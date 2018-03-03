@@ -5,7 +5,7 @@ module.exports = {
   mode: 'production',
   entry: [
     './assets/scripts/src/sholo.js',
-    './assets/styles/scss/sholo.scss',
+    './assets/styles/scss/demo.scss',
   ],
   output: {
     path: path.join(__dirname, '/assets'),

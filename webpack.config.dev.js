@@ -6,7 +6,7 @@ module.exports = {
   entry: [
     'webpack-dev-server/client?http://localhost:3000',
     './assets/scripts/src/sholo.js',
-    './assets/styles/scss/sholo.scss',
+    './assets/styles/scss/demo.scss',
   ],
   output: {
     path: path.join(__dirname, '/assets'),
@@ -43,7 +43,7 @@ module.exports = {
   },
   plugins: [
     new ExtractTextPlugin({
-      filename: 'styles/css/sholo.css',
+      filename: 'styles/css/demo.css',
       allChunks: true,
     }),
   ],

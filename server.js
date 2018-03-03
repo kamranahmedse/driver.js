@@ -2,7 +2,7 @@ const webpack = require('webpack');
 const WebpackDevServer = require('webpack-dev-server');
 const opn = require('opn');
 
-const config = require('./webpack.dev.config');
+const config = require('./webpack.config.dev');
 
 const PORT = 3000;
 const HOST = 'localhost';

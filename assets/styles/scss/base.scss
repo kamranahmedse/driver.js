@@ -5,6 +5,7 @@ $global-font-size-h3: 20px;
 $global-font-size-h4: 18px;
 $global-font-size-h5: 16px;
 $global-font-size-h6: 14px;
+$heading-font-weight: 700;
 
 /*=============================================
 =            Generic styling                  =
@@ -30,8 +31,8 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   font-size: 16px;
   line-height: 1.4;
-  color: #FFFFFF;
-  background-color: #333;
+  color: #000000;
+  background-color: #FFFFFF;
   overflow-x: hidden;
 }
 
@@ -58,7 +59,7 @@ hr {
 h1, h2, h3, h4, h5, h6 {
   margin-top: 0;
   margin-bottom: $global-guttering/2;
-  font-weight: 400;
+  font-weight: $heading-font-weight;
   line-height: 1.2;
 }
 
