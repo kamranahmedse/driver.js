@@ -1,0 +1,17 @@
+{
+  "name": "sholo",
+  "version": "1.0.0",
+  "description": "A light-weight, vanilla JS library to bring certain parts of page in spotlight",
+  "main": "./assets/scripts/dist/sholo.min.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "repository": "https://github.com/kamranahmedse/sholo",
+  "author": "Kamran Ahmed <kamranahmed.se@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "opn": "^5.2.0",
+    "webpack": "^4.0.1",
+    "webpack-dev-server": "^3.1.0"
+  }
+}

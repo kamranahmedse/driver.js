@@ -4,3 +4,4 @@ npm-debug.log
 .idea
 .vscode
 package-lock.json
+yarn-error.log
