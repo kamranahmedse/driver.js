@@ -1,14 +1,17 @@
 const path = require('path');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
   mode: 'development',
   entry: [
+    'webpack-dev-server/client?http://localhost:3000',
     './assets/scripts/src/sholo.js',
+    './assets/styles/scss/sholo.scss',
   ],
   output: {
-    publicPath: '/assets/scripts/dist/',
-    path: path.join(__dirname, 'dist'),
-    filename: 'sholo.min.js',
+    path: path.join(__dirname, '/assets'),
+    publicPath: '/assets/',
+    filename: 'scripts/dist/sholo.js',
     libraryTarget: 'umd',
     library: 'Sholo',
   },
@@ -32,8 +35,18 @@ module.exports = {
           presets: ['env'],
         },
       },
+      {
+        test: /.scss$/,
+        loader: ExtractTextPlugin.extract(['css-loader', 'sass-loader']),
+      },
     ],
   },
+  plugins: [
+    new ExtractTextPlugin({
+      filename: 'styles/css/sholo.css',
+      allChunks: true,
+    }),
+  ],
   stats: {
     colors: true,
   },
