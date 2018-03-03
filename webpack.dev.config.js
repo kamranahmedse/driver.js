@@ -11,5 +11,21 @@ module.exports = {
         filename: 'sholo.min.js',
         libraryTarget: "umd",
         library: "Sholo"
-    }
+    },
+    module: {
+        rules: [
+            {
+                test: /\.js$/,
+                exclude: /node_modules/,
+                loader: 'babel-loader',
+                query: {
+                    presets: ['env']
+                }
+            }
+        ]
+    },
+    stats: {
+        colors: true
+    },
+    devtool: "source-map"
 };
