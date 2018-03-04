@@ -22,6 +22,7 @@ export default class Sholo {
 
     this.onScroll = this.onScroll.bind(this);
     this.onResize = this.onResize.bind(this);
+    this.onKeyUp = this.onKeyUp.bind(this);
 
     // Event bindings
     this.bind();
@@ -32,6 +33,7 @@ export default class Sholo {
     this.document.addEventListener('scroll', this.onScroll, false);
     this.document.addEventListener('DOMMouseScroll', this.onScroll, false);
     this.window.addEventListener('resize', this.onResize, false);
+    this.window.addEventListener('keyup', this.onKeyUp, false);
   }
 
   onScroll() {
@@ -42,6 +44,12 @@ export default class Sholo {
   onResize() {
     // Refresh with animation
     this.overlay.refresh(true);
+  }
+
+  onKeyUp(event) {
+    if (event.keyCode === 27) {
+      this.overlay.clear();
+    }
   }
 
   highlight(selector) {
