@@ -7,6 +7,7 @@ function createOverlay() {
   overlay = document.createElement('canvas');
   overlayContext = overlay.getContext('2d');
 
+  overlay.style.pointerEvents = 'none';
   overlay.style.background = 'transparent';
   overlay.style.position = 'fixed';
   overlay.style.top = '0';
@@ -61,6 +62,13 @@ function selectNode(node) {
     return;
   }
 
+  const overlayAlpha = 0.7;
+
+  // Reset the overlay
+  overlayContext.clearRect(0, 0, overlay.width, overlay.height);
+  overlayContext.fillStyle = `rgba( 0, 0, 0, ${overlayAlpha} )`;
+  overlayContext.fillRect(0, 0, overlay.width, overlay.height);
+
   // Cut out the cleared region
   overlayContext.clearRect(
     currentRegion.left - window.scrollX,
@@ -72,7 +80,15 @@ function selectNode(node) {
   document.body.appendChild(overlay);
 }
 
-const nodeToSelect = document.querySelector('.section__header');
+const nodesToSelect = [
+  document.querySelector('.section__header'),
+  document.querySelector('.section__how'),
+];
 
 createOverlay();
-selectNode(nodeToSelect);
+
+nodesToSelect.forEach((nodeToSelect, index) => {
+  window.setTimeout(() => {
+    selectNode(nodeToSelect);
+  }, index * 1000);
+});
