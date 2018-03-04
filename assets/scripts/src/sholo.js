@@ -6,8 +6,8 @@ import Element from './element';
  * Plugin class that drives the plugin
  */
 export default class Sholo {
-  constructor({ alpha = 0.75 } = {}) {
-    this.overlay = new Overlay({ alpha });
+  constructor({ opacity = 0.75 } = {}) {
+    this.overlay = new Overlay({ opacity });
   }
 
   highlight(selector) {
@@ -22,6 +22,6 @@ export default class Sholo {
     }
 
     const element = new Element(domElement);
-    this.overlay.highglight(element);
+    this.overlay.highlight(element);
   }
 }

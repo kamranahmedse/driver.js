@@ -47,6 +47,7 @@
   const nodesToSelect = [
     '.section__header',
     '.section__how',
+    '.section__examples'
   ];
 
   const sholo = new Sholo();
@@ -54,7 +55,7 @@
   nodesToSelect.forEach((nodeToSelect, index) => {
     window.setTimeout(() => {
       sholo.highlight(nodeToSelect);
-    }, index * 1000);
+    }, index * 5000);
   });
 </script>
 </body>

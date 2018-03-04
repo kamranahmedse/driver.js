@@ -7,8 +7,10 @@ import Position from './position';
 export default class Overlay {
   constructor({ alpha = 0.75 }) {
     this.alpha = alpha;
+    this.selectedPosition = new Position({});
+    this.lastSelectedPosition = new Position({});
+
     this.window = window;
-    this.selected = new Position({});
 
     this.prepareContext();
     this.setSize();
@@ -30,7 +32,7 @@ export default class Overlay {
   }
 
   // Highlights the dom element on the screen
-  highglight(element) {
+  highlight(element) {
     if (!element) {
       // @todo - clearing the overlay
       return;
@@ -42,21 +44,22 @@ export default class Overlay {
       return;
     }
 
-    this.selected = position;
+    this.selectedPosition = position;
     this.draw();
   }
 
   draw() {
+    // Reset the overlay
     this.context.clearRect(0, 0, this.overlay.width, this.overlay.height);
     this.context.fillStyle = `rgba( 0, 0, 0, ${this.alpha})`;
     this.context.fillRect(0, 0, this.overlay.width, this.overlay.height);
 
     // Cut out the cleared region
     this.context.clearRect(
-      this.selected.left - window.scrollX,
-      this.selected.top - window.scrollY,
-      (this.selected.right - this.selected.left),
-      (this.selected.bottom - this.selected.top),
+      this.selectedPosition.left - window.scrollX,
+      this.selectedPosition.top - window.scrollY,
+      (this.selectedPosition.right - this.selectedPosition.left),
+      (this.selectedPosition.bottom - this.selectedPosition.top),
     );
 
     // Append the overlay if not there already
