@@ -69,11 +69,15 @@ export default class Overlay {
   }
 
   clear() {
-    // Cancel the existing animation frame if any
-    // remove the highlighted element and remove the canvas
-    this.window.cancelAnimationFrame(this.redrawAnimation);
+    this.positionToHighlight = new Position();
     this.highlightedElement = null;
-    this.document.body.removeChild(this.overlay);
+
+    // If animation is not required, cancel the immediately remove the canvas
+    // This will stop the animation from the animation frames above
+    if (!this.animate) {
+      this.window.cancelAnimationFrame(this.redrawAnimation);
+      this.document.body.removeChild(this.overlay);
+    }
   }
 
   /**
@@ -136,6 +140,8 @@ export default class Overlay {
       if (!this.overlay.parentNode) {
         document.body.appendChild(this.overlay);
       }
+
+      // @todo: do not requestAnimationFrame once final highlight position has been reached
 
       // Stage a new animation frame
       this.redrawAnimation = this.window.requestAnimationFrame(this.draw);
