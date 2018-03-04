@@ -1,6 +1,6 @@
 import Overlay from './overlay';
 import Element from './element';
-
+import './polyfill';
 
 /**
  * Plugin class that drives the plugin
