@@ -4,6 +4,12 @@
     "browser": true
   },
   "rules": {
-    "no-console": "off"
+    "no-console": "off",
+    "no-underscore-dangle": "off",
+    "no-plusplus": "off",
+    "no-cond-assign": "off",
+    "func-names": "off",
+    "no-param-reassign": ["off"],
+    "max-len": "off"
   }
 }
