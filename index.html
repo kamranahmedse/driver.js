@@ -50,7 +50,9 @@
     '.section__examples'
   ];
 
-  const sholo = new Sholo();
+  const sholo = new Sholo({
+    animate: false
+  });
 
   nodesToSelect.forEach((nodeToSelect, index) => {
     window.setTimeout(() => {

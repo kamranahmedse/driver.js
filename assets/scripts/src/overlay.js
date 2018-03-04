@@ -5,9 +5,14 @@ import Position from './position';
  * cutting out the visible part, animating between the sections etc
  */
 export default class Overlay {
-  constructor({ opacity = 0.75, padding = 5 }) {
+  constructor({
+    opacity = 0.75,
+    padding = 5,
+    animate = true,
+  }) {
     this.opacity = opacity; // Fixed opacity for the layover
     this.padding = padding; // Padding around the highlighted item
+    this.animate = animate; // Should animate between the transitions
 
     this.overlayAlpha = 0;                       // Is used to animate the layover
     this.positionToHighlight = new Position({}); // position at which layover is to be patched at
@@ -56,7 +61,7 @@ export default class Overlay {
 
     // If animation is not required then set the last path to be same
     // as the current path so that there is no easing towards it
-    if (!animate) {
+    if (!this.animate || !animate) {
       this.highlightedPosition = this.positionToHighlight;
     }
 
@@ -111,7 +116,11 @@ export default class Overlay {
 
     if (canHighlight) {
       // Fade the overlay in if we can highlight
-      this.overlayAlpha += (this.opacity - this.overlayAlpha) * 0.08;
+      if (!this.animate) {
+        this.overlayAlpha = this.opacity;
+      } else {
+        this.overlayAlpha += (this.opacity - this.overlayAlpha) * 0.08;
+      }
     } else {
       // otherwise fade out
       this.overlayAlpha = Math.max((this.overlayAlpha * 0.85) - 0.02, 0);
