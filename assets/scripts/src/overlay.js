@@ -104,9 +104,9 @@ export default class Overlay {
     // Add the overlay on top of the whole body
     this.addCloak();
 
-    if (canHighlight) {
-      const isFadingIn = this.overlayAlpha < 0.1;
+    const isFadingIn = this.overlayAlpha < 0.1;
 
+    if (canHighlight) {
       if (isFadingIn) {
         // Ignore the animation, just highlight the item at its current position
         this.highlightedPosition = this.positionToHighlight;
@@ -151,17 +151,24 @@ export default class Overlay {
       }
 
       // Stage a new animation frame only if the position has not been reached
-      // of the alpha has not yet fully reached fully required opacity
-      if (
-        !this.positionToHighlight.equals(this.highlightedPosition) ||
-        this.overlayAlpha.toFixed(2) !== this.opacity.toFixed(2)
-      ) {
+      // or the alpha has not yet fully reached fully required opacity
+      if (!this.hasPositionHighlighted()) {
         this.redrawAnimation = this.window.requestAnimationFrame(this.draw);
+      } else if (!this.animate && isFadingIn) {
+        this.redrawAnimation = this.window.requestAnimationFrame(this.draw);
+      } else {
+        // Element has been highlighted
+        this.highlightedElement.onHighlighted();
       }
     } else if (this.overlay.parentNode) {
       // Otherwise if the overlay is there, remove it
       this.document.body.removeChild(this.overlay);
     }
+  }
+
+  hasPositionHighlighted() {
+    return this.positionToHighlight.equals(this.highlightedPosition) &&
+      this.overlayAlpha > (this.opacity - 0.05);
   }
 
   /**

@@ -54,4 +54,9 @@ export default class Element {
 
     return position;
   }
+
+  onHighlighted() {
+    console.log('on highlighted');
+    console.log(this.getScreenCoordinates());
+  }
 }

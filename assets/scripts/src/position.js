@@ -35,9 +35,9 @@ export default class Position {
    * @returns {boolean}
    */
   equals(position) {
-    return this.left.toFixed(3) === position.left.toFixed(3) &&
-      this.right.toFixed(3) === position.right.toFixed(3) &&
-      this.top.toFixed(3) === position.top.toFixed(3) &&
-      this.bottom.toFixed(3) === position.bottom.toFixed(3);
+    return Math.round(this.left) === Math.round(position.left) &&
+      Math.round(this.right) === Math.round(position.right) &&
+      Math.round(this.top) === Math.round(position.top) &&
+      Math.round(this.bottom) === Math.round(position.bottom);
   }
 }

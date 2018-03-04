@@ -44,7 +44,10 @@
 
 <script src="./assets/scripts/dist/sholo.js"></script>
 <script>
-  const sholo = new Sholo();
+  const sholo = new Sholo({
+    animate: false,
+    opacity: 0.8
+  });
   sholo.highlight('.section__header');
 </script>
 </body>
