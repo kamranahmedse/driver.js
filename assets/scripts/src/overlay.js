@@ -86,12 +86,7 @@ export default class Overlay {
     this.positionToHighlight = new Position();
     this.highlightedElement = null;
 
-    // If animation is not required, cancel the immediately remove the canvas
-    // This will stop the animation from the animation frames above
-    if (!this.animate) {
-      this.window.cancelAnimationFrame(this.redrawAnimation);
-      this.document.body.removeChild(this.overlay);
-    }
+    this.draw();
   }
 
   /**
@@ -163,7 +158,8 @@ export default class Overlay {
       ) {
         this.redrawAnimation = this.window.requestAnimationFrame(this.draw);
       }
-    } else {
+    } else if (this.overlay.parentNode) {
+      // Otherwise if the overlay is there, remove it
       this.document.body.removeChild(this.overlay);
     }
   }
