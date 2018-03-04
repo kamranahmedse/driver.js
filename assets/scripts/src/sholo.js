@@ -8,7 +8,7 @@ import './polyfill';
 export default class Sholo {
   constructor({
     opacity = 0.75,
-    padding = 5,
+    padding = 10,
     animate = true,
   } = {}) {
     this.overlay = new Overlay({

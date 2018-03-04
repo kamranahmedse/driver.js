@@ -7,7 +7,7 @@ import Position from './position';
 export default class Overlay {
   constructor({
     opacity = 0.75,
-    padding = 5,
+    padding = 10,
     animate = true,
   }) {
     this.opacity = opacity; // Fixed opacity for the layover
