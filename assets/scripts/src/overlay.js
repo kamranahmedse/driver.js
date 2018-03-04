@@ -11,6 +11,7 @@ export default class Overlay {
     this.lastSelectedPosition = new Position({});
 
     this.window = window;
+    this.document = document;
 
     this.prepareContext();
     this.setSize();
@@ -18,7 +19,7 @@ export default class Overlay {
 
   // Prepares the overlay
   prepareContext() {
-    const overlay = document.createElement('canvas');
+    const overlay = this.document.createElement('canvas');
 
     this.overlay = overlay;
     this.context = overlay.getContext('2d');
@@ -34,7 +35,6 @@ export default class Overlay {
   // Highlights the dom element on the screen
   highlight(element) {
     if (!element) {
-      // @todo - clearing the overlay
       return;
     }
 
@@ -48,6 +48,10 @@ export default class Overlay {
     this.draw();
   }
 
+  clear() {
+    this.document.body.removeChild(this.overlay);
+  }
+
   draw() {
     // Reset the overlay
     this.context.clearRect(0, 0, this.overlay.width, this.overlay.height);
@@ -56,15 +60,15 @@ export default class Overlay {
 
     // Cut out the cleared region
     this.context.clearRect(
-      this.selectedPosition.left - window.scrollX,
-      this.selectedPosition.top - window.scrollY,
+      this.selectedPosition.left - this.window.scrollX,
+      this.selectedPosition.top - this.window.scrollY,
       (this.selectedPosition.right - this.selectedPosition.left),
       (this.selectedPosition.bottom - this.selectedPosition.top),
     );
 
     // Append the overlay if not there already
     if (!this.overlay.parentNode) {
-      document.body.appendChild(this.overlay);
+      this.document.body.appendChild(this.overlay);
     }
   }
 

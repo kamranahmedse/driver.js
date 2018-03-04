@@ -21,7 +21,11 @@ export default class Sholo {
       throw new Error('Element can only be string or the dom element');
     }
 
-    const element = new Element(domElement);
-    this.overlay.highlight(element);
+    if (domElement) {
+      const element = new Element(domElement);
+      this.overlay.highlight(element);
+    } else {
+      this.overlay.clear();
+    }
   }
 }
