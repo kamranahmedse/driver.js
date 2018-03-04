@@ -11,6 +11,7 @@ export default class Overlay {
     this.positionToHighlight = new Position({});
     this.highlightedPosition = new Position({});
     this.redrawAnimation = null;
+    this.highlightedElement = null;
 
     this.draw = this.draw.bind(this);
 
@@ -54,6 +55,10 @@ export default class Overlay {
   }
 
   clear() {
+    // Cancel the existing animation frame if any
+    // remove the highlighted element and remove the canvas
+    this.window.cancelAnimationFrame(this.redrawAnimation);
+    this.highlightedElement = null;
     this.document.body.removeChild(this.overlay);
   }
 
@@ -148,5 +153,13 @@ export default class Overlay {
     // cut out a chunk for the element to be visible out of it
     this.overlay.width = width || this.window.innerWidth;
     this.overlay.height = height || this.window.innerHeight;
+
+    // If the highlighted element was there Cancel the
+    // existing animation frame if any and highlight it again
+    // as its position might have been changed
+    if (this.highlightedElement) {
+      this.window.cancelAnimationFrame(this.redrawAnimation);
+      this.highlight(this.highlightedElement);
+    }
   }
 }
