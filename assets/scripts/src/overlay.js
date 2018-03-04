@@ -114,7 +114,6 @@ export default class Overlay {
 
     // Continue drawing while we can highlight or we are still fading out
     if (canHighlight || this.overlayAlpha > 0) {
-      console.log(this.overlayAlpha);
       // Add the overlay if not already there
       if (!this.overlay.parentNode) {
         document.body.appendChild(this.overlay);
