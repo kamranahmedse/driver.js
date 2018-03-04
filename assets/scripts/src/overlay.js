@@ -161,13 +161,19 @@ export default class Overlay {
     // cut out a chunk for the element to be visible out of it
     this.overlay.width = width || this.window.innerWidth;
     this.overlay.height = height || this.window.innerHeight;
+  }
+
+  // Refreshes the overlay i.e. sets the size according to current window size
+  // And moves the highlight around if necessary
+  refresh(animate = true) {
+    this.setSize();
 
     // If the highlighted element was there Cancel the
     // existing animation frame if any and highlight it again
     // as its position might have been changed
     if (this.highlightedElement) {
       this.window.cancelAnimationFrame(this.redrawAnimation);
-      this.highlight(this.highlightedElement);
+      this.highlight(this.highlightedElement, animate);
     }
   }
 }

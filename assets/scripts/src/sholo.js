@@ -7,10 +7,32 @@ import './polyfill';
  */
 export default class Sholo {
   constructor({ opacity = 0.75, padding = 5 } = {}) {
-    this.overlay = new Overlay({
-      opacity,
-      padding,
-    });
+    this.overlay = new Overlay({ opacity, padding });
+    this.document = document;
+    this.window = window;
+
+    this.onScroll = this.onScroll.bind(this);
+    this.onResize = this.onResize.bind(this);
+
+    // Event bindings
+    this.bind();
+  }
+
+  bind() {
+    // @todo: add throttling in all the listeners
+    this.document.addEventListener('scroll', this.onScroll, false);
+    this.document.addEventListener('DOMMouseScroll', this.onScroll, false);
+    this.window.addEventListener('resize', this.onResize, false);
+  }
+
+  onScroll() {
+    // Refresh without animation on scroll
+    this.overlay.refresh(false);
+  }
+
+  onResize() {
+    // Refresh with animation
+    this.overlay.refresh(true);
   }
 
   highlight(selector) {
