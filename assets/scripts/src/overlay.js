@@ -38,7 +38,7 @@ export default class Overlay {
   }
 
   // Highlights the dom element on the screen
-  highlight(element) {
+  highlight(element, animate = true) {
     if (!element) {
       return;
     }
@@ -51,6 +51,13 @@ export default class Overlay {
 
     this.highlightedElement = element;
     this.positionToHighlight = position;
+
+    // If animation is not required then set the last path to be same
+    // as the current path so that there is no easing towards it
+    if (!animate) {
+      this.highlightedPosition = this.positionToHighlight;
+    }
+
     this.draw();
   }
 
