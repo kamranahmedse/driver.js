@@ -44,22 +44,8 @@
 
 <script src="./assets/scripts/dist/sholo.js"></script>
 <script>
-  const nodesToSelect = [
-    '.section__header',
-    '.section__how',
-    '.section__examples'
-  ];
-
-  const sholo = new Sholo({
-    padding: 10,
-    animate: true
-  });
-
-  nodesToSelect.forEach((nodeToSelect, index) => {
-    window.setTimeout(() => {
-      sholo.highlight(nodeToSelect);
-    }, index * 1000);
-  });
+  const sholo = new Sholo();
+  sholo.highlight('.section__header');
 </script>
 </body>
 </html>

@@ -4,10 +4,10 @@
  */
 export default class Position {
   /**
-   * @param left
-   * @param top
-   * @param right
-   * @param bottom
+   * @param left number
+   * @param top number
+   * @param right number
+   * @param bottom number
    */
   constructor({
     left = 0,
@@ -21,10 +21,19 @@ export default class Position {
     this.bottom = bottom;
   }
 
+  /**
+   * Checks if the position is valid to be highlighted
+   * @returns {boolean}
+   */
   canHighlight() {
     return this.left < this.right && this.top < this.bottom;
   }
 
+  /**
+   * Checks if the given position is equal to the passed position
+   * @param position Position
+   * @returns {boolean}
+   */
   equals(position) {
     return this.left.toFixed(3) === position.left.toFixed(3) &&
       this.right.toFixed(3) === position.right.toFixed(3) &&

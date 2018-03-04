@@ -6,6 +6,11 @@ import './polyfill';
  * Plugin class that drives the plugin
  */
 export default class Sholo {
+  /**
+   * @param opacity number
+   * @param padding number
+   * @param animate boolean
+   */
   constructor({
     opacity = 0.75,
     padding = 10,
@@ -28,30 +33,50 @@ export default class Sholo {
     this.bind();
   }
 
+  /**
+   * Binds any DOM events listeners
+   * @todo: add throttling in all the listeners
+   */
   bind() {
-    // @todo: add throttling in all the listeners
     this.document.addEventListener('scroll', this.onScroll, false);
     this.document.addEventListener('DOMMouseScroll', this.onScroll, false);
     this.window.addEventListener('resize', this.onResize, false);
     this.window.addEventListener('keyup', this.onKeyUp, false);
   }
 
+  /**
+   * Handler for the onScroll event on document
+   * Refreshes without animation on scroll to make sure
+   * that the highlighted part travels with the scroll
+   */
   onScroll() {
-    // Refresh without animation on scroll
     this.overlay.refresh(false);
   }
 
+  /**
+   * Handler for the onResize DOM event
+   * Refreshes with animation on scroll to make sure that
+   * the highlighted part travels with the width change of window
+   */
   onResize() {
     // Refresh with animation
     this.overlay.refresh(true);
   }
 
+  /**
+   * Clears the overlay on escape key process
+   * @param event
+   */
   onKeyUp(event) {
     if (event.keyCode === 27) {
       this.overlay.clear();
     }
   }
 
+  /**
+   * Highlights the given selector
+   * @param selector
+   */
   highlight(selector) {
     let domElement;
 

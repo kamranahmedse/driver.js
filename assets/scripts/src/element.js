@@ -1,12 +1,19 @@
 import Position from './position';
 
 export default class Element {
+  /**
+   * DOM element object
+   * @param node
+   */
   constructor(node) {
     this.element = node;
     this.document = document;
   }
 
-  // Gets the screen co-ordinates for the current dom element
+  /**
+   * Gets the screen co-ordinates (x,y) for the current dom element
+   * @returns {{x: number, y: number}}
+   */
   getScreenCoordinates() {
     let tempNode = this.element;
 
@@ -23,8 +30,11 @@ export default class Element {
     return { x, y };
   }
 
-  // Gets the calculated position on screen
-  getPosition() {
+  /**
+   * Gets the calculated position on screen, around which
+   * we need to draw
+   */
+  getCalculatedPosition() {
     const coordinates = this.getScreenCoordinates();
     const position = new Position({
       left: Number.MAX_VALUE,

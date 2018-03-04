@@ -5,6 +5,11 @@ import Position from './position';
  * cutting out the visible part, animating between the sections etc
  */
 export default class Overlay {
+  /**
+   * @param opacity number
+   * @param padding number
+   * @param animate bool
+   */
   constructor({
     opacity = 0.75,
     padding = 10,
@@ -29,7 +34,9 @@ export default class Overlay {
     this.setSize();
   }
 
-  // Prepares the overlay
+  /**
+   * Prepares the overlay
+   */
   prepareContext() {
     const overlay = this.document.createElement('canvas');
 
@@ -44,14 +51,18 @@ export default class Overlay {
     this.overlay.style.zIndex = '999999999';
   }
 
-  // Highlights the dom element on the screen
+  /**
+   * Highlights the dom element on the screen
+   * @param element Element
+   * @param animate bool
+   */
   highlight(element, animate = true) {
     if (!element) {
       return;
     }
 
     // get the position of element around which we need to draw
-    const position = element.getPosition();
+    const position = element.getCalculatedPosition();
     if (!position.canHighlight()) {
       return;
     }
@@ -68,6 +79,9 @@ export default class Overlay {
     this.draw();
   }
 
+  /**
+   * Removes the overlay and cancel any listeners
+   */
   clear() {
     this.positionToHighlight = new Position();
     this.highlightedElement = null;
@@ -81,9 +95,9 @@ export default class Overlay {
   }
 
   /**
-   * `draw` is called for in requestAnimationFrame. Here is what it does
-   * - Puts back the filled overlay on body (i.e. while clearing existing highlight if any)
-   * - Slowly eases towards the item to be selected
+   * `draw` is called for in requestAnimationFrame. Puts back the
+   * filled overlay on body (i.e. while removing existing highlight if any) and
+   * Slowly eases towards the item to be selected.
    */
   draw() {
     // Cache the response of this for re-use below
@@ -99,7 +113,7 @@ export default class Overlay {
       const isFadingIn = this.overlayAlpha < 0.1;
 
       if (isFadingIn) {
-        // Ignore the animation, just highlight the item
+        // Ignore the animation, just highlight the item at its current position
         this.highlightedPosition = this.positionToHighlight;
       } else {
         // Slowly move towards the position to highlight
@@ -110,7 +124,7 @@ export default class Overlay {
       }
     }
 
-    // Remove the cloak from the position to highlight
+    // Cut the chunk of overlay that is over the highlighted item
     this.removeCloak({
       posX: this.highlightedPosition.left - window.scrollX - this.padding,
       posY: this.highlightedPosition.top - window.scrollY - this.padding,
@@ -118,8 +132,8 @@ export default class Overlay {
       height: (this.highlightedPosition.bottom - this.highlightedPosition.top) + (this.padding * 2),
     });
 
+    // Fade the overlay in if we can highlight
     if (canHighlight) {
-      // Fade the overlay in if we can highlight
       if (!this.animate) {
         this.overlayAlpha = this.opacity;
       } else {
@@ -154,7 +168,16 @@ export default class Overlay {
     }
   }
 
-  // Removes the patch of given width and height from the given position (x,y)
+  /**
+   * Removes the cloak from the given position
+   * i.e. cuts the chunk of layout which is over the element
+   * to be highlighted
+   *
+   * @param posX number
+   * @param posY number
+   * @param width number
+   * @param height number
+   */
   removeCloak({
     posX = 0,
     posY = 0,
@@ -164,7 +187,15 @@ export default class Overlay {
     this.context.clearRect(posX, posY, width, height);
   }
 
-  // Adds the cloak i.e. covers the given position with dark overlay
+  /**
+   * Adds the overlay i.e. to cover the given
+   * position with dark overlay
+   *
+   * @param posX number
+   * @param posY number
+   * @param width number
+   * @param height number
+   */
   addCloak({
     posX = 0,
     posY = 0,
@@ -175,6 +206,12 @@ export default class Overlay {
     this.context.fillRect(posX, posY, width, height);
   }
 
+  /**
+   * Sets the size for the overlay
+   *
+   * @param width number
+   * @param height number
+   */
   setSize(width = null, height = null) {
     // By default it is going to cover the whole page and then we will
     // cut out a chunk for the element to be visible out of it
@@ -182,8 +219,12 @@ export default class Overlay {
     this.overlay.height = height || this.window.innerHeight;
   }
 
-  // Refreshes the overlay i.e. sets the size according to current window size
-  // And moves the highlight around if necessary
+  /**
+   * Refreshes the overlay i.e. sets the size according to current window size
+   * And moves the highlight around if necessary
+   *
+   * @param animate bool
+   */
   refresh(animate = true) {
     this.setSize();
 
