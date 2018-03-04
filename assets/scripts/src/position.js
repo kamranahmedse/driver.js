@@ -24,4 +24,11 @@ export default class Position {
   canHighlight() {
     return this.left < this.right && this.top < this.bottom;
   }
+
+  equals(position) {
+    return this.left.toFixed(3) === position.left.toFixed(3) &&
+      this.right.toFixed(3) === position.right.toFixed(3) &&
+      this.top.toFixed(3) === position.top.toFixed(3) &&
+      this.bottom.toFixed(3) === position.bottom.toFixed(3);
+  }
 }

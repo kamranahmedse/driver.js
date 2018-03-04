@@ -141,10 +141,14 @@ export default class Overlay {
         document.body.appendChild(this.overlay);
       }
 
-      // @todo: do not requestAnimationFrame once final highlight position has been reached
-
-      // Stage a new animation frame
-      this.redrawAnimation = this.window.requestAnimationFrame(this.draw);
+      // Stage a new animation frame only if the position has not been reached
+      // of the alpha has not yet fully reached fully required opacity
+      if (
+        !this.positionToHighlight.equals(this.highlightedPosition) ||
+        this.overlayAlpha.toFixed(2) !== this.opacity.toFixed(2)
+      ) {
+        this.redrawAnimation = this.window.requestAnimationFrame(this.draw);
+      }
     } else {
       this.document.body.removeChild(this.overlay);
     }
