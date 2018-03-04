@@ -5,8 +5,8 @@ module.exports = {
   mode: 'development',
   entry: [
     'webpack-dev-server/client?http://localhost:3000',
-    './assets/scripts/src/sholo.js',
     './assets/styles/scss/demo.scss',
+    './assets/scripts/src/sholo.js',
   ],
   output: {
     path: path.join(__dirname, '/assets'),
@@ -33,6 +33,7 @@ module.exports = {
         loader: 'babel-loader',
         options: {
           presets: ['env'],
+          plugins: ['babel-plugin-add-module-exports'],
         },
       },
       {
