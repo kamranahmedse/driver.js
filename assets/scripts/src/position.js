@@ -21,7 +21,7 @@ export default class Position {
     this.bottom = bottom;
   }
 
-  isValid() {
+  canHighlight() {
     return this.left < this.right && this.top < this.bottom;
   }
 }

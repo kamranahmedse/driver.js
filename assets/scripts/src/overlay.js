@@ -5,10 +5,14 @@ import Position from './position';
  * cutting out the visible part, animating between the sections etc
  */
 export default class Overlay {
-  constructor({ alpha = 0.75 }) {
-    this.alpha = alpha;
-    this.selectedPosition = new Position({});
-    this.lastSelectedPosition = new Position({});
+  constructor({ opacity = 0.75 }) {
+    this.opacity = opacity;
+    this.overlayAlpha = 0;
+    this.positionToHighlight = new Position({});
+    this.highlightedPosition = new Position({});
+    this.redrawAnimation = null;
+
+    this.draw = this.draw.bind(this);
 
     this.window = window;
     this.document = document;
@@ -40,11 +44,12 @@ export default class Overlay {
 
     // get the position of element around which we need to draw
     const position = element.getPosition();
-    if (!position.isValid()) {
+    if (!position.canHighlight()) {
       return;
     }
 
-    this.selectedPosition = position;
+    this.highlightedElement = element;
+    this.positionToHighlight = position;
     this.draw();
   }
 
@@ -52,24 +57,90 @@ export default class Overlay {
     this.document.body.removeChild(this.overlay);
   }
 
+  /**
+   * `draw` is called for in requestAnimationFrame. Here is what it does
+   * - Puts back the filled overlay on body (i.e. while clearing existing highlight if any)
+   * - Slowly eases towards the item to be selected
+   */
   draw() {
-    // Reset the overlay
-    this.context.clearRect(0, 0, this.overlay.width, this.overlay.height);
-    this.context.fillStyle = `rgba( 0, 0, 0, ${this.alpha})`;
-    this.context.fillRect(0, 0, this.overlay.width, this.overlay.height);
+    // Cache the response of this for re-use below
+    const canHighlight = this.positionToHighlight.canHighlight();
 
-    // Cut out the cleared region
-    this.context.clearRect(
-      this.selectedPosition.left - this.window.scrollX,
-      this.selectedPosition.top - this.window.scrollY,
-      (this.selectedPosition.right - this.selectedPosition.left),
-      (this.selectedPosition.bottom - this.selectedPosition.top),
-    );
+    // Remove the existing cloak from the body
+    // it might be torn i.e. have patches from last highlight
+    this.removeCloak();
+    // Add the overlay on top of the whole body
+    this.addCloak();
 
-    // Append the overlay if not there already
-    if (!this.overlay.parentNode) {
-      this.document.body.appendChild(this.overlay);
+    if (canHighlight) {
+      const isFadingIn = this.overlayAlpha < 0.1;
+
+      if (isFadingIn) {
+        // Ignore the animation, just highlight the item
+        this.highlightedPosition = this.positionToHighlight;
+      } else {
+        // Slowly move towards the position to highlight
+        this.highlightedPosition.left += (this.positionToHighlight.left - this.highlightedPosition.left) * 0.18;
+        this.highlightedPosition.top += (this.positionToHighlight.top - this.highlightedPosition.top) * 0.18;
+        this.highlightedPosition.right += (this.positionToHighlight.right - this.highlightedPosition.right) * 0.18;
+        this.highlightedPosition.bottom += (this.positionToHighlight.bottom - this.highlightedPosition.bottom) * 0.18;
+      }
     }
+
+    // Remove the cloak from the position to highlight
+    this.removeCloak({
+      posX: this.highlightedPosition.left - window.scrollX - 5,
+      posY: this.highlightedPosition.top - window.scrollY - 5,
+      width: (this.highlightedPosition.right - this.highlightedPosition.left) + (5 * 2),
+      height: (this.highlightedPosition.bottom - this.highlightedPosition.top) + (5 * 2),
+    });
+
+    if (canHighlight) {
+      // Fade the overlay in if we can highlight
+      this.overlayAlpha += (this.opacity - this.overlayAlpha) * 0.08;
+    } else {
+      // otherwise fade out
+      this.overlayAlpha = Math.max((this.overlayAlpha * 0.85) - 0.02, 0);
+    }
+
+    // cancel any existing animation frames
+    // to avoid the overlapping of frames
+    this.window.cancelAnimationFrame(this.redrawAnimation);
+
+    // Continue drawing while we can highlight or we are still fading out
+    if (canHighlight || this.overlayAlpha > 0) {
+      console.log(this.overlayAlpha);
+      // Add the overlay if not already there
+      if (!this.overlay.parentNode) {
+        document.body.appendChild(this.overlay);
+      }
+
+      // Stage a new animation frame
+      this.redrawAnimation = this.window.requestAnimationFrame(this.draw);
+    } else {
+      this.document.body.removeChild(this.overlay);
+    }
+  }
+
+  // Removes the patch of given width and height from the given position (x,y)
+  removeCloak({
+    posX = 0,
+    posY = 0,
+    width = this.overlay.width,
+    height = this.overlay.height,
+  } = {}) {
+    this.context.clearRect(posX, posY, width, height);
+  }
+
+  // Adds the cloak i.e. covers the given position with dark overlay
+  addCloak({
+    posX = 0,
+    posY = 0,
+    width = this.overlay.width,
+    height = this.overlay.height,
+  } = {}) {
+    this.context.fillStyle = `rgba( 0, 0, 0, ${this.overlayAlpha} )`;
+    this.context.fillRect(posX, posY, width, height);
   }
 
   setSize(width = null, height = null) {
