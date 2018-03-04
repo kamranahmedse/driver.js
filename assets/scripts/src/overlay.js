@@ -5,15 +5,17 @@ import Position from './position';
  * cutting out the visible part, animating between the sections etc
  */
 export default class Overlay {
-  constructor({ opacity = 0.75 }) {
-    this.opacity = opacity;
-    this.overlayAlpha = 0;
-    this.positionToHighlight = new Position({});
-    this.highlightedPosition = new Position({});
-    this.redrawAnimation = null;
-    this.highlightedElement = null;
+  constructor({ opacity = 0.75, padding = 5 }) {
+    this.opacity = opacity; // Fixed opacity for the layover
+    this.padding = padding; // Padding around the highlighted item
 
-    this.draw = this.draw.bind(this);
+    this.overlayAlpha = 0;                       // Is used to animate the layover
+    this.positionToHighlight = new Position({}); // position at which layover is to be patched at
+    this.highlightedPosition = new Position({}); // position at which layover is patched currently
+    this.redrawAnimation = null;                 // used to cancel the redraw animation
+    this.highlightedElement = null;              // currently highlighted dom element (instance of Element)
+
+    this.draw = this.draw.bind(this);  // To pass the context of class, as it is to be used in redraw animation callback
 
     this.window = window;
     this.document = document;
@@ -101,10 +103,10 @@ export default class Overlay {
 
     // Remove the cloak from the position to highlight
     this.removeCloak({
-      posX: this.highlightedPosition.left - window.scrollX - 5,
-      posY: this.highlightedPosition.top - window.scrollY - 5,
-      width: (this.highlightedPosition.right - this.highlightedPosition.left) + (5 * 2),
-      height: (this.highlightedPosition.bottom - this.highlightedPosition.top) + (5 * 2),
+      posX: this.highlightedPosition.left - window.scrollX - this.padding,
+      posY: this.highlightedPosition.top - window.scrollY - this.padding,
+      width: (this.highlightedPosition.right - this.highlightedPosition.left) + (this.padding * 2),
+      height: (this.highlightedPosition.bottom - this.highlightedPosition.top) + (this.padding * 2),
     });
 
     if (canHighlight) {

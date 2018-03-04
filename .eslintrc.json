@@ -9,7 +9,10 @@
     "no-plusplus": "off",
     "no-cond-assign": "off",
     "func-names": "off",
-    "no-param-reassign": ["off"],
-    "max-len": "off"
+    "no-param-reassign": [
+      "off"
+    ],
+    "max-len": "off",
+    "no-multi-spaces": "off"
   }
 }

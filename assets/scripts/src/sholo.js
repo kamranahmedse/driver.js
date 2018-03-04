@@ -6,8 +6,11 @@ import './polyfill';
  * Plugin class that drives the plugin
  */
 export default class Sholo {
-  constructor({ opacity = 0.75 } = {}) {
-    this.overlay = new Overlay({ opacity });
+  constructor({ opacity = 0.75, padding = 5 } = {}) {
+    this.overlay = new Overlay({
+      opacity,
+      padding,
+    });
   }
 
   highlight(selector) {
