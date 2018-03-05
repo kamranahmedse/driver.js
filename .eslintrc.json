@@ -9,6 +9,7 @@
     "no-plusplus": "off",
     "no-cond-assign": "off",
     "func-names": "off",
+    "no-bitwise": "off",
     "no-param-reassign": [
       "off"
     ],

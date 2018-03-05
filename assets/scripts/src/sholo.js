@@ -7,20 +7,16 @@ import './polyfill';
  */
 export default class Sholo {
   /**
-   * @param opacity number
-   * @param padding number
-   * @param animate boolean
+   * @param options
    */
-  constructor({
-    opacity = 0.75,
-    padding = 10,
-    animate = true,
-  } = {}) {
-    this.overlay = new Overlay({
-      opacity,
-      padding,
-      animate,
-    });
+  constructor(options = {}) {
+    this.options = Object.assign({
+      padding: 10,
+      animate: true,
+      opacity: 0.75,
+    }, options);
+
+    this.overlay = new Overlay(options);
 
     this.document = document;
     this.window = window;
@@ -89,7 +85,7 @@ export default class Sholo {
     }
 
     if (domElement) {
-      const element = new Element(domElement);
+      const element = new Element(domElement, this.options);
       this.overlay.highlight(element);
     } else {
       this.overlay.clear();

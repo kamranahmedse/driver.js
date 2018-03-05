@@ -9,7 +9,7 @@
 </head>
 <body>
 <div class="page-wrap">
-    <section class="section__header">
+    <section class="section__header" data-sholo="Hey welcome to presenter!">
         <h1>Sholo</h1>
         <p class="text-muted">A light-weight, no-dependency, vanilla JavaScript library to bring certain parts of page in spotlight</p>
         <a href="#" class="btn btn__dark">Show an Example</a>
@@ -35,7 +35,7 @@
         <p>Here are some of the examples</p>
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi assumenda, at consectetur cupiditate inventore ipsa molestias, natus nulla odit optio pariatur perspiciatis, quae quam quasi quibusdam recusandae repellendus reprehenderit tempora!</p>
     </section>
-    <section>
+    <section class="section__contributing">
         <h1>Contributing</h1>
         <p>Here are some of the examples</p>
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi assumenda, at consectetur cupiditate inventore ipsa molestias, natus nulla odit optio pariatur perspiciatis, quae quam quasi quibusdam recusandae repellendus reprehenderit tempora!</p>
@@ -45,7 +45,7 @@
 <script src="./assets/scripts/dist/sholo.js"></script>
 <script>
   const sholo = new Sholo({
-    animate: false,
+    animate: true,
     opacity: 0.8
   });
   sholo.highlight('.section__header');

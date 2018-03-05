@@ -4,10 +4,13 @@ export default class Element {
   /**
    * DOM element object
    * @param node
+   * @param options
    */
-  constructor(node) {
-    this.element = node;
+  constructor(node, options) {
+    this.node = node;
     this.document = document;
+    this.window = window;
+    this.options = options;
   }
 
   /**
@@ -15,7 +18,7 @@ export default class Element {
    * @returns {{x: number, y: number}}
    */
   getScreenCoordinates() {
-    let tempNode = this.element;
+    let tempNode = this.node;
 
     let x = this.document.documentElement.offsetLeft;
     let y = this.document.documentElement.offsetTop;
@@ -45,11 +48,11 @@ export default class Element {
 
     // If we have the position for this element
     // and the element is visible on screen (has some height)
-    if (typeof coordinates.x === 'number' && typeof coordinates.y === 'number' && (this.element.offsetWidth > 0 || this.element.offsetHeight > 0)) {
+    if (typeof coordinates.x === 'number' && typeof coordinates.y === 'number' && (this.node.offsetWidth > 0 || this.node.offsetHeight > 0)) {
       position.left = Math.min(position.left, coordinates.x);
       position.top = Math.min(position.top, coordinates.y);
-      position.right = Math.max(position.right, coordinates.x + this.element.offsetWidth);
-      position.bottom = Math.max(position.bottom, coordinates.y + this.element.offsetHeight);
+      position.right = Math.max(position.right, coordinates.x + this.node.offsetWidth);
+      position.bottom = Math.max(position.bottom, coordinates.y + this.node.offsetHeight);
     }
 
     return position;
