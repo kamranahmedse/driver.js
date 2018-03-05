@@ -24,6 +24,7 @@ export default class Sholo {
     this.onScroll = this.onScroll.bind(this);
     this.onResize = this.onResize.bind(this);
     this.onKeyUp = this.onKeyUp.bind(this);
+    this.onMouseUp = this.onMouseUp.bind(this);
 
     // Event bindings
     this.bind();
@@ -38,6 +39,19 @@ export default class Sholo {
     this.document.addEventListener('DOMMouseScroll', this.onScroll, false);
     this.window.addEventListener('resize', this.onResize, false);
     this.window.addEventListener('keyup', this.onKeyUp, false);
+    this.window.addEventListener('mouseup', this.onMouseUp, false);
+  }
+
+  onMouseUp(e) {
+    const highlightedElement = this.overlay.getHighlightedElement();
+    if (!highlightedElement || !highlightedElement.node) {
+      return;
+    }
+
+    // Remove the overlay If clicked outside the highlighted element
+    if (!highlightedElement.node.contains(e.target)) {
+      this.overlay.clear();
+    }
   }
 
   /**

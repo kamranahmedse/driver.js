@@ -80,6 +80,14 @@ export default class Overlay {
   }
 
   /**
+   * Returns the currently selected element
+   * @returns {null|*}
+   */
+  getHighlightedElement() {
+    return this.highlightedElement;
+  }
+
+  /**
    * Removes the overlay and cancel any listeners
    */
   clear() {
