@@ -44,12 +44,14 @@ export default class Sholo {
 
   onMouseUp(e) {
     const highlightedElement = this.overlay.getHighlightedElement();
+    const popover = document.getElementById('sholo-popover-item');
+
     if (!highlightedElement || !highlightedElement.node) {
       return;
     }
 
     // Remove the overlay If clicked outside the highlighted element
-    if (!highlightedElement.node.contains(e.target)) {
+    if (!highlightedElement.node.contains(e.target) && (!popover || !popover.contains(e.target))) {
       this.overlay.clear();
     }
   }

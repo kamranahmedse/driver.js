@@ -1,6 +1,7 @@
 @import "base";
 
 $container-width: 500px !default;
+$logo-font-size: 55px !default;
 $button-font-size: 13px !default;
 $dark-button-bg: #2d2d2d !default;
 $dark-button-text: #ffffff !default;
@@ -34,6 +35,88 @@ section {
 }
 
 .section__header {
-  margin: 80px 0 60px;
+  margin: 80px 0 50px;
   text-align: center;
+  display: block;
+  padding: 10px 10px 20px;
+
+  h1 {
+    font-size: $logo-font-size;
+  }
+}
+
+/////////////////////////////////////////
+div#sholo-popover-item {
+
+  //////// Temp style
+  position: absolute;
+  top: 285px;
+  left: 710px;
+  //////////////////
+
+  display: block;
+  background: white;
+  margin: 0;
+  padding: 15px;
+  border-radius: 5px;
+  min-width: 250px;
+  max-width: 300px;
+  box-shadow: 0 1px 10px rgba(0, 0, 0, 0.4);
+  z-index: 1000000000;
+
+  .sholo-popover-tip {
+    border: 5px solid white;
+    content: '';
+    position: absolute;
+
+    &.bottom {
+      bottom: -10px;
+      border-top-color: white;
+      border-right-color: transparent;
+      border-bottom-color: transparent;
+      border-left-color: transparent;
+    }
+
+    &.left {
+      left: -10px;
+      top: 10px;
+      border-top-color: transparent;
+      border-right-color: white;
+      border-bottom-color: transparent;
+      border-left-color: transparent;
+    }
+
+    &.right {
+      right: -10px;
+      top: 10px;
+      border-top-color: transparent;
+      border-right-color: transparent;
+      border-bottom-color: transparent;
+      border-left-color: white;
+    }
+
+    &.top {
+      top: -10px;
+      border-top-color: transparent;
+      border-right-color: transparent;
+      border-bottom-color: white;
+      border-left-color: transparent;
+    }
+  }
+
+  .sholo-popover-title {
+    font-size: 19px;
+    margin: 0 0 5px;
+    font-weight: bold;
+    display: block;
+    position: relative;
+  }
+
+  .sholo-popover-description {
+    margin-bottom: 0;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #2d2d2d;
+    font-weight: normal;
+  }
 }
