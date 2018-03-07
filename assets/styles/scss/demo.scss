@@ -100,20 +100,30 @@ div#sholo-popover-item {
   .sholo-popover-footer {
     display: block;
     clear: both;
+    margin-top: 5px;
+
     a {
       display: inline-block;
       padding: 3px 10px;
       border: 1px solid #d4d4d4;
       text-decoration: none;
       text-shadow: 1px 1px 0 #fff;
-      color: #333;
+      color: #2d2d2d;
       font: 11px/normal sans-serif;
       cursor: pointer;
       outline: 0;
-      background-color: #ececec;
+      background-color: #f1f1f1;
       border-radius: 2px;
       zoom: 1;
       margin: 10px 0 0;
+    }
+
+    .sholo-close {
+      float: left;
+    }
+
+    .sholo-btn-group {
+      float: right;
     }
   }
 
