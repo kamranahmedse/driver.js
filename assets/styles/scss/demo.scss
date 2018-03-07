@@ -97,6 +97,26 @@ div#sholo-popover-item {
     }
   }
 
+  .sholo-popover-footer {
+    display: block;
+    clear: both;
+    a {
+      display: inline-block;
+      padding: 3px 10px;
+      border: 1px solid #d4d4d4;
+      text-decoration: none;
+      text-shadow: 1px 1px 0 #fff;
+      color: #333;
+      font: 11px/normal sans-serif;
+      cursor: pointer;
+      outline: 0;
+      background-color: #ececec;
+      border-radius: 2px;
+      zoom: 1;
+      margin: 10px 0 0;
+    }
+  }
+
   .sholo-popover-title {
     font-size: 19px;
     margin: 0 0 5px;
