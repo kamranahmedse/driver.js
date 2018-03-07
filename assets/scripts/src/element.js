@@ -75,11 +75,30 @@ export default class Element {
   }
 
   showPopover() {
+    this.resetPopover();
+
+    // Position at which the element is
     const position = this.getCalculatedPosition();
 
-    this.popover.style.left = `${position.left}px`;
-    this.popover.style.top = `${position.bottom + 10}px`;
-    this.popover.style.display = 'block';
+    const popoverTip = this.popover.querySelector('.sholo-popover-tip');
+
+    const documentHeight = this.getDocumentHeight();
+    const popoverHeight = this.getPopoverHeight();
+    const popoverMargin = this.options.padding + 10;
+
+    this.popover.style.left = `${position.left - this.options.padding}px`;
+
+    // Calculate different dimensions after attaching popover
+    const documentHeightAfterPopOver = position.bottom + popoverHeight + popoverMargin;
+
+    // If adding popover would go out of the window height, then show it to the top
+    if (documentHeightAfterPopOver >= documentHeight) {
+      this.popover.style.top = `${position.top - popoverHeight - popoverMargin}px`;
+      popoverTip.classList.add('bottom');
+    } else {
+      this.popover.style.top = `${position.bottom + popoverMargin}px`;
+      popoverTip.classList.add('top');
+    }
   }
 
   getPopover() {
@@ -92,5 +111,30 @@ export default class Element {
 
   hidePopover() {
     this.popover.style.display = 'none';
+  }
+
+  getDocumentHeight() {
+    // eslint-disable-next-line prefer-destructuring
+    const body = this.document.body;
+    const html = this.document.documentElement;
+
+    return Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight);
+  }
+
+  getPopoverHeight() {
+    return Math.max(this.popover.scrollHeight, this.popover.offsetHeight);
+  }
+
+  resetPopover() {
+    this.popover.style.display = 'block';
+    this.popover.style.left = '';
+    this.popover.style.top = '';
+    this.popover.style.bottom = '';
+    this.popover.style.right = '';
+
+    // Remove the positional classes from tip
+    this.popover
+      .querySelector('.sholo-popover-tip')
+      .className = 'sholo-popover-tip';
   }
 }

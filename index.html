@@ -10,7 +10,7 @@
 </head>
 <body>
 <div id="sholo-popover-item">
-  <div class="sholo-popover-tip top"></div>
+  <div class="sholo-popover-tip"></div>
   <div class="sholo-popover-title">Did you know?</div>
   <div class="sholo-popover-description">You can make step by step introductions with sholo!</div>
 </div>
@@ -65,8 +65,9 @@
     const sholo = new Sholo({
       animate: true,
       opacity: 0.8,
-      padding: 0
+      padding: 5
     });
+
 
   document.querySelector('.btn__example')
     .addEventListener('click', function () {
