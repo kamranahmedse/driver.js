@@ -61,6 +61,14 @@ export default class Overlay {
       return;
     }
 
+    // Trigger the hook for highlight started
+    element.onHighlightStarted();
+
+    // Old element has been deselected
+    if (this.highlightedElement) {
+      this.highlightedElement.onDeselected();
+    }
+
     // get the position of element around which we need to draw
     const position = element.getCalculatedPosition();
     if (!position.canHighlight()) {
@@ -92,6 +100,7 @@ export default class Overlay {
    */
   clear() {
     this.positionToHighlight = new Position();
+    this.highlightedElement.onDeselected();
     this.highlightedElement = null;
 
     this.draw();
@@ -245,6 +254,7 @@ export default class Overlay {
     if (this.highlightedElement) {
       this.window.cancelAnimationFrame(this.redrawAnimation);
       this.highlight(this.highlightedElement, animate);
+      this.highlightedElement.onHighlighted();
     }
   }
 }

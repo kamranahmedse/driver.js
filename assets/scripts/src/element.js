@@ -11,6 +11,7 @@ export default class Element {
     this.document = document;
     this.window = window;
     this.options = options;
+    this.popover = this.getPopover();
   }
 
   /**
@@ -58,8 +59,38 @@ export default class Element {
     return position;
   }
 
+  onDeselected() {
+    // Will be called when element is about to be deselected
+    this.hidePopover();
+  }
+
+  onHighlightStarted() {
+    // Will be triggered when the element is about to be highlighted
+    // i.e. overlay has started transitioning towards this element
+    this.showPopover();
+  }
+
   onHighlighted() {
-    console.log('on highlighted');
-    console.log(this.getScreenCoordinates());
+    this.showPopover();
+  }
+
+  showPopover() {
+    const position = this.getCalculatedPosition();
+
+    this.popover.style.left = `${position.left}px`;
+    this.popover.style.top = `${position.bottom + 10}px`;
+    this.popover.style.display = 'block';
+  }
+
+  getPopover() {
+    // @todo: Create if not there
+    const popover = this.document.getElementById('sholo-popover-item');
+    popover.style.position = 'absolute';
+
+    return popover;
+  }
+
+  hidePopover() {
+    this.popover.style.display = 'none';
   }
 }

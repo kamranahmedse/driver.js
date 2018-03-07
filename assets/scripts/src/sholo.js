@@ -42,6 +42,11 @@ export default class Sholo {
     this.window.addEventListener('mouseup', this.onMouseUp, false);
   }
 
+  /**
+   * Removes the popover if clicked outside the highlighted element
+   * or outside the
+   * @param e
+   */
   onMouseUp(e) {
     const highlightedElement = this.overlay.getHighlightedElement();
     const popover = document.getElementById('sholo-popover-item');
@@ -50,8 +55,11 @@ export default class Sholo {
       return;
     }
 
+    const clickedHighlightedElement = highlightedElement.node.contains(e.target);
+    const clickedPopover = popover && popover.contains(e.target);
+
     // Remove the overlay If clicked outside the highlighted element
-    if (!highlightedElement.node.contains(e.target) && (!popover || !popover.contains(e.target))) {
+    if (!clickedHighlightedElement && !clickedPopover) {
       this.overlay.clear();
     }
   }

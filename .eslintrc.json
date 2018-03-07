@@ -10,6 +10,7 @@
     "no-cond-assign": "off",
     "func-names": "off",
     "no-bitwise": "off",
+    "class-methods-use-this": "off",
     "no-param-reassign": [
       "off"
     ],
