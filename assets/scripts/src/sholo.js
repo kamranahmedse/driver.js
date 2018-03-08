@@ -21,10 +21,13 @@ export default class Sholo {
     this.document = document;
     this.window = window;
 
+    this.steps = [];            // steps to be presented if any
+    this.currentStep = 0;       // index for the currently highlighted step
+
     this.onScroll = this.onScroll.bind(this);
     this.onResize = this.onResize.bind(this);
     this.onKeyUp = this.onKeyUp.bind(this);
-    this.onMouseUp = this.onMouseUp.bind(this);
+    this.onClick = this.onClick.bind(this);
 
     // Event bindings
     this.bind();
@@ -39,7 +42,7 @@ export default class Sholo {
     this.document.addEventListener('DOMMouseScroll', this.onScroll, false);
     this.window.addEventListener('resize', this.onResize, false);
     this.window.addEventListener('keyup', this.onKeyUp, false);
-    this.window.addEventListener('mouseup', this.onMouseUp, false);
+    this.window.addEventListener('click', this.onClick, false);
   }
 
   /**
@@ -47,13 +50,14 @@ export default class Sholo {
    * or outside the
    * @param e
    */
-  onMouseUp(e) {
-    const highlightedElement = this.overlay.getHighlightedElement();
-    const popover = document.getElementById('sholo-popover-item');
-
-    if (!highlightedElement || !highlightedElement.node) {
+  onClick(e) {
+    if (!this.hasHighlightedElement()) {
+      // Has no highlighted element so ignore the click
       return;
     }
+
+    const highlightedElement = this.overlay.getHighlightedElement();
+    const popover = document.getElementById('sholo-popover-item');
 
     const clickedHighlightedElement = highlightedElement.node.contains(e.target);
     const clickedPopover = popover && popover.contains(e.target);
@@ -61,7 +65,19 @@ export default class Sholo {
     // Remove the overlay If clicked outside the highlighted element
     if (!clickedHighlightedElement && !clickedPopover) {
       this.overlay.clear();
+      return;
     }
+
+    const nextClicked = e.target.classList.contains('sholo-next-btn');
+    if (nextClicked) {
+      this.currentStep += 1;
+      this.overlay.highlight(this.steps[this.currentStep]);
+    }
+  }
+
+  hasHighlightedElement() {
+    const highlightedElement = this.overlay.getHighlightedElement();
+    return highlightedElement && highlightedElement.node;
   }
 
   /**
@@ -93,26 +109,50 @@ export default class Sholo {
     }
   }
 
+  defineSteps(steps) {
+    this.steps = [];
+
+    steps.forEach((step, index) => {
+      if (!step.element) {
+        throw new Error(`Element (query selector or a dom element) missing in step ${index}`);
+      }
+
+      const domElement = Sholo.findDomElement(step.element);
+      const element = new Element(domElement, Object.assign({}, this.options, step));
+
+      this.steps.push(element);
+    });
+  }
+
+  start() {
+    if (!this.steps || this.steps.length === 0) {
+      throw new Error('There are no steps defined to iterate');
+    }
+
+    this.currentStep = 0;
+    this.overlay.highlight(this.steps[0]);
+  }
+
   /**
    * Highlights the given selector
    * @param selector
    */
   highlight(selector) {
-    let domElement;
+    const domElement = Sholo.findDomElement(selector);
 
+    const element = new Element(domElement, this.options);
+    this.overlay.highlight(element);
+  }
+
+  static findDomElement(selector) {
     if (typeof selector === 'string') {
-      domElement = document.querySelector(selector);
-    } else if (typeof selector === 'object') {
-      domElement = selector;
-    } else {
-      throw new Error('Element can only be string or the dom element');
+      return document.querySelector(selector);
     }
 
-    if (domElement) {
-      const element = new Element(domElement, this.options);
-      this.overlay.highlight(element);
-    } else {
-      this.overlay.clear();
+    if (typeof selector === 'object') {
+      return selector;
     }
+
+    throw new Error('Element can only be string or the dom element');
   }
 }

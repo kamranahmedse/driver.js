@@ -57,7 +57,7 @@ export default class Overlay {
    * @param animate bool
    */
   highlight(element, animate = true) {
-    if (!element) {
+    if (!element || !element.node) {
       return;
     }
 

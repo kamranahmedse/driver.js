@@ -14,10 +14,10 @@
   <div class="sholo-popover-title">Did you know?</div>
   <div class="sholo-popover-description">You can make step by step introductions with sholo!</div>
   <div class="sholo-popover-footer">
-    <a href="javascript:void(0)" class="sholo-close">Close</a>
+    <a href="javascript:void(0)" class="sholo-close-btn">Close</a>
     <span class="sholo-btn-group">
-      <a href="javascript:void(0)">&larr; Previous</a>
-      <a href="javascript:void(0)">Next &rarr;</a>
+      <a class="sholo-prev-btn" href="javascript:void(0)">&larr; Previous</a>
+      <a class="sholo-next-btn" href="javascript:void(0)">Next &rarr;</a>
     </span>
   </div>
 </div>
@@ -75,10 +75,15 @@
     padding: 5
   });
 
+  sholo.defineSteps([
+    { element: '.section__header' },
+    { element: '.section__examples' },
+    { element: '.section__contributing' },
+  ]);
 
   document.querySelector('.btn__example')
     .addEventListener('click', function () {
-      sholo.highlight('.section__header');
+      sholo.start();
     });
 </script>
 </body>
