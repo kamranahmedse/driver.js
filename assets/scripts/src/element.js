@@ -34,6 +34,40 @@ export default class Element {
     return { x, y };
   }
 
+  isInView() {
+    let top = this.node.offsetTop;
+    let left = this.node.offsetLeft;
+    const width = this.node.offsetWidth;
+    const height = this.node.offsetHeight;
+
+    let el = this.node;
+
+    while (el.offsetParent) {
+      el = el.offsetParent;
+      top += el.offsetTop;
+      left += el.offsetLeft;
+    }
+
+    return (
+      top >= this.window.pageYOffset &&
+      left >= this.window.pageXOffset &&
+      (top + height) <= (this.window.pageYOffset + this.window.innerHeight) &&
+      (left + width) <= (this.window.pageXOffset + this.window.innerWidth)
+    );
+  }
+
+  bringInView() {
+    if (this.isInView()) {
+      return;
+    }
+
+    const elementRect = this.getCalculatedPosition();
+    const absoluteElementTop = elementRect.top + window.pageYOffset;
+    const middle = absoluteElementTop - (window.innerHeight / 2);
+
+    window.scrollTo(0, middle);
+  }
+
   /**
    * Gets the calculated position on screen, around which
    * we need to draw
@@ -82,17 +116,17 @@ export default class Element {
 
     const popoverTip = this.popover.querySelector('.sholo-popover-tip');
 
-    const documentHeight = this.getDocumentHeight();
+    const pageHeight = this.getFullPageSize().height;
     const popoverHeight = this.getPopoverHeight();
     const popoverMargin = this.options.padding + 10;
 
     this.popover.style.left = `${position.left - this.options.padding}px`;
 
     // Calculate different dimensions after attaching popover
-    const documentHeightAfterPopOver = position.bottom + popoverHeight + popoverMargin;
+    const pageHeightAfterPopOver = position.bottom + popoverHeight + popoverMargin;
 
     // If adding popover would go out of the window height, then show it to the top
-    if (documentHeightAfterPopOver >= documentHeight) {
+    if (pageHeightAfterPopOver >= pageHeight) {
       this.popover.style.top = `${position.top - popoverHeight - popoverMargin}px`;
       popoverTip.classList.add('bottom');
     } else {
@@ -113,12 +147,15 @@ export default class Element {
     this.popover.style.display = 'none';
   }
 
-  getDocumentHeight() {
+  getFullPageSize() {
     // eslint-disable-next-line prefer-destructuring
     const body = this.document.body;
     const html = this.document.documentElement;
 
-    return Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight);
+    return {
+      height: Math.max(body.scrollHeight, body.offsetHeight, html.scrollHeight, html.offsetHeight),
+      width: Math.max(body.scrollWidth, body.offsetWidth, html.scrollWidth, html.offsetWidth),
+    };
   }
 
   getPopoverHeight() {

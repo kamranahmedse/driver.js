@@ -72,12 +72,22 @@ export default class Sholo {
     const prevClicked = e.target.classList.contains('sholo-prev-btn');
     const closeClicked = e.target.classList.contains('sholo-close-btn');
 
+    if (closeClicked) {
+      this.reset();
+      return;
+    }
+
     if (nextClicked) {
       this.moveNext();
     } else if (prevClicked) {
       this.movePrevious();
-    } else if (closeClicked) {
-      this.reset();
+    }
+
+    // @todo - move to onHighlighted hook and add the check if not visible then do this
+    if (this.overlay.highlightedElement) {
+      window.setTimeout(() => {
+        this.overlay.highlightedElement.bringInView();
+      }, 800);
     }
   }
 
