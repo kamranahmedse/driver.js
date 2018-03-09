@@ -69,12 +69,56 @@ export default class Sholo {
     }
 
     const nextClicked = e.target.classList.contains('sholo-next-btn');
+    const prevClicked = e.target.classList.contains('sholo-prev-btn');
+    const closeClicked = e.target.classList.contains('sholo-close-btn');
+
     if (nextClicked) {
-      this.currentStep += 1;
-      this.overlay.highlight(this.steps[this.currentStep]);
+      this.moveNext();
+    } else if (prevClicked) {
+      this.movePrevious();
+    } else if (closeClicked) {
+      this.reset();
     }
   }
 
+  /**
+   * Moves to the previous step if possible
+   * otherwise resets the overlay
+   */
+  movePrevious() {
+    this.currentStep -= 1;
+    if (this.steps[this.currentStep]) {
+      this.overlay.highlight(this.steps[this.currentStep]);
+    } else {
+      this.reset();
+    }
+  }
+
+  /**
+   * Moves to the next step if possible
+   * otherwise resets the overlay
+   */
+  moveNext() {
+    this.currentStep += 1;
+    if (this.steps[this.currentStep]) {
+      this.overlay.highlight(this.steps[this.currentStep]);
+    } else {
+      this.reset();
+    }
+  }
+
+  /**
+   * Resets the steps if any and clears the overlay
+   */
+  reset() {
+    this.currentStep = 0;
+    this.overlay.clear();
+  }
+
+  /**
+   * Checks if there is any highlighted element or not
+   * @returns {boolean}
+   */
   hasHighlightedElement() {
     const highlightedElement = this.overlay.getHighlightedElement();
     return highlightedElement && highlightedElement.node;
