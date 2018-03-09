@@ -16,10 +16,10 @@ export default class Sholo {
       opacity: 0.75,
     }, options);
 
-    this.overlay = new Overlay(options);
-
     this.document = document;
     this.window = window;
+
+    this.overlay = new Overlay(options, window, document);
 
     this.steps = [];            // steps to be presented if any
     this.currentStep = 0;       // index for the currently highlighted step
@@ -57,7 +57,7 @@ export default class Sholo {
     }
 
     const highlightedElement = this.overlay.getHighlightedElement();
-    const popover = document.getElementById('sholo-popover-item');
+    const popover = this.document.getElementById('sholo-popover-item');
 
     const clickedHighlightedElement = highlightedElement.node.contains(e.target);
     const clickedPopover = popover && popover.contains(e.target);
@@ -81,13 +81,6 @@ export default class Sholo {
       this.moveNext();
     } else if (prevClicked) {
       this.movePrevious();
-    }
-
-    // @todo - move to onHighlighted hook and add the check if not visible then do this
-    if (this.overlay.highlightedElement) {
-      window.setTimeout(() => {
-        this.overlay.highlightedElement.bringInView();
-      }, 800);
     }
   }
 
@@ -167,12 +160,19 @@ export default class Sholo {
     this.steps = [];
 
     steps.forEach((step, index) => {
-      if (!step.element) {
-        throw new Error(`Element (query selector or a dom element) missing in step ${index}`);
+      if (!step.element || typeof step.element !== 'string') {
+        throw new Error(`Element (query selector string) missing in step ${index}`);
       }
 
-      const domElement = Sholo.findDomElement(step.element);
-      const element = new Element(domElement, Object.assign({}, this.options, step));
+      const elementOptions = Object.assign({}, this.options, step);
+
+      const domElement = this.document.querySelector(step.element);
+      if (!domElement) {
+        console.warn(`Element to highlight ${step.element} not found`);
+        return;
+      }
+
+      const element = new Element(domElement, elementOptions, this.overlay, this.window, this.document);
 
       this.steps.push(element);
     });
@@ -189,24 +189,17 @@ export default class Sholo {
 
   /**
    * Highlights the given selector
-   * @param selector
+   * @param selector string query selector
+   * @todo make it accept json or query selector
    */
   highlight(selector) {
-    const domElement = Sholo.findDomElement(selector);
+    const domElement = this.document.querySelector(selector);
+    if (!domElement) {
+      console.warn(`Element to highlight ${selector} not found`);
+      return;
+    }
 
-    const element = new Element(domElement, this.options);
+    const element = new Element(domElement, this.options, this.overlay, this.window, this.document);
     this.overlay.highlight(element);
-  }
-
-  static findDomElement(selector) {
-    if (typeof selector === 'string') {
-      return document.querySelector(selector);
-    }
-
-    if (typeof selector === 'object') {
-      return selector;
-    }
-
-    throw new Error('Element can only be string or the dom element');
   }
 }

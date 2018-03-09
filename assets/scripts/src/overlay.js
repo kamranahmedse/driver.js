@@ -9,12 +9,14 @@ export default class Overlay {
    * @param opacity number
    * @param padding number
    * @param animate bool
+   * @param window
+   * @param document
    */
   constructor({
     opacity = 0.75,
     padding = 10,
     animate = true,
-  }) {
+  }, window, document) {
     this.opacity = opacity; // Fixed opacity for the layover
     this.padding = padding; // Padding around the highlighted item
     this.animate = animate; // Should animate between the transitions
@@ -24,6 +26,7 @@ export default class Overlay {
     this.highlightedPosition = new Position({}); // position at which layover is patched currently
     this.redrawAnimation = null;                 // used to cancel the redraw animation
     this.highlightedElement = null;              // currently highlighted dom element (instance of Element)
+    this.lastHighlightedElement = null;          // element that was highlighted before current one
 
     this.draw = this.draw.bind(this);  // To pass the context of class, as it is to be used in redraw animation callback
 
@@ -58,6 +61,7 @@ export default class Overlay {
    */
   highlight(element, animate = true) {
     if (!element || !element.node) {
+      console.warn('Invalid element to highlight. Must be an instance of `Element`');
       return;
     }
 
@@ -75,6 +79,7 @@ export default class Overlay {
       return;
     }
 
+    this.lastHighlightedElement = this.highlightedElement;
     this.highlightedElement = element;
     this.positionToHighlight = position;
 
@@ -96,12 +101,21 @@ export default class Overlay {
   }
 
   /**
+   * Gets the element that was highlighted before current element
+   * @returns {null|*}
+   */
+  getLastHighlightedElement() {
+    return this.lastHighlightedElement;
+  }
+
+  /**
    * Removes the overlay and cancel any listeners
    */
   clear() {
     this.positionToHighlight = new Position();
     this.highlightedElement.onDeselected();
     this.highlightedElement = null;
+    this.lastHighlightedElement = null;
 
     this.draw();
   }
@@ -138,8 +152,8 @@ export default class Overlay {
 
     // Cut the chunk of overlay that is over the highlighted item
     this.removeCloak({
-      posX: this.highlightedPosition.left - window.scrollX - this.padding,
-      posY: this.highlightedPosition.top - window.scrollY - this.padding,
+      posX: this.highlightedPosition.left - this.window.scrollX - this.padding,
+      posY: this.highlightedPosition.top - this.window.scrollY - this.padding,
       width: (this.highlightedPosition.right - this.highlightedPosition.left) + (this.padding * 2),
       height: (this.highlightedPosition.bottom - this.highlightedPosition.top) + (this.padding * 2),
     });
@@ -164,7 +178,7 @@ export default class Overlay {
     if (canHighlight || this.overlayAlpha > 0) {
       // Add the overlay if not already there
       if (!this.overlay.parentNode) {
-        document.body.appendChild(this.overlay);
+        this.document.body.appendChild(this.overlay);
       }
 
       // Stage a new animation frame only if the position has not been reached

@@ -5,12 +5,16 @@ export default class Element {
    * DOM element object
    * @param node
    * @param options
+   * @param overlay
+   * @param window
+   * @param document
    */
-  constructor(node, options) {
+  constructor(node, options, overlay, window, document) {
     this.node = node;
     this.document = document;
     this.window = window;
     this.options = options;
+    this.overlay = overlay;
     this.popover = this.getPopover();
   }
 
@@ -62,10 +66,10 @@ export default class Element {
     }
 
     const elementRect = this.getCalculatedPosition();
-    const absoluteElementTop = elementRect.top + window.pageYOffset;
-    const middle = absoluteElementTop - (window.innerHeight / 2);
+    const absoluteElementTop = elementRect.top + this.window.pageYOffset;
+    const middle = absoluteElementTop - (this.window.innerHeight / 2);
 
-    window.scrollTo(0, middle);
+    this.window.scrollTo(0, middle);
   }
 
   /**
@@ -106,6 +110,18 @@ export default class Element {
 
   onHighlighted() {
     this.showPopover();
+
+    const highlightedElement = this;
+    const lastHighlightedElement = this.overlay.getLastHighlightedElement();
+
+    const highlightedNode = this.node;
+    const lastHighlightedNode = lastHighlightedElement && lastHighlightedElement.node;
+
+    // If this element is not already highlighted (because this call could
+    // be from the resize or scroll) and is not in view
+    if (highlightedNode !== lastHighlightedNode && !highlightedElement.isInView()) {
+      highlightedElement.bringInView();
+    }
   }
 
   showPopover() {
