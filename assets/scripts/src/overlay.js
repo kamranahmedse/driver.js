@@ -33,19 +33,26 @@ export default class Overlay {
     this.window = window;
     this.document = document;
 
-    this.prepareContext();
+    this.resetOverlay();
     this.setSize();
   }
 
   /**
    * Prepares the overlay
    */
-  prepareContext() {
+  resetOverlay() {
+    // Check and remove the canvas if it already exists
+    const canvasOverlay = this.document.getElementById('sholo-canvas-overlay');
+    if (canvasOverlay && canvasOverlay.parentNode) {
+      canvasOverlay.parentNode.removeChild(canvasOverlay);
+    }
+
     const overlay = this.document.createElement('canvas');
 
     this.overlay = overlay;
     this.context = overlay.getContext('2d');
 
+    this.overlay.id = 'sholo-canvas-overlay';
     this.overlay.style.pointerEvents = 'none';
     this.overlay.style.background = 'transparent';
     this.overlay.style.position = 'fixed';
