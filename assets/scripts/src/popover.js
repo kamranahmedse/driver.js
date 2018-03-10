@@ -14,6 +14,11 @@ import {
  * Popover that is displayed on top of the highlighted element
  */
 export default class Popover extends Element {
+  /**
+   * @param {Object} options
+   * @param {Window} window
+   * @param {Document} document
+   */
   constructor(options, window, document) {
     super();
 
@@ -35,6 +40,9 @@ export default class Popover extends Element {
     this.hide();
   }
 
+  /**
+   * Prepares the dom element for popover
+   */
   makeNode() {
     let popover = this.document.getElementById(ID_POPOVER);
     if (!popover) {
@@ -65,6 +73,10 @@ export default class Popover extends Element {
     return div.firstChild;
   }
 
+  /**
+   * Gets the size for popover
+   * @returns {{height: number, width: number}}
+   */
   getSize() {
     return {
       height: Math.max(this.node.scrollHeight, this.node.offsetHeight),
@@ -91,7 +103,7 @@ export default class Popover extends Element {
 
   /**
    * Shows the popover at the given position
-   * @param position
+   * @param {Position} position
    */
   show(position) {
     this.reset();
@@ -154,7 +166,7 @@ export default class Popover extends Element {
 
   /**
    * Shows the popover on the left of the given position
-   * @param elementPosition
+   * @param {Position} elementPosition
    */
   positionOnLeft(elementPosition) {
     const popoverWidth = this.getSize().width;
@@ -170,7 +182,7 @@ export default class Popover extends Element {
 
   /**
    * Shows the popover on the right of the given position
-   * @param elementPosition
+   * @param {Position} elementPosition
    */
   positionOnRight(elementPosition) {
     const popoverMargin = this.options.padding + 10;  // adding 10 to give it a little distance from the element
@@ -185,7 +197,7 @@ export default class Popover extends Element {
 
   /**
    * Shows the popover on the top of the given position
-   * @param elementPosition
+   * @param {Position} elementPosition
    */
   positionOnTop(elementPosition) {
     const popoverHeight = this.getSize().height;
@@ -201,7 +213,7 @@ export default class Popover extends Element {
 
   /**
    * Shows the popover on the bottom of the given position
-   * @param elementPosition
+   * @param {Position} elementPosition
    */
   positionOnBottom(elementPosition) {
     const popoverMargin = this.options.padding + 10;  // adding 10 to give it a little distance from the element
@@ -218,7 +230,7 @@ export default class Popover extends Element {
    * Automatically positions the popover around the given position
    * such that the element and popover remain in view
    * @todo add the left and right positioning decisions
-   * @param elementPosition
+   * @param {Position} elementPosition
    */
   autoPosition(elementPosition) {
     const pageSize = this.getFullPageSize();

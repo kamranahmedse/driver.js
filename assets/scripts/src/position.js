@@ -4,10 +4,10 @@
  */
 export default class Position {
   /**
-   * @param left number
-   * @param top number
-   * @param right number
-   * @param bottom number
+   * @param {number} left
+   * @param {number} top
+   * @param {number} right
+   * @param {number} bottom
    */
   constructor({
     left = 0,

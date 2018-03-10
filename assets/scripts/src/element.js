@@ -7,12 +7,12 @@ import Position from './position';
 export default class Element {
   /**
    * DOM element object
-   * @param node
-   * @param options
-   * @param popover
-   * @param overlay
-   * @param window
-   * @param document
+   * @param {Node} node
+   * @param {Object} options
+   * @param {Popover} popover
+   * @param {Overlay} overlay
+   * @param {Window} window
+   * @param {Document} document
    */
   constructor(node, options, popover, overlay, window, document) {
     this.node = node;
@@ -43,6 +43,10 @@ export default class Element {
     return { x, y };
   }
 
+  /**
+   * Checks if the current element is visible in viewport
+   * @returns {boolean}
+   */
   isInView() {
     let top = this.node.offsetTop;
     let left = this.node.offsetLeft;
@@ -65,6 +69,9 @@ export default class Element {
     );
   }
 
+  /**
+   * Brings the element to middle of the view port if not in view
+   */
   bringInView() {
     if (this.isInView()) {
       return;
@@ -127,6 +134,9 @@ export default class Element {
     this.showPopover();
   }
 
+  /**
+   * Is called when the element has been successfully highlighted
+   */
   onHighlighted() {
     if (this.popover) {
       this.showPopover();
@@ -152,12 +162,18 @@ export default class Element {
     }
   }
 
+  /**
+   * Shows the popover on the current element
+   */
   showPopover() {
     const position = this.getCalculatedPosition();
 
     this.popover.show(position);
   }
 
+  /**
+   * @returns {{height: number, width: number}}
+   */
   getFullPageSize() {
     // eslint-disable-next-line prefer-destructuring
     const body = this.document.body;

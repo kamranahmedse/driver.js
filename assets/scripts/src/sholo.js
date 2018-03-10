@@ -18,7 +18,7 @@ import {
  */
 export default class Sholo {
   /**
-   * @param options
+   * @param {Object} options
    */
   constructor(options = {}) {
     this.options = Object.assign({

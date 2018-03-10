@@ -7,9 +7,9 @@ import { ID_OVERLAY, OVERLAY_ZINDEX } from './constants';
  */
 export default class Overlay {
   /**
-   * @param options
-   * @param window
-   * @param document
+   * @param {Object} options
+   * @param {Window} window
+   * @param {Document} document
    */
   constructor(options, window, document) {
     this.options = options;
@@ -56,8 +56,8 @@ export default class Overlay {
 
   /**
    * Highlights the dom element on the screen
-   * @param element Element
-   * @param animate bool
+   * @param {Element} element
+   * @param {boolean} animate
    */
   highlight(element, animate = true) {
     if (!element || !element.node) {
@@ -124,7 +124,7 @@ export default class Overlay {
   }
 
   /**
-   * `draw` is called for in requestAnimationFrame. Puts back the
+   * `draw` is called for every frame . Puts back the
    * filled overlay on body (i.e. while removing existing highlight if any) and
    * Slowly eases towards the item to be selected.
    */
@@ -200,6 +200,10 @@ export default class Overlay {
     }
   }
 
+  /**
+   * Checks if there as any position highlighted
+   * @returns {boolean}
+   */
   hasPositionHighlighted() {
     return this.positionToHighlight.equals(this.highlightedPosition) &&
       this.overlayAlpha > (this.options.opacity - 0.05);
@@ -210,10 +214,10 @@ export default class Overlay {
    * i.e. cuts the chunk of layout which is over the element
    * to be highlighted
    *
-   * @param posX number
-   * @param posY number
-   * @param width number
-   * @param height number
+   * @param {number} posX
+   * @param {number} posY
+   * @param {number} width
+   * @param {number} height
    */
   removeCloak({
     posX = 0,
@@ -228,10 +232,10 @@ export default class Overlay {
    * Adds the overlay i.e. to cover the given
    * position with dark overlay
    *
-   * @param posX number
-   * @param posY number
-   * @param width number
-   * @param height number
+   * @param {number} posX
+   * @param {number} posY
+   * @param {number} width
+   * @param {number} height
    */
   addCloak({
     posX = 0,
@@ -246,8 +250,8 @@ export default class Overlay {
   /**
    * Sets the size for the overlay
    *
-   * @param width number
-   * @param height number
+   * @param {number|null} width
+   * @param {number|null} height
    */
   setSize(width = null, height = null) {
     // By default it is going to cover the whole page and then we will
@@ -260,7 +264,7 @@ export default class Overlay {
    * Refreshes the overlay i.e. sets the size according to current window size
    * And moves the highlight around if necessary
    *
-   * @param animate bool
+   * @param {boolean} animate
    */
   refresh(animate = true) {
     this.setSize();
