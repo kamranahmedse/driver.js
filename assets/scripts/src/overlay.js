@@ -1,4 +1,5 @@
 import Position from './position';
+import { ID_OVERLAY, OVERLAY_ANIMATE, OVERLAY_OPACITY, OVERLAY_PADDING, OVERLAY_ZINDEX } from './constants';
 
 /**
  * Responsible for overlay creation and manipulation i.e.
@@ -13,9 +14,9 @@ export default class Overlay {
    * @param document
    */
   constructor({
-    opacity = 0.75,
-    padding = 10,
-    animate = true,
+    opacity = OVERLAY_OPACITY,
+    padding = OVERLAY_PADDING,
+    animate = OVERLAY_ANIMATE,
   }, window, document) {
     this.opacity = opacity; // Fixed opacity for the layover
     this.padding = padding; // Padding around the highlighted item
@@ -42,7 +43,7 @@ export default class Overlay {
    */
   resetOverlay() {
     // Check and remove the canvas if it already exists
-    const canvasOverlay = this.document.getElementById('sholo-canvas-overlay');
+    const canvasOverlay = this.document.getElementById(ID_OVERLAY);
     if (canvasOverlay && canvasOverlay.parentNode) {
       canvasOverlay.parentNode.removeChild(canvasOverlay);
     }
@@ -52,13 +53,13 @@ export default class Overlay {
     this.overlay = overlay;
     this.context = overlay.getContext('2d');
 
-    this.overlay.id = 'sholo-canvas-overlay';
+    this.overlay.id = ID_OVERLAY;
     this.overlay.style.pointerEvents = 'none';
     this.overlay.style.background = 'transparent';
     this.overlay.style.position = 'fixed';
     this.overlay.style.top = '0';
     this.overlay.style.left = '0';
-    this.overlay.style.zIndex = '999999999';
+    this.overlay.style.zIndex = OVERLAY_ZINDEX;
   }
 
   /**

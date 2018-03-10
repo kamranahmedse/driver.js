@@ -2,6 +2,7 @@ import Overlay from './overlay';
 import Element from './element';
 import './polyfill';
 import Popover from './popover';
+import { CLASS_CLOSE_BTN, CLASS_NEXT_STEP_BTN, CLASS_PREV_STEP_BTN, ESC_KEYCODE, ID_POPOVER } from './constants';
 
 /**
  * Plugin class that drives the plugin
@@ -58,7 +59,7 @@ export default class Sholo {
     }
 
     const highlightedElement = this.overlay.getHighlightedElement();
-    const popover = this.document.getElementById('sholo-popover-item');
+    const popover = this.document.getElementById(ID_POPOVER);
 
     const clickedHighlightedElement = highlightedElement.node.contains(e.target);
     const clickedPopover = popover && popover.contains(e.target);
@@ -69,9 +70,9 @@ export default class Sholo {
       return;
     }
 
-    const nextClicked = e.target.classList.contains('sholo-next-btn');
-    const prevClicked = e.target.classList.contains('sholo-prev-btn');
-    const closeClicked = e.target.classList.contains('sholo-close-btn');
+    const nextClicked = e.target.classList.contains(CLASS_NEXT_STEP_BTN);
+    const prevClicked = e.target.classList.contains(CLASS_PREV_STEP_BTN);
+    const closeClicked = e.target.classList.contains(CLASS_CLOSE_BTN);
 
     if (closeClicked) {
       this.reset();
@@ -152,7 +153,7 @@ export default class Sholo {
    * @param event
    */
   onKeyUp(event) {
-    if (event.keyCode === 27) {
+    if (event.keyCode === ESC_KEYCODE) {
       this.overlay.clear();
     }
   }

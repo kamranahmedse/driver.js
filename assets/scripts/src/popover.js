@@ -1,8 +1,9 @@
+import Element from './element';
+import { CLASS_POPOVER_TIP, ID_POPOVER } from './constants';
+
 /**
  * Popover that is displayed on top of the highlighted element
  */
-import Element from './element';
-
 export default class Popover extends Element {
   constructor(options = {
     padding: 10,
@@ -18,7 +19,7 @@ export default class Popover extends Element {
 
   getPopover() {
     // @todo: Create if not there
-    const popover = this.document.getElementById('sholo-popover-item');
+    const popover = this.document.getElementById(ID_POPOVER);
     popover.style.position = 'absolute';
 
     return popover;
@@ -41,14 +42,14 @@ export default class Popover extends Element {
 
     // Remove the positional classes from tip
     this.node
-      .querySelector('.sholo-popover-tip')
-      .className = 'sholo-popover-tip';
+      .querySelector(`.${CLASS_POPOVER_TIP}`)
+      .className = CLASS_POPOVER_TIP;
   }
 
   show(position) {
     this.reset();
 
-    const popoverTip = this.node.querySelector('.sholo-popover-tip');
+    const popoverTip = this.node.querySelector(`.${CLASS_POPOVER_TIP}`);
 
     const pageHeight = this.getFullPageSize().height;
     const popoverHeight = this.getHeight();
