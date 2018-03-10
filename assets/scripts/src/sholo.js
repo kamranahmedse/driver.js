@@ -7,10 +7,10 @@ import {
   CLASS_NEXT_STEP_BTN,
   CLASS_PREV_STEP_BTN,
   ESC_KEY_CODE,
-  ID_POPOVER,
+  ID_POPOVER, LEFT_KEY_CODE,
   OVERLAY_ANIMATE,
   OVERLAY_OPACITY,
-  OVERLAY_PADDING,
+  OVERLAY_PADDING, RIGHT_KEY_CODE,
 } from './constants';
 
 /**
@@ -122,6 +122,20 @@ export default class Sholo {
   }
 
   /**
+   * @returns {boolean}
+   */
+  hasNextStep() {
+    return !!this.steps[this.currentStep + 1];
+  }
+
+  /**
+   * @returns {boolean}
+   */
+  hasPreviousStep() {
+    return !!this.steps[this.currentStep - 1];
+  }
+
+  /**
    * Resets the steps if any and clears the overlay
    */
   reset() {
@@ -165,6 +179,10 @@ export default class Sholo {
   onKeyUp(event) {
     if (event.keyCode === ESC_KEY_CODE) {
       this.overlay.clear();
+    } else if (event.keyCode === RIGHT_KEY_CODE && this.hasNextStep()) {
+      this.moveNext();
+    } else if (event.keyCode === LEFT_KEY_CODE && this.hasPreviousStep()) {
+      this.movePrevious();
     }
   }
 

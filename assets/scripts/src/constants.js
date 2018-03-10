@@ -4,6 +4,8 @@ export const OVERLAY_ANIMATE = true;
 export const OVERLAY_ZINDEX = '999999999';
 
 export const ESC_KEY_CODE = 27;
+export const LEFT_KEY_CODE = 37;
+export const RIGHT_KEY_CODE = 39;
 
 export const ID_OVERLAY = 'sholo-canvas-overlay';
 
