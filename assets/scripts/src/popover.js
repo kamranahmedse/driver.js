@@ -21,20 +21,21 @@ export default class Popover extends Element {
     this.window = window;
     this.document = document;
 
-    this.node = this.makeNode();
+    this.makeNode();
     this.hide();
   }
 
   makeNode() {
     let popover = this.document.getElementById(ID_POPOVER);
-    if (popover) {
-      return popover;
+    if (!popover) {
+      popover = Popover.createFromString(POPOVER_HTML);
+      document.body.appendChild(popover);
     }
 
-    popover = Popover.createFromString(POPOVER_HTML);
-    document.body.appendChild(popover);
-
-    return popover;
+    this.node = popover;
+    this.tipNode = popover.querySelector(`.${CLASS_POPOVER_TIP}`);
+    this.titleNode = popover.querySelector(`.${CLASS_POPOVER_TITLE}`);
+    this.descriptionNode = popover.querySelector(`.${CLASS_POPOVER_DESCRIPTION}`);
   }
 
   /**
@@ -50,8 +51,11 @@ export default class Popover extends Element {
     return div.firstChild;
   }
 
-  getHeight() {
-    return Math.max(this.node.scrollHeight, this.node.offsetHeight);
+  getSize() {
+    return {
+      height: Math.max(this.node.scrollHeight, this.node.offsetHeight),
+      width: Math.max(this.node.scrollWidth, this.node.offsetWidth),
+    };
   }
 
   hide() {
@@ -74,29 +78,113 @@ export default class Popover extends Element {
   show(position) {
     this.reset();
 
-    const popoverTip = this.node.querySelector(`.${CLASS_POPOVER_TIP}`);
-    const popoverTitle = this.node.querySelector(`.${CLASS_POPOVER_TITLE}`);
-    const popoverDescription = this.node.querySelector(`.${CLASS_POPOVER_DESCRIPTION}`);
+    // Set the title and descriptions
+    this.titleNode.innerText = this.options.title;
+    this.descriptionNode.innerText = this.options.description;
 
-    popoverTitle.innerText = this.options.title;
-    popoverDescription.innerText = this.options.description;
+    // Position the popover around the given position
+    switch (this.options.position) {
+      case 'left':
+        this.positionOnLeft(position);
+        break;
+      case 'right':
+        this.positionOnRight(position);
+        break;
+      case 'top':
+        this.positionOnTop(position);
+        break;
+      case 'bottom':
+        this.positionOnBottom(position);
+        break;
+      case 'auto':
+      default:
+        this.autoPosition(position);
+        break;
+    }
+  }
 
-    const pageHeight = this.getFullPageSize().height;
-    const popoverMargin = this.options.padding + 10;
-    const popoverHeight = this.getHeight();
+  /**
+   * Shows the popover on the left of the given position
+   * @param elementPosition
+   */
+  positionOnLeft(elementPosition) {
+    const popoverWidth = this.getSize().width;
+    const popoverMargin = this.options.padding + 10;  // adding 10 to give it a little distance from the element
 
-    this.node.style.left = `${position.left - this.options.padding}px`;
+    this.node.style.left = `${elementPosition.left - popoverWidth - popoverMargin}px`;
+    this.node.style.top = `${elementPosition.top - this.options.padding}px`;
+    this.node.style.right = '';
+    this.node.style.bottom = '';
 
-    // Calculate different dimensions after attaching popover
-    const pageHeightAfterPopOver = position.bottom + popoverHeight + popoverMargin;
+    this.tipNode.classList.add('right');
+  }
+
+  /**
+   * Shows the popover on the right of the given position
+   * @param elementPosition
+   */
+  positionOnRight(elementPosition) {
+    const popoverMargin = this.options.padding + 10;  // adding 10 to give it a little distance from the element
+
+    this.node.style.left = `${elementPosition.right + popoverMargin}px`;
+    this.node.style.top = `${elementPosition.top - this.options.padding}px`;
+    this.node.style.right = '';
+    this.node.style.bottom = '';
+
+    this.tipNode.classList.add('left');
+  }
+
+  /**
+   * Shows the popover on the top of the given position
+   * @param elementPosition
+   */
+  positionOnTop(elementPosition) {
+    const popoverHeight = this.getSize().height;
+    const popoverMargin = this.options.padding + 10;  // adding 10 to give it a little distance from the element
+
+    this.node.style.top = `${elementPosition.top - popoverHeight - popoverMargin}px`;
+    this.node.style.left = `${elementPosition.left - this.options.padding}px`;
+    this.node.style.right = '';
+    this.node.style.bottom = '';
+
+    this.tipNode.classList.add('bottom');
+  }
+
+  /**
+   * Shows the popover on the bottom of the given position
+   * @param elementPosition
+   */
+  positionOnBottom(elementPosition) {
+    const popoverMargin = this.options.padding + 10;  // adding 10 to give it a little distance from the element
+
+    this.node.style.top = `${elementPosition.bottom + popoverMargin}px`;
+    this.node.style.left = `${elementPosition.left - this.options.padding}px`;
+    this.node.style.right = '';
+    this.node.style.bottom = '';
+
+    this.tipNode.classList.add('top');
+  }
+
+  /**
+   * Automatically positions the popover around the given position
+   * such that the element and popover remain in view
+   * @param elementPosition
+   */
+  autoPosition(elementPosition) {
+    const pageSize = this.getFullPageSize();
+    const popoverSize = this.getSize();
+
+    const pageHeight = pageSize.height;
+    const popoverHeight = popoverSize.height;
+    const popoverMargin = this.options.padding + 10;  // adding 10 to give it a little distance from the element
+
+    const pageHeightAfterPopOver = elementPosition.bottom + popoverHeight + popoverMargin;
 
     // If adding popover would go out of the window height, then show it to the top
     if (pageHeightAfterPopOver >= pageHeight) {
-      this.node.style.top = `${position.top - popoverHeight - popoverMargin}px`;
-      popoverTip.classList.add('bottom');
+      this.positionOnTop(elementPosition);
     } else {
-      this.node.style.top = `${position.bottom + popoverMargin}px`;
-      popoverTip.classList.add('top');
+      this.positionOnBottom(elementPosition);
     }
   }
 }
