@@ -8,7 +8,7 @@ import {
   CLASS_POPOVER_TITLE, CLASS_PREV_STEP_BTN,
   ID_POPOVER,
   POPOVER_HTML,
-} from './constants';
+} from '../common/constants';
 
 /**
  * Popover that is displayed on top of the highlighted element

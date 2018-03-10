@@ -1,5 +1,5 @@
 import Position from './position';
-import { ID_OVERLAY, OVERLAY_ZINDEX } from './constants';
+import { ID_OVERLAY, OVERLAY_ZINDEX } from '../common/constants';
 
 /**
  * Responsible for overlay creation and manipulation i.e.

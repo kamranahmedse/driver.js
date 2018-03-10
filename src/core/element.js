@@ -7,7 +7,7 @@ import Position from './position';
 export default class Element {
   /**
    * DOM element object
-   * @param {Node} node
+   * @param {Node|HTMLElement} node
    * @param {Object} options
    * @param {Popover} popover
    * @param {Overlay} overlay

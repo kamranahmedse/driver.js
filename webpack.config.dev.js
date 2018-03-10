@@ -5,13 +5,13 @@ module.exports = {
   mode: 'development',
   entry: [
     'webpack-dev-server/client?http://localhost:3000',
-    './assets/styles/scss/demo.scss',
-    './assets/scripts/src/sholo.js',
+    './demo/demo.scss',
+    './src/index.js',
   ],
   output: {
-    path: path.join(__dirname, '/assets'),
-    publicPath: '/assets/',
-    filename: 'scripts/dist/sholo.js',
+    path: path.join(__dirname, '/dist'),
+    publicPath: '/dist/',
+    filename: 'sholo.js',
     libraryTarget: 'umd',
     library: 'Sholo',
   },
@@ -44,7 +44,7 @@ module.exports = {
   },
   plugins: [
     new ExtractTextPlugin({
-      filename: 'styles/css/demo.css',
+      filename: 'demo.css',
       allChunks: true,
     }),
   ],

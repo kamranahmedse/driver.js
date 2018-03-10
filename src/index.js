@@ -1,7 +1,7 @@
-import Overlay from './overlay';
-import Element from './element';
-import './polyfill';
-import Popover from './popover';
+import Overlay from './core/overlay';
+import Element from './core/element';
+import Popover from './core/popover';
+import './common/polyfill';
 import {
   CLASS_CLOSE_BTN,
   CLASS_NEXT_STEP_BTN,
@@ -11,7 +11,7 @@ import {
   OVERLAY_ANIMATE,
   OVERLAY_OPACITY,
   OVERLAY_PADDING, RIGHT_KEY_CODE,
-} from './constants';
+} from './common/constants';
 
 /**
  * Plugin class that drives the plugin
