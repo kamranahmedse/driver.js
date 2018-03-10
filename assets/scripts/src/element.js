@@ -1,21 +1,26 @@
 import Position from './position';
 
+/**
+ * Wrapper around DOMElements to enrich them
+ * with the functionality necessary
+ */
 export default class Element {
   /**
    * DOM element object
    * @param node
    * @param options
+   * @param popover
    * @param overlay
    * @param window
    * @param document
    */
-  constructor(node, options, overlay, window, document) {
+  constructor(node, options, popover, overlay, window, document) {
     this.node = node;
     this.document = document;
     this.window = window;
     this.options = options;
     this.overlay = overlay;
-    this.popover = this.getPopover();
+    this.popover = popover;
   }
 
   /**
@@ -99,7 +104,7 @@ export default class Element {
 
   onDeselected() {
     // Will be called when element is about to be deselected
-    this.hidePopover();
+    this.popover.hide();
   }
 
   onHighlightStarted() {
@@ -125,42 +130,9 @@ export default class Element {
   }
 
   showPopover() {
-    this.resetPopover();
-
-    // Position at which the element is
     const position = this.getCalculatedPosition();
 
-    const popoverTip = this.popover.querySelector('.sholo-popover-tip');
-
-    const pageHeight = this.getFullPageSize().height;
-    const popoverHeight = this.getPopoverHeight();
-    const popoverMargin = this.options.padding + 10;
-
-    this.popover.style.left = `${position.left - this.options.padding}px`;
-
-    // Calculate different dimensions after attaching popover
-    const pageHeightAfterPopOver = position.bottom + popoverHeight + popoverMargin;
-
-    // If adding popover would go out of the window height, then show it to the top
-    if (pageHeightAfterPopOver >= pageHeight) {
-      this.popover.style.top = `${position.top - popoverHeight - popoverMargin}px`;
-      popoverTip.classList.add('bottom');
-    } else {
-      this.popover.style.top = `${position.bottom + popoverMargin}px`;
-      popoverTip.classList.add('top');
-    }
-  }
-
-  getPopover() {
-    // @todo: Create if not there
-    const popover = this.document.getElementById('sholo-popover-item');
-    popover.style.position = 'absolute';
-
-    return popover;
-  }
-
-  hidePopover() {
-    this.popover.style.display = 'none';
+    this.popover.show(position);
   }
 
   getFullPageSize() {
@@ -172,22 +144,5 @@ export default class Element {
       height: Math.max(body.scrollHeight, body.offsetHeight, html.scrollHeight, html.offsetHeight),
       width: Math.max(body.scrollWidth, body.offsetWidth, html.scrollWidth, html.offsetWidth),
     };
-  }
-
-  getPopoverHeight() {
-    return Math.max(this.popover.scrollHeight, this.popover.offsetHeight);
-  }
-
-  resetPopover() {
-    this.popover.style.display = 'block';
-    this.popover.style.left = '';
-    this.popover.style.top = '';
-    this.popover.style.bottom = '';
-    this.popover.style.right = '';
-
-    // Remove the positional classes from tip
-    this.popover
-      .querySelector('.sholo-popover-tip')
-      .className = 'sholo-popover-tip';
   }
 }

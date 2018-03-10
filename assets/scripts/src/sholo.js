@@ -1,6 +1,7 @@
 import Overlay from './overlay';
 import Element from './element';
 import './polyfill';
+import Popover from './popover';
 
 /**
  * Plugin class that drives the plugin
@@ -172,7 +173,11 @@ export default class Sholo {
         return;
       }
 
-      const element = new Element(domElement, elementOptions, this.overlay, this.window, this.document);
+      // @todo pass the options such as position, button text etc
+      const popover = new Popover({
+        padding: this.options.padding,
+      }, this.window, this.document);
+      const element = new Element(domElement, elementOptions, popover, this.overlay, this.window, this.document);
 
       this.steps.push(element);
     });
@@ -199,7 +204,9 @@ export default class Sholo {
       return;
     }
 
-    const element = new Element(domElement, this.options, this.overlay, this.window, this.document);
+    // @todo add options such as position, button texts, additional classes etc
+    const popover = new Popover({}, this.window, this.document);
+    const element = new Element(domElement, this.options, popover, this.overlay, this.window, this.document);
     this.overlay.highlight(element);
   }
 }
