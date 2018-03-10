@@ -1,4 +1,5 @@
 const path = require('path');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
@@ -47,6 +48,9 @@ module.exports = {
       filename: 'demo.css',
       allChunks: true,
     }),
+    new CopyWebpackPlugin([
+      './demo/demo.js',
+    ]),
   ],
   stats: {
     colors: true,
