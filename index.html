@@ -65,11 +65,18 @@
 
   sholo.defineSteps([
     {
-      element: '.section__header'
+      element: '.section__header',
+      popover: {
+        title: 'Adding Introductions',
+        description: 'You can use it to add popovers on top of the website'
+      },
     },
     {
       element: '.section__how',
-      popover: {}
+      popover: {
+        title: 'Just Specify the Item',
+        description: 'All you have to do is provide the query selector of element to highlight'
+      },
     },
     {
       element: '.section__purpose',

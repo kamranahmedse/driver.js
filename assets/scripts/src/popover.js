@@ -1,5 +1,12 @@
 import Element from './element';
-import { CLASS_POPOVER_TIP, ID_POPOVER, OVERLAY_PADDING, POPOVER_HTML } from './constants';
+import {
+  CLASS_POPOVER_DESCRIPTION,
+  CLASS_POPOVER_TIP,
+  CLASS_POPOVER_TITLE,
+  ID_POPOVER,
+  OVERLAY_PADDING,
+  POPOVER_HTML,
+} from './constants';
 
 /**
  * Popover that is displayed on top of the highlighted element
@@ -14,11 +21,11 @@ export default class Popover extends Element {
     this.window = window;
     this.document = document;
 
-    this.node = this.preparePopover();
+    this.node = this.makeNode();
     this.hide();
   }
 
-  preparePopover() {
+  makeNode() {
     let popover = this.document.getElementById(ID_POPOVER);
     if (popover) {
       return popover;
@@ -67,9 +74,14 @@ export default class Popover extends Element {
   show(position) {
     this.reset();
 
-    const pageHeight = this.getFullPageSize().height;
-
     const popoverTip = this.node.querySelector(`.${CLASS_POPOVER_TIP}`);
+    const popoverTitle = this.node.querySelector(`.${CLASS_POPOVER_TITLE}`);
+    const popoverDescription = this.node.querySelector(`.${CLASS_POPOVER_DESCRIPTION}`);
+
+    popoverTitle.innerText = this.options.title;
+    popoverDescription.innerText = this.options.description;
+
+    const pageHeight = this.getFullPageSize().height;
     const popoverMargin = this.options.padding + 10;
     const popoverHeight = this.getHeight();
 

@@ -176,15 +176,18 @@ export default class Sholo {
       }
 
       const elementOptions = Object.assign({}, this.options, step);
-      const popoverOptions = Object.assign({}, this.options, elementOptions.popover || {});
-
       const domElement = this.document.querySelector(step.element);
       if (!domElement) {
         console.warn(`Element to highlight ${step.element} not found`);
         return;
       }
 
-      const popover = elementOptions.popover ? new Popover(popoverOptions, this.window, this.document) : null;
+      let popover = null;
+      const popoverOptions = Object.assign({}, this.options, elementOptions.popover || {});
+      if (elementOptions.popover && elementOptions.popover.description) {
+        popover = new Popover(popoverOptions, this.window, this.document);
+      }
+
       const element = new Element(domElement, elementOptions, popover, this.overlay, this.window, this.document);
 
       this.steps.push(element);
