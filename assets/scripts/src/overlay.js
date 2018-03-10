@@ -1,5 +1,5 @@
 import Position from './position';
-import { ID_OVERLAY, OVERLAY_ANIMATE, OVERLAY_OPACITY, OVERLAY_PADDING, OVERLAY_ZINDEX } from './constants';
+import { ID_OVERLAY, OVERLAY_ZINDEX } from './constants';
 
 /**
  * Responsible for overlay creation and manipulation i.e.
@@ -7,20 +7,12 @@ import { ID_OVERLAY, OVERLAY_ANIMATE, OVERLAY_OPACITY, OVERLAY_PADDING, OVERLAY_
  */
 export default class Overlay {
   /**
-   * @param opacity number
-   * @param padding number
-   * @param animate bool
+   * @param options
    * @param window
    * @param document
    */
-  constructor({
-    opacity = OVERLAY_OPACITY,
-    padding = OVERLAY_PADDING,
-    animate = OVERLAY_ANIMATE,
-  }, window, document) {
-    this.opacity = opacity; // Fixed opacity for the layover
-    this.padding = padding; // Padding around the highlighted item
-    this.animate = animate; // Should animate between the transitions
+  constructor(options, window, document) {
+    this.options = options;
 
     this.overlayAlpha = 0;                       // Is used to animate the layover
     this.positionToHighlight = new Position({}); // position at which layover is to be patched at
@@ -93,7 +85,7 @@ export default class Overlay {
 
     // If animation is not required then set the last path to be same
     // as the current path so that there is no easing towards it
-    if (!this.animate || !animate) {
+    if (!this.options.animate || !animate) {
       this.highlightedPosition = this.positionToHighlight;
     }
 
@@ -121,7 +113,10 @@ export default class Overlay {
    */
   clear() {
     this.positionToHighlight = new Position();
-    this.highlightedElement.onDeselected();
+    if (this.highlightedElement) {
+      this.highlightedElement.onDeselected();
+    }
+
     this.highlightedElement = null;
     this.lastHighlightedElement = null;
 
@@ -160,18 +155,18 @@ export default class Overlay {
 
     // Cut the chunk of overlay that is over the highlighted item
     this.removeCloak({
-      posX: this.highlightedPosition.left - this.window.scrollX - this.padding,
-      posY: this.highlightedPosition.top - this.window.scrollY - this.padding,
-      width: (this.highlightedPosition.right - this.highlightedPosition.left) + (this.padding * 2),
-      height: (this.highlightedPosition.bottom - this.highlightedPosition.top) + (this.padding * 2),
+      posX: this.highlightedPosition.left - this.window.scrollX - this.options.padding,
+      posY: this.highlightedPosition.top - this.window.scrollY - this.options.padding,
+      width: (this.highlightedPosition.right - this.highlightedPosition.left) + (this.options.padding * 2),
+      height: (this.highlightedPosition.bottom - this.highlightedPosition.top) + (this.options.padding * 2),
     });
 
     // Fade the overlay in if we can highlight
     if (canHighlight) {
-      if (!this.animate) {
-        this.overlayAlpha = this.opacity;
+      if (!this.options.animate) {
+        this.overlayAlpha = this.options.opacity;
       } else {
-        this.overlayAlpha += (this.opacity - this.overlayAlpha) * 0.08;
+        this.overlayAlpha += (this.options.opacity - this.overlayAlpha) * 0.08;
       }
     } else {
       // otherwise fade out
@@ -193,7 +188,7 @@ export default class Overlay {
       // or the alpha has not yet fully reached fully required opacity
       if (!this.hasPositionHighlighted()) {
         this.redrawAnimation = this.window.requestAnimationFrame(this.draw);
-      } else if (!this.animate && isFadingIn) {
+      } else if (!this.options.animate && isFadingIn) {
         this.redrawAnimation = this.window.requestAnimationFrame(this.draw);
       } else {
         // Element has been highlighted
@@ -207,7 +202,7 @@ export default class Overlay {
 
   hasPositionHighlighted() {
     return this.positionToHighlight.equals(this.highlightedPosition) &&
-      this.overlayAlpha > (this.opacity - 0.05);
+      this.overlayAlpha > (this.options.opacity - 0.05);
   }
 
   /**

@@ -8,6 +8,9 @@ import {
   CLASS_PREV_STEP_BTN,
   ESC_KEY_CODE,
   ID_POPOVER,
+  OVERLAY_ANIMATE,
+  OVERLAY_OPACITY,
+  OVERLAY_PADDING,
 } from './constants';
 
 /**
@@ -19,9 +22,9 @@ export default class Sholo {
    */
   constructor(options = {}) {
     this.options = Object.assign({
-      padding: 10,
-      animate: true,
-      opacity: 0.75,
+      animate: OVERLAY_ANIMATE,     // Whether to animate or not
+      opacity: OVERLAY_OPACITY,     // Overlay opacity
+      padding: OVERLAY_PADDING,     // Spacing around the element from the overlay
     }, options);
 
     this.document = document;
@@ -173,6 +176,7 @@ export default class Sholo {
       }
 
       const elementOptions = Object.assign({}, this.options, step);
+      const popoverOptions = Object.assign({}, this.options, elementOptions.popover || {});
 
       const domElement = this.document.querySelector(step.element);
       if (!domElement) {
@@ -180,8 +184,7 @@ export default class Sholo {
         return;
       }
 
-      // @todo pass the options such as position, button text etc
-      const popover = new Popover(elementOptions, this.window, this.document);
+      const popover = elementOptions.popover ? new Popover(popoverOptions, this.window, this.document) : null;
       const element = new Element(domElement, elementOptions, popover, this.overlay, this.window, this.document);
 
       this.steps.push(element);

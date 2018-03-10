@@ -102,19 +102,35 @@ export default class Element {
     return position;
   }
 
+  /**
+   * Is called when element is about to be deselected
+   * i.e. when moving the focus to next element of closing
+   */
   onDeselected() {
-    // Will be called when element is about to be deselected
+    if (!this.popover) {
+      return;
+    }
+
     this.popover.hide();
   }
 
+  /**
+   * Is called when the element is about to be highlighted
+   * i.e. either if overlay has started moving the highlight towards
+   * this element of has just decided to highlight it
+   */
   onHighlightStarted() {
-    // Will be triggered when the element is about to be highlighted
-    // i.e. overlay has started transitioning towards this element
+    if (!this.popover) {
+      return;
+    }
+
     this.showPopover();
   }
 
   onHighlighted() {
-    this.showPopover();
+    if (this.popover) {
+      this.showPopover();
+    }
 
     const highlightedElement = this;
     const lastHighlightedElement = this.overlay.getLastHighlightedElement();
@@ -130,7 +146,7 @@ export default class Element {
         highlightedElement.bringInView();
       }
 
-      if (!popoverElement.isInView()) {
+      if (popoverElement && !popoverElement.isInView()) {
         popoverElement.bringInView();
       }
     }

@@ -64,11 +64,22 @@
   });
 
   sholo.defineSteps([
-    { element: '.section__header' },
-    { element: '.section__how' },
-    { element: '.section__purpose' },
-    { element: '.section__examples' },
-    { element: '.section__contributing' },
+    {
+      element: '.section__header'
+    },
+    {
+      element: '.section__how',
+      popover: {}
+    },
+    {
+      element: '.section__purpose',
+    },
+    {
+      element: '.section__examples',
+    },
+    {
+      element: '.section__contributing',
+    },
   ]);
 
   document.querySelector('.btn__example')
