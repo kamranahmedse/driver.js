@@ -1,12 +1,12 @@
 import Element from './element';
-import { CLASS_POPOVER_TIP, ID_POPOVER } from './constants';
+import { CLASS_POPOVER_TIP, ID_POPOVER, OVERLAY_PADDING, POPOVER_HTML } from './constants';
 
 /**
  * Popover that is displayed on top of the highlighted element
  */
 export default class Popover extends Element {
   constructor(options = {
-    padding: 10,
+    padding: OVERLAY_PADDING,
   }, window, document) {
     super();
 
@@ -14,15 +14,33 @@ export default class Popover extends Element {
     this.window = window;
     this.document = document;
 
-    this.node = this.getPopover();
+    this.node = this.preparePopover();
+    this.hide();
   }
 
-  getPopover() {
-    // @todo: Create if not there
-    const popover = this.document.getElementById(ID_POPOVER);
-    popover.style.position = 'absolute';
+  preparePopover() {
+    let popover = this.document.getElementById(ID_POPOVER);
+    if (popover) {
+      return popover;
+    }
+
+    popover = Popover.createFromString(POPOVER_HTML);
+    document.body.appendChild(popover);
 
     return popover;
+  }
+
+  /**
+   * Turn a string into a node
+   * @param  {String} htmlString to convert
+   * @return {Node}   Converted node element
+   */
+  static createFromString(htmlString) {
+    const div = document.createElement('div');
+    div.innerHTML = htmlString.trim();
+
+    // Change this to div.childNodes to support multiple top-level nodes
+    return div.firstChild;
   }
 
   getHeight() {
@@ -35,8 +53,8 @@ export default class Popover extends Element {
 
   reset() {
     this.node.style.display = 'block';
-    this.node.style.left = '';
-    this.node.style.top = '';
+    this.node.style.left = '0';
+    this.node.style.top = '0';
     this.node.style.bottom = '';
     this.node.style.right = '';
 
@@ -49,11 +67,11 @@ export default class Popover extends Element {
   show(position) {
     this.reset();
 
-    const popoverTip = this.node.querySelector(`.${CLASS_POPOVER_TIP}`);
-
     const pageHeight = this.getFullPageSize().height;
-    const popoverHeight = this.getHeight();
+
+    const popoverTip = this.node.querySelector(`.${CLASS_POPOVER_TIP}`);
     const popoverMargin = this.options.padding + 10;
+    const popoverHeight = this.getHeight();
 
     this.node.style.left = `${position.left - this.options.padding}px`;
 
