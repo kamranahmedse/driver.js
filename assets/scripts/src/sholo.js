@@ -20,7 +20,7 @@ export default class Sholo {
     this.document = document;
     this.window = window;
 
-    this.overlay = new Overlay(options, window, document);
+    this.overlay = new Overlay(this.options, this.window, this.document);
 
     this.steps = [];            // steps to be presented if any
     this.currentStep = 0;       // index for the currently highlighted step
@@ -174,9 +174,7 @@ export default class Sholo {
       }
 
       // @todo pass the options such as position, button text etc
-      const popover = new Popover({
-        padding: this.options.padding,
-      }, this.window, this.document);
+      const popover = new Popover(elementOptions, this.window, this.document);
       const element = new Element(domElement, elementOptions, popover, this.overlay, this.window, this.document);
 
       this.steps.push(element);
@@ -205,7 +203,7 @@ export default class Sholo {
     }
 
     // @todo add options such as position, button texts, additional classes etc
-    const popover = new Popover({}, this.window, this.document);
+    const popover = new Popover(this.options, this.window, this.document);
     const element = new Element(domElement, this.options, popover, this.overlay, this.window, this.document);
     this.overlay.highlight(element);
   }
