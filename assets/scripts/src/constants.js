@@ -3,7 +3,7 @@ export const OVERLAY_PADDING = 10;
 export const OVERLAY_ANIMATE = true;
 export const OVERLAY_ZINDEX = '999999999';
 
-export const ESC_KEYCODE = 27;
+export const ESC_KEY_CODE = 27;
 
 export const ID_POPOVER = 'sholo-popover-item';
 export const ID_OVERLAY = 'sholo-canvas-overlay';

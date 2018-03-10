@@ -2,7 +2,13 @@ import Overlay from './overlay';
 import Element from './element';
 import './polyfill';
 import Popover from './popover';
-import { CLASS_CLOSE_BTN, CLASS_NEXT_STEP_BTN, CLASS_PREV_STEP_BTN, ESC_KEYCODE, ID_POPOVER } from './constants';
+import {
+  CLASS_CLOSE_BTN,
+  CLASS_NEXT_STEP_BTN,
+  CLASS_PREV_STEP_BTN,
+  ESC_KEY_CODE,
+  ID_POPOVER,
+} from './constants';
 
 /**
  * Plugin class that drives the plugin
@@ -153,7 +159,7 @@ export default class Sholo {
    * @param event
    */
   onKeyUp(event) {
-    if (event.keyCode === ESC_KEYCODE) {
+    if (event.keyCode === ESC_KEY_CODE) {
       this.overlay.clear();
     }
   }
