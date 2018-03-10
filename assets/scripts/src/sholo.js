@@ -126,6 +126,7 @@ export default class Sholo {
    */
   reset() {
     this.currentStep = 0;
+    this.steps = [];
     this.overlay.clear();
   }
 
@@ -167,6 +168,10 @@ export default class Sholo {
     }
   }
 
+  /**
+   * Defines steps to be highlighted
+   * @param {array} steps
+   */
   defineSteps(steps) {
     this.steps = [];
 
@@ -175,58 +180,83 @@ export default class Sholo {
         throw new Error(`Element (query selector string) missing in step ${index}`);
       }
 
-      const elementOptions = Object.assign({}, this.options, step);
-      const domElement = this.document.querySelector(step.element);
-      if (!domElement) {
-        console.warn(`Element to highlight ${step.element} not found`);
+      const element = this.prepareElementFromStep(step, steps, index);
+      if (!element) {
         return;
       }
-
-      let popover = null;
-      if (elementOptions.popover && elementOptions.popover.description) {
-        const popoverOptions = Object.assign(
-          {},
-          this.options,
-          elementOptions.popover, {
-            totalCount: steps.length,
-            currentIndex: index,
-            isFirst: index === 0,
-            isLast: index === steps.length - 1,
-          },
-        );
-        popover = new Popover(popoverOptions, this.window, this.document);
-      }
-
-      const element = new Element(domElement, elementOptions, popover, this.overlay, this.window, this.document);
 
       this.steps.push(element);
     });
   }
 
-  start() {
+  /**
+   * Prepares the step received from the user and returns an instance
+   * of Element
+   *
+   * @param currentStep Step that is being prepared
+   * @param allSteps  List of all the steps
+   * @param index Index of the current step
+   * @returns {null|Element}
+   */
+  prepareElementFromStep(currentStep, allSteps = [], index = 0) {
+    let querySelector = '';
+    let elementOptions = {};
+
+    if (typeof currentStep === 'string') {
+      querySelector = currentStep;
+    } else {
+      querySelector = currentStep.element;
+      elementOptions = Object.assign({}, this.options, currentStep);
+    }
+
+    const domElement = this.document.querySelector(querySelector);
+    if (!domElement) {
+      console.warn(`Element to highlight ${querySelector} not found`);
+      return null;
+    }
+
+    let popover = null;
+    if (elementOptions.popover && elementOptions.popover.description) {
+      const popoverOptions = Object.assign(
+        {},
+        this.options,
+        elementOptions.popover, {
+          totalCount: allSteps.length,
+          currentIndex: index,
+          isFirst: index === 0,
+          isLast: index === allSteps.length - 1,
+        },
+      );
+
+      popover = new Popover(popoverOptions, this.window, this.document);
+    }
+
+    return new Element(domElement, elementOptions, popover, this.overlay, this.window, this.document);
+  }
+
+  /**
+   * Initiates highlighting steps from first step
+   * @param {number} index at which highlight is to be started
+   */
+  start(index = 0) {
     if (!this.steps || this.steps.length === 0) {
       throw new Error('There are no steps defined to iterate');
     }
 
-    this.currentStep = 0;
-    this.overlay.highlight(this.steps[0]);
+    this.currentStep = index;
+    this.overlay.highlight(this.steps[index]);
   }
 
   /**
-   * Highlights the given selector
-   * @param selector string query selector
-   * @todo make it accept json or query selector
+   * Highlights the given element
+   * @param {string|{element: string, popover: {}}} selector Query selector or a step definition
    */
   highlight(selector) {
-    const domElement = this.document.querySelector(selector);
-    if (!domElement) {
-      console.warn(`Element to highlight ${selector} not found`);
+    const element = this.prepareElementFromStep(selector);
+    if (!element) {
       return;
     }
 
-    // @todo add options such as position, button texts, additional classes etc
-    const popover = new Popover(this.options, this.window, this.document);
-    const element = new Element(domElement, this.options, popover, this.overlay, this.window, this.document);
     this.overlay.highlight(element);
   }
 }
