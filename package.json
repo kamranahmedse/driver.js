@@ -4,7 +4,8 @@
   "description": "A light-weight, vanilla JS library to bring certain parts of page in spotlight",
   "main": "./assets/scripts/dist/sholo.min.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "build": "webpack --config webpack.config.prod.js "
   },
   "repository": "https://github.com/kamranahmedse/sholo",
   "author": "Kamran Ahmed <kamranahmed.se@gmail.com>",

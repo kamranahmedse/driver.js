@@ -3,9 +3,6 @@
   "env": {
     "browser": true
   },
-  "ecmaFeatures": {
-    "experimentalObjectRestSpread": true
-  },
   "rules": {
     "no-console": "off",
     "no-underscore-dangle": "off",

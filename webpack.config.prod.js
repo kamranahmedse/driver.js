@@ -4,13 +4,13 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 module.exports = {
   mode: 'production',
   entry: [
-    './assets/scripts/src/sholo.js',
-    './assets/styles/scss/demo.scss',
+    './src/index.js',
+    './src/sholo.scss',
   ],
   output: {
-    path: path.join(__dirname, '/assets'),
-    publicPath: '/assets/',
-    filename: 'scripts/dist/sholo.min.js',
+    path: path.join(__dirname, '/dist'),
+    publicPath: '/dist/',
+    filename: 'sholo.min.js',
     libraryTarget: 'umd',
     library: 'Sholo',
   },
@@ -48,7 +48,7 @@ module.exports = {
   },
   plugins: [
     new ExtractTextPlugin({
-      filename: 'styles/css/sholo.min.css',
+      filename: 'sholo.min.css',
       allChunks: true,
     }),
   ],
