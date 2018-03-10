@@ -183,8 +183,17 @@ export default class Sholo {
       }
 
       let popover = null;
-      const popoverOptions = Object.assign({}, this.options, elementOptions.popover || {});
       if (elementOptions.popover && elementOptions.popover.description) {
+        const popoverOptions = Object.assign(
+          {},
+          this.options,
+          elementOptions.popover, {
+            totalCount: steps.length,
+            currentIndex: index,
+            isFirst: index === 0,
+            isLast: index === steps.length - 1,
+          },
+        );
         popover = new Popover(popoverOptions, this.window, this.document);
       }
 

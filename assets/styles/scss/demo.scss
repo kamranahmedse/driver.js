@@ -119,6 +119,12 @@ div#sholo-popover-item {
       margin: 10px 0 0;
     }
 
+    a.sholo-disabled {
+      color: #808080;
+      cursor: default;
+      pointer-events: none;
+    }
+
     .sholo-close-btn {
       float: left;
     }

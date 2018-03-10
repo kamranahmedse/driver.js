@@ -15,6 +15,7 @@ export const CLASS_POPOVER_FOOTER = 'sholo-popover-footer';
 export const CLASS_CLOSE_BTN = 'sholo-close-btn';
 export const CLASS_NEXT_STEP_BTN = 'sholo-next-btn';
 export const CLASS_PREV_STEP_BTN = 'sholo-prev-btn';
+export const CLASS_BTN_DISABLED = 'sholo-disabled';
 
 // language=HTML
 export const POPOVER_HTML = `
