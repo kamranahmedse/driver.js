@@ -118,14 +118,21 @@ export default class Element {
 
     const highlightedElement = this;
     const lastHighlightedElement = this.overlay.getLastHighlightedElement();
+    const popoverElement = this.popover;
 
     const highlightedNode = this.node;
     const lastHighlightedNode = lastHighlightedElement && lastHighlightedElement.node;
 
     // If this element is not already highlighted (because this call could
     // be from the resize or scroll) and is not in view
-    if (highlightedNode !== lastHighlightedNode && !highlightedElement.isInView()) {
-      highlightedElement.bringInView();
+    if (highlightedNode !== lastHighlightedNode) {
+      if (!highlightedElement.isInView()) {
+        highlightedElement.bringInView();
+      }
+
+      if (!popoverElement.isInView()) {
+        popoverElement.bringInView();
+      }
     }
   }
 
