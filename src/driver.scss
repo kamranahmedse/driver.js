@@ -1,4 +1,4 @@
-div#sholo-popover-item {
+div#driver-popover-item {
   display: none;
   position: absolute;
   background: white;
@@ -11,7 +11,7 @@ div#sholo-popover-item {
   box-shadow: 0 1px 10px rgba(0, 0, 0, 0.4);
   z-index: 1000000000;
 
-  .sholo-popover-tip {
+  .driver-popover-tip {
     border: 5px solid white;
     content: '';
     position: absolute;
@@ -51,7 +51,7 @@ div#sholo-popover-item {
     }
   }
 
-  .sholo-popover-footer {
+  .driver-popover-footer {
     display: block;
     clear: both;
     margin-top: 5px;
@@ -72,22 +72,22 @@ div#sholo-popover-item {
       margin: 10px 0 0;
     }
 
-    a.sholo-disabled {
+    a.driver-disabled {
       color: #808080;
       cursor: default;
       pointer-events: none;
     }
 
-    .sholo-close-btn {
+    .driver-close-btn {
       float: left;
     }
 
-    .sholo-btn-group {
+    .driver-btn-group {
       float: right;
     }
   }
 
-  .sholo-popover-title {
+  .driver-popover-title {
     font: 19px/normal sans-serif;
     margin: 0 0 5px;
     font-weight: bold;
@@ -97,7 +97,7 @@ div#sholo-popover-item {
     zoom: 1;
   }
 
-  .sholo-popover-description {
+  .driver-popover-description {
     margin-bottom: 0;
     font: 14px/normal sans-serif;
     line-height: 1.5;

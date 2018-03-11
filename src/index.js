@@ -18,7 +18,7 @@ import {
 /**
  * Plugin class that drives the plugin
  */
-export default class Sholo {
+export default class Driver {
   /**
    * @param {Object} options
    */

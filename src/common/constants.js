@@ -7,17 +7,17 @@ export const ESC_KEY_CODE = 27;
 export const LEFT_KEY_CODE = 37;
 export const RIGHT_KEY_CODE = 39;
 
-export const ID_OVERLAY = 'sholo-canvas-overlay';
+export const ID_OVERLAY = 'driver-canvas-overlay';
 
-export const ID_POPOVER = 'sholo-popover-item';
-export const CLASS_POPOVER_TIP = 'sholo-popover-tip';
-export const CLASS_POPOVER_TITLE = 'sholo-popover-title';
-export const CLASS_POPOVER_DESCRIPTION = 'sholo-popover-description';
-export const CLASS_POPOVER_FOOTER = 'sholo-popover-footer';
-export const CLASS_CLOSE_BTN = 'sholo-close-btn';
-export const CLASS_NEXT_STEP_BTN = 'sholo-next-btn';
-export const CLASS_PREV_STEP_BTN = 'sholo-prev-btn';
-export const CLASS_BTN_DISABLED = 'sholo-disabled';
+export const ID_POPOVER = 'driver-popover-item';
+export const CLASS_POPOVER_TIP = 'driver-popover-tip';
+export const CLASS_POPOVER_TITLE = 'driver-popover-title';
+export const CLASS_POPOVER_DESCRIPTION = 'driver-popover-description';
+export const CLASS_POPOVER_FOOTER = 'driver-popover-footer';
+export const CLASS_CLOSE_BTN = 'driver-close-btn';
+export const CLASS_NEXT_STEP_BTN = 'driver-next-btn';
+export const CLASS_PREV_STEP_BTN = 'driver-prev-btn';
+export const CLASS_BTN_DISABLED = 'driver-disabled';
 
 // language=HTML
 export const POPOVER_HTML = `
@@ -27,7 +27,7 @@ export const POPOVER_HTML = `
     <div class="${CLASS_POPOVER_DESCRIPTION}">Popover Description</div>
     <div class="${CLASS_POPOVER_FOOTER}">
       <a href="javascript:void(0)" class="${CLASS_CLOSE_BTN}">Close</a>
-      <span class="sholo-btn-group">
+      <span class="driver-btn-group">
         <a class="${CLASS_PREV_STEP_BTN}" href="javascript:void(0)">&larr; Previous</a>
         <a class="${CLASS_NEXT_STEP_BTN}" href="javascript:void(0)">Next &rarr;</a>
       </span>

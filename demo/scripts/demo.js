@@ -1,13 +1,13 @@
 /* eslint-disable */
 
-const tourSholo = new Sholo({
+const tourDriver = new Driver({
   animate: true,
   opacity: 0.8,
   padding: 5,
   showButtons: false,
 });
 
-tourSholo.defineSteps([
+tourDriver.defineSteps([
   {
     element: '.emoji',
     popover: {
@@ -66,7 +66,7 @@ tourSholo.defineSteps([
 
 document.querySelector('.btn__example')
   .addEventListener('click', () => {
-    tourSholo.start();
+    tourDriver.start();
   });
 
 
@@ -78,33 +78,33 @@ document.querySelectorAll('pre code').forEach((element) => {
 /////////////////////////////////////////////
 // First example – highlighting without popover
 /////////////////////////////////////////////
-const singleSholoNoPopover = new Sholo();
+const singleDriverNoPopover = new Driver();
 document.querySelector('#run-single-element-no-popover')
   .addEventListener('click', (e) => {
     e.preventDefault();
-    singleSholoNoPopover.highlight('#single-element-no-popover');
+    singleDriverNoPopover.highlight('#single-element-no-popover');
   });
 
 /////////////////////////////////////////////
 // Form focus examples
 /////////////////////////////////////////////
-const focusSholo = new Sholo({ padding: 0 });
+const focusDriver = new Driver({ padding: 0 });
 const inputIds = ['creation-input', 'creation-input-2', 'creation-input-3', 'creation-input-4'];
 inputIds.forEach(inputId => {
   // Highlight the section on focus
   document.getElementById(inputId).addEventListener('focus', () => {
-    focusSholo.highlight(`#${inputId}`);
+    focusDriver.highlight(`#${inputId}`);
   });
 });
 
 /////////////////////////////////////////////
 // Highlighting single element with popover
 /////////////////////////////////////////////
-const singleSholoWithPopover = new Sholo();
+const singleDriverWithPopover = new Driver();
 document.querySelector('#run-single-element-with-popover')
   .addEventListener('click', (e) => {
     e.preventDefault();
-    singleSholoWithPopover.highlight({
+    singleDriverWithPopover.highlight({
       element: '#single-element-with-popover',
       popover: {
         title: 'Did you know?',
@@ -117,12 +117,12 @@ document.querySelector('#run-single-element-with-popover')
 /////////////////////////////////////////////////////
 // Highlighting single element with popover position
 /////////////////////////////////////////////////////
-const singleSholoWithPopoverPosition = new Sholo();
+const singleDriverWithPopoverPosition = new Driver();
 document.querySelector('#run-single-element-with-popover-position')
   .addEventListener('click', (e) => {
     e.preventDefault();
 
-    singleSholoWithPopoverPosition.highlight({
+    singleDriverWithPopoverPosition.highlight({
       element: '#single-element-with-popover-position',
       popover: {
         title: 'Did you know?',
@@ -135,7 +135,7 @@ document.querySelector('#run-single-element-with-popover-position')
 /////////////////////////////////////////////////////
 // Highlighting single element with popover position
 /////////////////////////////////////////////////////
-const positionBtnsSholo = new Sholo({
+const positionBtnsDriver = new Driver({
   padding: 0,
 });
 
@@ -143,7 +143,7 @@ document.querySelector('#position-btn-left')
   .addEventListener('click', (e) => {
     e.preventDefault();
 
-    positionBtnsSholo.highlight({
+    positionBtnsDriver.highlight({
       element: '#position-btn-left',
       popover: {
         title: 'Did you know?',
@@ -157,7 +157,7 @@ document.querySelector('#position-btn-right')
   .addEventListener('click', (e) => {
     e.preventDefault();
 
-    positionBtnsSholo.highlight({
+    positionBtnsDriver.highlight({
       element: '#position-btn-right',
       popover: {
         title: 'Did you know?',
@@ -171,7 +171,7 @@ document.querySelector('#position-btn-bottom')
   .addEventListener('click', (e) => {
     e.preventDefault();
 
-    positionBtnsSholo.highlight({
+    positionBtnsDriver.highlight({
       element: '#position-btn-bottom',
       popover: {
         title: 'Did you know?',
@@ -185,7 +185,7 @@ document.querySelector('#position-btn-top')
   .addEventListener('click', (e) => {
     e.preventDefault();
 
-    positionBtnsSholo.highlight({
+    positionBtnsDriver.highlight({
       element: '#position-btn-top',
       popover: {
         title: 'Did you know?',
@@ -198,13 +198,13 @@ document.querySelector('#position-btn-top')
 /////////////////////////////////////////////////////
 // Highlighting single element with popover position
 /////////////////////////////////////////////////////
-const htmlSholo = new Sholo();
+const htmlDriver = new Driver();
 
 document.querySelector('#run-single-element-with-popover-html')
   .addEventListener('click', (e) => {
     e.preventDefault();
 
-    htmlSholo.highlight({
+    htmlDriver.highlight({
       element: '#single-element-with-popover-html',
       popover: {
         title: '<em>Tags</em> in title or <u>body</u>',
@@ -217,7 +217,7 @@ document.querySelector('#run-single-element-with-popover-html')
 /////////////////////////////////////////////////////
 // Without Overlay Example
 /////////////////////////////////////////////////////
-const withoutOverlay = new Sholo({
+const withoutOverlay = new Driver({
   opacity: 0,
   padding: 0
 });
@@ -239,8 +239,8 @@ document.querySelector('#run-element-without-popover')
 /////////////////////////////////////////////////////
 // Highlighting single element with popover position
 /////////////////////////////////////////////////////
-const featureIntroductionSholo = new Sholo();
-featureIntroductionSholo.defineSteps([
+const featureIntroductionDriver = new Driver();
+featureIntroductionDriver.defineSteps([
   {
     element: '#first-element-introduction',
     popover: {
@@ -286,6 +286,6 @@ featureIntroductionSholo.defineSteps([
 document.querySelector('#run-multi-element-popovers')
   .addEventListener('click', (e) => {
     e.preventDefault();
-    featureIntroductionSholo.start();
+    featureIntroductionDriver.start();
   });
 

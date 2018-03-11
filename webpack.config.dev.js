@@ -12,9 +12,9 @@ module.exports = {
   output: {
     path: path.join(__dirname, '/dist'),
     publicPath: '/dist/',
-    filename: 'sholo.js',
+    filename: 'driver.js',
     libraryTarget: 'umd',
-    library: 'Sholo',
+    library: 'Driver',
   },
   module: {
     rules: [

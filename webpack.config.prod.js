@@ -5,14 +5,14 @@ module.exports = {
   mode: 'production',
   entry: [
     './src/index.js',
-    './src/sholo.scss',
+    './src/driver.scss',
   ],
   output: {
     path: path.join(__dirname, '/dist'),
     publicPath: '/dist/',
-    filename: 'sholo.min.js',
+    filename: 'driver.min.js',
     libraryTarget: 'umd',
-    library: 'Sholo',
+    library: 'Driver',
   },
   module: {
     rules: [
@@ -48,7 +48,7 @@ module.exports = {
   },
   plugins: [
     new ExtractTextPlugin({
-      filename: 'sholo.min.css',
+      filename: 'driver.min.css',
       allChunks: true,
     }),
   ],

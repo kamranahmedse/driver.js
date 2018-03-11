@@ -1,13 +1,13 @@
 {
-  "name": "sholo",
+  "name": "driver.js",
   "version": "1.0.0",
   "description": "A light-weight, vanilla JS library to bring certain parts of page in spotlight",
-  "main": "./assets/scripts/dist/sholo.min.js",
+  "main": "./assets/scripts/dist/driver.min.js",
   "scripts": {
     "start": "node server.js",
     "build": "webpack --config webpack.config.prod.js "
   },
-  "repository": "https://github.com/kamranahmedse/sholo",
+  "repository": "https://github.com/kamranahmedse/driver.js",
   "author": "Kamran Ahmed <kamranahmed.se@gmail.com>",
   "license": "MIT",
   "devDependencies": {
