@@ -28,8 +28,9 @@ export default class Popover extends Element {
       totalCount: 1,
       currentIndex: 0,
       showButtons: true,
-      doneBtnText: 'Done',
       closeBtnText: 'Close',
+      doneBtnText: 'Done',
+      startBtnText: 'Next &rarr;',
       nextBtnText: 'Next &rarr;',
       prevBtnText: '&larr; Previous',
     }, options);
@@ -154,6 +155,7 @@ export default class Popover extends Element {
     this.footerNode.style.display = 'block';
     if (this.options.isFirst) {
       this.prevBtnNode.classList.add(CLASS_BTN_DISABLED);
+      this.nextBtnNode.innerHTML = this.options.startBtnText;
     } else {
       this.prevBtnNode.classList.remove(CLASS_BTN_DISABLED);
     }

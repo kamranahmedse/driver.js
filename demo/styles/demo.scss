@@ -18,9 +18,11 @@ img.emoji {
 
   a, a:visited, a:focus {
     color: #333333;
+    text-decoration: underline;
   }
 
   a.btn__dark {
+    text-decoration: none;
     color: #FFFFFF;
     background-color: #F44336;
     padding: 0 18px;
@@ -37,6 +39,7 @@ img.emoji {
   }
 
   a.btn__run-demo {
+    text-decoration: none;
     background: #f54336;
     padding: 5px;
     border-radius: 20px;
@@ -90,6 +93,7 @@ section {
 }
 
 .position-btns a {
+  text-decoration: none;
   font-size: 13px;
   padding: 10px 15px;
   background: #f54336;

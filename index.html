@@ -6,13 +6,15 @@
         content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Driver</title>
+  <meta name=description itemprop=description
+        content="A light-weight, no-dependency, vanilla JavaScript library to drive the user's focus across the page"/>
   <link rel="stylesheet" href="./dist/demo.css">
   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/monokai.min.css">
 </head>
 <body>
 <div class="page-wrap">
-  <section class="section__header" data-driver="Hey welcome to presenter!">
-    <h1><span class="emoji">👨‍🔧️</span> Driver</h1>
+  <section class="section__header" id="driver-demo-head">
+    <h1><span id="logo_emoji" class="emoji">👨‍🔧️</span> <span id="name_driver">Driver</span></h1>
     <p class="text-muted">A light-weight, no-dependency, vanilla JavaScript library to drive the user's focus across the
       page</p>
     <a href="javascript:void(0)" class="btn btn__example btn__dark">Quick Tour</a>
@@ -29,15 +31,15 @@
     <p>Driver is compatible with all the major browsers and can be used for any of your overlay needs. Feature
       introductions, focus shifters, call-to-action are just a few examples.</p>
     <ul>
-      <li>🔆 <strong>Highlight</strong> any (literally any) item on page</li>
-      <li>✋ <strong>Block user interactions</strong></li>
-      <li>📣 Create <strong>feature introductions</strong></li>
-      <li>👓 Add <strong>focus shifters</strong> for users</li>
-      <li>🛠️ Highly customizable – <strong>Use it anywhere</strong> for overlay</li>
-      <li>⌨️ User Friendly – <strong>Controllable by keys</strong></li>
-      <li id="free-use">🆓 <strong>MIT Licensed</strong> – Free for personal and commercial use</li>
-      <li>🕊️ Lightweight – Only <strong>~4kb</strong> when gzipped</li>
-      <li>🌀 <strong>Consistent behavior</strong> across all major browsers</li>
+      <li id="highlight_feature">🔆 <strong>Highlight</strong> any (literally any) item on page</li>
+      <li id="interactions_feature">✋ <strong>Block user interactions</strong></li>
+      <li id="feature_introductions_feature">📣 Create <strong>feature introductions</strong></li>
+      <li id="focus_shifters_feature">👓 Add <strong>focus shifters</strong> for users</li>
+      <li id="customizable_feature">🛠️ Highly customizable – <strong>Use it anywhere</strong> for overlay</li>
+      <li id="keyboard_feature">⌨️ User Friendly – <strong>Controllable by keys</strong></li>
+      <li id="free_use_feature">🆓 <strong>MIT Licensed</strong> – Free for personal and commercial use</li>
+      <li id="lightweight_feature">🕊️ Lightweight – Only <strong>~4kb</strong> when gzipped</li>
+      <li id="major_browsers_feature">🌀 <strong>Consistent behavior</strong> across all major browsers</li>
     </ul>
   </section>
   <hr class="hr__fancy">
@@ -49,9 +51,11 @@
   </section>
   <hr class="hr__fancy">
   <section class="section__examples">
-    <h3>Can you show some Examples?</h3>
-    <p>Below you find some of the examples and sample use-cases on how you can use it. Run by clicking the
-      <code>RUN</code> button.</p>
+    <div id="examples_section">
+      <h3>Can you show some Examples?</h3>
+      <p>Below you find some of the examples and sample use-cases on how you can use it. Run by clicking the
+        <code>RUN</code> button.</p>
+    </div>
     <div id="single-element-no-popover" class="section__example">
       <h4>Highlighting a Single Element – Without Popover</h4>
       <p class="zero-bottom">If all you want is just highlight a single element, you can do that simply by passing the
@@ -204,7 +208,8 @@ driver.start();
 
     <div id="element-without-popover" class="section__example">
       <h4>Without Overlay</h4>
-      <p>You can create feature introductions and do everything listed above without overlays also. All you have to do is just set the opacity to `0`.</p>
+      <p>You can create feature introductions and do everything listed above without overlays also. All you have to do
+        is just set the opacity to `0`.</p>
       <a href="#" class="btn__run-demo" id="run-element-without-popover">Show Demo</a>
       <pre><code class="javascript">const driver = new Driver({
     opacity: 0,
@@ -225,8 +230,10 @@ driver.highlight({
     <hr class="hr__fancy">
 
     <div class="section__example">
-      <h3>..and much much more</h3>
-      <p>Driver comes with many options that you can manipulate to make driver behave as you may like</p>
+      <div id="api_section">
+        <h3>..and much much more</h3>
+        <p>Driver comes with many options that you can manipulate to make driver behave as you may like</p>
+      </div>
       <h4>Driver Definition</h4>
       <p>Here are the options that Driver understands</p>
       <pre><code class="javascript">const driver = new Driver({
@@ -241,7 +248,8 @@ driver.highlight({
     </div>
     <div class="section__example">
       <h4>Step Definition</h4>
-      <p>Here are the set of options that you can pass in each step i.e. an item in array of steps or the object that you pass to <code>highlight</code> method</p>
+      <p>Here are the set of options that you can pass in each step i.e. an item in array of steps or the object that
+        you pass to <code>highlight</code> method</p>
       <pre><code class="javascript">const stepDefinition = {
   element: '#some-item', // Query selector for the item to be highlighted
   popover: {             // There will be no popover if empty or not given
@@ -281,16 +289,22 @@ activeElement.showPopover();  // Show the popover
 activeElement.getNode();  // Gets the DOM Element behind this element
 </code></pre>
     </div>
-    <p class="top-20">You can use a variety of options to achieve whatever you may want. I have some plans on improving it further, make sure to keep an eye on the <a href="https://github.com/kamranahmedse/driver.js" target="_blank">github page</a></p>
+    <p class="top-20">You can use a variety of options to achieve whatever you may want. I have some plans on improving
+      it further, make sure to keep an eye on the <a href="https://github.com/kamranahmedse/driver.js" target="_blank">github
+        page</a></p>
   </section>
   <hr class="hr__fancy">
   <div class="section__example">
     <h4>Contributing</h4>
-    <p>You can find the contribution instructions on the <a href="https://github.com/kamranahmedse/driver.js" target="_blank">github page</a>. Feel free to submit an issue, create a pull request or spread the word</p>
+    <p>You can find the contribution instructions on the <a href="https://github.com/kamranahmedse/driver.js"
+                                                            target="_blank">github page</a>. Feel free to submit an
+      issue, create a pull request or spread the word</p>
   </div>
   <hr class="hr__fancy">
   <div class="section__example">
-    <p>A product by <a href="http://twitter.com/kamranahmedse" target="_blank">Kamran</a> produced out of boredom and frustration in cold Berlin after he gave up on trying to find a perfect solution to integrate journey introduction and overlays.</p>
+    <p>A product by <a href="http://twitter.com/kamranahmedse" target="_blank">Kamran</a> produced out of boredom and
+      frustration in cold Berlin after he gave up on trying to find a perfect solution to integrate journey introduction
+      and overlays.</p>
     <a href="https://twitter.com/kamranahmedse?ref_src=twsrc%5Etfw"
        class="twitter-follow-button mr-3"
        data-show-screen-name="false"

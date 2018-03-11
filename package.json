@@ -7,6 +7,10 @@
     "start": "node server.js",
     "build": "webpack --config webpack.config.prod.js "
   },
+  "bugs": {
+    "url": "https://github.com/kamranahmedse/driver.js/issues"
+  },
+  "homepage": "https://github.com/kamranahmedse/driver.js#readme",
   "repository": "https://github.com/kamranahmedse/driver.js",
   "author": "Kamran Ahmed <kamranahmed.se@gmail.com>",
   "license": "MIT",
