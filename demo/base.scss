@@ -13,7 +13,9 @@ $heading-font-weight: 700;
 
 * {
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale
+  -moz-osx-font-smoothing: grayscale;
+  margin: 0;
+  padding: 0;
 }
 
 *, *:before, *:after {
@@ -32,8 +34,8 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   font-size: 16px;
   line-height: 1.4;
-  color: #000000;
-  background-color: #FFFFFF;
+  color: white;
+  background-color: #2E2E30;
   overflow-x: hidden;
 }
 
@@ -47,6 +49,7 @@ label {
 
 p {
   margin-top: 0;
+  margin-bottom: 20px;
 }
 
 hr {
@@ -54,7 +57,9 @@ hr {
   margin: $global-guttering*1.25 0;
   border: 0;
   border-bottom: 1px solid #eaeaea;
-  height: 1px;
+  background: url(https://i.imgur.com/MoU1Mn4.png) repeat-y;
+  height: 5px;
+  background-size: cover;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -105,6 +110,18 @@ h5, .h5 {
 
 h6, .h6 {
   font-size: $global-font-size-h6;
+}
+
+ul li, ol li {
+  list-style-type: none;
+  line-height: 1.5;
+}
+
+blockquote {
+  background: #f5f3f1;
+  padding: 10px;
+  margin-bottom: 35px;
+  border-radius: 10px;
 }
 
 .container {

@@ -15,22 +15,6 @@ sholo.defineSteps([
     },
   },
   {
-    element: '.btn__example',
-    popover: {
-      title: 'Adding Introductions',
-      description: 'You can use it to add popovers on top of the website',
-      position: 'left',
-    },
-  },
-  {
-    element: '.btn__light',
-    popover: {
-      title: 'Adding Introductions',
-      description: 'You can use it to add popovers on top of the website',
-      position: 'rig',
-    },
-  },
-  {
     element: '.section__how',
     popover: {
       title: 'Just Specify the Item',

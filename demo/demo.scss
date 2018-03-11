@@ -9,10 +9,20 @@ $dark-button-text: #ffffff !default;
 $light-button-bg: #f5f5f5 !default;
 $light-button-text: #2d2d2d !default;
 
+img.emoji {
+  height: 1em;
+  width: 1em;
+  margin: 0 .05em 0 .1em;
+  vertical-align: -0.1em;
+}
+
 .page-wrap {
-  padding-top: 1px;
-  width: $container-width;
-  margin: auto;
+  width: 500px;
+  margin: 50px auto;
+  background: white;
+  padding: 10px 30px;
+  border-radius: 5px;
+  color: #333333;
 }
 
 .btn {
@@ -21,27 +31,40 @@ $light-button-text: #2d2d2d !default;
   border-radius: 3px;
 
   &.btn__dark {
-    background: $dark-button-bg;
-    color: $dark-button-text;
-  }
-
-  &.btn__light {
-    background: $light-button-bg;
-    color: $light-button-text;
+    color: #FFFFFF;
+    background-color: #F44336;
+    padding: 0 18px;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+    font-weight: 500;
+    width: 240px;
+    font-size: 17px;
+    margin: auto;
+    display: block;
   }
 }
 
 section {
-  margin-bottom: 35px;
+  margin-bottom: $global-guttering*1.25;
 }
 
 .section__header {
-  margin: 80px 0 50px;
+  margin: 10px 0 30px;
   text-align: center;
   display: block;
-  padding: 10px 10px 20px;
+  padding: 10px;
 
   h1 {
     font-size: $logo-font-size;
+
+    .emoji {
+      font-size: 45px;
+      top: -4px;
+      margin-right: 3px;
+      position: relative;
+    }
   }
 }

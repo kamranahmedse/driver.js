@@ -50,6 +50,7 @@ module.exports = {
     }),
     new CopyWebpackPlugin([
       './demo/demo.js',
+      './demo/emoji.js',
     ]),
   ],
   stats: {

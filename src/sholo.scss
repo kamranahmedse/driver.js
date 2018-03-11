@@ -2,6 +2,7 @@ div#sholo-popover-item {
   display: none;
   position: absolute;
   background: white;
+  color: #2d2d2d;
   margin: 0;
   padding: 15px;
   border-radius: 5px;
@@ -87,18 +88,21 @@ div#sholo-popover-item {
   }
 
   .sholo-popover-title {
-    font-size: 19px;
+    font: 19px/normal sans-serif;
     margin: 0 0 5px;
     font-weight: bold;
     display: block;
     position: relative;
+    line-height: 1.5;
+    zoom: 1;
   }
 
   .sholo-popover-description {
     margin-bottom: 0;
-    font-size: 14px;
+    font: 14px/normal sans-serif;
     line-height: 1.5;
     color: #2d2d2d;
     font-weight: normal;
+    zoom: 1;
   }
 }
