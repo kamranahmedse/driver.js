@@ -1,4 +1,4 @@
-<h1 align="center"><img src="./demo/images/driver.png" /> Driver.js</h1>
+<h1 align="center"><img src="./demo/images/driver.png" /><br> Driver.js</h1>
 
 <p align="center">
   <a href="https://creativecommons.org/licenses/by/4.0/">
@@ -13,7 +13,7 @@
 </p>
 
 <p align="center">
-  <b>A powerful yet light-weight, vanilla JavaScript engine to drive the user's focus across the page</b></br>
+  <b>Powerful yet light-weight, vanilla JavaScript engine to drive the user's focus across the page</b></br>
   <sub>Only ~4kb, no external dependency, supports all major browsers and highly customizable <sub>
 </p>
 
@@ -40,8 +40,6 @@ yarn add driver.js
 ```
 
 Or include directly
-
-Or include Choices directly:
 
 ```html
 <!-- Include Driver CSS -->
