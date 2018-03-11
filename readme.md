@@ -244,6 +244,10 @@ activeElement.getNode();  // Gets the DOM Element behind this element
 
 ![](./demo/images/split.png)
 
+## Contributions
+
+Feel free to submit pull requests, create issues or spread the word
+
 ## License
 
 MIT &copy; [Kamran Ahmed](https://twitter.com/kamranahmedse)
