@@ -21,6 +21,8 @@ export default class Element {
     this.options = options;
     this.overlay = overlay;
     this.popover = popover;
+
+    this.highlightFinished = false; // To track when the element has fully highlighted
   }
 
   /**
@@ -114,11 +116,12 @@ export default class Element {
    * i.e. when moving the focus to next element of closing
    */
   onDeselected() {
-    if (!this.popover) {
-      return;
-    }
+    this.hidePopover();
+    this.highlightFinished = false;
 
-    this.popover.hide();
+    if (this.options.onDeselected) {
+      this.options.onDeselected(this);
+    }
   }
 
   /**
@@ -127,20 +130,24 @@ export default class Element {
    * this element of has just decided to highlight it
    */
   onHighlightStarted() {
-    if (!this.popover) {
-      return;
-    }
-
     this.showPopover();
+
+    // Because element has just started highlighting
+    // and hasn't completely highlighted
+    this.highlightFinished = false;
+
+    if (this.options.onHighlightStarted) {
+      this.options.onHighlightStarted(this);
+    }
   }
 
   /**
    * Is called when the element has been successfully highlighted
    */
   onHighlighted() {
-    if (this.popover) {
-      this.showPopover();
-    }
+    this.showPopover();
+
+    this.highlightFinished = true;
 
     const highlightedElement = this;
     const lastHighlightedElement = this.overlay.getLastHighlightedElement();
@@ -160,12 +167,28 @@ export default class Element {
         highlightedElement.bringInView();
       }
     }
+
+    if (this.options.onHighlighted) {
+      this.options.onHighlighted(this);
+    }
+  }
+
+  hidePopover() {
+    if (!this.popover) {
+      return;
+    }
+
+    this.popover.hide();
   }
 
   /**
    * Shows the popover on the current element
    */
   showPopover() {
+    if (!this.popover) {
+      return;
+    }
+
     const position = this.getCalculatedPosition();
 
     this.popover.show(position);

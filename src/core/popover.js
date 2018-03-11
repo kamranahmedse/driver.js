@@ -27,6 +27,7 @@ export default class Popover extends Element {
       isLast: true,
       totalCount: 1,
       currentIndex: 0,
+      showButtons: true,
       doneBtnText: 'Done',
       closeBtnText: 'Close',
       nextBtnText: 'Next &rarr;',
@@ -145,7 +146,7 @@ export default class Popover extends Element {
     this.closeBtnNode.innerHTML = this.options.closeBtnText;
 
     // If there was only one item, hide the buttons
-    if (!this.options.totalCount || this.options.totalCount === 1) {
+    if (!this.options.showButtons || !this.options.totalCount || this.options.totalCount === 1) {
       this.footerNode.style.display = 'none';
       return;
     }

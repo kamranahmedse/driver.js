@@ -27,6 +27,12 @@ export default class Sholo {
       animate: OVERLAY_ANIMATE,     // Whether to animate or not
       opacity: OVERLAY_OPACITY,     // Overlay opacity
       padding: OVERLAY_PADDING,     // Spacing around the element from the overlay
+      onHighlightStarted: () => {   // When element is about to be highlighted
+      },
+      onHighlighted: () => {        // When element has been highlighted
+      },
+      onDeselected: () => {         // When the element has been deselected
+      },
     }, options);
 
     this.document = document;
@@ -144,7 +150,6 @@ export default class Sholo {
   reset() {
     this.currentStep = 0;
     this.isActivated = false;
-    this.steps = [];
     this.overlay.clear();
   }
 
@@ -154,7 +159,23 @@ export default class Sholo {
    */
   hasHighlightedElement() {
     const highlightedElement = this.overlay.getHighlightedElement();
-    return highlightedElement && highlightedElement.node;
+    return highlightedElement && highlightedElement.node && highlightedElement.highlightFinished;
+  }
+
+  /**
+   * Gets the currently highlighted element in overlay
+   * @returns {Element}
+   */
+  getHighlightedElement() {
+    return this.overlay.getHighlightedElement();
+  }
+
+  /**
+   * Gets the element that was highlighted before currently highlighted element
+   * @returns {Element}
+   */
+  getLastHighlightedElement() {
+    return this.overlay.getLastHighlightedElement();
   }
 
   /**
@@ -195,9 +216,9 @@ export default class Sholo {
 
     if (event.keyCode === ESC_KEY_CODE) {
       this.reset();
-    } else if (event.keyCode === RIGHT_KEY_CODE && this.hasNextStep()) {
+    } else if (event.keyCode === RIGHT_KEY_CODE) {
       this.moveNext();
-    } else if (event.keyCode === LEFT_KEY_CODE && this.hasPreviousStep()) {
+    } else if (event.keyCode === LEFT_KEY_CODE) {
       this.movePrevious();
     }
   }
