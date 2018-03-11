@@ -1,7 +1,7 @@
 {
   "name": "driver.js",
-  "version": "1.0.0",
-  "description": "A light-weight, vanilla JS library to bring certain parts of page in spotlight",
+  "version": "0.1.0",
+  "description": "A light-weight, no-dependency, vanilla JavaScript library to drive the user's focus across the page",
   "main": "./assets/scripts/dist/driver.min.js",
   "scripts": {
     "start": "node server.js",
