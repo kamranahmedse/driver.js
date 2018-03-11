@@ -1,5 +1,5 @@
-@import "base";
-@import "../src/sholo";
+@import "./base";
+@import "../../src/sholo";
 
 $container-width: 500px !default;
 $logo-font-size: 55px !default;
@@ -23,14 +23,12 @@ img.emoji {
   padding: 10px 30px;
   border-radius: 5px;
   color: #333333;
-}
 
-.btn {
-  font-size: $button-font-size;
-  padding: 7px 10px;
-  border-radius: 3px;
+  a, a:visited, a:focus {
+    color: #333333;
+  }
 
-  &.btn__dark {
+  a.btn__dark {
     color: #FFFFFF;
     background-color: #F44336;
     padding: 0 18px;
@@ -44,6 +42,16 @@ img.emoji {
     font-size: 17px;
     margin: auto;
     display: block;
+  }
+
+  a.btn__run-demo {
+    background: #f54336;
+    padding: 5px;
+    border-radius: 20px;
+    color: white;
+    display: block;
+    margin: 15px 0 10px;
+    text-align: center;
   }
 }
 
@@ -66,5 +74,25 @@ section {
       margin-right: 3px;
       position: relative;
     }
+  }
+}
+
+.section__examples {
+  .section__example {
+    margin-bottom: 20px;
+  }
+
+  #creation-input {
+    margin-top: 20px;
+  }
+
+  input {
+    padding: 10px;
+    background-color: #fafbfc;
+    border: 3px solid #e1e4e8;
+    border-radius: 3px;
+    box-shadow: inset 0 0 10px rgba(27,31,35,0.05);
+    margin-bottom: 0;
+    margin-top: 7px;
   }
 }

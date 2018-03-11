@@ -7,66 +7,108 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Sholo</title>
   <link rel="stylesheet" href="./dist/demo.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/monokai.min.css">
 </head>
 <body>
 <div class="page-wrap">
   <section class="section__header" data-sholo="Hey welcome to presenter!">
     <h1><span class="emoji">👨‍🔧️</span> Driver</h1>
-    <p class="text-muted">A light-weight, no-dependency, vanilla JavaScript library to drive the user's focus across the page</p>
-    <a href="javascript:void(0)" class="btn btn__example btn__dark">Quick Example</a>
+    <p class="text-muted">A light-weight, no-dependency, vanilla JavaScript library to drive the user's focus across the
+      page</p>
+    <a href="javascript:void(0)" class="btn btn__example btn__dark">Quick Tour</a>
   </section>
 
   <blockquote>
     <p>A lightweight (~4kb gzipped) yet powerful JavaScript engine that helps you drive the user's focus on page.</p>
-    <p class="zero-bottom">Some sample use-cases can be creating powerful feature introductions, call-to-action components, focus shifters etc.</p>
+    <p class="zero-bottom">Some sample use-cases can be creating powerful feature introductions, call-to-action
+      components, focus shifters etc.</p>
   </blockquote>
 
   <section class="section__purpose">
-    <h3>Features</h3>
+    <h3>What are the features?</h3>
+    <p>Driver is compatible with all the major browsers and can be used for any of your overlay needs. Feature
+      introductions, focus shifters, call-to-action are just a few examples.</p>
     <ul>
-      <li>Highlight any item on page</li>
-      <li>Block user interactions</li>
-      <li>Create feature introductions</li>
-      <li>User Friendly – Controllable by keys</li>
-      <li>Free for personal and commercial use</li>
-      <li>Lightweight – Only ~4kb when gzipped</li>
-      <li>Supports all major browsers</li>
-      <li></li>
+      <li>🔆 <strong>Highlight</strong> any item on page</li>
+      <li>✋ <strong>Block user interactions</strong></li>
+      <li>📣 Create <strong>feature introductions</strong></li>
+      <li>👓 Add <strong>focus shifters</strong> for users</li>
+      <li>🛠️ Highly customizable – <strong>Use it anywhere</strong> for overlay</li>
+      <li>⌨️ User Friendly – <strong>Controllable by keys</strong></li>
+      <li id="free-use">🆓 <strong>MIT Licensed</strong> – Free for personal and commercial use</li>
+      <li>🕊️ Lightweight – Only <strong>~4kb</strong> when gzipped</li>
+      <li>🌀 <strong>Consistent behavior</strong> across all major browsers</li>
     </ul>
   </section>
-  <hr>
+  <hr class="hr__fancy">
   <section class="section__how">
     <h3>How does it do that?</h3>
-    <p>Ever heard of magic? ...it is not that, it just uses some canvas manipulation to put the focus on some
-      element</p>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi assumenda, at consectetur cupiditate inventore
-      ipsa molestias, natus nulla odit optio pariatur perspiciatis, quae quam quasi quibusdam recusandae repellendus
-      reprehenderit tempora!</p>
+    <p>In it simplest, it puts the canvas on top of the whole page and then cuts the part that is over the element to be
+      highlighted and provides you several hooks when highlighting, highlighted or un-highlighting elements making it
+      highly customizable.</p>
   </section>
+  <hr class="hr__fancy">
   <section class="section__examples">
     <h3>Can you show some Examples?</h3>
-    <p>Here are some of the examples</p>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi assumenda, at consectetur cupiditate inventore
-      ipsa molestias, natus nulla odit optio pariatur perspiciatis, quae quam quasi quibusdam recusandae repellendus
-      reprehenderit tempora!</p>
-  </section>
-  <section class="section__learn">
-    <h3>I want to learn more</h3>
-    <p>Here are some of the examples</p>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi assumenda, at consectetur cupiditate inventore
-      ipsa molestias, natus nulla odit optio pariatur perspiciatis, quae quam quasi quibusdam recusandae repellendus
-      reprehenderit tempora!</p>
-  </section>
-  <section class="section__contributing">
-    <h3>Contributing</h3>
-    <p>Here are some of the examples</p>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi assumenda, at consectetur cupiditate inventore
-      ipsa molestias, natus nulla odit optio pariatur perspiciatis, quae quam quasi quibusdam recusandae repellendus
-      reprehenderit tempora!</p>
+    <p>Below you find some of the examples and sample use-cases on how you can use it. Run by clicking the
+      <code>RUN</code> button.</p>
+    <div id="single-element-no-popover" class="section__example">
+      <h4>Highlighting a Single Element – Without Popover</h4>
+      <p class="zero-bottom">If all you want is just highlight a single element, you can do that simply by passing the
+        selector</p>
+      <a href="#" class="btn__run-demo" id="run-single-element-no-popover">Run it</a>
+      <pre><code class="javascript">const driver = new Driver();
+driver.highlight('#create-post');
+</code></pre>
+    </div>
+
+    <hr class="hr__fancy">
+
+    <div class="section__example">
+      <p>A <strong>real world use-case</strong> for this could be highlighting an element when user is interacting with
+        it</p>
+      <pre><code class="javascript">const focusDriver = new Driver();
+
+// Highlight the section on focus
+document.getElementById('creation-input')
+  .addEventListener('focus', (e) => {
+    focusDriver.focus('#creation-input');
+  });
+</code></pre>
+      <p class="top-20">Focus any of the inputs and see how it moves the highlight from one element to the other</p>
+      <div id="creation-forms">
+        <input type="text" id="creation-input" class="form-control" placeholder="Focus any of the inputs">
+        <input type="text" id="creation-input-2" class="form-control" placeholder="Focus any of the inputs">
+        <input type="text" id="creation-input-3" class="form-control" placeholder="Focus any of the inputs">
+        <input type="text" id="creation-input-4" class="form-control" placeholder="Focus any of the inputs">
+      </div>
+    </div>
+
+    <p>You can also turn off the animation or set the padding around the corner. More on it later.</p>
+
+    <hr class="hr__fancy">
+
+    <div id="single-element-with-popover" class="section__example">
+      <h4>Highlighting a Single Element – With Popover</h4>
+      <p>If you would like to show some details alongside the highlighted element, you can do that easily by specifying
+        title and description</p>
+      <a href="#" class="btn__run-demo" id="run-single-element-with-popover">Run it</a>
+      <pre><code class="javascript">const driver = new Driver();
+driver.highlight({
+  element: '#some-element',
+  popover: {
+    title: 'Title for the Popover',
+    description: 'Description for it',
+  }
+});
+</code></pre>
+    </div>
+
   </section>
 </div>
 
 <script src="//twemoji.maxcdn.com/2/twemoji.min.js?2.5"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
 
 <script src="./dist/sholo.js"></script>
 <script src="./dist/demo.js"></script>

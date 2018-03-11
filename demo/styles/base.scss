@@ -50,16 +50,21 @@ label {
 p {
   margin-top: 0;
   margin-bottom: 20px;
+  line-height: 1.5;
 }
 
-hr {
+hr, .hr {
   display: block;
   margin: $global-guttering*1.25 0;
   border: 0;
   border-bottom: 1px solid #eaeaea;
-  background: url(https://i.imgur.com/MoU1Mn4.png) repeat-y;
-  height: 5px;
-  background-size: cover;
+  height: 1px;
+
+  &.hr__fancy {
+    background: url("./separator.png") repeat-y;
+    height: 5px;
+    background-size: cover;
+  }
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -85,6 +90,7 @@ a, a:visited, a:focus {
   font-size: 14px;
   -webkit-appearance: none;
   appearance: none;
+  outline: none;
   margin-bottom: $global-guttering;
 }
 
@@ -115,6 +121,7 @@ h6, .h6 {
 ul li, ol li {
   list-style-type: none;
   line-height: 1.5;
+  margin-bottom: 3px;
 }
 
 blockquote {
@@ -124,41 +131,8 @@ blockquote {
   border-radius: 10px;
 }
 
-.container {
-  display: block;
-  margin: auto;
-  max-width: 40em;
-  padding: $global-guttering*2;
-  @media (max-width: 620px) {
-    padding: 0;
-  }
-}
-
-.section {
-  background-color: #FFFFFF;
-  padding: $global-guttering;
-  color: #333;
-  a, a:visited, a:focus {
-    color: #00bcd4;
-  }
-}
-
-.logo {
-  display: block;
-  margin-bottom: $global-guttering/2;
-}
-
-.logo__img {
-  width: 100%;
-  height: auto;
-  display: inline-block;
-  max-width: 100%;
-  vertical-align: top;
-  padding: $global-guttering/4 0;
-}
-
-.visible-ie {
-  display: none;
+.top-20 {
+  margin-top: 20px;
 }
 
 .zero-bottom {

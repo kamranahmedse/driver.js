@@ -6,7 +6,7 @@ module.exports = {
   mode: 'development',
   entry: [
     'webpack-dev-server/client?http://localhost:3000',
-    './demo/demo.scss',
+    './demo/styles/demo.scss',
     './src/index.js',
   ],
   output: {
@@ -39,7 +39,7 @@ module.exports = {
       },
       {
         test: /.scss$/,
-        loader: ExtractTextPlugin.extract(['css-loader', 'sass-loader']),
+        loader: ExtractTextPlugin.extract(['css-loader?url=false', 'sass-loader']),
       },
     ],
   },
@@ -49,8 +49,9 @@ module.exports = {
       allChunks: true,
     }),
     new CopyWebpackPlugin([
-      './demo/demo.js',
-      './demo/emoji.js',
+      './demo/scripts/emoji.js',
+      './demo/scripts/demo.js',
+      './demo/images/separator.png',
     ]),
   ],
   stats: {
