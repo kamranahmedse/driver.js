@@ -29,7 +29,7 @@
     <p>Driver is compatible with all the major browsers and can be used for any of your overlay needs. Feature
       introductions, focus shifters, call-to-action are just a few examples.</p>
     <ul>
-      <li>🔆 <strong>Highlight</strong> any item on page</li>
+      <li>🔆 <strong>Highlight</strong> any (literally any) item on page</li>
       <li>✋ <strong>Block user interactions</strong></li>
       <li>📣 Create <strong>feature introductions</strong></li>
       <li>👓 Add <strong>focus shifters</strong> for users</li>
@@ -56,7 +56,7 @@
       <h4>Highlighting a Single Element – Without Popover</h4>
       <p class="zero-bottom">If all you want is just highlight a single element, you can do that simply by passing the
         selector</p>
-      <a href="#" class="btn__run-demo" id="run-single-element-no-popover">Run it</a>
+      <a href="#" class="btn__run-demo" id="run-single-element-no-popover">Show Demo</a>
       <pre><code class="javascript">const driver = new Driver();
 driver.highlight('#create-post');
 </code></pre>
@@ -92,7 +92,7 @@ document.getElementById('creation-input')
       <h4>Highlighting a Single Element – With Popover</h4>
       <p>If you would like to show some details alongside the highlighted element, you can do that easily by specifying
         title and description</p>
-      <a href="#" class="btn__run-demo" id="run-single-element-with-popover">Run it</a>
+      <a href="#" class="btn__run-demo" id="run-single-element-with-popover">Show Demo</a>
       <pre><code class="javascript">const driver = new Driver();
 driver.highlight({
   element: '#some-element',
@@ -112,7 +112,7 @@ driver.highlight({
       <h4>Popover Positioning</h4>
       <p>You can also, change the position of the popover to be either <code>left</code>, <code>top</code>,
         <code>right</code> or <code>bottom</code>.</p>
-      <a href="#" class="btn__run-demo" id="run-single-element-with-popover-position">Run it</a>
+      <a href="#" class="btn__run-demo" id="run-single-element-with-popover-position">Show Demo</a>
       <pre><code class="javascript">const driver = new Driver();
 driver.highlight({
   element: '#some-element',
@@ -123,6 +123,8 @@ driver.highlight({
   }
 });
 </code></pre>
+    </div>
+    <div class="section__example">
       <div class="top-20 position-btns">
         <a href="#" id="position-btn-left">On my Left</a>
         <a href="#" id="position-btn-top">On my Top</a>
@@ -131,6 +133,151 @@ driver.highlight({
       </div>
       <p class="top-20">If you don't specify the position or specify it to be <code>auto</code>, it will automatically
         find the suitable position for the popover and show it</p>
+    </div>
+    <hr class="hr__fancy">
+    <div id="single-element-with-popover-html" class="section__example">
+      <h4>HTML in Popovers</h4>
+      <p>You can also specify HTML in the body or the title of the popovers. Here is an example:</p>
+      <a href="#" class="btn__run-demo" id="run-single-element-with-popover-html">Show Demo</a>
+      <pre><code class="javascript">const driver = new Driver();
+driver.highlight({
+  element: '#some-element',
+  popover: {
+    title: '&lt;em&gt;An italicized title&lt;/em&gt;',
+    description: 'Description may also contain &lt;strong&gt;HTML&lt;/strong&gt;'
+  }
+});
+</code></pre>
+    </div>
+
+    <p class="top-20">And of-course it can be any valid HTML.</p>
+
+    <hr class="hr__fancy">
+
+    <div id="third-element-introduction" class="section__example">
+      <h4 id="first-element-introduction">Creating Feature Introductions</h4>
+      <p id="second-para-feature-introductions">You can also make powerful feature introductions to guide the users
+        about the features. Just provide an array of steps where each step specifies an element to highlight.</p>
+      <p id="third-para-feature-introductions">Below is just a quick example showing you how to combine the steps in
+        introduction.</p>
+      <a href="#" class="btn__run-demo" id="run-multi-element-popovers">Show Demo</a>
+    </div>
+    <pre><code class="javascript">const driver = new Driver();
+// Define the steps for introduction
+driver.defineSteps([
+  {
+    element: '#first-element-introduction',
+    popover: {
+      title: 'Title on Popover',
+      description: 'Body of the popover',
+      position: 'left'
+    }
+  },
+  {
+    element: '#second-element-introduction',
+    popover: {
+      title: 'Title on Popover',
+      description: 'Body of the popover',
+      position: 'top'
+    }
+  },
+  {
+    element: '#third-element-introduction',
+    popover: {
+      title: 'Title on Popover',
+      description: 'Body of the popover',
+      position: 'right'
+    }
+  },
+]);
+// Start the introduction
+driver.start();
+</code></pre>
+    <p class="top-20">This is just a quick example for the feature introduction. For a richer one, please have a look at
+      the
+      <a href="#" class="btn__example">"Quick Tour"</a></p>
+
+    <p>You may also turn off the footer buttons in popover, in which case user can control the popover using the arrows
+      keys on keyboard. Or you may control it using the methods provided by Driver.</p>
+
+    <hr class="hr__fancy">
+
+    <div id="element-without-popover" class="section__example">
+      <h4>Without Overlay</h4>
+      <p>You can create feature introductions and do everything listed above without overlays also. All you have to do is just set the opacity to `0`.</p>
+      <a href="#" class="btn__run-demo" id="run-element-without-popover">Show Demo</a>
+      <pre><code class="javascript">const driver = new Driver({
+    opacity: 0,
+});
+
+driver.highlight({
+  element: '#run-element-without-popover',
+  popover: {
+    title: 'Title for the Popover',
+    description: 'Description for it',
+    position: 'top', // can be `top`, `left`, `right`, `bottom`
+  }
+});
+</code></pre>
+      <p class="top-20">..and you can do the same for the feature introductions</p>
+    </div>
+
+    <hr class="hr__fancy">
+
+    <div class="section__example">
+      <h3>..and much much more</h3>
+      <p>Driver comes with many options that you can manipulate to make driver behave as you may like</p>
+      <h4>Driver Definition</h4>
+      <p>Here are the options that Driver understands</p>
+      <pre><code class="javascript">const driver = new Driver({
+  animate: true,  // Animate while changing highlighted element
+  opacity: 0.75,  // Background opacity (0 means only popovers and without overlay)
+  padding: 10,    // Distance of element from around the edges
+  onHighlightStarted: (Element) {}, // Called when element is about to be highlighted
+  onHighlighted: (Element) {}, // Called when element is fully highlighted
+  onDeselected: (Element) {}, // Called when element has been deselected
+});
+</code></pre>
+    </div>
+    <div class="section__example">
+      <h4>Step Definition</h4>
+      <p>Here are the set of options that you can pass in each step i.e. an item in array of steps or the object that you pass to <code>highlight</code> method</p>
+      <pre><code class="javascript">const stepDefinition = {
+  element: '#some-item', // Query selector for the item to be highlighted
+  popover: {             // There will be no popover if empty or not given
+    title: 'Title',      // Title on the popover
+    description: 'Description', // Body of the popover
+    showButtons: false,      // Do not show control buttons in footer
+    doneBtnText: 'Done',     // Text on the last button
+    closeBtnText: 'Close',   // Text on the close button
+    nextBtnText: 'Next',     // Next button text
+    prevBtnText: 'Previous', // Previous button text
+  }
+};
+</code></pre>
+    </div>
+    <div class="section__example">
+      <h4>API Methods</h4>
+      <p>Below are the set of methods that are available to you</p>
+      <pre><code class="javascript">const driver = new Driver(driverOptions);
+
+const isActivated = driver.isActivated; // Checks if the driver is active or not
+driver.moveNext();     // Moves to next step in the steps list
+driver.movePrevious(); // Moves to previous step in the steps list
+driver.start(stepNumber = 0);  // Starts driving through the defined steps
+driver.highlight(string|stepDefinition); // highlights the element using query selector or the step definition
+driver.reset(); // Resets the overlay and clears the screen
+driver.hasHighlightedElement(); // Checks if there is any highlighted element
+driver.hasNextStep(); // Checks if there is next step to move to
+driver.hasPreviousStep(); // Checks if there is previous step to move to
+
+// Gets the currently highlighted element on screen
+const activeElement = driver.getHighlightedElement();
+const lastActiveElement = driver.getLastHighlightedElement();
+activeElement.getScreenCoordinates(); // Gets screen co-ordinates of the active element
+activeElement.hidePopover();  // Hide the popover
+activeElement.showPopover();  // Show the popover
+</code></pre>
     </div>
   </section>
 </div>

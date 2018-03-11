@@ -4,10 +4,18 @@ const tourSholo = new Sholo({
   animate: true,
   opacity: 0.8,
   padding: 5,
+  showButtons: false,
 });
 
 tourSholo.defineSteps([
   {
+    element: '.emoji',
+    popover: {
+      title: 'Adding Introductions',
+      description: 'You can use it to add popovers on top of the website',
+      position: 'bottom',
+    },
+  }, {
     element: '.section__header',
     popover: {
       title: 'Adding Introductions',
@@ -128,7 +136,7 @@ document.querySelector('#run-single-element-with-popover-position')
 // Highlighting single element with popover position
 /////////////////////////////////////////////////////
 const positionBtnsSholo = new Sholo({
-  padding: 0
+  padding: 0,
 });
 
 document.querySelector('#position-btn-left')
@@ -186,3 +194,98 @@ document.querySelector('#position-btn-top')
       }
     });
   });
+
+/////////////////////////////////////////////////////
+// Highlighting single element with popover position
+/////////////////////////////////////////////////////
+const htmlSholo = new Sholo();
+
+document.querySelector('#run-single-element-with-popover-html')
+  .addEventListener('click', (e) => {
+    e.preventDefault();
+
+    htmlSholo.highlight({
+      element: '#single-element-with-popover-html',
+      popover: {
+        title: '<em>Tags</em> in title or <u>body</u>',
+        description: 'Body can also have <strong>html tags</strong>!',
+        position: 'top'
+      }
+    });
+  });
+
+/////////////////////////////////////////////////////
+// Without Overlay Example
+/////////////////////////////////////////////////////
+const withoutOverlay = new Sholo({
+  opacity: 0,
+  padding: 0
+});
+
+document.querySelector('#run-element-without-popover')
+  .addEventListener('click', (e) => {
+    e.preventDefault();
+
+    withoutOverlay.highlight({
+      element: '#run-element-without-popover',
+      popover: {
+        title: 'Title for the Popover',
+        description: 'Description for it',
+        position: 'left', // can be `top`, `left`, `right`, `bottom`
+      }
+    } );
+  });
+
+/////////////////////////////////////////////////////
+// Highlighting single element with popover position
+/////////////////////////////////////////////////////
+const featureIntroductionSholo = new Sholo();
+featureIntroductionSholo.defineSteps([
+  {
+    element: '#first-element-introduction',
+    popover: {
+      title: 'Title on Popover',
+      description: 'Body of the popover',
+      position: 'bottom'
+    }
+  },
+  {
+    element: '#second-para-feature-introductions',
+    popover: {
+      title: 'Title on Popover',
+      description: 'Body of the popover',
+      position: 'left'
+    }
+  },
+  {
+    element: '#third-para-feature-introductions',
+    popover: {
+      title: 'Title on Popover',
+      description: 'Body of the popover',
+      position: 'right'
+    }
+  },
+  {
+    element: '#run-multi-element-popovers',
+    popover: {
+      title: 'Title on Popover',
+      description: 'Body of the popover',
+      position: 'top'
+    }
+  },
+  {
+    element: '#third-element-introduction',
+    popover: {
+      title: 'Title on Popover',
+      description: 'Body of the popover',
+      position: 'top'
+    }
+  },
+]);
+
+document.querySelector('#run-multi-element-popovers')
+  .addEventListener('click', (e) => {
+    e.preventDefault();
+    featureIntroductionSholo.start();
+  });
+
