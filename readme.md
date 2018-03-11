@@ -244,6 +244,18 @@ activeElement.getNode();  // Gets the DOM Element behind this element
 
 ![](./demo/images/split.png)
 
+## Todo
+
+- [X] Single elment highlighting
+- [X] Popovers on the highlighted elements
+- [X] Add smooth transition on changing highlighted elements
+- [X] Multi-step Journey Definitions
+- [X] Make it controllable by keyboard
+- [X] Bring highlighted element to viewport
+- [ ] Add type definitions
+- [ ] Create wrappers for Angular and React
+- [ ] Write tests
+
 ## Contributions
 
 Feel free to submit pull requests, create issues or spread the word
