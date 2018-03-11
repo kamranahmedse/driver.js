@@ -7,10 +7,12 @@ import {
   CLASS_NEXT_STEP_BTN,
   CLASS_PREV_STEP_BTN,
   ESC_KEY_CODE,
-  ID_POPOVER, LEFT_KEY_CODE,
+  ID_POPOVER,
+  LEFT_KEY_CODE,
   OVERLAY_ANIMATE,
   OVERLAY_OPACITY,
-  OVERLAY_PADDING, RIGHT_KEY_CODE,
+  OVERLAY_PADDING,
+  RIGHT_KEY_CODE,
 } from './common/constants';
 
 /**
@@ -30,6 +32,7 @@ export default class Sholo {
     this.document = document;
     this.window = window;
 
+    this.isActivated = false;
     this.overlay = new Overlay(this.options, this.window, this.document);
 
     this.steps = [];            // steps to be presented if any
@@ -62,7 +65,7 @@ export default class Sholo {
    * @param e
    */
   onClick(e) {
-    if (!this.hasHighlightedElement()) {
+    if (!this.hasHighlightedElement() || !this.isActivated) {
       // Has no highlighted element so ignore the click
       return;
     }
@@ -75,7 +78,7 @@ export default class Sholo {
 
     // Remove the overlay If clicked outside the highlighted element
     if (!clickedHighlightedElement && !clickedPopover) {
-      this.overlay.clear();
+      this.reset();
       return;
     }
 
@@ -140,6 +143,7 @@ export default class Sholo {
    */
   reset() {
     this.currentStep = 0;
+    this.isActivated = false;
     this.steps = [];
     this.overlay.clear();
   }
@@ -159,6 +163,10 @@ export default class Sholo {
    * that the highlighted part travels with the scroll
    */
   onScroll() {
+    if (!this.isActivated) {
+      return;
+    }
+
     this.overlay.refresh(false);
   }
 
@@ -168,6 +176,10 @@ export default class Sholo {
    * the highlighted part travels with the width change of window
    */
   onResize() {
+    if (!this.isActivated) {
+      return;
+    }
+
     // Refresh with animation
     this.overlay.refresh(true);
   }
@@ -177,8 +189,12 @@ export default class Sholo {
    * @param event
    */
   onKeyUp(event) {
+    if (!this.isActivated) {
+      return;
+    }
+
     if (event.keyCode === ESC_KEY_CODE) {
-      this.overlay.clear();
+      this.reset();
     } else if (event.keyCode === RIGHT_KEY_CODE && this.hasNextStep()) {
       this.moveNext();
     } else if (event.keyCode === LEFT_KEY_CODE && this.hasPreviousStep()) {
@@ -261,6 +277,8 @@ export default class Sholo {
       throw new Error('There are no steps defined to iterate');
     }
 
+    this.isActivated = true;
+
     this.currentStep = index;
     this.overlay.highlight(this.steps[index]);
   }
@@ -270,6 +288,8 @@ export default class Sholo {
    * @param {string|{element: string, popover: {}}} selector Query selector or a step definition
    */
   highlight(selector) {
+    this.isActivated = true;
+
     const element = this.prepareElementFromStep(selector);
     if (!element) {
       return;
