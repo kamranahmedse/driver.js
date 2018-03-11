@@ -35,15 +35,16 @@ For Usage and Examples, [have a look at demo](http://kamranahmed.info/driver)
 
 ## Installation
 
-```zsh
+You can install it using `yarn` or `npm`, whatever you prefer
+
+```sh
 yarn add driver.js
+npm install driver.js
 ```
 
-Or include directly
+Or grab the code from `dist` directory and include it directly
 
 ```html
-<!-- Include Driver CSS -->
 <link rel="stylesheet" href="/dist/driver.min.css">
-<!-- Include Driver JavaScript -->
 <script src="/dist/driver.min.js"></script>
 ```
