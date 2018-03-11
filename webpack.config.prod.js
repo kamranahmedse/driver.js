@@ -4,8 +4,8 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 module.exports = {
   mode: 'production',
   entry: [
-    './src/index.js',
     './src/driver.scss',
+    './src/index.js',
   ],
   output: {
     path: path.join(__dirname, '/dist'),
@@ -32,6 +32,7 @@ module.exports = {
         loader: 'babel-loader',
         options: {
           presets: ['env'],
+          plugins: ['babel-plugin-add-module-exports'],
         },
       },
       {
@@ -39,7 +40,7 @@ module.exports = {
         loader: ExtractTextPlugin.extract([
           {
             loader: 'css-loader',
-            options: { minimize: true },
+            options: { minimize: true, url: false },
           },
           'sass-loader',
         ]),

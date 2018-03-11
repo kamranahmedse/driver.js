@@ -31,4 +31,21 @@
 
 ![](./demo/images/split.png)
 
-For Usage and Examples, [have a look at demo]()
+For Usage and Examples, [have a look at demo](http://kamranahmed.info/driver)
+
+## Installation
+
+```zsh
+yarn add driver.js
+```
+
+Or include directly
+
+Or include Choices directly:
+
+```html
+<!-- Include Driver CSS -->
+<link rel="stylesheet" href="/dist/driver.min.css">
+<!-- Include Driver JavaScript -->
+<script src="/dist/driver.min.js"></script>
+```
