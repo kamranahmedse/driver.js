@@ -7,9 +7,6 @@
   <a href="https://npmjs.org/package/driver.js">
     <img src="https://img.shields.io/npm/v/driver.js.svg" alt="version" />
   </a>
-  <a href="http://makeapullrequest.com">
-    <img src="https://img.shields.io/badge/contributions-welcome-green.svg" />
-  </a>
   <a href="http://twitter.com/kamranahmedse">
     <img src="https://img.shields.io/badge/author-kamranahmedse-blue.svg" />
   </a>
@@ -68,8 +65,6 @@ driver.highlight('#create-post');
 ```
 A real world usage example for this could be using it to dim the background and highlight the required element e.g. the way facebook does it on creating a post.
 
-![](./demo/images/split.png)
-
 ### Highlight and Popover – [Demo](http://kamranahmed.info/driver#single-element-with-popover)
 
 You can show additional details beside the highlighted element using the popover
@@ -87,8 +82,6 @@ driver.highlight({
 
 Also, `title` and `description` can have HTML as well.
 
-![](./demo/images/split.png)
-
 ### Positioning the Popover – [Demo](http://kamranahmed.info/driver#single-element-with-popover-position)
 
 By default, driver automatically finds the suitable position for the popover and displays it, you can override it using `position` property
@@ -104,8 +97,6 @@ driver.highlight({
   }
 });
 ```
-
-![](./demo/images/split.png)
 
 ### Creating Feature Introductions – [Demo](http://kamranahmed.info/driver)
 
@@ -149,7 +140,7 @@ You can also hide the buttons and control the introductions programmatically by 
 
 ![](./demo/images/split.png)
 
-# API
+## API
 
 Driver comes with several options that you can manipulate to make driver behave as you may like
 
@@ -159,12 +150,12 @@ Here are the options that Driver understands
 
 ```javascript
 const driver = new Driver({
-  animate: true,  // Animate while changing highlighted element
-  opacity: 0.75,  // Background opacity (0 means only popovers and without overlay)
-  padding: 10,    // Distance of element from around the edges
+  animate: true,                    // Animate while changing highlighted element
+  opacity: 0.75,                    // Background opacity (0 means only popovers and without overlay)
+  padding: 10,                      // Distance of element from around the edges
   onHighlightStarted: (Element) {}, // Called when element is about to be highlighted
-  onHighlighted: (Element) {}, // Called when element is fully highlighted
-  onDeselected: (Element) {}, // Called when element has been deselected
+  onHighlighted: (Element) {},      // Called when element is fully highlighted
+  onDeselected: (Element) {},       // Called when element has been deselected
 });
 ```
 
@@ -174,17 +165,36 @@ Here are the set of options that you can pass while defining steps `defineSteps`
 
 ```javascript
 const stepDefinition = {
-  element: '#some-item', // Query selector for the item to be highlighted
-  popover: {             // There will be no popover if empty or not given
-    title: 'Title',      // Title on the popover
+  element: '#some-item',        // Query selector for the item to be highlighted
+  popover: {                    // There will be no popover if empty or not given
+    title: 'Title',             // Title on the popover
     description: 'Description', // Body of the popover
-    showButtons: false,      // Do not show control buttons in footer
-    doneBtnText: 'Done',     // Text on the last button
-    closeBtnText: 'Close',   // Text on the close button
-    nextBtnText: 'Next',     // Next button text
-    prevBtnText: 'Previous', // Previous button text
+    showButtons: false,         // Do not show control buttons in footer
+    doneBtnText: 'Done',        // Text on the last button
+    closeBtnText: 'Close',      // Text on the close button
+    nextBtnText: 'Next',        // Next button text
+    prevBtnText: 'Previous',    // Previous button text
   }
 };
+```
+
+For example, here is how it would look when highlighting a single element
+
+```javascript
+const driver = new Driver(driverOptions);
+driver.highlight(stepDefinition);
+```
+
+And this is how it would look when creating a step by step guide
+
+```javascript
+const driver = new Driver(driverOptions);
+driver.defineSteps([
+    stepDefinition1,
+    stepDefinition2,
+    stepDefinition3,
+    stepDefinition4,
+]);
 ```
 
 ### API Methods
@@ -194,22 +204,40 @@ Below are the set of methods that are available to you
 ```javascript
 const driver = new Driver(driverOptions);
 
-const isActivated = driver.isActivated; // Checks if the driver is active or not
-driver.moveNext();     // Moves to next step in the steps list
-driver.movePrevious(); // Moves to previous step in the steps list
+// Checks if the driver is active or not
+if (driver.isActivated) {
+    console.log('Driver is active');
+}
+
+// In case of the steps guide, you can call below methods
+driver.defineSteps([ stepDefinition1, stepDefinition2, stepDefinition3 ]);
 driver.start(stepNumber = 0);  // Starts driving through the defined steps
-driver.highlight(string|stepDefinition); // highlights the element using query selector or the step definition
-driver.reset(); // Resets the overlay and clears the screen
-driver.hasHighlightedElement(); // Checks if there is any highlighted element
-driver.hasNextStep(); // Checks if there is next step to move to
-driver.hasPreviousStep(); // Checks if there is previous step to move to
+driver.moveNext();             // Moves to next step in the steps list
+driver.movePrevious();         // Moves to previous step in the steps list
+driver.hasNextStep();          // Checks if there is next step to move to
+driver.hasPreviousStep();      // Checks if there is previous step to move to
+
+// Highlights the element using query selector or the step definition
+driver.highlight(string|stepDefinition);
+
+// Resets the overlay and clears the screen
+driver.reset();
+
+// Checks if there is any highlighted element
+if(driver.hasHighlightedElement()) {
+    console.log('There is an element highlighted');
+}
 
 // Gets the currently highlighted element on screen
+// It would be an instance of `/src/core/element.js`
 const activeElement = driver.getHighlightedElement();
+
+// Gets the last highlighted element, would be an instance of `/src/core/element.js`
 const lastActiveElement = driver.getLastHighlightedElement();
+
 activeElement.getScreenCoordinates(); // Gets screen co-ordinates of the active element
-activeElement.hidePopover();  // Hide the popover
-activeElement.showPopover();  // Show the popover
+activeElement.hidePopover();          // Hide the popover
+activeElement.showPopover();          // Show the popover
 
 activeElement.getNode();  // Gets the DOM Element behind this element
 ```
