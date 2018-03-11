@@ -77,7 +77,7 @@ export default class Element {
       return;
     }
 
-    const elementRect = this.getCalculatedPosition();
+    const elementRect = this.node.getBoundingClientRect();
     const absoluteElementTop = elementRect.top + this.window.pageYOffset;
     const middle = absoluteElementTop - (this.window.innerHeight / 2);
 
@@ -152,12 +152,12 @@ export default class Element {
     // If this element is not already highlighted (because this call could
     // be from the resize or scroll) and is not in view
     if (highlightedNode !== lastHighlightedNode) {
-      if (!highlightedElement.isInView()) {
-        highlightedElement.bringInView();
-      }
-
       if (popoverElement && !popoverElement.isInView()) {
         popoverElement.bringInView();
+      }
+
+      if (!highlightedElement.isInView()) {
+        highlightedElement.bringInView();
       }
     }
   }
