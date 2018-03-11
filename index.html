@@ -102,8 +102,36 @@ driver.highlight({
   }
 });
 </code></pre>
+      <p class="top-20">You can modify the behavior of this popover also by a certain set of options. More on it
+        below.</p>
     </div>
 
+    <hr class="hr__fancy">
+
+    <div id="single-element-with-popover-position" class="section__example">
+      <h4>Popover Positioning</h4>
+      <p>You can also, change the position of the popover to be either <code>left</code>, <code>top</code>,
+        <code>right</code> or <code>bottom</code>.</p>
+      <a href="#" class="btn__run-demo" id="run-single-element-with-popover-position">Run it</a>
+      <pre><code class="javascript">const driver = new Driver();
+driver.highlight({
+  element: '#some-element',
+  popover: {
+    title: 'Title for the Popover',
+    description: 'Description for it',
+    position: 'left', // can be `top`, `left`, `right`, `bottom`
+  }
+});
+</code></pre>
+      <div class="top-20 position-btns">
+        <a href="#" id="position-btn-left">On my Left</a>
+        <a href="#" id="position-btn-top">On my Top</a>
+        <a href="#" id="position-btn-bottom">On my Bottom</a>
+        <a href="#" id="position-btn-right">On my Right</a>
+      </div>
+      <p class="top-20">If you don't specify the position or specify it to be <code>auto</code>, it will automatically
+        find the suitable position for the popover and show it</p>
+    </div>
   </section>
 </div>
 

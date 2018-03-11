@@ -101,6 +101,88 @@ document.querySelector('#run-single-element-with-popover')
       popover: {
         title: 'Did you know?',
         description: 'You can add HTML in title or description also!',
+        position: 'top'
+      }
+    });
+  });
+
+/////////////////////////////////////////////////////
+// Highlighting single element with popover position
+/////////////////////////////////////////////////////
+const singleSholoWithPopoverPosition = new Sholo();
+document.querySelector('#run-single-element-with-popover-position')
+  .addEventListener('click', (e) => {
+    e.preventDefault();
+
+    singleSholoWithPopoverPosition.highlight({
+      element: '#single-element-with-popover-position',
+      popover: {
+        title: 'Did you know?',
+        description: 'You can add HTML in title or description also!',
+        position: 'left'
+      }
+    });
+  });
+
+/////////////////////////////////////////////////////
+// Highlighting single element with popover position
+/////////////////////////////////////////////////////
+const positionBtnsSholo = new Sholo({
+  padding: 0
+});
+
+document.querySelector('#position-btn-left')
+  .addEventListener('click', (e) => {
+    e.preventDefault();
+
+    positionBtnsSholo.highlight({
+      element: '#position-btn-left',
+      popover: {
+        title: 'Did you know?',
+        description: 'You can add HTML in title or description also!',
+        position: 'left'
+      }
+    });
+  });
+
+document.querySelector('#position-btn-right')
+  .addEventListener('click', (e) => {
+    e.preventDefault();
+
+    positionBtnsSholo.highlight({
+      element: '#position-btn-right',
+      popover: {
+        title: 'Did you know?',
+        description: 'You can add HTML in title or description also!',
+        position: 'right'
+      }
+    });
+  });
+
+document.querySelector('#position-btn-bottom')
+  .addEventListener('click', (e) => {
+    e.preventDefault();
+
+    positionBtnsSholo.highlight({
+      element: '#position-btn-bottom',
+      popover: {
+        title: 'Did you know?',
+        description: 'You can add HTML in title or description also!',
+        position: 'bottom'
+      }
+    });
+  });
+
+document.querySelector('#position-btn-top')
+  .addEventListener('click', (e) => {
+    e.preventDefault();
+
+    positionBtnsSholo.highlight({
+      element: '#position-btn-top',
+      popover: {
+        title: 'Did you know?',
+        description: 'You can add HTML in title or description also!',
+        position: 'top'
       }
     });
   });
