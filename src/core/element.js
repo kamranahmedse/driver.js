@@ -173,6 +173,14 @@ export default class Element {
     }
   }
 
+  /**
+   * Gets the DOM Element behind this element
+   * @returns {Node|HTMLElement|*}
+   */
+  getNode() {
+    return this.node;
+  }
+
   hidePopover() {
     if (!this.popover) {
       return;
