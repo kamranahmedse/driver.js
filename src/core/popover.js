@@ -112,6 +112,8 @@ export default class Popover extends Element {
     this.titleNode.innerHTML = this.options.title;
     this.descriptionNode.innerHTML = this.options.description;
 
+    this.renderButtons();
+
     // Position the popover around the given position
     switch (this.options.position) {
       case 'left':
@@ -131,8 +133,6 @@ export default class Popover extends Element {
         this.autoPosition(position);
         break;
     }
-
-    this.renderButtons();
   }
 
   /**
