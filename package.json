@@ -5,7 +5,7 @@
   "main": "./assets/scripts/dist/driver.min.js",
   "scripts": {
     "start": "node server.js",
-    "build": "webpack --config webpack.config.prod.js "
+    "build": "webpack --config webpack.config.prod.js"
   },
   "bugs": {
     "url": "https://github.com/kamranahmedse/driver.js/issues"
