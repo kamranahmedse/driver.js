@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", function () {
       element: '#name_driver',
       popover: {
         title: 'Why Driver?',
-        description: 'Because it let\'s you drive the user across the page',
+        description: 'Because it lets you drive the user across the page',
         position: 'bottom',
       },
     },
