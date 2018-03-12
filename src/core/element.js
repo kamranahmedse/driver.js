@@ -72,27 +72,38 @@ export default class Element {
   }
 
   /**
+   * Manualy scrolls to the position of element
+   */
+  mannualScroll() {
+    const elementRect = this.node.getBoundingClientRect();
+    const absoluteElementTop = elementRect.top + this.window.pageYOffset;
+    const middle = absoluteElementTop - (this.window.innerHeight / 2);
+    this.window.scrollTo(0, middle);
+  }
+
+  /**
    * Brings the element to middle of the view port if not in view
    */
   bringInView() {
     if (this.isInView()) {
+      console.log('it is in view');
       return;
     }
 
     // If browser supports scrollIntoView, use that otherwise center it manually
     if (this.node.scrollIntoView) {
-      const scrollIntoViewOptions = this.options.scrollIntoViewOptions || {
-        behavior: 'smooth',
-        block: 'center',
-      };
-
-      this.node.scrollIntoView(scrollIntoViewOptions);
+      console.log('supports');
+      try {
+        const scrollIntoViewOptions = this.options.scrollIntoViewOptions || {
+          behavior: 'smooth',
+          block: 'center',
+        };
+        this.node.scrollIntoView(scrollIntoViewOptions);
+      } catch (e) {
+        this.mannualScroll();
+      }
     } else {
-      const elementRect = this.node.getBoundingClientRect();
-      const absoluteElementTop = elementRect.top + this.window.pageYOffset;
-      const middle = absoluteElementTop - (this.window.innerHeight / 2);
-
-      this.window.scrollTo(0, middle);
+      this.mannualScroll();
     }
   }
 
