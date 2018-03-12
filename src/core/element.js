@@ -79,11 +79,21 @@ export default class Element {
       return;
     }
 
-    const elementRect = this.node.getBoundingClientRect();
-    const absoluteElementTop = elementRect.top + this.window.pageYOffset;
-    const middle = absoluteElementTop - (this.window.innerHeight / 2);
+    // If browser supports scrollIntoView, use that otherwise center it manually
+    if (this.node.scrollIntoView) {
+      const scrollIntoViewOptions = this.options.scrollIntoViewOptions || {
+        behavior: 'smooth',
+        block: 'center',
+      };
 
-    this.window.scrollTo(0, middle);
+      this.node.scrollIntoView(scrollIntoViewOptions);
+    } else {
+      const elementRect = this.node.getBoundingClientRect();
+      const absoluteElementTop = elementRect.top + this.window.pageYOffset;
+      const middle = absoluteElementTop - (this.window.innerHeight / 2);
+
+      this.window.scrollTo(0, middle);
+    }
   }
 
   /**
