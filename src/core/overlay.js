@@ -102,10 +102,8 @@ export default class Overlay {
     this.highlightedElement = null;
     this.lastHighlightedElement = null;
 
-    this.pageOverlay.style.display = 'none';
+    this.pageOverlay.style.opacity = '0';
     this.highlightStage.style.display = 'none';
-
-    this.draw();
   }
 
   /**
@@ -118,19 +116,22 @@ export default class Overlay {
       return;
     }
 
-    // Show the overlay
-    this.pageOverlay.style.display = 'block';
-    this.highlightStage.style.display = 'block';
+    // Make it two times the padding because, half will be given on left and half on right
+    const requiredPadding = this.options.padding * 2;
 
-    const elementSize = this.highlightedElement.getSize();
+    // Show the overlay
+    this.pageOverlay.style.opacity = `${this.options.opacity}`;
+
+    const width = (this.positionToHighlight.right - this.positionToHighlight.left) + (requiredPadding);
+    const height = (this.positionToHighlight.bottom - this.positionToHighlight.top) + (requiredPadding);
 
     // Show the stage
     this.highlightStage.style.display = 'block';
     this.highlightStage.style.position = 'absolute';
-    this.highlightStage.style.width = `${elementSize.width + this.options.padding}px`;
-    this.highlightStage.style.height = `${elementSize.height + this.options.padding}px`;
-    this.highlightStage.style.top = `${this.positionToHighlight.top}px`;
-    this.highlightStage.style.left = `${this.positionToHighlight.left}px`;
+    this.highlightStage.style.width = `${width}px`;
+    this.highlightStage.style.height = `${height}px`;
+    this.highlightStage.style.top = `${this.positionToHighlight.top - (requiredPadding / 2)}px`;
+    this.highlightStage.style.left = `${this.positionToHighlight.left - (requiredPadding / 2)}px`;
 
     // Element has been highlighted
     this.highlightedElement.onHighlighted();
