@@ -86,13 +86,11 @@ export default class Element {
    */
   bringInView() {
     if (this.isInView()) {
-      console.log('it is in view');
       return;
     }
 
     // If browser supports scrollIntoView, use that otherwise center it manually
     if (this.node.scrollIntoView) {
-      console.log('supports');
       try {
         const scrollIntoViewOptions = this.options.scrollIntoViewOptions || {
           behavior: 'smooth',
