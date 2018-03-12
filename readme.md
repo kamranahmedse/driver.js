@@ -2,10 +2,10 @@
 
 <p align="center">
   <a href="https://github.com/kamranahmedse/driver.js/blob/master/license">
-    <img src="https://img.shields.io/github/license/kamranahmedse/driver.js.svg" />
+    <img src="https://img.shields.io/badge/License-MIT-yellow.svg" />
   </a>
   <a href="https://npmjs.org/package/driver.js">
-    <img src="https://img.shields.io/npm/v/driver.js.svg" alt="version" />
+    <img src="https://badge.fury.io/js/driver.js.svg" alt="version" />
   </a>
   <a href="http://twitter.com/kamranahmedse">
     <img src="https://img.shields.io/badge/author-kamranahmedse-blue.svg" />
