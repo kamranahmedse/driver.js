@@ -27,6 +27,7 @@ export default class Driver {
       animate: OVERLAY_ANIMATE,     // Whether to animate or not
       opacity: OVERLAY_OPACITY,     // Overlay opacity
       padding: OVERLAY_PADDING,     // Spacing around the element from the overlay
+      scrollIntoViewOptions: null,  // Options to be passed to `scrollIntoView`
       onHighlightStarted: () => {   // When element is about to be highlighted
       },
       onHighlighted: () => {        // When element has been highlighted
