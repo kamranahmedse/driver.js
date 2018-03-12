@@ -72,6 +72,17 @@ export default class Element {
   }
 
   /**
+   * Manually scrolls to the position of element if `scrollIntoView` fails
+   */
+  scrollManually() {
+    const elementRect = this.node.getBoundingClientRect();
+    const absoluteElementTop = elementRect.top + this.window.pageYOffset;
+    const middle = absoluteElementTop - (this.window.innerHeight / 2);
+
+    this.window.scrollTo(0, middle);
+  }
+
+  /**
    * Brings the element to middle of the view port if not in view
    */
   bringInView() {
@@ -79,20 +90,20 @@ export default class Element {
       return;
     }
 
-    // If browser supports scrollIntoView, use that otherwise center it manually
-    if (this.node.scrollIntoView) {
-      const scrollIntoViewOptions = this.options.scrollIntoViewOptions || {
+    // If browser does not support scrollIntoView
+    if (!this.node.scrollIntoView) {
+      this.scrollManually();
+      return;
+    }
+
+    try {
+      this.node.scrollIntoView(this.options.scrollIntoViewOptions || {
         behavior: 'smooth',
         block: 'center',
-      };
-
-      this.node.scrollIntoView(scrollIntoViewOptions);
-    } else {
-      const elementRect = this.node.getBoundingClientRect();
-      const absoluteElementTop = elementRect.top + this.window.pageYOffset;
-      const middle = absoluteElementTop - (this.window.innerHeight / 2);
-
-      this.window.scrollTo(0, middle);
+      });
+    } catch (e) {
+      // `block` option is not allowed in older versions of firefox, scroll manually
+      this.scrollManually();
     }
   }
 
