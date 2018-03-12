@@ -65,6 +65,7 @@ export default class Overlay {
       return;
     }
 
+    // @todo put it in the caller after testing
     this.setSize();
 
     // Trigger the hook for highlight started
