@@ -65,6 +65,8 @@ export default class Overlay {
       return;
     }
 
+    this.setSize();
+
     // Trigger the hook for highlight started
     element.onHighlightStarted();
 
