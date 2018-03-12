@@ -138,11 +138,22 @@ export default class Element {
    */
   onDeselected() {
     this.hidePopover();
+
+    this.node.classList.remove('driver-highlighted-element');
+
     this.highlightFinished = false;
 
     if (this.options.onDeselected) {
       this.options.onDeselected(this);
     }
+  }
+
+  getSize() {
+    const boundingRect = this.node.getBoundingClientRect();
+    return {
+      width: boundingRect.width,
+      height: boundingRect.height
+    };
   }
 
   /**
@@ -167,6 +178,8 @@ export default class Element {
    */
   onHighlighted() {
     this.showPopover();
+
+    this.node.classList.add('driver-highlighted-element');
 
     this.highlightFinished = true;
 

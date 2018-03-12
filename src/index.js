@@ -45,7 +45,6 @@ export default class Driver {
     this.steps = [];            // steps to be presented if any
     this.currentStep = 0;       // index for the currently highlighted step
 
-    this.onScroll = this.onScroll.bind(this);
     this.onResize = this.onResize.bind(this);
     this.onKeyUp = this.onKeyUp.bind(this);
     this.onClick = this.onClick.bind(this);
@@ -59,8 +58,6 @@ export default class Driver {
    * @todo: add throttling in all the listeners
    */
   bind() {
-    this.document.addEventListener('scroll', this.onScroll, false);
-    this.document.addEventListener('DOMMouseScroll', this.onScroll, false);
     this.window.addEventListener('resize', this.onResize, false);
     this.window.addEventListener('keyup', this.onKeyUp, false);
     this.window.addEventListener('click', this.onClick, false);
@@ -177,19 +174,6 @@ export default class Driver {
    */
   getLastHighlightedElement() {
     return this.overlay.getLastHighlightedElement();
-  }
-
-  /**
-   * Handler for the onScroll event on document
-   * Refreshes without animation on scroll to make sure
-   * that the highlighted part travels with the scroll
-   */
-  onScroll() {
-    if (!this.isActivated) {
-      return;
-    }
-
-    this.overlay.refresh(false);
   }
 
   /**
