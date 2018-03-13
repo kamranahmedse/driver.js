@@ -24,7 +24,7 @@ export default class Driver {
    * @param {Object} options
    */
   constructor(options = {}) {
-    this.options = Object.assign({
+    this.options = {
       animate: OVERLAY_ANIMATE,     // Whether to animate or not
       opacity: OVERLAY_OPACITY,     // Overlay opacity
       padding: OVERLAY_PADDING,     // Spacing around the element from the overlay
@@ -35,7 +35,8 @@ export default class Driver {
       },
       onDeselected: () => {         // When the element has been deselected
       },
-    }, options);
+      ...options,
+    };
 
     this.document = document;
     this.window = window;
@@ -244,11 +245,10 @@ export default class Driver {
       querySelector = currentStep;
     } else {
       querySelector = currentStep.element;
-      elementOptions = Object.assign(
-        {},
-        this.options,
-        currentStep,
-      );
+      elementOptions = {
+        ...this.options,
+        ...currentStep,
+      };
     }
 
     const domElement = this.document.querySelector(querySelector);
@@ -259,17 +259,14 @@ export default class Driver {
 
     let popover = null;
     if (elementOptions.popover && elementOptions.popover.description) {
-      const popoverOptions = Object.assign(
-        {},
-        this.options,
-        elementOptions.popover,
-        {
-          totalCount: allSteps.length,
-          currentIndex: index,
-          isFirst: index === 0,
-          isLast: index === allSteps.length - 1,
-        },
-      );
+      const popoverOptions = {
+        ...this.options,
+        ...elementOptions.popover,
+        totalCount: allSteps.length,
+        currentIndex: index,
+        isFirst: index === 0,
+        isLast: index === allSteps.length - 1,
+      };
 
       popover = new Popover(popoverOptions, this.window, this.document);
     }
