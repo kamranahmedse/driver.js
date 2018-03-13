@@ -14,6 +14,7 @@ import {
   OVERLAY_PADDING,
   RIGHT_KEY_CODE,
 } from './common/constants';
+import Stage from './core/stage';
 
 /**
  * Plugin class that drives the plugin
@@ -38,12 +39,12 @@ export default class Driver {
 
     this.document = document;
     this.window = window;
-
     this.isActivated = false;
-    this.overlay = new Overlay(this.options, this.window, this.document);
-
     this.steps = [];            // steps to be presented if any
     this.currentStep = 0;       // index for the currently highlighted step
+
+    const stage = new Stage(this.options, window, document);
+    this.overlay = new Overlay(this.options, stage, window, document);
 
     this.onResize = this.onResize.bind(this);
     this.onKeyUp = this.onKeyUp.bind(this);
@@ -242,11 +243,16 @@ export default class Driver {
     let querySelector = '';
     let elementOptions = {};
 
+    // If it is just a query selector string
     if (typeof currentStep === 'string') {
       querySelector = currentStep;
     } else {
       querySelector = currentStep.element;
-      elementOptions = Object.assign({}, this.options, currentStep);
+      elementOptions = Object.assign(
+        {},
+        this.options,
+        currentStep,
+      );
     }
 
     const domElement = this.document.querySelector(querySelector);
@@ -260,7 +266,8 @@ export default class Driver {
       const popoverOptions = Object.assign(
         {},
         this.options,
-        elementOptions.popover, {
+        elementOptions.popover,
+        {
           totalCount: allSteps.length,
           currentIndex: index,
           isFirst: index === 0,
