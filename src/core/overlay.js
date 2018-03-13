@@ -1,4 +1,6 @@
 import Position from './position';
+import { ID_OVERLAY, OVERLAY_HTML, POPOVER_HTML } from "../common/constants";
+import { createNodeFromString } from "../common/utils";
 
 /**
  * Responsible for overlay creation and manipulation i.e.
@@ -8,9 +10,10 @@ export default class Overlay {
   /**
    * @param {Object} options
    * @param {Window} window
+   * @param {Stage} stage
    * @param {Document} document
    */
-  constructor(options, window, document) {
+  constructor(options, stage, window, document) {
     this.options = options;
 
     this.positionToHighlight = new Position({}); // position at which layover is to be patched at
@@ -22,18 +25,22 @@ export default class Overlay {
 
     this.window = window;
     this.document = document;
+    this.stage = stage;
 
-    this.resetOverlay();
+    this.makeNode();
   }
 
   /**
    * Prepares the overlay
    */
-  resetOverlay() {
-    // @todo: append the elements if not there already
+  makeNode() {
+    let pageOverlay = this.document.getElementById(ID_OVERLAY);
+    if (!pageOverlay) {
+      pageOverlay = createNodeFromString(OVERLAY_HTML);
+      document.body.appendChild(pageOverlay);
+    }
 
-    this.pageOverlay = this.document.getElementById('driver-page-overlay');
-    this.highlightStage = this.document.getElementById('driver-highlighted-element-stage');
+    this.node = pageOverlay;
   }
 
   /**
@@ -102,8 +109,8 @@ export default class Overlay {
     this.highlightedElement = null;
     this.lastHighlightedElement = null;
 
-    this.pageOverlay.style.opacity = '0';
-    this.highlightStage.style.display = 'none';
+    this.node.style.opacity = '0';
+    this.stage.hide();
   }
 
   /**
@@ -116,22 +123,11 @@ export default class Overlay {
       return;
     }
 
-    // Make it two times the padding because, half will be given on left and half on right
-    const requiredPadding = this.options.padding * 2;
-
     // Show the overlay
-    this.pageOverlay.style.opacity = `${this.options.opacity}`;
-
-    const width = (this.positionToHighlight.right - this.positionToHighlight.left) + (requiredPadding);
-    const height = (this.positionToHighlight.bottom - this.positionToHighlight.top) + (requiredPadding);
+    this.node.style.opacity = `${this.options.opacity}`;
 
     // Show the stage
-    this.highlightStage.style.display = 'block';
-    this.highlightStage.style.position = 'absolute';
-    this.highlightStage.style.width = `${width}px`;
-    this.highlightStage.style.height = `${height}px`;
-    this.highlightStage.style.top = `${this.positionToHighlight.top - (requiredPadding / 2)}px`;
-    this.highlightStage.style.left = `${this.positionToHighlight.left - (requiredPadding / 2)}px`;
+    this.stage.show(this.positionToHighlight);
 
     // Element has been highlighted
     this.highlightedElement.onHighlighted();

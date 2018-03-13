@@ -148,14 +148,6 @@ export default class Element {
     }
   }
 
-  getSize() {
-    const boundingRect = this.node.getBoundingClientRect();
-    return {
-      width: boundingRect.width,
-      height: boundingRect.height
-    };
-  }
-
   /**
    * Is called when the element is about to be highlighted
    * i.e. either if overlay has started moving the highlight towards
@@ -247,6 +239,17 @@ export default class Element {
     return {
       height: Math.max(body.scrollHeight, body.offsetHeight, html.scrollHeight, html.offsetHeight),
       width: Math.max(body.scrollWidth, body.offsetWidth, html.scrollWidth, html.offsetWidth),
+    };
+  }
+
+  /**
+   * Gets the size for popover
+   * @returns {{height: number, width: number}}
+   */
+  getSize() {
+    return {
+      height: Math.max(this.node.scrollHeight, this.node.offsetHeight),
+      width: Math.max(this.node.scrollWidth, this.node.offsetWidth),
     };
   }
 }

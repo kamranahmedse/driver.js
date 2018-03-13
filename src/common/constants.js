@@ -7,9 +7,10 @@ export const ESC_KEY_CODE = 27;
 export const LEFT_KEY_CODE = 37;
 export const RIGHT_KEY_CODE = 39;
 
-export const ID_OVERLAY = 'driver-canvas-overlay';
-
+export const ID_OVERLAY = 'driver-page-overlay';
+export const ID_STAGE = 'driver-highlighted-element-stage';
 export const ID_POPOVER = 'driver-popover-item';
+
 export const CLASS_POPOVER_TIP = 'driver-popover-tip';
 export const CLASS_POPOVER_TITLE = 'driver-popover-title';
 export const CLASS_POPOVER_DESCRIPTION = 'driver-popover-description';
@@ -33,3 +34,6 @@ export const POPOVER_HTML = `
       </span>
     </div>
   </div>`;
+
+export const OVERLAY_HTML = `<div id="${ID_OVERLAY}"></div>`;
+export const STAGE_HTML = `<div id="${ID_STAGE}"></div>`;
