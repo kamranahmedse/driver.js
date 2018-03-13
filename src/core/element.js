@@ -11,17 +11,27 @@ export default class Element {
    * @param {Node|HTMLElement} node
    * @param {Object} options
    * @param {Popover} popover
+   * @param {Stage} stage
    * @param {Overlay} overlay
    * @param {Window} window
    * @param {Document} document
    */
-  constructor(node, options, popover, overlay, window, document) {
+  constructor({
+    node,
+    options,
+    popover,
+    stage,
+    overlay,
+    window,
+    document,
+  } = {}) {
     this.node = node;
     this.document = document;
     this.window = window;
     this.options = options;
     this.overlay = overlay;
     this.popover = popover;
+    this.stage = stage;
 
     this.animationTimeout = null;
 
@@ -139,8 +149,12 @@ export default class Element {
    * Is called when element is about to be deselected
    * i.e. when moving the focus to next element of closing
    */
-  onDeselected() {
+  onDeselected(hideStage = false) {
     this.hidePopover();
+
+    if (hideStage) {
+      this.hideStage();
+    }
 
     this.node.classList.remove(CLASS_DRIVER_HIGHLIGHTED_ELEMENT);
 
@@ -152,6 +166,19 @@ export default class Element {
     if (this.options.onDeselected) {
       this.options.onDeselected(this);
     }
+  }
+
+  /**
+   * Checks if the given element is same as the current element
+   * @param {Element} element
+   * @returns {boolean}
+   */
+  isSame(element) {
+    if (!element || !element.node) {
+      return false;
+    }
+
+    return element.node === this.node;
   }
 
   /**
@@ -174,29 +201,21 @@ export default class Element {
    */
   onHighlighted() {
     this.showPopover();
+    this.showStage();
 
     this.node.classList.add(CLASS_DRIVER_HIGHLIGHTED_ELEMENT);
 
     this.highlightFinished = true;
 
     const highlightedElement = this;
-    const highlightedNode = this.node;
+    const popoverElement = this.popover;
 
-    const lastHighlightedElement = this.overlay.getLastHighlightedElement();
-    const lastHighlightedNode = lastHighlightedElement && lastHighlightedElement.node;
+    if (popoverElement && !popoverElement.isInView()) {
+      popoverElement.bringInView();
+    }
 
-    // If this element is not already highlighted (because this call could
-    // be from the resize or scroll) and is not in view
-    if (highlightedNode !== lastHighlightedNode) {
-      const popoverElement = this.popover;
-
-      if (popoverElement && !popoverElement.isInView()) {
-        popoverElement.bringInView();
-      }
-
-      if (!highlightedElement.isInView()) {
-        highlightedElement.bringInView();
-      }
+    if (!highlightedElement.isInView()) {
+      highlightedElement.bringInView();
     }
 
     if (this.options.onHighlighted) {
@@ -205,11 +224,22 @@ export default class Element {
   }
 
   /**
+   * Shows the stage behind the element
+   */
+  showStage() {
+    this.stage.show(this.getCalculatedPosition());
+  }
+
+  /**
    * Gets the DOM Element behind this element
    * @returns {Node|HTMLElement|*}
    */
   getNode() {
     return this.node;
+  }
+
+  hideStage() {
+    this.stage.hide();
   }
 
   hidePopover() {
