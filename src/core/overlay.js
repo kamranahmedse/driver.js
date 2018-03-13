@@ -1,5 +1,5 @@
 import Position from './position';
-import { ANIMATION_DURATION_MS, ID_OVERLAY, OVERLAY_HTML } from '../common/constants';
+import { ANIMATION_DURATION_MS, CLASS_NO_ANIMATION, ID_OVERLAY, OVERLAY_HTML } from '../common/constants';
 import { createNodeFromString } from '../common/utils';
 
 /**
@@ -36,6 +36,12 @@ export default class Overlay {
 
     this.node = pageOverlay;
     this.node.style.opacity = '0';
+
+    if (!this.options.animate) {
+      this.node.classList.add(CLASS_NO_ANIMATION);
+    } else {
+      this.node.classList.remove(CLASS_NO_ANIMATION);
+    }
   }
 
   /**
@@ -75,13 +81,17 @@ export default class Overlay {
     this.highlightedElement = element;
     this.positionToHighlight = position;
 
-    this.showOverlay();
+    this.show();
 
     // Element has been highlighted
     this.highlightedElement.onHighlighted();
   }
 
-  showOverlay() {
+  show() {
+    if (this.node && this.node.parentElement) {
+      return;
+    }
+
     this.makeNode();
 
     window.setTimeout(() => {
