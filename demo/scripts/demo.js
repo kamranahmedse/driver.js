@@ -1,7 +1,7 @@
 /* eslint-disable */
 document.addEventListener("DOMContentLoaded", function () {
   const tourDriver = new Driver({
-    animate: true,
+    animate: false,
     opacity: 0.8,
     padding: 5,
     showButtons: true,

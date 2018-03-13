@@ -1,4 +1,4 @@
-import { ID_STAGE, STAGE_HTML } from '../common/constants';
+import { CLASS_NO_ANIMATION, ID_STAGE, STAGE_HTML } from '../common/constants';
 import { createNodeFromString } from '../common/utils';
 import Element from './element';
 
@@ -18,9 +18,6 @@ export default class Stage extends Element {
     this.options = options;
     this.window = window;
     this.document = document;
-
-    this.makeNode();
-    this.hide();
   }
 
   /**
@@ -34,6 +31,12 @@ export default class Stage extends Element {
     }
 
     this.node = stage;
+
+    if (!this.options.animate) {
+      this.node.classList.add(CLASS_NO_ANIMATION);
+    } else {
+      this.node.classList.remove(CLASS_NO_ANIMATION);
+    }
   }
 
   removeNode() {
@@ -49,6 +52,7 @@ export default class Stage extends Element {
    */
   hide() {
     this.node.style.display = 'none';
+
     this.removeNode();
   }
 
