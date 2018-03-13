@@ -22,8 +22,6 @@ export default class Overlay {
 
     this.window = window;
     this.document = document;
-
-    this.makeNode();
   }
 
   /**
@@ -37,12 +35,12 @@ export default class Overlay {
     }
 
     this.node = pageOverlay;
+    this.node.style.opacity = '0';
   }
 
   /**
    * Highlights the dom element on the screen
    * @param {Element} element
-   * @param {boolean} animate
    */
   highlight(element) {
     if (!element || !element.node) {
@@ -84,12 +82,16 @@ export default class Overlay {
   }
 
   showOverlay() {
-    this.node.style.opacity = `${this.options.opacity}`;
-    this.node.style.position = 'fixed';
-    this.node.style.left = '0';
-    this.node.style.top = '0';
-    this.node.style.bottom = '0';
-    this.node.style.right = '0';
+    this.makeNode();
+
+    window.setTimeout(() => {
+      this.node.style.opacity = `${this.options.opacity}`;
+      this.node.style.position = 'fixed';
+      this.node.style.left = '0';
+      this.node.style.top = '0';
+      this.node.style.bottom = '0';
+      this.node.style.right = '0';
+    });
   }
 
   hideOverlay() {
@@ -101,6 +103,8 @@ export default class Overlay {
       this.node.style.top = '';
       this.node.style.bottom = '';
       this.node.style.right = '';
+
+      this.node.parentElement.removeChild(this.node);
     }, ANIMATION_DURATION_MS);
   }
 

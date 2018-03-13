@@ -1,4 +1,4 @@
-import { ID_STAGE, POPOVER_HTML, STAGE_HTML } from '../common/constants';
+import { ID_STAGE, STAGE_HTML } from '../common/constants';
 import { createNodeFromString } from '../common/utils';
 import Element from './element';
 
@@ -36,11 +36,20 @@ export default class Stage extends Element {
     this.node = stage;
   }
 
+  removeNode() {
+    if (!this.node) {
+      return;
+    }
+
+    this.node.parentElement.removeChild(this.node);
+  }
+
   /**
    * Simply hides the stage
    */
   hide() {
     this.node.style.display = 'none';
+    this.removeNode();
   }
 
   /**
@@ -55,6 +64,8 @@ export default class Stage extends Element {
   }
 
   show(position) {
+    this.makeNode();
+
     this.setInitialStyle();
 
     // Make it two times the padding because, half will be given on left and half on right

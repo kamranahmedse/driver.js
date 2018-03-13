@@ -153,7 +153,6 @@ Here are the options that Driver understands
 
 ```javascript
 const driver = new Driver({
-  animate: true,                    // Animate while changing highlighted element
   opacity: 0.75,                    // Background opacity (0 means only popovers and without overlay)
   padding: 10,                      // Distance of element from around the edges
   onHighlightStarted: (Element) {}, // Called when element is about to be highlighted

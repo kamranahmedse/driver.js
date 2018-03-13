@@ -34,8 +34,6 @@ export default class Element {
     this.stage = stage;
 
     this.animationTimeout = null;
-
-    this.highlightFinished = false; // To track when the element has fully highlighted
   }
 
   /**
@@ -161,8 +159,6 @@ export default class Element {
     // If there was any animation in progress, cancel that
     this.window.clearTimeout(this.animationTimeout);
 
-    this.highlightFinished = false;
-
     if (this.options.onDeselected) {
       this.options.onDeselected(this);
     }
@@ -187,10 +183,6 @@ export default class Element {
    * this element of has just decided to highlight it
    */
   onHighlightStarted() {
-    // Because element has just started highlighting
-    // and hasn't completely highlighted
-    this.highlightFinished = false;
-
     if (this.options.onHighlightStarted) {
       this.options.onHighlightStarted(this);
     }
@@ -204,8 +196,6 @@ export default class Element {
     this.showStage();
 
     this.node.classList.add(CLASS_DRIVER_HIGHLIGHTED_ELEMENT);
-
-    this.highlightFinished = true;
 
     const highlightedElement = this;
     const popoverElement = this.popover;
