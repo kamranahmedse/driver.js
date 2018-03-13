@@ -176,7 +176,7 @@ document.addEventListener("DOMContentLoaded", function () {
         popover: {
           title: 'Did you know?',
           description: 'You can add HTML in title or description also!',
-          position: 'left'
+          position: 'top'
         }
       });
     });
@@ -280,7 +280,7 @@ document.addEventListener("DOMContentLoaded", function () {
         popover: {
           title: 'Title for the Popover',
           description: 'Description for it',
-          position: 'left', // can be `top`, `left`, `right`, `bottom`
+          position: 'top', // can be `top`, `left`, `right`, `bottom`
         }
       });
     });
@@ -303,7 +303,7 @@ document.addEventListener("DOMContentLoaded", function () {
       popover: {
         title: 'Title on Popover',
         description: 'Body of the popover',
-        position: 'left'
+        position: 'bottom'
       }
     },
     {
@@ -311,7 +311,7 @@ document.addEventListener("DOMContentLoaded", function () {
       popover: {
         title: 'Title on Popover',
         description: 'Body of the popover',
-        position: 'right'
+        position: 'top'
       }
     },
     {
@@ -339,4 +339,9 @@ document.addEventListener("DOMContentLoaded", function () {
       featureIntroductionDriver.start();
     });
 
+  const newURL = location.href.split("?")[0];
+  if (newURL !== location.href) {
+    window.location = newURL;
+    window.location.href = newURL;
+  }
 });
