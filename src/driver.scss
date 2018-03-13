@@ -108,15 +108,9 @@ div#driver-popover-item {
 }
 
 div#driver-page-overlay {
-  display: block;
-  width: 100%;
-  height: 100%;
   background: black;
-  top: 0;
-  left: 0;
-  position: fixed;
+  position: absolute;
   opacity: 0;
-  pointer-events: none;
   z-index: 100002 !important;
 
   // If you update this duration, make sure to update `ANIMATION_DURATION_MS` constant
