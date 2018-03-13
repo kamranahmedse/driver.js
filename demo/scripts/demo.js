@@ -331,6 +331,7 @@ document.addEventListener("DOMContentLoaded", function () {
   document.querySelector('#run-multi-element-popovers')
     .addEventListener('click', (e) => {
       e.preventDefault();
+      e.stopPropagation();
       featureIntroductionDriver.start();
     });
 
