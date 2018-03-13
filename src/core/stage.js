@@ -46,7 +46,7 @@ export default class Stage extends Element {
   /**
    * Makes it visible and sets the default properties
    */
-  reset() {
+  setInitialStyle() {
     this.node.style.display = 'block';
     this.node.style.left = '0';
     this.node.style.top = '0';
@@ -55,7 +55,7 @@ export default class Stage extends Element {
   }
 
   show(position) {
-    this.reset();
+    this.setInitialStyle();
 
     // Make it two times the padding because, half will be given on left and half on right
     const requiredPadding = this.options.padding * 2;
