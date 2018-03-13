@@ -1,5 +1,5 @@
 import Position from './position';
-import { ANIMATION_DURATION_MS } from "../common/constants";
+import { ANIMATION_DURATION_MS, DRIVER_HIGHLIGHTED_ELEMENT } from '../common/constants';
 
 /**
  * Wrapper around DOMElements to enrich them
@@ -140,7 +140,7 @@ export default class Element {
   onDeselected() {
     this.hidePopover();
 
-    this.node.classList.remove('driver-highlighted-element');
+    this.node.classList.remove(DRIVER_HIGHLIGHTED_ELEMENT);
 
     this.highlightFinished = false;
 

@@ -10,6 +10,8 @@ export const ID_OVERLAY = 'driver-page-overlay';
 export const ID_STAGE = 'driver-highlighted-element-stage';
 export const ID_POPOVER = 'driver-popover-item';
 
+export const DRIVER_HIGHLIGHTED_ELEMENT = 'driver-highlighted-element';
+
 export const CLASS_POPOVER_TIP = 'driver-popover-tip';
 export const CLASS_POPOVER_TITLE = 'driver-popover-title';
 export const CLASS_POPOVER_DESCRIPTION = 'driver-popover-description';
