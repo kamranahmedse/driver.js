@@ -22,7 +22,7 @@ export const CLASS_PREV_STEP_BTN = 'driver-prev-btn';
 export const CLASS_BTN_DISABLED = 'driver-disabled';
 
 // It must match the one set in the animations in CSS file
-export const ANIMATION_DURATION_MS = 200;
+export const ANIMATION_DURATION_MS = 400;
 
 // language=HTML
 export const POPOVER_HTML = `
