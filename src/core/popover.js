@@ -3,9 +3,11 @@ import {
   CLASS_BTN_DISABLED,
   CLASS_CLOSE_BTN,
   CLASS_NEXT_STEP_BTN,
-  CLASS_POPOVER_DESCRIPTION, CLASS_POPOVER_FOOTER,
+  CLASS_POPOVER_DESCRIPTION,
+  CLASS_POPOVER_FOOTER,
   CLASS_POPOVER_TIP,
-  CLASS_POPOVER_TITLE, CLASS_PREV_STEP_BTN,
+  CLASS_POPOVER_TITLE,
+  CLASS_PREV_STEP_BTN,
   ID_POPOVER,
   POPOVER_HTML,
 } from '../common/constants';
@@ -53,7 +55,6 @@ export default class Popover extends Element {
       document.body.appendChild(popover);
     }
 
-
     this.node = popover;
     this.tipNode = popover.querySelector(`.${CLASS_POPOVER_TIP}`);
     this.titleNode = popover.querySelector(`.${CLASS_POPOVER_TITLE}`);
@@ -68,7 +69,7 @@ export default class Popover extends Element {
     this.node.style.display = 'none';
   }
 
-  reset() {
+  setInitialState() {
     this.node.style.display = 'block';
     this.node.style.left = '0';
     this.node.style.top = '0';
@@ -86,7 +87,7 @@ export default class Popover extends Element {
    * @param {Position} position
    */
   show(position) {
-    this.reset();
+    this.setInitialState();
 
     // Set the title and descriptions
     this.titleNode.innerHTML = this.options.title;

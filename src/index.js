@@ -156,7 +156,7 @@ export default class Driver {
    */
   hasHighlightedElement() {
     const highlightedElement = this.overlay.getHighlightedElement();
-    return highlightedElement && highlightedElement.node && highlightedElement.highlightFinished;
+    return highlightedElement && highlightedElement.node;
   }
 
   /**
@@ -177,8 +177,7 @@ export default class Driver {
 
   /**
    * Handler for the onResize DOM event
-   * Refreshes with animation on scroll to make sure that
-   * the highlighted part travels with the width change of window
+   * Makes sure highlighted element stays at valid position
    */
   onResize() {
     if (!this.isActivated) {
