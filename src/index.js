@@ -43,8 +43,7 @@ export default class Driver {
     this.steps = [];            // steps to be presented if any
     this.currentStep = 0;       // index for the currently highlighted step
 
-    const stage = new Stage(this.options, window, document);
-    this.overlay = new Overlay(this.options, stage, window, document);
+    this.overlay = new Overlay(this.options, window, document);
 
     this.onResize = this.onResize.bind(this);
     this.onKeyUp = this.onKeyUp.bind(this);
@@ -70,8 +69,7 @@ export default class Driver {
    * @param e
    */
   onClick(e) {
-    if (!this.hasHighlightedElement() || !this.isActivated) {
-      // Has no highlighted element so ignore the click
+    if (!this.isActivated || !this.hasHighlightedElement()) {
       return;
     }
 
@@ -188,7 +186,7 @@ export default class Driver {
     }
 
     // Refresh with animation
-    this.overlay.refresh(true);
+    this.overlay.refresh();
   }
 
   /**
@@ -278,7 +276,17 @@ export default class Driver {
       popover = new Popover(popoverOptions, this.window, this.document);
     }
 
-    return new Element(domElement, elementOptions, popover, this.overlay, this.window, this.document);
+    const stage = new Stage(this.options, this.window, this.document);
+
+    return new Element({
+      node: domElement,
+      options: elementOptions,
+      popover,
+      stage,
+      overlay: this.overlay,
+      window: this.window,
+      document: this.document,
+    });
   }
 
   /**

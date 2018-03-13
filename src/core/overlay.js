@@ -10,10 +10,9 @@ export default class Overlay {
   /**
    * @param {Object} options
    * @param {Window} window
-   * @param {Stage} stage
    * @param {Document} document
    */
-  constructor(options, stage, window, document) {
+  constructor(options, window, document) {
     this.options = options;
 
     this.positionToHighlight = new Position({}); // position at which layover is to be patched at
@@ -23,7 +22,6 @@ export default class Overlay {
 
     this.window = window;
     this.document = document;
-    this.stage = stage;
 
     this.makeNode();
   }
@@ -52,6 +50,11 @@ export default class Overlay {
       return;
     }
 
+    // If highlighted element is not changed from last time
+    if (this.highlightedElement && this.highlightedElement.isSame(this.lastHighlightedElement)) {
+      return;
+    }
+
     // There might be hide timer from last time
     // which might be getting triggered
     this.window.clearTimeout(this.hideTimer);
@@ -60,7 +63,7 @@ export default class Overlay {
     element.onHighlightStarted();
 
     // Old element has been deselected
-    if (this.highlightedElement) {
+    if (this.highlightedElement && !this.highlightedElement.isSame(this.lastHighlightedElement)) {
       this.highlightedElement.onDeselected();
     }
 
@@ -75,9 +78,6 @@ export default class Overlay {
     this.positionToHighlight = position;
 
     this.showOverlay();
-
-    // Show the stage
-    this.stage.show(this.positionToHighlight);
 
     // Element has been highlighted
     this.highlightedElement.onHighlighted();
@@ -126,14 +126,13 @@ export default class Overlay {
   clear() {
     this.positionToHighlight = new Position();
     if (this.highlightedElement) {
-      this.highlightedElement.onDeselected();
+      this.highlightedElement.onDeselected(true);
     }
 
     this.highlightedElement = null;
     this.lastHighlightedElement = null;
 
     this.hideOverlay();
-    this.stage.hide();
   }
 
   /**
@@ -141,12 +140,13 @@ export default class Overlay {
    * And moves the highlight around if necessary
    */
   refresh() {
-    // If the highlighted element was there Cancel the
-    // existing animation frame if any and highlight it again
-    // as its position might have been changed
-    if (this.highlightedElement) {
-      this.highlight(this.highlightedElement);
-      this.highlightedElement.onHighlighted();
+    // If no highlighted element, cancel the refresh
+    if (!this.highlightedElement) {
+      return;
     }
+
+    // Reposition the stage and show popover
+    this.highlightedElement.showPopover();
+    this.highlightedElement.showStage();
   }
 }
