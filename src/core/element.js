@@ -231,7 +231,7 @@ export default class Element {
     const showAtPosition = this.getCalculatedPosition();
 
     // For first highlight, show it immediately because there won't be any animation
-    const animationDuration = !this.overlay.lastHighlightedElement ? 0 : ANIMATION_DURATION_MS * 2;
+    const animationDuration = !this.overlay.lastHighlightedElement ? 0 : ANIMATION_DURATION_MS;
 
     this.animationTimeout = this.window.setTimeout(() => {
       this.popover.show(showAtPosition);
