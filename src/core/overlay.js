@@ -1,5 +1,5 @@
 import Position from './position';
-import { ID_OVERLAY, OVERLAY_HTML } from '../common/constants';
+import { ANIMATION_DURATION_MS, ID_OVERLAY, OVERLAY_HTML } from '../common/constants';
 import { createNodeFromString } from '../common/utils';
 
 /**
@@ -19,8 +19,7 @@ export default class Overlay {
     this.positionToHighlight = new Position({}); // position at which layover is to be patched at
     this.highlightedElement = null;              // currently highlighted dom element (instance of Element)
     this.lastHighlightedElement = null;          // element that was highlighted before current one
-
-    this.draw = this.draw.bind(this);  // To pass the context of class, as it is to be used in redraw animation callback
+    this.hideTimer = null;
 
     this.window = window;
     this.document = document;
@@ -53,6 +52,10 @@ export default class Overlay {
       return;
     }
 
+    // There might be hide timer from last time
+    // which might be getting triggered
+    this.window.clearTimeout(this.hideTimer);
+
     // Trigger the hook for highlight started
     element.onHighlightStarted();
 
@@ -71,7 +74,34 @@ export default class Overlay {
     this.highlightedElement = element;
     this.positionToHighlight = position;
 
-    this.draw();
+    this.showOverlay();
+
+    // Show the stage
+    this.stage.show(this.positionToHighlight);
+
+    // Element has been highlighted
+    this.highlightedElement.onHighlighted();
+  }
+
+  showOverlay() {
+    this.node.style.opacity = `${this.options.opacity}`;
+    this.node.style.position = 'fixed';
+    this.node.style.left = '0';
+    this.node.style.top = '0';
+    this.node.style.bottom = '0';
+    this.node.style.right = '0';
+  }
+
+  hideOverlay() {
+    this.node.style.opacity = '0';
+
+    this.hideTimer = window.setTimeout(() => {
+      this.node.style.position = 'absolute';
+      this.node.style.left = '';
+      this.node.style.top = '';
+      this.node.style.bottom = '';
+      this.node.style.right = '';
+    }, ANIMATION_DURATION_MS);
   }
 
   /**
@@ -102,42 +132,20 @@ export default class Overlay {
     this.highlightedElement = null;
     this.lastHighlightedElement = null;
 
-    this.node.style.opacity = '0';
+    this.hideOverlay();
     this.stage.hide();
-  }
-
-  /**
-   * `draw` is called for every frame . Puts back the
-   * filled overlay on body (i.e. while removing existing highlight if any) and
-   * Slowly eases towards the item to be selected.
-   */
-  draw() {
-    if (!this.highlightedElement || !this.positionToHighlight.canHighlight()) {
-      return;
-    }
-
-    // Show the overlay
-    this.node.style.opacity = `${this.options.opacity}`;
-
-    // Show the stage
-    this.stage.show(this.positionToHighlight);
-
-    // Element has been highlighted
-    this.highlightedElement.onHighlighted();
   }
 
   /**
    * Refreshes the overlay i.e. sets the size according to current window size
    * And moves the highlight around if necessary
-   *
-   * @param {boolean} animate
    */
-  refresh(animate = true) {
+  refresh() {
     // If the highlighted element was there Cancel the
     // existing animation frame if any and highlight it again
     // as its position might have been changed
     if (this.highlightedElement) {
-      this.highlight(this.highlightedElement, animate);
+      this.highlight(this.highlightedElement);
       this.highlightedElement.onHighlighted();
     }
   }
