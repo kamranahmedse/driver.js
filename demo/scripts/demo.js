@@ -295,7 +295,7 @@ document.addEventListener("DOMContentLoaded", function () {
       popover: {
         title: 'Title on Popover',
         description: 'Body of the popover',
-        position: 'bottom'
+        position: 'top'
       }
     },
     {
