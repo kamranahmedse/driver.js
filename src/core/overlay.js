@@ -55,7 +55,7 @@ export default class Overlay {
     }
 
     // If highlighted element is not changed from last time
-    if (this.highlightedElement && this.highlightedElement.isSame(this.lastHighlightedElement)) {
+    if (element.isSame(this.highlightedElement)) {
       return;
     }
 
