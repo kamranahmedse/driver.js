@@ -1,5 +1,5 @@
 import Position from './position';
-import { ANIMATION_DURATION_MS, DRIVER_HIGHLIGHTED_ELEMENT } from '../common/constants';
+import { ANIMATION_DURATION_MS, CLASS_DRIVER_HIGHLIGHTED_ELEMENT } from '../common/constants';
 
 /**
  * Wrapper around DOMElements to enrich them
@@ -22,6 +22,8 @@ export default class Element {
     this.options = options;
     this.overlay = overlay;
     this.popover = popover;
+
+    this.animationTimeout = null;
 
     this.highlightFinished = false; // To track when the element has fully highlighted
   }
@@ -140,7 +142,10 @@ export default class Element {
   onDeselected() {
     this.hidePopover();
 
-    this.node.classList.remove(DRIVER_HIGHLIGHTED_ELEMENT);
+    this.node.classList.remove(CLASS_DRIVER_HIGHLIGHTED_ELEMENT);
+
+    // If there was any animation in progress, cancel that
+    this.window.clearTimeout(this.animationTimeout);
 
     this.highlightFinished = false;
 
@@ -170,7 +175,7 @@ export default class Element {
   onHighlighted() {
     this.showPopover();
 
-    this.node.classList.add('driver-highlighted-element');
+    this.node.classList.add(CLASS_DRIVER_HIGHLIGHTED_ELEMENT);
 
     this.highlightFinished = true;
 
@@ -228,7 +233,7 @@ export default class Element {
     // For first highlight, show it immediately because there won't be any animation
     const animationDuration = !this.overlay.lastHighlightedElement ? 0 : ANIMATION_DURATION_MS * 2;
 
-    window.setTimeout(() => {
+    this.animationTimeout = this.window.setTimeout(() => {
       this.popover.show(showAtPosition);
     }, animationDuration);
   }
