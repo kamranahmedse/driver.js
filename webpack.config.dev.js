@@ -18,23 +18,26 @@ module.exports = {
   },
   module: {
     rules: [
-      // {
-      //   test: /\.js$/,
-      //   exclude: /node_modules/,
-      //   loader: 'eslint-loader',
-      //   enforce: 'pre',
-      //   options: {
-      //     failOnWarning: false,
-      //     failOnError: true,
-      //   },
-      // },
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: 'eslint-loader',
+        enforce: 'pre',
+        options: {
+          failOnWarning: false,
+          failOnError: true,
+        },
+      },
       {
         test: /\.js$/,
         exclude: /node_modules/,
         loader: 'babel-loader',
         options: {
           presets: ['env'],
-          plugins: ['babel-plugin-add-module-exports'],
+          plugins: [
+            'babel-plugin-add-module-exports',
+            'transform-object-rest-spread',
+          ],
         },
       },
       {
