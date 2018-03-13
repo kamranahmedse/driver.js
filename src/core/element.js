@@ -1,4 +1,5 @@
 import Position from './position';
+import { ANIMATION_DURATION_MS } from "../common/constants";
 
 /**
  * Wrapper around DOMElements to enrich them
@@ -154,8 +155,6 @@ export default class Element {
    * this element of has just decided to highlight it
    */
   onHighlightStarted() {
-    this.showPopover();
-
     // Because element has just started highlighting
     // and hasn't completely highlighted
     this.highlightFinished = false;
@@ -176,15 +175,16 @@ export default class Element {
     this.highlightFinished = true;
 
     const highlightedElement = this;
-    const lastHighlightedElement = this.overlay.getLastHighlightedElement();
-    const popoverElement = this.popover;
-
     const highlightedNode = this.node;
+
+    const lastHighlightedElement = this.overlay.getLastHighlightedElement();
     const lastHighlightedNode = lastHighlightedElement && lastHighlightedElement.node;
 
     // If this element is not already highlighted (because this call could
     // be from the resize or scroll) and is not in view
     if (highlightedNode !== lastHighlightedNode) {
+      const popoverElement = this.popover;
+
       if (popoverElement && !popoverElement.isInView()) {
         popoverElement.bringInView();
       }
@@ -223,9 +223,14 @@ export default class Element {
       return;
     }
 
-    const position = this.getCalculatedPosition();
+    const showAtPosition = this.getCalculatedPosition();
 
-    this.popover.show(position);
+    // For first highlight, show it immediately because there won't be any animation
+    const animationDuration = !this.overlay.lastHighlightedElement ? 0 : ANIMATION_DURATION_MS * 2;
+
+    window.setTimeout(() => {
+      this.popover.show(showAtPosition);
+    }, animationDuration);
   }
 
   /**
