@@ -9,6 +9,7 @@ import {
   ID_POPOVER,
   POPOVER_HTML,
 } from '../common/constants';
+import { createNodeFromString } from '../common/utils';
 
 /**
  * Popover that is displayed on top of the highlighted element
@@ -48,9 +49,10 @@ export default class Popover extends Element {
   makeNode() {
     let popover = this.document.getElementById(ID_POPOVER);
     if (!popover) {
-      popover = Popover.createFromString(POPOVER_HTML);
+      popover = createNodeFromString(POPOVER_HTML);
       document.body.appendChild(popover);
     }
+
 
     this.node = popover;
     this.tipNode = popover.querySelector(`.${CLASS_POPOVER_TIP}`);
@@ -60,30 +62,6 @@ export default class Popover extends Element {
     this.nextBtnNode = popover.querySelector(`.${CLASS_NEXT_STEP_BTN}`);
     this.prevBtnNode = popover.querySelector(`.${CLASS_PREV_STEP_BTN}`);
     this.closeBtnNode = popover.querySelector(`.${CLASS_CLOSE_BTN}`);
-  }
-
-  /**
-   * Turn a string into a node
-   * @param  {String} htmlString to convert
-   * @return {Node}   Converted node element
-   */
-  static createFromString(htmlString) {
-    const div = document.createElement('div');
-    div.innerHTML = htmlString.trim();
-
-    // Change this to div.childNodes to support multiple top-level nodes
-    return div.firstChild;
-  }
-
-  /**
-   * Gets the size for popover
-   * @returns {{height: number, width: number}}
-   */
-  getSize() {
-    return {
-      height: Math.max(this.node.scrollHeight, this.node.offsetHeight),
-      width: Math.max(this.node.scrollWidth, this.node.offsetWidth),
-    };
   }
 
   hide() {
