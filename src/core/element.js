@@ -251,11 +251,15 @@ export default class Element {
     const showAtPosition = this.getCalculatedPosition();
 
     // For first highlight, show it immediately because there won't be any animation
-    const animationDuration = !this.overlay.lastHighlightedElement ? 0 : ANIMATION_DURATION_MS;
+    let showAfterMs = ANIMATION_DURATION_MS;
+    // If animation is disabled or  if it is the first display, show it immediately
+    if (!this.options.animate || !this.overlay.lastHighlightedElement) {
+      showAfterMs = 0;
+    }
 
     this.animationTimeout = this.window.setTimeout(() => {
       this.popover.show(showAtPosition);
-    }, animationDuration);
+    }, showAfterMs);
   }
 
   /**

@@ -184,7 +184,6 @@ export default class Driver {
       return;
     }
 
-    // Refresh with animation
     this.overlay.refresh();
   }
 
