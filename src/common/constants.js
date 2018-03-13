@@ -1,7 +1,6 @@
 export const OVERLAY_OPACITY = 0.75;
 export const OVERLAY_PADDING = 10;
 export const OVERLAY_ANIMATE = true;
-export const OVERLAY_ZINDEX = '999999999';
 
 export const ESC_KEY_CODE = 27;
 export const LEFT_KEY_CODE = 37;
@@ -19,6 +18,9 @@ export const CLASS_CLOSE_BTN = 'driver-close-btn';
 export const CLASS_NEXT_STEP_BTN = 'driver-next-btn';
 export const CLASS_PREV_STEP_BTN = 'driver-prev-btn';
 export const CLASS_BTN_DISABLED = 'driver-disabled';
+
+// It must match the one set in the animations in CSS file
+export const ANIMATION_DURATION_MS = 200;
 
 // language=HTML
 export const POPOVER_HTML = `

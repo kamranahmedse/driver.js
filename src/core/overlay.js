@@ -1,6 +1,6 @@
 import Position from './position';
-import { ID_OVERLAY, OVERLAY_HTML, POPOVER_HTML } from "../common/constants";
-import { createNodeFromString } from "../common/utils";
+import { ID_OVERLAY, OVERLAY_HTML } from '../common/constants';
+import { createNodeFromString } from '../common/utils';
 
 /**
  * Responsible for overlay creation and manipulation i.e.
@@ -17,7 +17,6 @@ export default class Overlay {
     this.options = options;
 
     this.positionToHighlight = new Position({}); // position at which layover is to be patched at
-    this.highlightedPosition = new Position({}); // position at which layover is patched currently
     this.highlightedElement = null;              // currently highlighted dom element (instance of Element)
     this.lastHighlightedElement = null;          // element that was highlighted before current one
 
@@ -48,7 +47,7 @@ export default class Overlay {
    * @param {Element} element
    * @param {boolean} animate
    */
-  highlight(element, animate = true) {
+  highlight(element) {
     if (!element || !element.node) {
       console.warn('Invalid element to highlight. Must be an instance of `Element`');
       return;
@@ -71,12 +70,6 @@ export default class Overlay {
     this.lastHighlightedElement = this.highlightedElement;
     this.highlightedElement = element;
     this.positionToHighlight = position;
-
-    // If animation is not required then set the last path to be same
-    // as the current path so that there is no easing towards it
-    if (!this.options.animate || !animate) {
-      this.highlightedPosition = this.positionToHighlight;
-    }
 
     this.draw();
   }
