@@ -156,7 +156,7 @@ const driver = new Driver({
   animate: true,                    // Whether to animate or not
   opacity: 0.75,                    // Background opacity (0 means only popovers and without overlay)
   padding: 10,                      // Distance of element from around the edges
-  clickOutsideToClose: true,        // Whether the click on overlay should close or not
+  allowClose: true,                 // Whether the click on overlay should close or not
   scrollIntoViewOptions: {},        // We use `scrollIntoView()` when possible, pass here the options for it if you want any
   onHighlightStarted: (Element) {}, // Called when element is about to be highlighted
   onHighlighted: (Element) {},      // Called when element is fully highlighted
