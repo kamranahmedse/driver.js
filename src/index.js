@@ -9,10 +9,11 @@ import {
   ESC_KEY_CODE,
   ID_POPOVER,
   LEFT_KEY_CODE,
-  SHOULD_ANIMATE_OVERLAY,
   OVERLAY_OPACITY,
   OVERLAY_PADDING,
-  RIGHT_KEY_CODE, SHOULD_OUTSIDE_CLICK_CLOSE,
+  RIGHT_KEY_CODE,
+  SHOULD_ANIMATE_OVERLAY,
+  SHOULD_OUTSIDE_CLICK_CLOSE,
 } from './common/constants';
 import Stage from './core/stage';
 
@@ -29,7 +30,7 @@ export default class Driver {
       opacity: OVERLAY_OPACITY,     // Overlay opacity
       padding: OVERLAY_PADDING,     // Spacing around the element from the overlay
       scrollIntoViewOptions: null,  // Options to be passed to `scrollIntoView`
-      clickOutsideToClose: SHOULD_OUTSIDE_CLICK_CLOSE,    // Whether to close overlay on click outside the element
+      allowClose: SHOULD_OUTSIDE_CLICK_CLOSE,    // Whether to close overlay on click outside the element
       onHighlightStarted: () => {   // When element is about to be highlighted
       },
       onHighlighted: () => {        // When element has been highlighted
@@ -82,7 +83,7 @@ export default class Driver {
     const clickedPopover = popover && popover.contains(e.target);
 
     // Remove the overlay If clicked outside the highlighted element
-    if (!clickedHighlightedElement && !clickedPopover && this.options.clickOutsideToClose) {
+    if (!clickedHighlightedElement && !clickedPopover && this.options.allowClose) {
       this.reset();
       return;
     }
@@ -198,12 +199,19 @@ export default class Driver {
       return;
     }
 
-    if (event.keyCode === ESC_KEY_CODE) {
+    // If escape was pressed and it is allowed to click outside to close
+    if (event.keyCode === ESC_KEY_CODE && this.options.allowClose) {
       this.reset();
-    } else if (event.keyCode === RIGHT_KEY_CODE) {
-      this.moveNext();
-    } else if (event.keyCode === LEFT_KEY_CODE) {
-      this.movePrevious();
+      return;
+    }
+
+    // Arrow keys to only perform if it is stepped introduction
+    if (this.steps.length !== 0) {
+      if (event.keyCode === RIGHT_KEY_CODE) {
+        this.moveNext();
+      } else if (event.keyCode === LEFT_KEY_CODE) {
+        this.movePrevious();
+      }
     }
   }
 
