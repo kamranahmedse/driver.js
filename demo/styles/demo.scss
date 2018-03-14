@@ -9,7 +9,7 @@ img.emoji {
 }
 
 .page-wrap {
-  width: 725px;
+  max-width: 550px;
   margin: 50px auto;
   background: white;
   padding: 10px 30px;
@@ -35,17 +35,7 @@ img.emoji {
     width: 195px;
     font-size: 17px;
     display: inline-block;
-
-    &.btn-right {
-      margin-left: -5px;
-      border-radius: 0 8px 8px 0;
-      filter: grayscale(2);
-      border-left: 1px solid #2e2e30;
-    }
-
-    &.btn-left {
-      border-radius: 8px 0 0 8px;
-    }
+    margin-top: 2px;
   }
 
   a.btn__run-demo {
