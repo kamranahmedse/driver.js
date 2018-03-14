@@ -1,5 +1,5 @@
 import Position from './position';
-import { ANIMATION_DURATION_MS, CLASS_DRIVER_HIGHLIGHTED_ELEMENT } from '../common/constants';
+import { ANIMATION_DURATION_MS, CLASS_DRIVER_HIGHLIGHTED_ELEMENT, CLASS_DRIVER_HIGHLIGHTED_ELEMENT_STATIC } from '../common/constants';
 
 /**
  * Wrapper around DOMElements to enrich them
@@ -154,7 +154,7 @@ export default class Element {
       this.hideStage();
     }
 
-    this.node.classList.remove(CLASS_DRIVER_HIGHLIGHTED_ELEMENT);
+    this.node.classList.remove(CLASS_DRIVER_HIGHLIGHTED_ELEMENT, CLASS_DRIVER_HIGHLIGHTED_ELEMENT_STATIC);
 
     // If there was any animation in progress, cancel that
     this.window.clearTimeout(this.animationTimeout);
@@ -196,6 +196,10 @@ export default class Element {
     this.showStage();
 
     this.node.classList.add(CLASS_DRIVER_HIGHLIGHTED_ELEMENT);
+
+    if (this.options.isStatic) {
+      this.node.classList.add(CLASS_DRIVER_HIGHLIGHTED_ELEMENT_STATIC);
+    }
 
     const highlightedElement = this;
     const popoverElement = this.popover;
