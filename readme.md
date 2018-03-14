@@ -7,9 +7,6 @@
   <a href="https://npmjs.org/package/driver.js">
     <img src="https://badge.fury.io/js/driver.js.svg" alt="version" />
   </a>
-  <a href="https://github.com/kamranahmedse/driver.js/issues">
-    <img src="https://img.shields.io/badge/Production%20Ready-Not%20Yet-red.svg" alt="Not Ready Yet" />
-  </a>
   <a href="http://twitter.com/kamranahmedse">
     <img src="https://img.shields.io/badge/author-kamranahmedse-blue.svg" />
   </a>
