@@ -1,5 +1,3 @@
-/* eslint linebreak-style: ["error", "windows"] */
-
 import Overlay from './core/overlay';
 import Element from './core/element';
 import Popover from './core/popover';
