@@ -1,6 +1,8 @@
 export const OVERLAY_OPACITY = 0.75;
 export const OVERLAY_PADDING = 10;
-export const OVERLAY_ANIMATE = true;
+
+export const SHOULD_ANIMATE_OVERLAY = true;
+export const SHOULD_OUTSIDE_CLICK_CLOSE = true;
 
 export const ESC_KEY_CODE = 27;
 export const LEFT_KEY_CODE = 37;
