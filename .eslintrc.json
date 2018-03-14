@@ -15,6 +15,7 @@
       "off"
     ],
     "max-len": "off",
-    "no-multi-spaces": "off"
+    "no-multi-spaces": "off",
+    "linebreak-style": ["error", "windows"]
   }
 }

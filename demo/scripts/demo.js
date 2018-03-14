@@ -25,6 +25,7 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     }, {
       element: '#driver-demo-head',
+      options: { isStatic: true },
       popover: {
         title: 'Lets talk features',
         description: 'You may leave your mouse and use the <strong>arrow keys</strong> to move next and back or <strong>escape key</strong> anytime to close this',

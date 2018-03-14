@@ -159,4 +159,8 @@ div#driver-highlighted-element-stage {
 .driver-highlighted-element {
   z-index: 100004 !important;
   position: relative;
+
+  &.static {
+    pointer-events: none;
+  }
 }
