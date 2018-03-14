@@ -9,10 +9,10 @@ import {
   ESC_KEY_CODE,
   ID_POPOVER,
   LEFT_KEY_CODE,
-  OVERLAY_ANIMATE,
+  SHOULD_ANIMATE_OVERLAY,
   OVERLAY_OPACITY,
   OVERLAY_PADDING,
-  RIGHT_KEY_CODE,
+  RIGHT_KEY_CODE, SHOULD_OUTSIDE_CLICK_CLOSE,
 } from './common/constants';
 import Stage from './core/stage';
 
@@ -25,10 +25,11 @@ export default class Driver {
    */
   constructor(options = {}) {
     this.options = {
-      animate: OVERLAY_ANIMATE,     // Whether to animate or not
+      animate: SHOULD_ANIMATE_OVERLAY,     // Whether to animate or not
       opacity: OVERLAY_OPACITY,     // Overlay opacity
       padding: OVERLAY_PADDING,     // Spacing around the element from the overlay
       scrollIntoViewOptions: null,  // Options to be passed to `scrollIntoView`
+      clickOutsideToClose: SHOULD_OUTSIDE_CLICK_CLOSE,    // Whether to close overlay on click outside the element
       onHighlightStarted: () => {   // When element is about to be highlighted
       },
       onHighlighted: () => {        // When element has been highlighted
@@ -81,7 +82,7 @@ export default class Driver {
     const clickedPopover = popover && popover.contains(e.target);
 
     // Remove the overlay If clicked outside the highlighted element
-    if (!clickedHighlightedElement && !clickedPopover) {
+    if (!clickedHighlightedElement && !clickedPopover && this.options.clickOutsideToClose) {
       this.reset();
       return;
     }
