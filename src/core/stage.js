@@ -55,7 +55,6 @@ export default class Stage extends Element {
 
     this.removeNode();
   }
-
   /**
    * Makes it visible and sets the default properties
    */
@@ -65,6 +64,11 @@ export default class Stage extends Element {
     this.node.style.top = '0';
     this.node.style.bottom = '';
     this.node.style.right = '';
+    this.node.style.backgroundColor = '';
+  }
+
+  fillBackgroundColor(color) {
+    this.node.style.backgroundColor = color;
   }
 
   show(position) {

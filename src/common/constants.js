@@ -44,3 +44,4 @@ export const POPOVER_HTML = `
 
 export const OVERLAY_HTML = `<div id="${ID_OVERLAY}"></div>`;
 export const STAGE_HTML = `<div id="${ID_STAGE}"></div>`;
+export const STAGE_BACKGROUND_COLOR = '#fff';
