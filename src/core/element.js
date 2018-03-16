@@ -109,7 +109,7 @@ export default class Element {
 
     try {
       this.node.scrollIntoView(this.options.scrollIntoViewOptions || {
-        behavior: 'smooth',
+        behavior: 'instant',
         block: 'center',
       });
     } catch (e) {
