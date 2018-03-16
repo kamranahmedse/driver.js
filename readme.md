@@ -250,7 +250,7 @@ activeElement.getNode();  // Gets the DOM Element behind this element
 
 ## Todo
 
-- [X] Single elment highlighting
+- [X] Single element highlighting
 - [X] Popovers on the highlighted elements
 - [X] Add smooth transition on changing highlighted elements
 - [X] Multi-step Journey Definitions
