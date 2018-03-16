@@ -156,6 +156,7 @@ const driver = new Driver({
   allowClose: true,                 // Whether the click on overlay should close or not
   doneBtnText: 'Done',              // Text on the final button
   closeBtnText: 'Close',            // Text on the close button for this step
+  stageBackground: '#ffffff',       // Background color for the staged behind highlighted element
   nextBtnText: 'Next',              // Next button text for this step
   prevBtnText: 'Previous',          // Previous button text for this step
   showButtons: false,               // Do not show control buttons in footer
@@ -174,6 +175,7 @@ Here are the set of options that you can pass while defining steps `defineSteps`
 ```javascript
 const stepDefinition = {
   element: '#some-item',        // Query selector for the item to be highlighted
+  stageBackground: '#ffffff',   // This will override the one set in driver
   popover: {                    // There will be no popover if empty or not given
     title: 'Title',             // Title on the popover
     description: 'Description', // Body of the popover
@@ -255,7 +257,7 @@ activeElement.showPopover();          // Show the popover
 activeElement.getNode();  // Gets the DOM Element behind this element
 ```
 
-*Note –* Do not forget to add `e.stopPropagation()` to the `click` binding that triggers driver 
+**Note –** Do not forget to add `e.stopPropagation()` to the `click` binding that triggers driver
 
 ![](./demo/images/split.png)
 
