@@ -1,5 +1,9 @@
 import Position from './position';
-import { ANIMATION_DURATION_MS, CLASS_DRIVER_HIGHLIGHTED_ELEMENT } from '../common/constants';
+import {
+  ANIMATION_DURATION_MS,
+  CLASS_DRIVER_HIGHLIGHTED_ELEMENT,
+  STAGE_BACKGROUND_COLOR,
+} from '../common/constants';
 
 /**
  * Wrapper around DOMElements to enrich them
@@ -143,6 +147,26 @@ export default class Element {
     return position;
   }
 
+  getHighlightedElementVisualBackground(node) {
+    const target = node || this.node;
+    const background = this.getNodeBackground(target);
+    if (background) {
+      return background;
+    }
+    const parent = target.parentNode;
+    if (parent && parent.tagName !== 'HTML') {
+      return this.getHighlightedElementVisualBackground(parent);
+    }
+
+    return STAGE_BACKGROUND_COLOR;
+  }
+
+  getNodeBackground(node) {
+    const { backgroundColor } = window.getComputedStyle(node, null);
+    const transparent = backgroundColor === 'rgba(0, 0, 0, 0)';
+    return !transparent ? backgroundColor : null;
+  }
+
   /**
    * Is called when element is about to be deselected
    * i.e. when moving the focus to next element of closing
@@ -217,7 +241,9 @@ export default class Element {
    * Shows the stage behind the element
    */
   showStage() {
+    const bgColor = this.getHighlightedElementVisualBackground();
     this.stage.show(this.getCalculatedPosition());
+    this.stage.fillBackgroundColor(bgColor);
   }
 
   /**
