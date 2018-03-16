@@ -116,6 +116,10 @@ export default class Element {
       // `block` option is not allowed in older versions of firefox, scroll manually
       this.scrollManually();
     }
+
+    while (!this.isInView()) {
+      this.bringInView();
+    }
   }
 
   /**
