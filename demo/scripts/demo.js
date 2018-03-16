@@ -110,11 +110,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
   document.querySelector('#animated-tour')
     .addEventListener('click', () => {
+      boringTourDriver.reset();
       animatedTourDriver.start();
     });
 
   document.querySelector('#boring-tour')
     .addEventListener('click', () => {
+      animatedTourDriver.reset();
       boringTourDriver.start();
     });
 

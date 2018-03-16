@@ -1,4 +1,3 @@
-import Position from './position';
 import { ANIMATION_DURATION_MS, CLASS_NO_ANIMATION, ID_OVERLAY, OVERLAY_HTML } from '../common/constants';
 import { createNodeFromString } from '../common/utils';
 
@@ -15,7 +14,6 @@ export default class Overlay {
   constructor(options, window, document) {
     this.options = options;
 
-    this.positionToHighlight = new Position({}); // position at which layover is to be patched at
     this.highlightedElement = null;              // currently highlighted dom element (instance of Element)
     this.lastHighlightedElement = null;          // element that was highlighted before current one
     this.hideTimer = null;
@@ -79,7 +77,6 @@ export default class Overlay {
 
     this.lastHighlightedElement = this.highlightedElement;
     this.highlightedElement = element;
-    this.positionToHighlight = position;
 
     this.show();
 
@@ -104,20 +101,6 @@ export default class Overlay {
     });
   }
 
-  hideOverlay() {
-    this.node.style.opacity = '0';
-
-    this.hideTimer = window.setTimeout(() => {
-      this.node.style.position = 'absolute';
-      this.node.style.left = '';
-      this.node.style.top = '';
-      this.node.style.bottom = '';
-      this.node.style.right = '';
-
-      this.node.parentElement.removeChild(this.node);
-    }, ANIMATION_DURATION_MS);
-  }
-
   /**
    * Returns the currently selected element
    * @returns {null|*}
@@ -138,7 +121,7 @@ export default class Overlay {
    * Removes the overlay and cancel any listeners
    */
   clear() {
-    this.positionToHighlight = new Position();
+    // Deselect the highlighted element if any
     if (this.highlightedElement) {
       this.highlightedElement.onDeselected(true);
     }
@@ -146,7 +129,28 @@ export default class Overlay {
     this.highlightedElement = null;
     this.lastHighlightedElement = null;
 
-    this.hideOverlay();
+    if (!this.node) {
+      return;
+    }
+
+    // Clear any existing timers and remove node
+    this.window.clearTimeout(this.hideTimer);
+
+    if (this.options.animate) {
+      this.node.style.opacity = '0';
+      this.hideTimer = window.setTimeout(this.removeNode, ANIMATION_DURATION_MS);
+    } else {
+      this.removeNode();
+    }
+  }
+
+  /**
+   * Removes the overlay node if it exists
+   */
+  removeNode() {
+    if (this.node && this.node.parentElement) {
+      this.node.parentElement.removeChild(this.node);
+    }
   }
 
   /**
