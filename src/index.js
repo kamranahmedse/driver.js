@@ -9,11 +9,13 @@ import {
   ESC_KEY_CODE,
   ID_POPOVER,
   LEFT_KEY_CODE,
-  OVERLAY_ANIMATE,
   OVERLAY_OPACITY,
   OVERLAY_PADDING,
   RIGHT_KEY_CODE,
+  SHOULD_ANIMATE_OVERLAY,
+  SHOULD_OUTSIDE_CLICK_CLOSE,
 } from './common/constants';
+import Stage from './core/stage';
 
 /**
  * Plugin class that drives the plugin
@@ -23,29 +25,29 @@ export default class Driver {
    * @param {Object} options
    */
   constructor(options = {}) {
-    this.options = Object.assign({
-      animate: OVERLAY_ANIMATE,     // Whether to animate or not
+    this.options = {
+      animate: SHOULD_ANIMATE_OVERLAY,     // Whether to animate or not
       opacity: OVERLAY_OPACITY,     // Overlay opacity
       padding: OVERLAY_PADDING,     // Spacing around the element from the overlay
       scrollIntoViewOptions: null,  // Options to be passed to `scrollIntoView`
+      allowClose: SHOULD_OUTSIDE_CLICK_CLOSE,    // Whether to close overlay on click outside the element
       onHighlightStarted: () => {   // When element is about to be highlighted
       },
       onHighlighted: () => {        // When element has been highlighted
       },
       onDeselected: () => {         // When the element has been deselected
       },
-    }, options);
+      ...options,
+    };
 
     this.document = document;
     this.window = window;
-
     this.isActivated = false;
-    this.overlay = new Overlay(this.options, this.window, this.document);
-
     this.steps = [];            // steps to be presented if any
     this.currentStep = 0;       // index for the currently highlighted step
 
-    this.onScroll = this.onScroll.bind(this);
+    this.overlay = new Overlay(this.options, window, document);
+
     this.onResize = this.onResize.bind(this);
     this.onKeyUp = this.onKeyUp.bind(this);
     this.onClick = this.onClick.bind(this);
@@ -59,8 +61,6 @@ export default class Driver {
    * @todo: add throttling in all the listeners
    */
   bind() {
-    this.document.addEventListener('scroll', this.onScroll, false);
-    this.document.addEventListener('DOMMouseScroll', this.onScroll, false);
     this.window.addEventListener('resize', this.onResize, false);
     this.window.addEventListener('keyup', this.onKeyUp, false);
     this.window.addEventListener('click', this.onClick, false);
@@ -72,8 +72,7 @@ export default class Driver {
    * @param e
    */
   onClick(e) {
-    if (!this.hasHighlightedElement() || !this.isActivated) {
-      // Has no highlighted element so ignore the click
+    if (!this.isActivated || !this.hasHighlightedElement()) {
       return;
     }
 
@@ -84,7 +83,7 @@ export default class Driver {
     const clickedPopover = popover && popover.contains(e.target);
 
     // Remove the overlay If clicked outside the highlighted element
-    if (!clickedHighlightedElement && !clickedPopover) {
+    if (!clickedHighlightedElement && !clickedPopover && this.options.allowClose) {
       this.reset();
       return;
     }
@@ -160,7 +159,7 @@ export default class Driver {
    */
   hasHighlightedElement() {
     const highlightedElement = this.overlay.getHighlightedElement();
-    return highlightedElement && highlightedElement.node && highlightedElement.highlightFinished;
+    return highlightedElement && highlightedElement.node;
   }
 
   /**
@@ -180,30 +179,15 @@ export default class Driver {
   }
 
   /**
-   * Handler for the onScroll event on document
-   * Refreshes without animation on scroll to make sure
-   * that the highlighted part travels with the scroll
-   */
-  onScroll() {
-    if (!this.isActivated) {
-      return;
-    }
-
-    this.overlay.refresh(false);
-  }
-
-  /**
    * Handler for the onResize DOM event
-   * Refreshes with animation on scroll to make sure that
-   * the highlighted part travels with the width change of window
+   * Makes sure highlighted element stays at valid position
    */
   onResize() {
     if (!this.isActivated) {
       return;
     }
 
-    // Refresh with animation
-    this.overlay.refresh(true);
+    this.overlay.refresh();
   }
 
   /**
@@ -215,12 +199,19 @@ export default class Driver {
       return;
     }
 
-    if (event.keyCode === ESC_KEY_CODE) {
+    // If escape was pressed and it is allowed to click outside to close
+    if (event.keyCode === ESC_KEY_CODE && this.options.allowClose) {
       this.reset();
-    } else if (event.keyCode === RIGHT_KEY_CODE) {
-      this.moveNext();
-    } else if (event.keyCode === LEFT_KEY_CODE) {
-      this.movePrevious();
+      return;
+    }
+
+    // Arrow keys to only perform if it is stepped introduction
+    if (this.steps.length !== 0) {
+      if (event.keyCode === RIGHT_KEY_CODE) {
+        this.moveNext();
+      } else if (event.keyCode === LEFT_KEY_CODE) {
+        this.movePrevious();
+      }
     }
   }
 
@@ -258,11 +249,15 @@ export default class Driver {
     let querySelector = '';
     let elementOptions = {};
 
+    // If it is just a query selector string
     if (typeof currentStep === 'string') {
       querySelector = currentStep;
     } else {
       querySelector = currentStep.element;
-      elementOptions = Object.assign({}, this.options, currentStep);
+      elementOptions = {
+        ...this.options,
+        ...currentStep,
+      };
     }
 
     const domElement = this.document.querySelector(querySelector);
@@ -273,21 +268,29 @@ export default class Driver {
 
     let popover = null;
     if (elementOptions.popover && elementOptions.popover.description) {
-      const popoverOptions = Object.assign(
-        {},
-        this.options,
-        elementOptions.popover, {
-          totalCount: allSteps.length,
-          currentIndex: index,
-          isFirst: index === 0,
-          isLast: index === allSteps.length - 1,
-        },
-      );
+      const popoverOptions = {
+        ...this.options,
+        ...elementOptions.popover,
+        totalCount: allSteps.length,
+        currentIndex: index,
+        isFirst: index === 0,
+        isLast: index === allSteps.length - 1,
+      };
 
       popover = new Popover(popoverOptions, this.window, this.document);
     }
 
-    return new Element(domElement, elementOptions, popover, this.overlay, this.window, this.document);
+    const stage = new Stage(this.options, this.window, this.document);
+
+    return new Element({
+      node: domElement,
+      options: elementOptions,
+      popover,
+      stage,
+      overlay: this.overlay,
+      window: this.window,
+      document: this.document,
+    });
   }
 
   /**

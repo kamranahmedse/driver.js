@@ -1,4 +1,5 @@
 import Position from './position';
+import { ANIMATION_DURATION_MS, CLASS_DRIVER_HIGHLIGHTED_ELEMENT } from '../common/constants';
 
 /**
  * Wrapper around DOMElements to enrich them
@@ -10,19 +11,29 @@ export default class Element {
    * @param {Node|HTMLElement} node
    * @param {Object} options
    * @param {Popover} popover
+   * @param {Stage} stage
    * @param {Overlay} overlay
    * @param {Window} window
    * @param {Document} document
    */
-  constructor(node, options, popover, overlay, window, document) {
+  constructor({
+    node,
+    options,
+    popover,
+    stage,
+    overlay,
+    window,
+    document,
+  } = {}) {
     this.node = node;
     this.document = document;
     this.window = window;
     this.options = options;
     this.overlay = overlay;
     this.popover = popover;
+    this.stage = stage;
 
-    this.highlightFinished = false; // To track when the element has fully highlighted
+    this.animationTimeout = null;
   }
 
   /**
@@ -72,12 +83,13 @@ export default class Element {
   }
 
   /**
-   * Manualy scrolls to the position of element
+   * Manually scrolls to the position of element if `scrollIntoView` fails
    */
-  mannualScroll() {
+  scrollManually() {
     const elementRect = this.node.getBoundingClientRect();
     const absoluteElementTop = elementRect.top + this.window.pageYOffset;
     const middle = absoluteElementTop - (this.window.innerHeight / 2);
+
     this.window.scrollTo(0, middle);
   }
 
@@ -89,19 +101,20 @@ export default class Element {
       return;
     }
 
-    // If browser supports scrollIntoView, use that otherwise center it manually
-    if (this.node.scrollIntoView) {
-      try {
-        const scrollIntoViewOptions = this.options.scrollIntoViewOptions || {
-          behavior: 'smooth',
-          block: 'center',
-        };
-        this.node.scrollIntoView(scrollIntoViewOptions);
-      } catch (e) {
-        this.mannualScroll();
-      }
-    } else {
-      this.mannualScroll();
+    // If browser does not support scrollIntoView
+    if (!this.node.scrollIntoView) {
+      this.scrollManually();
+      return;
+    }
+
+    try {
+      this.node.scrollIntoView(this.options.scrollIntoViewOptions || {
+        behavior: 'smooth',
+        block: 'center',
+      });
+    } catch (e) {
+      // `block` option is not allowed in older versions of firefox, scroll manually
+      this.scrollManually();
     }
   }
 
@@ -134,13 +147,34 @@ export default class Element {
    * Is called when element is about to be deselected
    * i.e. when moving the focus to next element of closing
    */
-  onDeselected() {
+  onDeselected(hideStage = false) {
     this.hidePopover();
-    this.highlightFinished = false;
+
+    if (hideStage) {
+      this.hideStage();
+    }
+
+    this.node.classList.remove(CLASS_DRIVER_HIGHLIGHTED_ELEMENT);
+
+    // If there was any animation in progress, cancel that
+    this.window.clearTimeout(this.animationTimeout);
 
     if (this.options.onDeselected) {
       this.options.onDeselected(this);
     }
+  }
+
+  /**
+   * Checks if the given element is same as the current element
+   * @param {Element} element
+   * @returns {boolean}
+   */
+  isSame(element) {
+    if (!element || !element.node) {
+      return false;
+    }
+
+    return element.node === this.node;
   }
 
   /**
@@ -149,12 +183,6 @@ export default class Element {
    * this element of has just decided to highlight it
    */
   onHighlightStarted() {
-    this.showPopover();
-
-    // Because element has just started highlighting
-    // and hasn't completely highlighted
-    this.highlightFinished = false;
-
     if (this.options.onHighlightStarted) {
       this.options.onHighlightStarted(this);
     }
@@ -165,26 +193,19 @@ export default class Element {
    */
   onHighlighted() {
     this.showPopover();
+    this.showStage();
 
-    this.highlightFinished = true;
+    this.node.classList.add(CLASS_DRIVER_HIGHLIGHTED_ELEMENT);
 
     const highlightedElement = this;
-    const lastHighlightedElement = this.overlay.getLastHighlightedElement();
     const popoverElement = this.popover;
 
-    const highlightedNode = this.node;
-    const lastHighlightedNode = lastHighlightedElement && lastHighlightedElement.node;
+    if (popoverElement && !popoverElement.isInView()) {
+      popoverElement.bringInView();
+    }
 
-    // If this element is not already highlighted (because this call could
-    // be from the resize or scroll) and is not in view
-    if (highlightedNode !== lastHighlightedNode) {
-      if (popoverElement && !popoverElement.isInView()) {
-        popoverElement.bringInView();
-      }
-
-      if (!highlightedElement.isInView()) {
-        highlightedElement.bringInView();
-      }
+    if (!highlightedElement.isInView()) {
+      highlightedElement.bringInView();
     }
 
     if (this.options.onHighlighted) {
@@ -193,11 +214,22 @@ export default class Element {
   }
 
   /**
+   * Shows the stage behind the element
+   */
+  showStage() {
+    this.stage.show(this.getCalculatedPosition());
+  }
+
+  /**
    * Gets the DOM Element behind this element
    * @returns {Node|HTMLElement|*}
    */
   getNode() {
     return this.node;
+  }
+
+  hideStage() {
+    this.stage.hide();
   }
 
   hidePopover() {
@@ -216,9 +248,18 @@ export default class Element {
       return;
     }
 
-    const position = this.getCalculatedPosition();
+    const showAtPosition = this.getCalculatedPosition();
 
-    this.popover.show(position);
+    // For first highlight, show it immediately because there won't be any animation
+    let showAfterMs = ANIMATION_DURATION_MS;
+    // If animation is disabled or  if it is the first display, show it immediately
+    if (!this.options.animate || !this.overlay.lastHighlightedElement) {
+      showAfterMs = 0;
+    }
+
+    this.animationTimeout = this.window.setTimeout(() => {
+      this.popover.show(showAtPosition);
+    }, showAfterMs);
   }
 
   /**
@@ -232,6 +273,17 @@ export default class Element {
     return {
       height: Math.max(body.scrollHeight, body.offsetHeight, html.scrollHeight, html.offsetHeight),
       width: Math.max(body.scrollWidth, body.offsetWidth, html.scrollWidth, html.offsetWidth),
+    };
+  }
+
+  /**
+   * Gets the size for popover
+   * @returns {{height: number, width: number}}
+   */
+  getSize() {
+    return {
+      height: Math.max(this.node.scrollHeight, this.node.offsetHeight),
+      width: Math.max(this.node.scrollWidth, this.node.offsetWidth),
     };
   }
 }

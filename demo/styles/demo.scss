@@ -9,15 +9,15 @@ img.emoji {
 }
 
 .page-wrap {
-  width: 500px;
+  max-width: 550px;
   margin: 50px auto;
   background: white;
   padding: 10px 30px;
   border-radius: 5px;
-  color: #333333;
+  color: #1f1f1f;
 
   a, a:visited, a:focus {
-    color: #333333;
+    color: #1f1f1f;
     text-decoration: underline;
   }
 
@@ -28,14 +28,14 @@ img.emoji {
     padding: 0 18px;
     height: 40px;
     line-height: 40px;
-    border-radius: 20px;
+    border-radius: 8px;
     cursor: pointer;
     transition: background-color 0.2s, color 0.2s;
     font-weight: 500;
-    width: 240px;
+    width: 195px;
     font-size: 17px;
-    margin: auto;
-    display: block;
+    display: inline-block;
+    margin-top: 2px;
   }
 
   a.btn__run-demo {
@@ -55,7 +55,7 @@ section {
 }
 
 .section__header {
-  margin: 10px 0 30px;
+  margin: 10px 0 20px;
   text-align: center;
   display: block;
   padding: 10px;
@@ -69,6 +69,12 @@ section {
       margin-right: 3px;
       position: relative;
     }
+  }
+
+  .tagline {
+    width: 450px;
+    margin: 0 auto 25px;
+    text-align: center;
   }
 }
 

@@ -3,12 +3,15 @@ import {
   CLASS_BTN_DISABLED,
   CLASS_CLOSE_BTN,
   CLASS_NEXT_STEP_BTN,
-  CLASS_POPOVER_DESCRIPTION, CLASS_POPOVER_FOOTER,
+  CLASS_POPOVER_DESCRIPTION,
+  CLASS_POPOVER_FOOTER,
   CLASS_POPOVER_TIP,
-  CLASS_POPOVER_TITLE, CLASS_PREV_STEP_BTN,
+  CLASS_POPOVER_TITLE,
+  CLASS_PREV_STEP_BTN,
   ID_POPOVER,
   POPOVER_HTML,
 } from '../common/constants';
+import { createNodeFromString } from '../common/utils';
 
 /**
  * Popover that is displayed on top of the highlighted element
@@ -48,7 +51,7 @@ export default class Popover extends Element {
   makeNode() {
     let popover = this.document.getElementById(ID_POPOVER);
     if (!popover) {
-      popover = Popover.createFromString(POPOVER_HTML);
+      popover = createNodeFromString(POPOVER_HTML);
       document.body.appendChild(popover);
     }
 
@@ -62,35 +65,11 @@ export default class Popover extends Element {
     this.closeBtnNode = popover.querySelector(`.${CLASS_CLOSE_BTN}`);
   }
 
-  /**
-   * Turn a string into a node
-   * @param  {String} htmlString to convert
-   * @return {Node}   Converted node element
-   */
-  static createFromString(htmlString) {
-    const div = document.createElement('div');
-    div.innerHTML = htmlString.trim();
-
-    // Change this to div.childNodes to support multiple top-level nodes
-    return div.firstChild;
-  }
-
-  /**
-   * Gets the size for popover
-   * @returns {{height: number, width: number}}
-   */
-  getSize() {
-    return {
-      height: Math.max(this.node.scrollHeight, this.node.offsetHeight),
-      width: Math.max(this.node.scrollWidth, this.node.offsetWidth),
-    };
-  }
-
   hide() {
     this.node.style.display = 'none';
   }
 
-  reset() {
+  setInitialState() {
     this.node.style.display = 'block';
     this.node.style.left = '0';
     this.node.style.top = '0';
@@ -108,7 +87,7 @@ export default class Popover extends Element {
    * @param {Position} position
    */
   show(position) {
-    this.reset();
+    this.setInitialState();
 
     // Set the title and descriptions
     this.titleNode.innerHTML = this.options.title;

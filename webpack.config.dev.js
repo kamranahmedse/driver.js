@@ -34,7 +34,10 @@ module.exports = {
         loader: 'babel-loader',
         options: {
           presets: ['env'],
-          plugins: ['babel-plugin-add-module-exports'],
+          plugins: [
+            'babel-plugin-add-module-exports',
+            'transform-object-rest-spread',
+          ],
         },
       },
       {

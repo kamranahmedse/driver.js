@@ -15,9 +15,18 @@
 <div class="page-wrap">
   <section class="section__header" id="driver-demo-head">
     <h1><span id="logo_emoji" class="emoji">👨‍🔧️</span> <span id="name_driver">Driver</span></h1>
-    <p class="text-muted">A light-weight, no-dependency, vanilla JavaScript library to drive the user's focus across the
+    <p class="text-muted tagline">Light-weight, no-dependency, vanilla JavaScript engine to drive user's focus across the
       page</p>
-    <a href="javascript:void(0)" class="btn btn__example btn__dark">Quick Tour</a>
+
+    <a id="animated-tour" href="javascript:void(0)" class="btn btn__example btn__dark">With Animation</a>
+    <a id="boring-tour" href="javascript:void(0)" class="btn btn__example btn__dark">without Animation</a>
+
+    <div class="github-button top-30">
+      <!-- Place this tag where you want the button to render. -->
+      <a class="github-button" href="https://github.com/kamranahmedse/driver.js" data-size="large"
+         data-show-count="true" aria-label="Star kamranahmedse/driver.js on GitHub">Star</a>
+    </div>
+
   </section>
 
   <blockquote>
@@ -154,7 +163,7 @@ driver.highlight({
 </code></pre>
     </div>
 
-    <p class="top-20">And of-course it can be any valid HTML.</p>
+    <p class="top-20">And of course it can be any valid HTML.</p>
 
     <hr class="hr__fancy">
 
@@ -240,6 +249,8 @@ driver.highlight({
   animate: true,  // Animate while changing highlighted element
   opacity: 0.75,  // Background opacity (0 means only popovers and without overlay)
   padding: 10,    // Distance of element from around the edges
+  allowClose: true, // Whether clicking on overlay should close or not
+  scrollIntoViewOptions: {}, // We use `scrollIntoView()` when possible, pass here the options for it if you want any
   onHighlightStarted: (Element) {}, // Called when element is about to be highlighted
   onHighlighted: (Element) {}, // Called when element is fully highlighted
   onDeselected: (Element) {}, // Called when element has been deselected

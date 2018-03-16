@@ -2,10 +2,10 @@
 
 <p align="center">
   <a href="https://github.com/kamranahmedse/driver.js/blob/master/license">
-    <img src="https://img.shields.io/github/license/kamranahmedse/driver.js.svg" />
+    <img src="https://img.shields.io/badge/License-MIT-yellow.svg" />
   </a>
   <a href="https://npmjs.org/package/driver.js">
-    <img src="https://img.shields.io/npm/v/driver.js.svg" alt="version" />
+    <img src="https://badge.fury.io/js/driver.js.svg" alt="version" />
   </a>
   <a href="http://twitter.com/kamranahmedse">
     <img src="https://img.shields.io/badge/author-kamranahmedse-blue.svg" />
@@ -150,9 +150,11 @@ Here are the options that Driver understands
 
 ```javascript
 const driver = new Driver({
-  animate: true,                    // Animate while changing highlighted element
+  animate: true,                    // Whether to animate or not
   opacity: 0.75,                    // Background opacity (0 means only popovers and without overlay)
   padding: 10,                      // Distance of element from around the edges
+  allowClose: true,                 // Whether the click on overlay should close or not
+  scrollIntoViewOptions: {},        // We use `scrollIntoView()` when possible, pass here the options for it if you want any
   onHighlightStarted: (Element) {}, // Called when element is about to be highlighted
   onHighlighted: (Element) {},      // Called when element is fully highlighted
   onDeselected: (Element) {},       // Called when element has been deselected
@@ -241,6 +243,8 @@ activeElement.showPopover();          // Show the popover
 
 activeElement.getNode();  // Gets the DOM Element behind this element
 ```
+
+*Note –* Do not forget to add `e.stopPropagation()` to the `click` binding that triggers driver 
 
 ![](./demo/images/split.png)
 
