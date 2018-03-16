@@ -230,6 +230,11 @@ driver.highlight(string|stepDefinition);
 
 // Resets the overlay and clears the screen
 driver.reset();
+// Additionally you can pass a boolean parameter
+// to clear immediately and not do the animations etc
+// Could be useful when you, let's say, want to run
+// a different instance of driver while one was running
+driver.reset(clearImmediately = false);
 
 // Checks if there is any highlighted element
 if(driver.hasHighlightedElement()) {
