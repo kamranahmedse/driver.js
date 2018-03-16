@@ -111,7 +111,7 @@ document.addEventListener("DOMContentLoaded", function () {
   document.querySelector('#animated-tour')
     .addEventListener('click', () => {
       if (boringTourDriver.isActivated) {
-        boringTourDriver.reset();
+        boringTourDriver.reset(true);
       }
 
       animatedTourDriver.start();
@@ -120,7 +120,7 @@ document.addEventListener("DOMContentLoaded", function () {
   document.querySelector('#boring-tour')
     .addEventListener('click', () => {
       if (animatedTourDriver.isActivated) {
-        animatedTourDriver.reset();
+        animatedTourDriver.reset(true);
       }
 
       boringTourDriver.start();

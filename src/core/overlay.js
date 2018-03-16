@@ -20,6 +20,8 @@ export default class Overlay {
 
     this.window = window;
     this.document = document;
+
+    this.removeNode = this.removeNode.bind(this);
   }
 
   /**
@@ -120,10 +122,11 @@ export default class Overlay {
   /**
    * Removes the overlay and cancel any listeners
    */
-  clear() {
+  clear(immediate = false) {
     // Deselect the highlighted element if any
     if (this.highlightedElement) {
-      this.highlightedElement.onDeselected(true);
+      const hideStage = true;
+      this.highlightedElement.onDeselected(hideStage);
     }
 
     this.highlightedElement = null;
@@ -136,9 +139,9 @@ export default class Overlay {
     // Clear any existing timers and remove node
     this.window.clearTimeout(this.hideTimer);
 
-    if (this.options.animate) {
+    if (this.options.animate && !immediate) {
       this.node.style.opacity = '0';
-      this.hideTimer = window.setTimeout(this.removeNode, ANIMATION_DURATION_MS);
+      this.hideTimer = this.window.setTimeout(this.removeNode, ANIMATION_DURATION_MS);
     } else {
       this.removeNode();
     }
