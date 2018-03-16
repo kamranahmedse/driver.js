@@ -26,11 +26,12 @@ export default class Driver {
    */
   constructor(options = {}) {
     this.options = {
-      animate: SHOULD_ANIMATE_OVERLAY,     // Whether to animate or not
-      opacity: OVERLAY_OPACITY,     // Overlay opacity
-      padding: OVERLAY_PADDING,     // Spacing around the element from the overlay
+      animate: SHOULD_ANIMATE_OVERLAY, // Whether to animate or not
+      opacity: OVERLAY_OPACITY, // Overlay opacity
+      padding: OVERLAY_PADDING, // Spacing around the element from the overlay
       scrollIntoViewOptions: null,  // Options to be passed to `scrollIntoView`
       allowClose: SHOULD_OUTSIDE_CLICK_CLOSE,    // Whether to close overlay on click outside the element
+      stageBackground: '#ffffff',   // Background color for the stage
       onHighlightStarted: () => {   // When element is about to be highlighted
       },
       onHighlighted: () => {        // When element has been highlighted
@@ -280,7 +281,12 @@ export default class Driver {
       popover = new Popover(popoverOptions, this.window, this.document);
     }
 
-    const stage = new Stage(this.options, this.window, this.document);
+    const stageOptions = {
+      ...this.options,
+      ...elementOptions,
+    };
+
+    const stage = new Stage(stageOptions, this.window, this.document);
 
     return new Element({
       node: domElement,
