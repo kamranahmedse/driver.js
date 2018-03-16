@@ -154,12 +154,18 @@ const driver = new Driver({
   opacity: 0.75,                    // Background opacity (0 means only popovers and without overlay)
   padding: 10,                      // Distance of element from around the edges
   allowClose: true,                 // Whether the click on overlay should close or not
+  doneBtnText: 'Done',              // Text on the final button
+  closeBtnText: 'Close',            // Text on the close button for this step
+  nextBtnText: 'Next',              // Next button text for this step
+  prevBtnText: 'Previous',          // Previous button text for this step
+  showButtons: false,               // Do not show control buttons in footer
   scrollIntoViewOptions: {},        // We use `scrollIntoView()` when possible, pass here the options for it if you want any
   onHighlightStarted: (Element) {}, // Called when element is about to be highlighted
   onHighlighted: (Element) {},      // Called when element is fully highlighted
   onDeselected: (Element) {},       // Called when element has been deselected
 });
 ```
+Note that all the button options that you provide in the driver definition can be overridden for a specific step by giving them in the step definition
 
 ### Step Definition
 
