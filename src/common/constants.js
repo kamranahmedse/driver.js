@@ -34,10 +34,10 @@ export const POPOVER_HTML = `
     <div class="${CLASS_POPOVER_TITLE}">Popover Title</div>
     <div class="${CLASS_POPOVER_DESCRIPTION}">Popover Description</div>
     <div class="${CLASS_POPOVER_FOOTER}">
-      <a href="javascript:void(0)" class="${CLASS_CLOSE_BTN}">Close</a>
+      <button class="${CLASS_CLOSE_BTN}">Close</button>
       <span class="driver-btn-group">
-        <a class="${CLASS_PREV_STEP_BTN}" href="javascript:void(0)">&larr; Previous</a>
-        <a class="${CLASS_NEXT_STEP_BTN}" href="javascript:void(0)">Next &rarr;</a>
+        <button class="${CLASS_PREV_STEP_BTN}">&larr; Previous</button>
+        <button class="${CLASS_NEXT_STEP_BTN}">Next &rarr;</button>
       </span>
     </div>
   </div>`;

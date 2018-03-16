@@ -56,7 +56,7 @@ div#driver-popover-item {
     clear: both;
     margin-top: 5px;
 
-    a {
+    button {
       display: inline-block;
       padding: 3px 10px;
       border: 1px solid #d4d4d4;
@@ -72,7 +72,7 @@ div#driver-popover-item {
       margin: 10px 0 0;
     }
 
-    a.driver-disabled {
+    button.driver-disabled {
       color: #808080;
       cursor: default;
       pointer-events: none;

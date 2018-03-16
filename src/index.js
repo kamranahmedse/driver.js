@@ -147,10 +147,10 @@ export default class Driver {
   /**
    * Resets the steps if any and clears the overlay
    */
-  reset() {
+  reset(immediate = false) {
     this.currentStep = 0;
     this.isActivated = false;
-    this.overlay.clear();
+    this.overlay.clear(immediate);
   }
 
   /**
