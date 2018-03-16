@@ -268,7 +268,7 @@ activeElement.getNode();  // Gets the DOM Element behind this element
 - [X] Make it controllable by keyboard
 - [X] Bring highlighted element to viewport
 - [ ] Add type definitions
-- [ ] Create wrappers for Angular and React
+- [ ] Create wrappers for Angular, Vue and React
 - [ ] Write tests
 
 ## Contributions
