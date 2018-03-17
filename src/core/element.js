@@ -39,6 +39,7 @@ export default class Element {
   /**
    * Gets the screen co-ordinates (x,y) for the current dom element
    * @returns {{x: number, y: number}}
+   * @private
    */
   getScreenCoordinates() {
     let tempNode = this.node;
@@ -59,6 +60,7 @@ export default class Element {
   /**
    * Checks if the current element is visible in viewport
    * @returns {boolean}
+   * @private
    */
   isInView() {
     let top = this.node.offsetTop;
@@ -84,6 +86,7 @@ export default class Element {
 
   /**
    * Manually scrolls to the position of element if `scrollIntoView` fails
+   * @private
    */
   scrollManually() {
     const elementRect = this.node.getBoundingClientRect();
@@ -95,6 +98,7 @@ export default class Element {
 
   /**
    * Brings the element to middle of the view port if not in view
+   * @private
    */
   bringInView() {
     if (this.isInView()) {
@@ -121,6 +125,7 @@ export default class Element {
   /**
    * Gets the calculated position on screen, around which
    * we need to draw
+   * @public
    */
   getCalculatedPosition() {
     const coordinates = this.getScreenCoordinates();
@@ -146,6 +151,7 @@ export default class Element {
   /**
    * Is called when element is about to be deselected
    * i.e. when moving the focus to next element of closing
+   * @public
    */
   onDeselected(hideStage = false) {
     this.hidePopover();
@@ -168,6 +174,7 @@ export default class Element {
    * Checks if the given element is same as the current element
    * @param {Element} element
    * @returns {boolean}
+   * @public
    */
   isSame(element) {
     if (!element || !element.node) {
@@ -179,6 +186,7 @@ export default class Element {
 
   /**
    * Is called when the element is about to be highlighted
+   * @public
    */
   onHighlightStarted() {
     if (this.options.onHighlightStarted) {
@@ -188,6 +196,7 @@ export default class Element {
 
   /**
    * Is called when the element has been successfully highlighted
+   * @public
    */
   onHighlighted() {
     this.showPopover();
@@ -213,6 +222,7 @@ export default class Element {
 
   /**
    * Shows the stage behind the element
+   * @public
    */
   showStage() {
     this.stage.show(this.getCalculatedPosition());
@@ -221,15 +231,24 @@ export default class Element {
   /**
    * Gets the DOM Element behind this element
    * @returns {Node|HTMLElement|*}
+   * @public
    */
   getNode() {
     return this.node;
   }
 
+  /**
+   * Hides the stage
+   * @public
+   */
   hideStage() {
     this.stage.hide();
   }
 
+  /**
+   * Hides the popover if possible
+   * @public
+   */
   hidePopover() {
     if (!this.popover) {
       return;
@@ -240,6 +259,7 @@ export default class Element {
 
   /**
    * Shows the popover on the current element
+   * @public
    */
   showPopover() {
     if (!this.popover) {
@@ -262,6 +282,7 @@ export default class Element {
 
   /**
    * @returns {{height: number, width: number}}
+   * @public
    */
   getFullPageSize() {
     // eslint-disable-next-line prefer-destructuring
@@ -277,6 +298,7 @@ export default class Element {
   /**
    * Gets the size for popover
    * @returns {{height: number, width: number}}
+   * @public
    */
   getSize() {
     return {

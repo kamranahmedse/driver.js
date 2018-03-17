@@ -26,6 +26,7 @@ export default class Overlay {
 
   /**
    * Prepares the overlay
+   * @private
    */
   makeNode() {
     let pageOverlay = this.document.getElementById(ID_OVERLAY);
@@ -47,6 +48,7 @@ export default class Overlay {
   /**
    * Highlights the dom element on the screen
    * @param {Element} element
+   * @public
    */
   highlight(element) {
     if (!element || !element.node) {
@@ -86,6 +88,10 @@ export default class Overlay {
     this.highlightedElement.onHighlighted();
   }
 
+  /**
+   * Shows the overlay on whole screen
+   * @public
+   */
   show() {
     if (this.node && this.node.parentElement) {
       return;
@@ -106,6 +112,7 @@ export default class Overlay {
   /**
    * Returns the currently selected element
    * @returns {null|*}
+   * @public
    */
   getHighlightedElement() {
     return this.highlightedElement;
@@ -114,6 +121,7 @@ export default class Overlay {
   /**
    * Gets the element that was highlighted before current element
    * @returns {null|*}
+   * @public
    */
   getLastHighlightedElement() {
     return this.lastHighlightedElement;
@@ -121,6 +129,7 @@ export default class Overlay {
 
   /**
    * Removes the overlay and cancel any listeners
+   * @public
    */
   clear(immediate = false) {
     // Deselect the highlighted element if any
@@ -149,6 +158,7 @@ export default class Overlay {
 
   /**
    * Removes the overlay node if it exists
+   * @private
    */
   removeNode() {
     if (this.node && this.node.parentElement) {
@@ -159,6 +169,7 @@ export default class Overlay {
   /**
    * Refreshes the overlay i.e. sets the size according to current window size
    * And moves the highlight around if necessary
+   * @public
    */
   refresh() {
     // If no highlighted element, cancel the refresh

@@ -22,6 +22,7 @@ export default class Stage extends Element {
 
   /**
    * Prepares the DOM element if not already there
+   * @private
    */
   makeNode() {
     let stage = this.document.getElementById(ID_STAGE);
@@ -41,6 +42,7 @@ export default class Stage extends Element {
 
   /**
    * Simply hides the stage
+   * @public
    */
   hide() {
     if (!this.node || !this.node.parentElement) {
@@ -52,6 +54,7 @@ export default class Stage extends Element {
 
   /**
    * Makes it visible and sets the default properties
+   * @private
    */
   setInitialStyle() {
     this.node.style.display = 'block';
@@ -64,6 +67,7 @@ export default class Stage extends Element {
   /**
    * Shows the stage at provided position
    * @param {Position} position
+   * @public
    */
   show(position) {
     this.makeNode();
