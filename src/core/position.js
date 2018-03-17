@@ -24,6 +24,7 @@ export default class Position {
   /**
    * Checks if the position is valid to be highlighted
    * @returns {boolean}
+   * @public
    */
   canHighlight() {
     return this.left < this.right && this.top < this.bottom;
@@ -33,6 +34,7 @@ export default class Position {
    * Checks if the given position is equal to the passed position
    * @param position Position
    * @returns {boolean}
+   * @public
    */
   equals(position) {
     return Math.round(this.left) === Math.round(position.left) &&
