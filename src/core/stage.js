@@ -39,21 +39,15 @@ export default class Stage extends Element {
     }
   }
 
-  removeNode() {
-    if (!this.node) {
-      return;
-    }
-
-    this.node.parentElement.removeChild(this.node);
-  }
-
   /**
    * Simply hides the stage
    */
   hide() {
-    this.node.style.display = 'none';
+    if (!this.node || !this.node.parentElement) {
+      return;
+    }
 
-    this.removeNode();
+    this.node.parentElement.removeChild(this.node);
   }
 
   /**
@@ -67,6 +61,10 @@ export default class Stage extends Element {
     this.node.style.right = '';
   }
 
+  /**
+   * Shows the stage at provided position
+   * @param {Position} position
+   */
   show(position) {
     this.makeNode();
 

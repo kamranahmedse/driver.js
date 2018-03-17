@@ -60,6 +60,7 @@ export default class Driver {
   /**
    * Binds any DOM events listeners
    * @todo: add throttling in all the listeners
+   * @private
    */
   bind() {
     this.window.addEventListener('resize', this.onResize, false);
@@ -71,6 +72,7 @@ export default class Driver {
    * Removes the popover if clicked outside the highlighted element
    * or outside the
    * @param e
+   * @private
    */
   onClick(e) {
     if (!this.isActivated || !this.hasHighlightedElement()) {
@@ -105,83 +107,11 @@ export default class Driver {
     }
   }
 
-  /**
-   * Moves to the previous step if possible
-   * otherwise resets the overlay
-   */
-  movePrevious() {
-    this.currentStep -= 1;
-    if (this.steps[this.currentStep]) {
-      this.overlay.highlight(this.steps[this.currentStep]);
-    } else {
-      this.reset();
-    }
-  }
-
-  /**
-   * Moves to the next step if possible
-   * otherwise resets the overlay
-   */
-  moveNext() {
-    this.currentStep += 1;
-    if (this.steps[this.currentStep]) {
-      this.overlay.highlight(this.steps[this.currentStep]);
-    } else {
-      this.reset();
-    }
-  }
-
-  /**
-   * @returns {boolean}
-   */
-  hasNextStep() {
-    return !!this.steps[this.currentStep + 1];
-  }
-
-  /**
-   * @returns {boolean}
-   */
-  hasPreviousStep() {
-    return !!this.steps[this.currentStep - 1];
-  }
-
-  /**
-   * Resets the steps if any and clears the overlay
-   */
-  reset(immediate = false) {
-    this.currentStep = 0;
-    this.isActivated = false;
-    this.overlay.clear(immediate);
-  }
-
-  /**
-   * Checks if there is any highlighted element or not
-   * @returns {boolean}
-   */
-  hasHighlightedElement() {
-    const highlightedElement = this.overlay.getHighlightedElement();
-    return highlightedElement && highlightedElement.node;
-  }
-
-  /**
-   * Gets the currently highlighted element in overlay
-   * @returns {Element}
-   */
-  getHighlightedElement() {
-    return this.overlay.getHighlightedElement();
-  }
-
-  /**
-   * Gets the element that was highlighted before currently highlighted element
-   * @returns {Element}
-   */
-  getLastHighlightedElement() {
-    return this.overlay.getLastHighlightedElement();
-  }
 
   /**
    * Handler for the onResize DOM event
    * Makes sure highlighted element stays at valid position
+   * @private
    */
   onResize() {
     if (!this.isActivated) {
@@ -194,6 +124,7 @@ export default class Driver {
   /**
    * Clears the overlay on escape key process
    * @param event
+   * @private
    */
   onKeyUp(event) {
     if (!this.isActivated) {
@@ -217,8 +148,92 @@ export default class Driver {
   }
 
   /**
+   * Moves to the previous step if possible
+   * otherwise resets the overlay
+   * @public
+   */
+  movePrevious() {
+    this.currentStep -= 1;
+    if (this.steps[this.currentStep]) {
+      this.overlay.highlight(this.steps[this.currentStep]);
+    } else {
+      this.reset();
+    }
+  }
+
+  /**
+   * Moves to the next step if possible
+   * otherwise resets the overlay
+   * @public
+   */
+  moveNext() {
+    this.currentStep += 1;
+    if (this.steps[this.currentStep]) {
+      this.overlay.highlight(this.steps[this.currentStep]);
+    } else {
+      this.reset();
+    }
+  }
+
+  /**
+   * @returns {boolean}
+   * @public
+   */
+  hasNextStep() {
+    return !!this.steps[this.currentStep + 1];
+  }
+
+  /**
+   * @returns {boolean}
+   * @public
+   */
+  hasPreviousStep() {
+    return !!this.steps[this.currentStep - 1];
+  }
+
+  /**
+   * Resets the steps if any and clears the overlay
+   * @param {boolean} immediate
+   * @public
+   */
+  reset(immediate = false) {
+    this.currentStep = 0;
+    this.isActivated = false;
+    this.overlay.clear(immediate);
+  }
+
+  /**
+   * Checks if there is any highlighted element or not
+   * @returns {boolean}
+   * @public
+   */
+  hasHighlightedElement() {
+    const highlightedElement = this.overlay.getHighlightedElement();
+    return highlightedElement && highlightedElement.node;
+  }
+
+  /**
+   * Gets the currently highlighted element in overlay
+   * @returns {Element}
+   * @public
+   */
+  getHighlightedElement() {
+    return this.overlay.getHighlightedElement();
+  }
+
+  /**
+   * Gets the element that was highlighted before currently highlighted element
+   * @returns {Element}
+   * @public
+   */
+  getLastHighlightedElement() {
+    return this.overlay.getLastHighlightedElement();
+  }
+
+  /**
    * Defines steps to be highlighted
    * @param {array} steps
+   * @public
    */
   defineSteps(steps) {
     this.steps = [];
@@ -245,6 +260,7 @@ export default class Driver {
    * @param allSteps  List of all the steps
    * @param index Index of the current step
    * @returns {null|Element}
+   * @private
    */
   prepareElementFromStep(currentStep, allSteps = [], index = 0) {
     let querySelector = '';
@@ -302,6 +318,7 @@ export default class Driver {
   /**
    * Initiates highlighting steps from first step
    * @param {number} index at which highlight is to be started
+   * @public
    */
   start(index = 0) {
     if (!this.steps || this.steps.length === 0) {
@@ -317,6 +334,7 @@ export default class Driver {
   /**
    * Highlights the given element
    * @param {string|{element: string, popover: {}}} selector Query selector or a step definition
+   * @public
    */
   highlight(selector) {
     this.isActivated = true;

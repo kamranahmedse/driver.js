@@ -179,8 +179,6 @@ export default class Element {
 
   /**
    * Is called when the element is about to be highlighted
-   * i.e. either if overlay has started moving the highlight towards
-   * this element of has just decided to highlight it
    */
   onHighlightStarted() {
     if (this.options.onHighlightStarted) {
