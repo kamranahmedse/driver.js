@@ -269,7 +269,7 @@ activeElement.getNode();  // Gets the DOM Element behind this element
 - [X] Multi-step Journey Definitions
 - [X] Make it controllable by keyboard
 - [X] Bring highlighted element to viewport
-- [ ] Add type definitions
+- [X] Add type definitions
 - [ ] Create wrappers for Angular, Vue and React
 - [ ] Write tests
 
