@@ -149,7 +149,7 @@ declare module 'driver.js' {
       /**
        * Options representing popover for this step
        */
-      popover: Driver.PopoverOptions;
+      popover?: Driver.PopoverOptions;
     }
 
     class Element {
@@ -439,10 +439,6 @@ declare module 'driver.js' {
     }
 
     class Stage extends Element {
-      private options: Driver.StageOptions;
-      private window: Window;
-      private document: Document;
-
       /**
        * @param {Driver.StageOptions} options
        * @param {Window} window
@@ -475,16 +471,11 @@ declare module 'driver.js' {
     }
 
     class Position {
-      top: number;
-      left: number;
-      right: number;
-      bottom: number;
-
       constructor({
-                    left: number,
-                    top: number,
-                    bottom: number,
-                    right: number,
+                    left,
+                    top,
+                    bottom,
+                    right,
                   });
 
       /**
@@ -525,31 +516,55 @@ declare module 'driver.js' {
        * Whether to show control buttons or not
        * @default true
        */
-      showButtons: boolean;
+      showButtons?: boolean;
 
       /**
        * Text on the button in the final step
        * @default 'Done'
        */
-      doneBtnText: string;
+      doneBtnText?: string;
 
       /**
        * Text on the close button
        * @default 'Close'
        */
-      closeBtnText: string;
+      closeBtnText?: string;
 
       /**
        * Text on the next button
        * @default 'Next'
        */
-      nextBtnText: string;
+      nextBtnText?: string;
 
       /**
        * Text on the previous button
        * @default 'Previous'
        */
-      prevBtnText: string;
+      prevBtnText?: string;
+
+      /**
+       * Total number of elements with popovers
+       * @default 0
+       */
+      totalCount?: number;
+
+      /**
+       * Counter for the current popover
+       * @default 0
+       */
+      currentIndex?: number;
+
+      /**
+       * If the current popover is the first one
+       * @default true
+       */
+      isFirst?: boolean;
+
+      /**
+       * If the current popover is the last one
+       * @default true
+       */
+      isLast?: boolean;
     }
 
     interface DriverOptions {
@@ -594,52 +609,52 @@ declare module 'driver.js' {
        * Whether to show control buttons or not
        * @default true
        */
-      showButtons: boolean;
+      showButtons?: boolean;
 
       /**
        * Text on the button in the final step
        * @default 'Done'
        */
-      doneBtnText: string;
+      doneBtnText?: string;
 
       /**
        * Text on the close button
        * @default 'Close'
        */
-      closeBtnText: string;
+      closeBtnText?: string;
 
       /**
        * Text on the next button
        * @default 'Next'
        */
-      nextBtnText: string;
+      nextBtnText?: string;
 
       /**
        * Text on the previous button
        * @default 'Previous'
        */
-      prevBtnText: string;
+      prevBtnText?: string;
 
       /**
        * Callback to be called when element is about to be highlighted
        * @param {Driver.Element} element
        * @returns any
        */
-      onHighlightStarted: (element: Driver.Element) => void;
+      onHighlightStarted?: (element: Driver.Element) => void;
 
       /**
        * Callback to be called when element has been highlighted
        * @param {Driver.Element} element
        * @returns any
        */
-      onHighlighted: (element: Driver.Element) => void,
+      onHighlighted?: (element: Driver.Element) => void,
 
       /**
        * Callback to be called when element has been deselected
        * @param {Driver.Element} element
        * @returns any
        */
-      onDeselected: (element: Driver.Element) => void,
+      onDeselected?: (element: Driver.Element) => void,
     }
 
     interface ElementOptions extends Driver.DriverOptions {
