@@ -20,13 +20,13 @@ document.addEventListener("DOMContentLoaded", function () {
       element: '#name_driver',
       popover: {
         title: 'Why Driver?',
-        description: 'Because it let\'s you drive the user across the page',
+        description: 'Because it lets you drive the user across the page',
         position: 'bottom'
       }
     }, {
       element: '#driver-demo-head',
       popover: {
-        title: 'Lets talk features',
+        title: 'Let\'s talk features',
         description: 'You may leave your mouse and use the <strong>arrow keys</strong> to move next and back or <strong>escape key</strong> anytime to close this',
         position: 'bottom'
       }
