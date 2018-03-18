@@ -1,5 +1,5 @@
 declare module 'driver.js' {
-  export class Driver {
+  class Driver {
     /**
      * Refers to the global document object
      */
@@ -38,38 +38,38 @@ declare module 'driver.js' {
     /**
      * Does the required bindings for DOM Events
      */
-    private bind();
+    private bind(): void;
 
     /**
      * Listener for the click event, to decide if
      * to next/previous step, reset the overlay etc
      * @param {Event} e
      */
-    private onClick(e: Event);
+    private onClick(e: Event): void;
 
     /**
      * Refreshes the driver and resets the position for stage
      * and popover on resizing the window
      */
-    private onResize();
+    private onResize(): void;
 
     /**
      * Makes it operable with keyboard
      * @param {Event} e
      */
-    private onKeyUp(e: Event);
+    private onKeyUp(e: Event): void;
 
     /**
      * Moves to the previous step if possible
      * otherwise resets the overlay
      */
-    public movePrevious();
+    public movePrevious(): void;
 
     /**
      * Moves to the next step if possible
      * otherwise resets the overlay
      */
-    public moveNext();
+    public moveNext(): void;
 
     /**
      * Checks if can be moved to next step
@@ -86,7 +86,7 @@ declare module 'driver.js' {
     /**
      * Resets the steps and clears the overlay
      */
-    public reset();
+    public reset(): void;
 
     /**
      * Checks if there is any highlighted element or not
@@ -110,7 +110,7 @@ declare module 'driver.js' {
      * Defines the steps to be used in multi-step driver
      * @param {Array<Driver.Step>} steps
      */
-    public defineSteps(steps: Array<Driver.Step>);
+    public defineSteps(steps: Array<Driver.Step>): void;
 
     /**
      * Prepares {Driver.Element} from the given step definition
@@ -118,19 +118,19 @@ declare module 'driver.js' {
      * @param {Array<Driver.Step>} allSteps all the given steps
      * @param {number} stepIndex array index for the current step
      */
-    private prepareElementFromStep(step: Driver.Step | string, allSteps: Array<Driver.Step>, stepIndex: number);
+    private prepareElementFromStep(step: Driver.Step | string, allSteps: Array<Driver.Step>, stepIndex: number): void;
 
     /**
      * Starts presenting the set steps from the given index
      * @param {number} index
      */
-    public start(index?: number);
+    public start(index?: number): void;
 
     /**
      * Highlights the given element. Element can be a query selector or a step definition
      * @param {string | Driver.Step} element
      */
-    public highlight(element: string | Driver.Step);
+    public highlight(element: string | Driver.Step): void;
   }
 
   namespace Driver {
@@ -214,7 +214,7 @@ declare module 'driver.js' {
       /**
        * Brings the current DOMElement in view
        */
-      public bringInView();
+      public bringInView(): void;
 
       /**
        * Gets the position of element on screen
@@ -225,38 +225,38 @@ declare module 'driver.js' {
       /**
        * Manually scrolls to current element if scrollInToView is not supported
        */
-      private scrollManually();
+      private scrollManually(): void;
 
       /**
        * Is called when the current element is deselected
        * @param {boolean} hideStage
        */
-      private onDeselected(hideStage?: boolean = false);
+      private onDeselected(hideStage?: boolean): void;
 
       /**
        * Is called when element is about to be highlighted
        */
-      private onHighlightStarted();
+      private onHighlightStarted(): void;
 
       /**
        * Is called when element has been successfully highlighted
        */
-      private onHighlighted();
+      private onHighlighted(): void;
 
       /**
        * Shows the stage on the current element
        */
-      private showStage();
+      private showStage(): void;
 
       /**
        * Hides the popover from the current element if visible
        */
-      private hidePopover();
+      private hidePopover(): void;
 
       /**
        * Shows the popover on current element if possible
        */
-      private showPopover();
+      private showPopover(): void;
 
       /**
        * Gets the full page size
@@ -267,7 +267,7 @@ declare module 'driver.js' {
        * Checks if the current element is same as passed element
        * @param {Driver.Element} element
        */
-      private isSame(element: Driver.Element);
+      private isSame(element: Driver.Element): void;
 
       /**
        * Gets the node that this element refers to
@@ -316,18 +316,18 @@ declare module 'driver.js' {
       /**
        * Prepares the DOM element for overlay and appends to body
        */
-      private makeNode();
+      private makeNode(): void;
 
       /**
        * Highlights the given Element while resetting the existing one
        * @param {Driver.Element} element
        */
-      public highlight(element: Driver.Element);
+      public highlight(element: Driver.Element): void;
 
       /**
        * Shows the overlay while appending to body if it is not there already
        */
-      public show();
+      public show(): void;
 
       /**
        * Gets the highlighted element in overlay if any
@@ -346,18 +346,18 @@ declare module 'driver.js' {
        * by default or without animation if immediate is set to false
        * @param {boolean} immediate
        */
-      public clear(immediate: boolean = false);
+      public clear(immediate?: boolean): void;
 
       /**
        * Removes the overlay node if it exists
        */
-      private removeNode();
+      private removeNode(): void;
 
       /**
        * Refreshes the overlay i.e. sets the size according to current window size
        * And moves the highlight around if necessary
        */
-      public refresh();
+      public refresh(): void;
     }
 
     export class Popover {
@@ -384,58 +384,58 @@ declare module 'driver.js' {
       /**
        * Prepares the DOM element for popover and appends to the body
        */
-      private makeNode();
+      private makeNode(): void;
 
       /**
        * Hides the popover if visible
        */
-      public hide();
+      public hide(): void;
 
       /**
        * Sets the initial state for popover before changing position
        */
-      private setInitialState();
+      private setInitialState(): void;
 
       /**
        * Shows the popover at the given position
        * @param {Driver.Position} position
        */
-      public show(position: Driver.Position);
+      public show(position: Driver.Position): void;
 
       /**
        * Renders the buttons in the footer of the popover
        */
-      private renderButtons();
+      private renderButtons(): void;
 
       /**
        * Positions the popover to the left of the given element position
        * @param {Driver.Position} position
        */
-      private positionOnLeft(position: Driver.Position);
+      private positionOnLeft(position: Driver.Position): void;
 
       /**
        * Positions the popover to the right of the given element position
        * @param {Driver.Position} position
        */
-      private positionOnRight(position: Driver.Position);
+      private positionOnRight(position: Driver.Position): void;
 
       /**
        * Positions the popover to the top of the given element position
        * @param {Driver.Position} position
        */
-      private positionOnTop(position: Driver.Position);
+      private positionOnTop(position: Driver.Position): void;
 
       /**
        * Positions the popover to the bottom of the given element position
        * @param {Driver.Position} position
        */
-      private positionOnBottom(position: Driver.Position);
+      private positionOnBottom(position: Driver.Position): void;
 
       /**
        * Positions the popover automatically around the element position
        * @param {Driver.Position} position
        */
-      private autoPosition(position: Driver.Position);
+      private autoPosition(position: Driver.Position): void;
     }
 
     export class Stage extends Element {
@@ -455,23 +455,23 @@ declare module 'driver.js' {
       /**
        * Prepares the node and appends to body if not there already
        */
-      private makeNode();
+      private makeNode(): void;
 
       /**
        * Hides the stage by removing the node
        */
-      public hide();
+      public hide(): void;
 
       /**
        * Sets the default properties on the node
        */
-      private setInitialStyle();
+      private setInitialStyle(): void;
 
       /**
        * Shows the stage at provided position
        * @param {Driver.Position} position
        */
-      public show(position: Driver.Position);
+      public show(position: Driver.Position): void;
     }
 
     export class Position {
@@ -481,11 +481,11 @@ declare module 'driver.js' {
       bottom: number;
 
       constructor({
-                    left: number = 0,
-                    top: number = 0,
-                    bottom: number = 0,
-                    right: number = 0,
-                  } = {});
+                    left: number,
+                    top: number,
+                    bottom: number,
+                    right: number,
+                  });
 
       /**
        * Checks if the given position is valid and can be highlighted
@@ -497,7 +497,7 @@ declare module 'driver.js' {
        * Checks if the given position is same as the passed position
        * @param {Driver.Position} position
        */
-      equals(position: Driver.Position);
+      equals(position: Driver.Position): void;
     }
 
     interface ScreenCoordinates {
@@ -648,4 +648,6 @@ declare module 'driver.js' {
     interface StageOptions extends ElementOptions {
     }
   }
+
+  export = Driver;
 }
