@@ -134,7 +134,7 @@ declare module 'driver.js' {
   }
 
   namespace Driver {
-    export interface Step {
+    interface Step {
       /**
        * Query selector representing the DOM Element
        */
@@ -152,7 +152,7 @@ declare module 'driver.js' {
       popover: Driver.PopoverOptions;
     }
 
-    export class Element {
+    class Element {
       /**
        * Refers to the DOM element that this class wraps
        */
@@ -282,7 +282,7 @@ declare module 'driver.js' {
       public getSize(): Driver.ElementSize;
     }
 
-    export class Overlay {
+    class Overlay {
       /**
        * Options to modify the overlay behavior
        */
@@ -360,7 +360,7 @@ declare module 'driver.js' {
       public refresh(): void;
     }
 
-    export class Popover {
+    class Popover {
       private node: Node | HTMLElement;
       private tipNode: Node | HTMLElement;
       private titleNode: Node | HTMLElement;
@@ -438,7 +438,7 @@ declare module 'driver.js' {
       private autoPosition(position: Driver.Position): void;
     }
 
-    export class Stage extends Element {
+    class Stage extends Element {
       private options: Driver.StageOptions;
       private window: Window;
       private document: Document;
@@ -474,7 +474,7 @@ declare module 'driver.js' {
       public show(position: Driver.Position): void;
     }
 
-    export class Position {
+    class Position {
       top: number;
       left: number;
       right: number;
