@@ -283,6 +283,12 @@ activeElement.getNode();  // Gets the DOM Element behind this element
 
 Feel free to submit pull requests, create issues or spread the word
 
+## Sponsored By
+
+Thanks to [BrowserStack](https://browserstack.com) for sponsoring the compatibility testing needs
+
+[![BrowserStack](./demo/assets/browserstack.svg)](https://www.browserstack.com)
+
 ## License
 
 MIT &copy; [Kamran Ahmed](https://twitter.com/kamranahmedse)
