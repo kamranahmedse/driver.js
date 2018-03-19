@@ -11,6 +11,7 @@
     "func-names": "off",
     "no-bitwise": "off",
     "class-methods-use-this": "off",
+    "prefer-destructuring": "off",
     "no-param-reassign": [
       "off"
     ],

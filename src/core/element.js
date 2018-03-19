@@ -1,5 +1,6 @@
+import { ANIMATION_DURATION_MS, CLASS_DRIVER_HIGHLIGHTED_ELEMENT, CLASS_POSITION_RELATIVE } from '../common/constants';
+import { getStyleProperty } from '../common/utils';
 import Position from './position';
-import { ANIMATION_DURATION_MS, CLASS_DRIVER_HIGHLIGHTED_ELEMENT } from '../common/constants';
 
 /**
  * Wrapper around DOMElements to enrich them
@@ -34,27 +35,6 @@ export default class Element {
     this.stage = stage;
 
     this.animationTimeout = null;
-  }
-
-  /**
-   * Gets the screen co-ordinates (x,y) for the current dom element
-   * @returns {{x: number, y: number}}
-   * @private
-   */
-  getScreenCoordinates() {
-    let tempNode = this.node;
-
-    let x = this.document.documentElement.offsetLeft;
-    let y = this.document.documentElement.offsetTop;
-
-    if (tempNode.offsetParent) {
-      do {
-        x += tempNode.offsetLeft;
-        y += tempNode.offsetTop;
-      } while (tempNode = tempNode.offsetParent);
-    }
-
-    return { x, y };
   }
 
   /**
@@ -128,24 +108,20 @@ export default class Element {
    * @public
    */
   getCalculatedPosition() {
-    const coordinates = this.getScreenCoordinates();
-    const position = new Position({
-      left: Number.MAX_VALUE,
-      top: Number.MAX_VALUE,
-      right: 0,
-      bottom: 0,
+    const body = this.document.body;
+    const documentElement = this.document.documentElement;
+    const window = this.window;
+
+    const scrollTop = this.window.pageYOffset || documentElement.scrollTop || body.scrollTop;
+    const scrollLeft = window.pageXOffset || documentElement.scrollLeft || body.scrollLeft;
+    const elementRect = this.node.getBoundingClientRect();
+
+    return new Position({
+      top: elementRect.top + scrollTop,
+      left: elementRect.left + scrollLeft,
+      right: elementRect.left + scrollLeft + elementRect.width,
+      bottom: elementRect.top + scrollTop + elementRect.height,
     });
-
-    // If we have the position for this element
-    // and the element is visible on screen (has some height)
-    if (typeof coordinates.x === 'number' && typeof coordinates.y === 'number' && (this.node.offsetWidth > 0 || this.node.offsetHeight > 0)) {
-      position.left = Math.min(position.left, coordinates.x);
-      position.top = Math.min(position.top, coordinates.y);
-      position.right = Math.max(position.right, coordinates.x + this.node.offsetWidth);
-      position.bottom = Math.max(position.bottom, coordinates.y + this.node.offsetHeight);
-    }
-
-    return position;
   }
 
   /**
@@ -160,7 +136,7 @@ export default class Element {
       this.hideStage();
     }
 
-    this.node.classList.remove(CLASS_DRIVER_HIGHLIGHTED_ELEMENT);
+    this.removeHighlightClasses();
 
     // If there was any animation in progress, cancel that
     this.window.clearTimeout(this.animationTimeout);
@@ -168,6 +144,10 @@ export default class Element {
     if (this.options.onDeselected) {
       this.options.onDeselected(this);
     }
+  }
+
+  removeHighlightClasses() {
+    this.node.classList.remove(CLASS_DRIVER_HIGHLIGHTED_ELEMENT);
   }
 
   /**
@@ -202,7 +182,7 @@ export default class Element {
     this.showPopover();
     this.showStage();
 
-    this.node.classList.add(CLASS_DRIVER_HIGHLIGHTED_ELEMENT);
+    this.addHighlightClasses();
 
     const highlightedElement = this;
     const popoverElement = this.popover;
@@ -218,6 +198,33 @@ export default class Element {
     if (this.options.onHighlighted) {
       this.options.onHighlighted(this);
     }
+  }
+
+  addHighlightClasses() {
+    this.node.classList.add(CLASS_DRIVER_HIGHLIGHTED_ELEMENT);
+
+    if (this.canMakeRelative()) {
+      this.node.classList.add(CLASS_POSITION_RELATIVE);
+    }
+  }
+
+  canMakeRelative() {
+    const currentPosition = this.getStyleProperty('position');
+    const avoidPositionsList = ['absolute', 'fixed', 'relative'];
+
+    // Because if the element has any of these positions, making it
+    // relative will break the UI
+    return !avoidPositionsList.includes(currentPosition);
+  }
+
+  /**
+   * Get an element CSS property on the page
+   * @param {string} property
+   * @returns string
+   * @private
+   */
+  getStyleProperty(property) {
+    return getStyleProperty(this.node, property);
   }
 
   /**
