@@ -287,7 +287,7 @@ Feel free to submit pull requests, create issues or spread the word
 
 Thanks to [BrowserStack](https://browserstack.com) for sponsoring the compatibility testing needs
 
-[![BrowserStack](./demo/images/browserstack.svg)](https://www.browserstack.com)
+[![BrowserStack](./demo/images/browserstack.png)](https://www.browserstack.com)
 
 ## License
 
