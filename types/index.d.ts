@@ -565,6 +565,12 @@ declare module 'driver.js' {
        * @default true
        */
       isLast?: boolean;
+
+      /**
+       * Position for the popover on element
+       * @default auto
+       */
+      position?: string;
     }
 
     interface DriverOptions {
