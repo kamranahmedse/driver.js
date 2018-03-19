@@ -172,5 +172,8 @@ div#driver-highlighted-element-stage {
 
 .driver-highlighted-element {
   z-index: $highlighted-element-zindex !important;
+}
+
+.driver-position-relative {
   position: relative;
 }

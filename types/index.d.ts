@@ -200,12 +200,6 @@ declare module 'driver.js' {
                   document: Document);
 
       /**
-       * Gets the screen coordinates for the current DOM Element
-       * @return {Driver.ScreenCoordinates}
-       */
-      public getScreenCoordinates(): Driver.ScreenCoordinates;
-
-      /**
        * Checks if the give element is in view port or not
        * @return {boolean}
        */
@@ -280,6 +274,16 @@ declare module 'driver.js' {
        * @return {Driver.ElementSize}
        */
       public getSize(): Driver.ElementSize;
+
+      /**
+       * Removes the highlight classes from current element if any
+       */
+      private removeHighlightClasses(): void;
+
+      /**
+       * Adds the highlight classes to current element if required
+       */
+      private addHighlightClasses(): void;
     }
 
     class Overlay {
