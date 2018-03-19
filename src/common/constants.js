@@ -14,7 +14,7 @@ export const ID_POPOVER = 'driver-popover-item';
 
 export const CLASS_DRIVER_HIGHLIGHTED_ELEMENT = 'driver-highlighted-element';
 
-export const CLASS_NO_ANIMATION = 'sholo-no-animation';
+export const CLASS_NO_ANIMATION = 'driver-no-animation';
 export const CLASS_POPOVER_TIP = 'driver-popover-tip';
 export const CLASS_POPOVER_TITLE = 'driver-popover-title';
 export const CLASS_POPOVER_DESCRIPTION = 'driver-popover-description';
