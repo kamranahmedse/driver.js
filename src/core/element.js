@@ -214,7 +214,7 @@ export default class Element {
 
     // Because if the element has any of these positions, making it
     // relative will break the UI
-    return avoidPositionsList.indexOf(currentPosition) !== -1;
+    return avoidPositionsList.indexOf(currentPosition) === -1;
   }
 
   /**
