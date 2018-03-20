@@ -35,20 +35,20 @@ For Usage and Examples, [have a look at demo](http://kamranahmed.info/driver)
 
 ## So, yet another tour library?
 
-**No** it is not. **Tours are just one of the many use-cases**. Driver.js can be used at any place where you need some sort of overlay for the page, some common usecases could be e.g. dimming the background when user is interacting with some component i.e. [the way Facebook does](https://i.imgur.com/Q3PzaKk.png) when you try to create a post, or you can use it as a focus shifter to bring user's attention to some component on page or maybe you can use it to simulate those "Turn off the Lights" widgets that you might have seen on video players online etc.
+**No**, it is not. **Tours are just one of the many use-cases**. Driver.js can be used wherever you need some sort of overlay for the page; some common usecases could be: e.g. dimming the background when user is interacting with some component i.e. [the way Facebook does](https://i.imgur.com/Q3PzaKk.png) when you try to create a post, using it as a focus shifter to bring user's attention to some component on page, or using it to simulate those "Turn off the Lights" widgets that you might have seen on video players online, etc.
 
-Driver.js is written in Vanilla JS, has zero dependencies and is highly customizable. It has several options allowing you to manipulate how it behaves and also **provides you the hooks** to manipulate the elements as they are highlighted about to be highlighted or deselected.
+Driver.js is written in Vanilla JS, has zero dependencies and is highly customizable. It has several options allowing you to manipulate how it behaves and also **provides you the hooks** to manipulate the elements as they are highlighted, about to be highlighted, or deselected.
 
 ## Installation
 
-You can install it using `yarn` or `npm`, whatever you prefer
+You can install it using `yarn` or `npm`, whatever you prefer.
 
 ```sh
 yarn add driver.js
 npm install driver.js
 ```
 
-Or grab the code from `dist` directory and include it directly
+Or grab the code from `dist` directory and include it directly.
 
 ```html
 <link rel="stylesheet" href="/dist/driver.min.css">
@@ -59,21 +59,21 @@ Or grab the code from `dist` directory and include it directly
 
 ## Usage and Demo
 
-Demos and many more usage examples can be found [through the docs page](http://kamranahmed.info/driver).
+Demos and many more usage examples can be found [in the docs page](http://kamranahmed.info/driver).
 
 ### Highlighting Single Element – [Demo](http://kamranahmed.info/driver#single-element-no-popover)
 
-If all you want is just highlight a single element, you can do that simply by passing the selector
+You can highlight a single element by simply passing the selector.
 
 ```javascript
 const driver = new Driver();
 driver.highlight('#create-post');
 ```
-A real world usage example for this could be using it to dim the background and highlight the required element e.g. the way facebook does it on creating a post.
+A real world usage example for this is: using it to dim the background and highlight the required element e.g. the way facebook does it when creating a post.
 
 ### Highlight and Popover – [Demo](http://kamranahmed.info/driver#single-element-with-popover)
 
-You can show additional details beside the highlighted element using the popover
+You can show additional details beside the highlighted element using the popover.
 
 ```javascript
 const driver = new Driver();
@@ -90,7 +90,7 @@ Also, `title` and `description` can have HTML as well.
 
 ### Positioning the Popover – [Demo](http://kamranahmed.info/driver#single-element-with-popover-position)
 
-By default, driver automatically finds the suitable position for the popover and displays it, you can override it using `position` property
+By default, driver automatically finds the suitable position for the popover and displays it. You can override it using `position` property.
 
 ```javascript
 const driver = new Driver();
@@ -106,7 +106,7 @@ driver.highlight({
 
 ### Creating Feature Introductions – [Demo](http://kamranahmed.info/driver)
 
-Feature introductions are helpful in onboarding new users and giving them idea about different parts of the application, you can create them seemlessly with driver. Define the steps and call the `start` when you want to start presenting. User will be able to control the steps using keyboard or using the buttons on popovers.
+Feature introductions are helpful when onboarding new users and giving them idea about different parts of the application; you can create them seemlessly with driver. Define the steps and call the `start` when you want to start presenting. User will be able to control the steps using the keyboard or using the buttons on popovers.
 
 ```javascript
 const driver = new Driver();
@@ -142,17 +142,17 @@ driver.defineSteps([
 // Start the introduction
 driver.start();
 ```
-You can also hide the buttons and control the introductions programmatically by using the API methods listed below
+You can also hide the buttons and control the introductions programmatically by using the API methods listed below.
 
 ![](./demo/images/split.png)
 
 ## API
 
-Driver comes with several options that you can manipulate to make driver behave as you may like
+Driver comes with several options that you can manipulate to make driver behave as you like
 
 ### Driver Definition
 
-Here are the options that Driver understands
+Here are the options that Driver understands:
 
 ```javascript
 const driver = new Driver({
@@ -176,7 +176,7 @@ Note that all the button options that you provide in the driver definition can b
 
 ### Step Definition
 
-Here are the set of options that you can pass while defining steps `defineSteps` or the object that you pass to `highlight` method
+Here are the set of options that you can pass while defining steps `defineSteps` or the object that you pass to `highlight` method:
 
 ```javascript
 const stepDefinition = {
@@ -194,14 +194,14 @@ const stepDefinition = {
 };
 ```
 
-For example, here is how it would look when highlighting a single element
+For example, here is how it would look when highlighting a single element:
 
 ```javascript
 const driver = new Driver(driverOptions);
 driver.highlight(stepDefinition);
 ```
 
-And this is how it would look when creating a step by step guide
+And this is how it would look when creating a step by step guide:
 
 ```javascript
 const driver = new Driver(driverOptions);
@@ -215,7 +215,7 @@ driver.defineSteps([
 
 ### API Methods
 
-Below are the set of methods that are available to you
+Below are the set of methods that are available:
 
 ```javascript
 const driver = new Driver(driverOptions);
@@ -263,7 +263,7 @@ activeElement.showPopover();          // Show the popover
 activeElement.getNode();  // Gets the DOM Element behind this element
 ```
 
-**Note –** Do not forget to add `e.stopPropagation()` to the `click` binding that triggers driver
+**Note –** Do not forget to add `e.stopPropagation()` to the `click` binding that triggers driver.
 
 ![](./demo/images/split.png)
 
@@ -281,11 +281,11 @@ activeElement.getNode();  // Gets the DOM Element behind this element
 
 ## Contributions
 
-Feel free to submit pull requests, create issues or spread the word
+Feel free to submit pull requests, create issues or spread the word.
 
 ## Sponsored By
 
-Thanks to [BrowserStack](https://browserstack.com) for sponsoring the compatibility testing needs
+Thanks to [BrowserStack](https://browserstack.com) for sponsoring the compatibility testing needs.
 
 [![BrowserStack](./demo/images/browserstack.png)](https://www.browserstack.com)
 
