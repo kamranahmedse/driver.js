@@ -25,7 +25,7 @@ export default class Popover extends Element {
   constructor(options, window, document) {
     super();
 
-    this.options = Object.assign({
+    this.options = {
       isFirst: true,
       isLast: true,
       totalCount: 1,
@@ -36,7 +36,8 @@ export default class Popover extends Element {
       startBtnText: 'Next &rarr;',
       nextBtnText: 'Next &rarr;',
       prevBtnText: '&larr; Previous',
-    }, options);
+      ...options,
+    };
 
     this.window = window;
     this.document = document;
