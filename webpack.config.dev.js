@@ -33,7 +33,14 @@ module.exports = {
         exclude: /node_modules/,
         loader: 'babel-loader',
         options: {
-          presets: ['env'],
+          presets: [
+            [
+              'env',
+              {
+                useBuiltIns: 'usage',
+              },
+            ],
+          ],
           plugins: [
             'babel-plugin-add-module-exports',
             'transform-object-rest-spread',
