@@ -6,6 +6,7 @@
   "types": "types/index.d.ts",
   "scripts": {
     "start": "node server.js",
+    "build-demo": "NODE_ENV=production webpack --config webpack.config.dev.js",
     "build": "webpack --config webpack.config.prod.js"
   },
   "bugs": {

@@ -5,3 +5,4 @@ npm-debug.log
 .vscode
 package-lock.json
 yarn-error.log
+dist/demo
