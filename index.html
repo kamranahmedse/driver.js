@@ -6,9 +6,9 @@
         content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Driver</title>
-  <meta name=description itemprop=description
+  <meta name="description" itemprop="description"
         content="A light-weight, no-dependency, vanilla JavaScript library to drive the user's focus across the page"/>
-  <link rel="stylesheet" href="./dist/demo.css">
+  <link rel="stylesheet" href="./dist/demo/driver-demo.css">
   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/monokai.min.css">
 </head>
 <body>
@@ -167,7 +167,28 @@ driver.highlight({
     <p class="top-20">And of course it can be any valid HTML.</p>
 
     <hr class="hr__fancy">
+    <div id="single-element-no-close" class="section__example">
+      <h4>Disable Close on Outside Click</h4>
+      <p>By default, driver.js gets reset if user clicks outside the highlighted element, you can disable this:</p>
+      <a href="#" class="btn__run-demo" id="run-single-element-no-close">Show Demo</a>
+      <pre><code class="javascript">const driver = new Driver({
+    allowClose: false,
+});
 
+driver.highlight({
+  element: '#some-element',
+  popover: {
+    title: '&lt;em&gt;An italicized title&lt;/em&gt;',
+    description: 'Description may also contain &lt;strong&gt;HTML&lt;/strong&gt;'
+  }
+});
+</code></pre>
+      <p class="top-20">
+        If you use this option, for multi-step driver, it would close after you are done with the popover or you can close it programmatically. For single element popover, you need to close it properly, otherwise it won't be closed
+      </p>
+      <pre><code class="javascript">driver.reset()</code></div>
+
+    <hr class="hr__fancy">
     <div id="third-element-introduction" class="section__example">
       <h4 id="first-element-introduction">Creating Feature Introductions</h4>
       <p id="second-para-feature-introductions">You can also make powerful feature introductions to guide the users
@@ -343,8 +364,15 @@ activeElement.getNode();  // Gets the DOM Element behind this element
 <script src="//twemoji.maxcdn.com/2/twemoji.min.js?2.5"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
 
-<script src="./dist/driver.js"></script>
-<script src="./dist/demo.js"></script>
-<script src="./dist/emoji.js"></script>
+<script src="./dist/demo/driver-demo.js"></script>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-58155965-1', 'auto');
+  ga('send', 'pageview');
+</script>
 </body>
 </html>

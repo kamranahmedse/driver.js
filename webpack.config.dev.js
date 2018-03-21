@@ -2,17 +2,23 @@ const path = require('path');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
+const isProduction = process.env.NODE_ENV === 'production';
+const scriptFileName = isProduction ? 'driver-demo.min.js' : 'driver-demo.js';
+const styleFileName = isProduction ? 'driver-demo.min.css' : 'driver-demo.css';
+
 module.exports = {
-  mode: 'development',
+  mode: isProduction ? 'production' : 'development',
   entry: [
     'webpack-dev-server/client?http://localhost:3000',
     './demo/styles/demo.scss',
+    './demo/scripts/emoji.js',
+    './demo/scripts/demo.js',
     './src/index.js',
   ],
   output: {
-    path: path.join(__dirname, '/dist'),
-    publicPath: '/dist/',
-    filename: 'driver.js',
+    path: path.join(__dirname, '/dist/demo'),
+    publicPath: '/dist/demo/',
+    filename: scriptFileName,
     libraryTarget: 'umd',
     library: 'Driver',
   },
@@ -49,18 +55,22 @@ module.exports = {
       },
       {
         test: /.scss$/,
-        loader: ExtractTextPlugin.extract(['css-loader?url=false', 'sass-loader']),
+        loader: ExtractTextPlugin.extract([
+          {
+            loader: 'css-loader',
+            options: { minimize: isProduction, url: false },
+          },
+          'sass-loader',
+        ]),
       },
     ],
   },
   plugins: [
     new ExtractTextPlugin({
-      filename: 'demo.css',
+      filename: styleFileName,
       allChunks: true,
     }),
     new CopyWebpackPlugin([
-      './demo/scripts/emoji.js',
-      './demo/scripts/demo.js',
       './demo/images/separator.png',
     ]),
   ],
