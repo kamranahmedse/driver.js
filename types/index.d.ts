@@ -284,6 +284,24 @@ declare module 'driver.js' {
        * Adds the highlight classes to current element if required
        */
       private addHighlightClasses(): void;
+
+      /**
+       * Walks through the parents of the current element and fixes
+       * the stacking context
+       */
+      private fixStackingContext(): void;
+
+      /**
+       * Checks if we can make the current element relative or not
+       * @return {boolean}
+       */
+      private canMakeRelative(): boolean;
+
+      /**
+       * Get current element's CSS attribute value
+       * @return {string}
+       */
+      private getStyleProperty(): string;
     }
 
     class Overlay {
