@@ -1,4 +1,9 @@
-import { ANIMATION_DURATION_MS, CLASS_DRIVER_HIGHLIGHTED_ELEMENT, CLASS_POSITION_RELATIVE } from '../common/constants';
+import {
+  ANIMATION_DURATION_MS,
+  CLASS_DRIVER_HIGHLIGHTED_ELEMENT,
+  CLASS_FIX_STACKING_CONTEXT,
+  CLASS_POSITION_RELATIVE,
+} from '../common/constants';
 import { getStyleProperty } from '../common/utils';
 import Position from './position';
 
@@ -146,10 +151,6 @@ export default class Element {
     }
   }
 
-  removeHighlightClasses() {
-    this.node.classList.remove(CLASS_DRIVER_HIGHLIGHTED_ELEMENT);
-  }
-
   /**
    * Checks if the given element is same as the current element
    * @param {Element} element
@@ -200,14 +201,78 @@ export default class Element {
     }
   }
 
+  /**
+   * Removes the stacking context fix classes and the highlighter classes
+   * @private
+   */
+  removeHighlightClasses() {
+    this.node.classList.remove(CLASS_DRIVER_HIGHLIGHTED_ELEMENT);
+    this.node.classList.remove(CLASS_POSITION_RELATIVE);
+
+    const stackFixes = this.document.querySelectorAll(`.${CLASS_FIX_STACKING_CONTEXT}`);
+    stackFixes.forEach((stackFix) => {
+      stackFix.classList.remove(CLASS_FIX_STACKING_CONTEXT);
+    });
+  }
+
+  /**
+   * Adds the highlight class on the current element and "fixes"
+   * the parent nodes if they
+   * @private
+   */
   addHighlightClasses() {
     this.node.classList.add(CLASS_DRIVER_HIGHLIGHTED_ELEMENT);
 
+    // Don't make relative if element already has some position set
     if (this.canMakeRelative()) {
       this.node.classList.add(CLASS_POSITION_RELATIVE);
     }
+
+    // Check and re-define the stacking context
+    this.fixStackingContext();
   }
 
+  /**
+   * Walks through the parents of the current element and fixes
+   * the stacking context
+   * @private
+   */
+  fixStackingContext() {
+    let parentNode = this.node.parentNode;
+    while (parentNode) {
+      if (!parentNode.tagName || parentNode.tagName.toLowerCase() === 'body') {
+        break;
+      }
+
+      const zIndex = getStyleProperty(parentNode, 'z-index');
+      const opacity = parseFloat(getStyleProperty(parentNode, 'opacity'));
+      const transform = getStyleProperty(parentNode, 'transform', true);
+      const filter = getStyleProperty(parentNode, 'filter', true);
+      const perspective = getStyleProperty(parentNode, 'perspective', true);
+
+      // Stacking context gets disturbed if
+      // - Parent has z-index
+      // - Opacity is below 0
+      // - Filter/transform or perspective is applied
+      if (
+        /[0-9]+/.test(zIndex) ||
+        opacity < 1 ||
+        (transform && transform !== 'none') ||
+        (filter && filter !== 'none') ||
+        (perspective && perspective !== 'none')
+      ) {
+        parentNode.classList.add(CLASS_FIX_STACKING_CONTEXT);
+      }
+
+      parentNode = parentNode.parentNode;
+    }
+  }
+
+  /**
+   * Checks if we can make the current element relative or not
+   * @return {boolean}
+   * @private
+   */
   canMakeRelative() {
     const currentPosition = this.getStyleProperty('position');
     const avoidPositionsList = ['absolute', 'fixed', 'relative'];
