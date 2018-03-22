@@ -1,4 +1,4 @@
-<h1 align="center"><img src="./demo/images/driver.png" /><br> Driver.js</h1>
+<h1 align="center"><br> Driver.js</h1>
 
 <p align="center">
   <a href="https://github.com/kamranahmedse/driver.js/blob/master/license">
