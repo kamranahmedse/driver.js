@@ -283,7 +283,7 @@ export default class Element {
   }
 
   /**
-   * Get an element CSS property on the page
+   * Get current element's CSS attribute value
    * @param {string} property
    * @returns string
    * @private
