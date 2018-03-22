@@ -16,9 +16,24 @@ export const createNodeFromString = (htmlString) => {
  * Gets the CSS property from the given element
  * @param {HTMLElement|Node} element
  * @param {string} propertyName
+ * @param {boolean} prefixVendor
  * @return {string}
  */
-export const getStyleProperty = (element, propertyName) => {
+export const getStyleProperty = (element, propertyName, prefixVendor = false) => {
+  if (prefixVendor) {
+    const prefixes = ['', '-webkit-', '-ms-', 'moz-', '-o-'];
+    for (let counter = 0; counter < prefixes.length; counter++) {
+      const prefixedProperty = prefixes[counter] + propertyName;
+      const foundValue = getStyleProperty(element, prefixedProperty);
+
+      if (foundValue) {
+        return foundValue;
+      }
+    }
+
+    return '';
+  }
+
   let propertyValue = '';
 
   if (element.currentStyle) {

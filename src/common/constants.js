@@ -14,6 +14,7 @@ export const ID_POPOVER = 'driver-popover-item';
 
 export const CLASS_DRIVER_HIGHLIGHTED_ELEMENT = 'driver-highlighted-element';
 export const CLASS_POSITION_RELATIVE = 'driver-position-relative';
+export const CLASS_FIX_STACKING_CONTEXT = 'driver-fix-stacking';
 
 export const CLASS_NO_ANIMATION = 'driver-no-animation';
 export const CLASS_POPOVER_TIP = 'driver-popover-tip';
