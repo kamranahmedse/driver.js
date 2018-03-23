@@ -69,7 +69,7 @@ You can highlight a single element by simply passing the selector.
 const driver = new Driver();
 driver.highlight('#create-post');
 ```
-A real world usage example for this is: using it to dim the background and highlight the required element e.g. the way facebook does it when creating a post.
+A real world usage example for this is: using it to dim the background and highlight the required element e.g. the way Facebook does it when creating a post.
 
 ### Highlight and Popover – [Demo](http://kamranahmed.info/driver#single-element-with-popover)
 
@@ -106,7 +106,7 @@ driver.highlight({
 
 ### Creating Feature Introductions – [Demo](http://kamranahmed.info/driver)
 
-Feature introductions are helpful when onboarding new users and giving them idea about different parts of the application; you can create them seemlessly with driver. Define the steps and call the `start` when you want to start presenting. User will be able to control the steps using the keyboard or using the buttons on popovers.
+Feature introductions are helpful when onboarding new users and giving them ideas about different parts of the application; you can create them seemlessly with Driver. Define the steps and call the `start` when you want to start presenting. User will be able to control the steps using the keyboard or using the buttons on popovers.
 
 ```javascript
 const driver = new Driver();
@@ -148,7 +148,7 @@ You can also hide the buttons and control the introductions programmatically by 
 
 ## API
 
-Driver comes with several options that you can manipulate to make driver behave as you like
+Driver comes with several options that you can manipulate to make Driver behave as you like
 
 ### Driver Definition
 
