@@ -106,7 +106,7 @@ driver.highlight({
 
 ### Creating Feature Introductions – [Demo](http://kamranahmed.info/driver)
 
-Feature introductions are helpful when onboarding new users and giving them ideas about different parts of the application; you can create them seemlessly with Driver. Define the steps and call the `start` when you want to start presenting. User will be able to control the steps using the keyboard or using the buttons on popovers.
+Feature introductions are helpful when onboarding new users and giving them an idea about different parts of the application; you can create them seemlessly with Driver. Define the steps and call the `start` when you want to start presenting. User will be able to control the steps using the keyboard or using the buttons on popovers.
 
 ```javascript
 const driver = new Driver();
