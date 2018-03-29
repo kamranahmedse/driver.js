@@ -1,0 +1,15 @@
+@import "./base";
+
+div#driver-popover-item {
+	border-radius: 5px;
+
+	.driver-popover-footer {
+		button {
+			border: 1px solid #d4d4d4;
+			text-shadow: 1px 1px 0 #fff;
+			font: 11px/normal sans-serif;
+			margin: 10px 0 0;
+     		line-height: 1.3;
+		}
+	}
+}

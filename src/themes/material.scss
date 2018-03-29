@@ -1,0 +1,17 @@
+@import"./base"; 
+
+div#driver-popover-item {
+	border-radius: 2px;
+
+	.driver-popover-footer {
+		button {
+			border: 0;
+			margin: 10px 0 0;
+		}
+
+		button.driver-next-btn {
+			color: white;
+			background-color: #2d548d;
+		}
+	}
+}
