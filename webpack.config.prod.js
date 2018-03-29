@@ -4,7 +4,8 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 module.exports = {
   mode: 'production',
   entry: [
-    './src/driver.scss',
+    './src/themes/default.scss',
+    './src/themes/material.scss',
     './src/index.js',
   ],
   output: {
@@ -47,19 +48,37 @@ module.exports = {
       },
       {
         test: /.scss$/,
-        loader: ExtractTextPlugin.extract([
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: 'driver.[name].min.css',
+              context: './themes/',
+            },
+          },
+          {
+            loader: 'extract-loader',
+            options: {
+              publicPath: './',
+            },
+          },
           {
             loader: 'css-loader',
-            options: { minimize: true, url: false },
+            options: {
+              minimize: true,
+              url: false,
+            },
           },
-          'sass-loader',
-        ]),
+          {
+            loader: 'sass-loader',
+          },
+        ],
       },
     ],
   },
   plugins: [
     new ExtractTextPlugin({
-      filename: 'driver.min.css',
+      filename: 'driver.min.[name].css',
       allChunks: true,
     }),
   ],

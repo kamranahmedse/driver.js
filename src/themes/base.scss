@@ -21,7 +21,7 @@ div#driver-popover-item {
   color: $text-color;
   margin: 0;
   padding: 15px;
-  border-radius: 5px;
+  
   min-width: 250px;
   max-width: 300px;
   box-shadow: 0 1px 10px rgba(0, 0, 0, 0.4);
@@ -75,18 +75,13 @@ div#driver-popover-item {
     button {
       display: inline-block;
       padding: 3px 10px;
-      border: 1px solid #d4d4d4;
       text-decoration: none;
-      text-shadow: 1px 1px 0 #fff;
-      color: $text-color;
-      font: 11px/normal sans-serif;
+      color: $text-color; 
       cursor: pointer;
       outline: 0;
       background-color: $button-bg;
       border-radius: 2px;
       zoom: 1;
-      margin: 10px 0 0;
-      line-height: 1.3;
     }
 
     button.driver-disabled {
