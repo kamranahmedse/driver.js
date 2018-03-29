@@ -87,18 +87,19 @@ export default class Driver {
 
     // Remove the overlay If clicked outside the highlighted element
     if (!clickedHighlightedElement && !clickedPopover && this.options.allowClose) {
-      this.reset();
+      this.close();
+      return;
+    }
+    
+    const closeClicked = e.target.classList.contains(CLASS_CLOSE_BTN);
+
+    if (closeClicked) {
+      this.close();
       return;
     }
 
     const nextClicked = e.target.classList.contains(CLASS_NEXT_STEP_BTN);
     const prevClicked = e.target.classList.contains(CLASS_PREV_STEP_BTN);
-    const closeClicked = e.target.classList.contains(CLASS_CLOSE_BTN);
-
-    if (closeClicked) {
-      this.reset();
-      return;
-    }
 
     if (nextClicked) {
       this.moveNext();
@@ -133,7 +134,7 @@ export default class Driver {
 
     // If escape was pressed and it is allowed to click outside to close
     if (event.keyCode === ESC_KEY_CODE && this.options.allowClose) {
-      this.reset();
+      this.close();
       return;
     }
 
@@ -198,10 +199,19 @@ export default class Driver {
    */
   reset(immediate = false) {
     this.currentStep = 0;
+    this.close(immediate);
+  }
+
+  /**
+   * Hide the current step and clears the overlay
+   * @param {boolean} immediate
+   * @public
+   */
+  close(immediate = false) {
     this.isActivated = false;
     this.overlay.clear(immediate);
   }
-
+    
   /**
    * Checks if there is any highlighted element or not
    * @returns {boolean}
@@ -316,18 +326,22 @@ export default class Driver {
   }
 
   /**
-   * Initiates highlighting steps from first step
+   * Initiates highlighting steps from first step or the last active step
    * @param {number} index at which highlight is to be started
    * @public
    */
-  start(index = 0) {
+  start(index) {
     if (!this.steps || this.steps.length === 0) {
       throw new Error('There are no steps defined to iterate');
     }
-
+    
+    if (typeof index === 'undefined') {
+      index = this.currentStep;
+    } else {
+      this.currentStep = index;
+    }
+    
     this.isActivated = true;
-
-    this.currentStep = index;
     this.overlay.highlight(this.steps[index]);
   }
 
