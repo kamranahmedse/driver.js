@@ -316,18 +316,22 @@ export default class Driver {
   }
 
   /**
-   * Initiates highlighting steps from first step
+   * Initiates highlighting steps from first step or the last active step
    * @param {number} index at which highlight is to be started
    * @public
    */
-  start(index = 0) {
+  start(index) {
     if (!this.steps || this.steps.length === 0) {
       throw new Error('There are no steps defined to iterate');
     }
-
+    
+    if (typeof index === 'undefined') {
+      index = this.currentStep;
+    } else {
+      this.currentStep = index;
+    }
+    
     this.isActivated = true;
-
-    this.currentStep = index;
     this.overlay.highlight(this.steps[index]);
   }
 
