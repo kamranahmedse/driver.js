@@ -247,6 +247,8 @@ export default class Element {
       const zIndex = getStyleProperty(parentNode, 'z-index');
       const opacity = parseFloat(getStyleProperty(parentNode, 'opacity'));
       const transform = getStyleProperty(parentNode, 'transform', true);
+      const transformStyle = getStyleProperty(parentNode, 'transform-style', true);
+      const transformBox = getStyleProperty(parentNode, 'transform-box', true);
       const filter = getStyleProperty(parentNode, 'filter', true);
       const perspective = getStyleProperty(parentNode, 'perspective', true);
 
@@ -258,6 +260,8 @@ export default class Element {
         /[0-9]+/.test(zIndex) ||
         opacity < 1 ||
         (transform && transform !== 'none') ||
+        (transformStyle && transformStyle !== 'flat') ||
+        (transformBox && transformBox !== 'border-box') ||
         (filter && filter !== 'none') ||
         (perspective && perspective !== 'none')
       ) {
