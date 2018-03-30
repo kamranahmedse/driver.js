@@ -117,15 +117,17 @@ export default class Popover extends Element {
    */
   show(position) {
     this.setInitialState();
+    
+    const options = this.options;
 
     // Set the title and descriptions
-    this.titleNode.innerHTML = this.options.title;
-    this.descriptionNode.innerHTML = this.options.description;
+    this.titleNode.innerHTML = typeof options.title === "function" ? options.title.call(this, this.titleNode) : options.title;
+    this.descriptionNode.innerHTML = typeof options.description === "function" ? options.description.call(this, this.descriptionNode) : options.description;
 
     this.renderButtons();
 
     // Position the popover around the given position
-    switch (this.options.position) {
+    switch (options.position) {
       case 'left':
         this.positionOnLeft(position);
         break;
