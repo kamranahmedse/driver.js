@@ -276,6 +276,12 @@ declare module 'driver.js' {
       public getSize(): Driver.ElementSize;
 
       /**
+       * Gets the popover on current element if any
+       * @returns {Driver.Popover}
+       */
+      public getPopover(): Driver.Popover;
+
+      /**
        * Removes the highlight classes from current element if any
        */
       private removeHighlightClasses(): void;
@@ -458,6 +464,18 @@ declare module 'driver.js' {
        * @param {Driver.Position} position
        */
       private autoPosition(position: Driver.Position): void;
+
+      /**
+       * Gets the title node for popover
+       * @returns {Node | HTMLElement}
+       */
+      public getTitleNode(): Node | HTMLElement;
+
+      /**
+       * Gets the description node for popover
+       * @returns {Node | HTMLElement}
+       */
+      public getDescriptionNode(): Node | HTMLElement;
     }
 
     class Stage extends Element {

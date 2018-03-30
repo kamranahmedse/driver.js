@@ -130,6 +130,15 @@ export default class Element {
   }
 
   /**
+   * Gets the popover for the current element if any
+   * @returns {Popover|*}
+   * @public
+   */
+  getPopover() {
+    return this.popover;
+  }
+
+  /**
    * Is called when element is about to be deselected
    * i.e. when moving the focus to next element of closing
    * @public
