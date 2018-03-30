@@ -68,6 +68,24 @@ export default class Popover extends Element {
   }
 
   /**
+   * Gets the title node for the popover
+   * @returns {Element | null | *}
+   * @public
+   */
+  getTitleNode() {
+    return this.titleNode;
+  }
+
+  /**
+   * Gets the description node for the popover
+   * @returns {Element | null | *}
+   * @public
+   */
+  getDescriptionNode() {
+    return this.descriptionNode;
+  }
+
+  /**
    * Hides the popover
    * @public
    */
