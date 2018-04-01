@@ -701,6 +701,11 @@ declare module 'driver.js' {
        * @returns any
        */
       onDeselected?: (element: Driver.Element) => void,
+
+      /**
+       * Is called when the overlay is about to reset
+       */
+      onReset?: () => void,
     }
 
     interface ElementOptions extends Driver.DriverOptions {

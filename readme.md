@@ -170,6 +170,7 @@ const driver = new Driver({
   onHighlightStarted: (Element) {}, // Called when element is about to be highlighted
   onHighlighted: (Element) {},      // Called when element is fully highlighted
   onDeselected: (Element) {},       // Called when element has been deselected
+  onReset: () {},                   // Called when element has been deselected
 });
 ```
 Note that all the button options that you provide in the driver definition can be overridden for a specific step by giving them in the step definition
