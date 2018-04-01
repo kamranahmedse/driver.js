@@ -132,6 +132,11 @@ export default class Overlay {
    * @public
    */
   clear(immediate = false) {
+    // Callback for when overlay is about to be reset
+    if (this.options.onReset) {
+      this.options.onReset();
+    }
+
     // Deselect the highlighted element if any
     if (this.highlightedElement) {
       const hideStage = true;

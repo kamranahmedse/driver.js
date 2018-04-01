@@ -38,6 +38,8 @@ export default class Driver {
       },
       onDeselected: () => {         // When the element has been deselected
       },
+      onReset: () => {              // When overlay is about to be cleared
+      },
       ...options,
     };
 
