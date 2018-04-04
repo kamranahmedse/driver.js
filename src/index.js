@@ -143,7 +143,7 @@ export default class Driver {
     if (this.steps.length !== 0) {
       if (event.keyCode === RIGHT_KEY_CODE) {
         this.moveNext();
-      } else if (event.keyCode === LEFT_KEY_CODE) {
+      } else if (event.keyCode === LEFT_KEY_CODE && this.hasPreviousStep()) {
         this.movePrevious();
       }
     }
