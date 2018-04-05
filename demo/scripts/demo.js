@@ -380,4 +380,39 @@ document.addEventListener("DOMContentLoaded", function () {
     window.location = newURL;
     window.location.href = newURL;
   }
+
+/////////////////////////////////////////////
+// Async example
+/////////////////////////////////////////////
+  const asyncCallbacksDriver = new Driver();
+  asyncCallbacksDriver.defineSteps([
+    {
+      element: '#async-callbacks',
+      popover: {
+        title: 'Follow me…',
+        description: 'Clicking next will create a DOM element…',
+        position: 'left',
+        onNext: (done) => {
+          const foo = document.createElement('div');
+          foo.setAttribute('class', 'foo');
+          foo.innerHTML = 'I am new';
+          document.querySelector('#async-callbacks').append(foo);
+          setTimeout(done, 500);
+        }
+      }
+    },
+    {
+      element: '.foo',
+      popover: {
+        title: 'Behold!',
+        description: 'This element was not here before…',
+        position: 'top'
+      }
+    }
+  ]);
+  document.querySelector('#run-async-callbacks')
+    .addEventListener('click', (e) => {
+      e.preventDefault();
+      asyncCallbacksDriver.start();
+    });
 });

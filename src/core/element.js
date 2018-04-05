@@ -14,7 +14,7 @@ import Position from './position';
 export default class Element {
   /**
    * DOM element object
-   * @param {Node|HTMLElement} node
+   * @param {String} querySelector
    * @param {Object} options
    * @param {Popover} popover
    * @param {Stage} stage
@@ -23,7 +23,7 @@ export default class Element {
    * @param {Document} document
    */
   constructor({
-    node,
+    querySelector,
     options,
     popover,
     stage,
@@ -31,7 +31,7 @@ export default class Element {
     window,
     document,
   } = {}) {
-    this.node = node;
+    this.querySelector = querySelector;
     this.document = document;
     this.window = window;
     this.options = options;

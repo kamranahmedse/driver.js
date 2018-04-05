@@ -36,10 +36,9 @@ export default class Popover extends Element {
       startBtnText: 'Next &rarr;',
       nextBtnText: 'Next &rarr;',
       prevBtnText: '&larr; Previous',
-      onClose: () => {},
-      onDone: () => {},
-      onNext: () => {},
-      onPrev: () => {},
+      onClose: null,
+      onNext: null,
+      onPrev: null,
       ...options,
     };
 
@@ -165,14 +164,6 @@ export default class Popover extends Element {
       return;
     }
 
-    if (this.options.onPrev) {
-      this.prevBtnNode.onclick = this.options.onPrev;
-    }
-
-    if (this.options.onClose) {
-      this.closeBtnNode.onclick = this.options.onClose;
-    }
-
     this.footerNode.style.display = 'block';
     if (this.options.isFirst) {
       this.prevBtnNode.classList.add(CLASS_BTN_DISABLED);
@@ -183,14 +174,8 @@ export default class Popover extends Element {
 
     if (this.options.isLast) {
       this.nextBtnNode.innerHTML = this.options.doneBtnText;
-      if (this.options.onDone) {
-        this.nextBtnNode.onclick = this.options.onDone;
-      }
     } else {
       this.nextBtnNode.innerHTML = this.options.nextBtnText;
-      if (this.options.onNext) {
-        this.nextBtnNode.onclick = this.options.onNext;
-      }
     }
   }
 

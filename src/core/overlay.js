@@ -48,13 +48,24 @@ export default class Overlay {
   /**
    * Highlights the dom element on the screen
    * @param {Element} element
+   * @param {Function} fallback
    * @public
    */
-  highlight(element) {
-    if (!element || !element.node) {
+  highlight(element, fallback) {
+    if (!element || !element.querySelector) {
       console.warn('Invalid element to highlight. Must be an instance of `Element`');
       return;
     }
+
+    const domElement = this.document.querySelector(element.querySelector);
+    if (!domElement) {
+      console.warn(`Element to highlight ${element.querySelector} not found`);
+      if (fallback) {
+        fallback();
+      }
+      return;
+    }
+    element.node = domElement;
 
     // If highlighted element is not changed from last time
     if (element.isSame(this.highlightedElement)) {

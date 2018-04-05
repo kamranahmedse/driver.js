@@ -189,6 +189,39 @@ driver.highlight({
       <pre><code class="javascript">driver.reset()</code></div>
 
     <hr class="hr__fancy">
+    <div id="async-callbacks" class="section__example">
+      <h4>Use async callbacks</h4>
+      <p>If you need to drive other applications, it can be handy to register async callbacks for some steps.</p>
+      <a href="#" class="btn__run-demo" id="run-async-callbacks">Show Demo</a>
+      <pre><code class="javascript">const driver = new Driver();
+driver.defineSteps([
+  {
+    element: '#async-callbacks',
+    popover: {
+      title: 'Follow me…',
+      description: 'Clicking next will create a DOM element…',
+      position: 'left',
+      onNext: (done) => {
+        const foo = document.createElement('div');
+        foo.setAttribute('class', 'foo');
+        foo.innerHTML = 'I am new';
+        document.querySelector('#async-callbacks').append(foo);
+        setTimeout(done, 500);
+      }
+    }
+  },
+  {
+    element: '.foo',
+    popover: {
+      title: 'Behold!',
+      description: 'This element was not here before…',
+      position: 'top'
+    }
+  }
+]);</code></pre>
+    </div>
+
+    <hr class="hr__fancy">
     <div id="third-element-introduction" class="section__example">
       <h4 id="first-element-introduction">Creating Feature Introductions</h4>
       <p id="second-para-feature-introductions">You can also make powerful feature introductions to guide the users
@@ -299,10 +332,18 @@ driver.highlight({
     closeBtnText: 'Close',   // Text on the close button for this step
     nextBtnText: 'Next',     // Next button text for this step
     prevBtnText: 'Previous', // Previous button text for this step
-    onDone: () => {},        // Done button callback
-    onClose: () => {},       // Close button callback
-    onNext: () => {},        // Next button callback
-    onPrev: () => {},        // Prev button callback
+    onClose: (done) => {     // Close button callback
+      // e.g. clean up
+      done();
+    },
+    onNext: (done) => {      // Next button callback
+      // e.g. trigger something async that creates
+      // the element you want to select as a result
+      done();
+    },
+    onPrev: (done) => {      // Prev button callback
+      done()
+    }
   }
 };
 </code></pre>
