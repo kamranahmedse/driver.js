@@ -646,6 +646,12 @@ declare module 'driver.js' {
       allowClose?: boolean,
 
       /**
+       * Clicking outside the highlighted element should move next
+       * @default false
+       */
+      outsideClickNext?: boolean,
+
+      /**
        * Background color for the stage behind the highlighted element
        * @default '#ffffff'
        */
