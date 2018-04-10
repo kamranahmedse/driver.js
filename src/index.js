@@ -100,22 +100,36 @@ export default class Driver {
       return;
     }
 
+    const step = this.steps[this.currentStep];
+    const currentPopover = step.options.popover;
+
     const nextClicked = e.target.classList.contains(CLASS_NEXT_STEP_BTN);
     const prevClicked = e.target.classList.contains(CLASS_PREV_STEP_BTN);
     const closeClicked = e.target.classList.contains(CLASS_CLOSE_BTN);
 
     if (closeClicked) {
-      this.reset();
+      if (currentPopover.onClose) {
+        currentPopover.onClose(() => this.reset());
+      } else {
+        this.reset();
+      }
       return;
     }
 
     if (nextClicked) {
-      this.moveNext();
+      if (currentPopover.onNext) {
+        currentPopover.onNext(() => this.moveNext());
+      } else {
+        this.moveNext();
+      }
     } else if (prevClicked) {
-      this.movePrevious();
+      if (currentPopover.onPrev) {
+        currentPopover.onPrev(() => this.movePrevious());
+      } else {
+        this.movePrevious();
+      }
     }
   }
-
 
   /**
    * Handler for the onResize DOM event
@@ -140,18 +154,33 @@ export default class Driver {
       return;
     }
 
+    const step = this.steps[this.currentStep];
+    const currentPopover = step.options.popover;
+
     // If escape was pressed and it is allowed to click outside to close
     if (event.keyCode === ESC_KEY_CODE && this.options.allowClose) {
-      this.reset();
+      if (currentPopover.onClose) {
+        currentPopover.onClose(() => this.reset());
+      } else {
+        this.reset();
+      }
       return;
     }
 
     // Arrow keys to only perform if it is stepped introduction
     if (this.steps.length !== 0) {
       if (event.keyCode === RIGHT_KEY_CODE) {
-        this.moveNext();
+        if (currentPopover.onNext) {
+          currentPopover.onNext(() => this.moveNext());
+        } else {
+          this.moveNext();
+        }
       } else if (event.keyCode === LEFT_KEY_CODE) {
-        this.movePrevious();
+        if (currentPopover.onPrev) {
+          currentPopover.onPrev(() => this.movePrevious());
+        } else {
+          this.movePrevious();
+        }
       }
     }
   }
@@ -164,7 +193,7 @@ export default class Driver {
   movePrevious() {
     this.currentStep -= 1;
     if (this.steps[this.currentStep]) {
-      this.overlay.highlight(this.steps[this.currentStep]);
+      this.overlay.highlight(this.steps[this.currentStep], () => this.movePrevious());
     } else {
       this.reset();
     }
@@ -178,7 +207,7 @@ export default class Driver {
   moveNext() {
     this.currentStep += 1;
     if (this.steps[this.currentStep]) {
-      this.overlay.highlight(this.steps[this.currentStep]);
+      this.overlay.highlight(this.steps[this.currentStep], () => this.moveNext());
     } else {
       this.reset();
     }
@@ -286,12 +315,6 @@ export default class Driver {
       };
     }
 
-    const domElement = this.document.querySelector(querySelector);
-    if (!domElement) {
-      console.warn(`Element to highlight ${querySelector} not found`);
-      return null;
-    }
-
     let popover = null;
     if (elementOptions.popover && elementOptions.popover.description) {
       const popoverOptions = {
@@ -314,7 +337,7 @@ export default class Driver {
     const stage = new Stage(stageOptions, this.window, this.document);
 
     return new Element({
-      node: domElement,
+      querySelector,
       options: elementOptions,
       popover,
       stage,
