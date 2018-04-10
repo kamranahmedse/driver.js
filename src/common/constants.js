@@ -3,7 +3,6 @@ export const OVERLAY_PADDING = 10;
 
 export const SHOULD_ANIMATE_OVERLAY = true;
 export const SHOULD_OUTSIDE_CLICK_CLOSE = true;
-
 export const SHOULD_OUTSIDE_CLICK_NEXT = false;
 
 export const ESC_KEY_CODE = 27;

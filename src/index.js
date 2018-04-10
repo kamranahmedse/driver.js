@@ -32,7 +32,7 @@ export default class Driver {
       padding: OVERLAY_PADDING, // Spacing around the element from the overlay
       scrollIntoViewOptions: null,  // Options to be passed to `scrollIntoView`
       allowClose: SHOULD_OUTSIDE_CLICK_CLOSE,    // Whether to close overlay on click outside the element
-      outsideClickNext: SHOULD_OUTSIDE_CLICK_NEXT,  // Whether to move next on click outside the element
+      overlayClickNext: SHOULD_OUTSIDE_CLICK_NEXT,  // Whether to move next on click outside the element
       stageBackground: '#ffffff',   // Background color for the stage
       onHighlightStarted: () => {   // When element is about to be highlighted
       },
@@ -89,7 +89,7 @@ export default class Driver {
     const clickedHighlightedElement = highlightedElement.node.contains(e.target);
     const clickedPopover = popover && popover.contains(e.target);
 
-    if (!clickedHighlightedElement && !clickedPopover && this.options.outsideClickNext) {
+    if (!clickedHighlightedElement && !clickedPopover && this.options.overlayClickNext) {
       this.moveNext();
       return;
     }
