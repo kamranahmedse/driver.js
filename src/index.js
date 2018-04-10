@@ -17,6 +17,7 @@ import {
   SHOULD_OUTSIDE_CLICK_NEXT,
 } from './common/constants';
 import Stage from './core/stage';
+import { isDomElement } from './common/utils';
 
 /**
  * Plugin class that drives the plugin
@@ -248,10 +249,6 @@ export default class Driver {
     this.steps = [];
 
     steps.forEach((step, index) => {
-      if (!step.element || typeof step.element !== 'string') {
-        throw new Error(`Element (query selector string) missing in step ${index}`);
-      }
-
       const element = this.prepareElementFromStep(step, steps, index);
       if (!element) {
         return;
@@ -272,13 +269,18 @@ export default class Driver {
    * @private
    */
   prepareElementFromStep(currentStep, allSteps = [], index = 0) {
-    let querySelector = '';
     let elementOptions = {};
+    let querySelector = currentStep;
 
-    // If it is just a query selector string
-    if (typeof currentStep === 'string') {
-      querySelector = currentStep;
-    } else {
+    // If the `currentStep` is step definition
+    // then grab the options and element from the definition
+    const isStepDefinition = typeof currentStep !== 'string' && !isDomElement(currentStep);
+
+    if (!currentStep || (isStepDefinition && !currentStep.element)) {
+      throw new Error(`Element is required in step ${index}`);
+    }
+
+    if (isStepDefinition) {
       querySelector = currentStep.element;
       elementOptions = {
         ...this.options,
@@ -286,7 +288,7 @@ export default class Driver {
       };
     }
 
-    const domElement = this.document.querySelector(querySelector);
+    const domElement = isDomElement(querySelector) ? querySelector : this.document.querySelector(querySelector);
     if (!domElement) {
       console.warn(`Element to highlight ${querySelector} not found`);
       return null;

@@ -182,7 +182,7 @@ Here are the set of options that you can pass while defining steps `defineSteps`
 
 ```javascript
 const stepDefinition = {
-  element: '#some-item',        // Query selector for the item to be highlighted
+  element: '#some-item',        // Query selector string or Node to be highlighted
   stageBackground: '#ffffff',   // This will override the one set in driver
   popover: {                    // There will be no popover if empty or not given
     title: 'Title',             // Title on the popover
