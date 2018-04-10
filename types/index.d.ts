@@ -138,7 +138,7 @@ declare module 'driver.js' {
       /**
        * Query selector representing the DOM Element
        */
-      element: string;
+      element: string | HTMLElement;
 
       /**
        * Color of stage when this step is active

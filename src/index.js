@@ -248,7 +248,7 @@ export default class Driver {
     this.steps = [];
 
     steps.forEach((step, index) => {
-      if (!step.element || typeof step.element !== 'string') {
+      if ((!step.element || !(typeof step.element === 'string' || step.element.nodeType > 0))) {
         throw new Error(`Element (query selector string) missing in step ${index}`);
       }
 
@@ -274,9 +274,10 @@ export default class Driver {
   prepareElementFromStep(currentStep, allSteps = [], index = 0) {
     let querySelector = '';
     let elementOptions = {};
+    let domElement;
 
-    // If it is just a query selector string
-    if (typeof currentStep === 'string') {
+    // If it is just a query selector string or DOM node
+    if (typeof currentStep === 'string' || currentStep.nodeType > 0) {
       querySelector = currentStep;
     } else {
       querySelector = currentStep.element;
@@ -286,10 +287,15 @@ export default class Driver {
       };
     }
 
-    const domElement = this.document.querySelector(querySelector);
-    if (!domElement) {
-      console.warn(`Element to highlight ${querySelector} not found`);
-      return null;
+    // If it's a DOM node
+    if (querySelector.nodeType > 0) {
+      domElement = querySelector;
+    } else {
+      domElement = this.document.querySelector(querySelector);
+      if (!domElement) {
+        console.warn(`Element to highlight ${querySelector} not found`);
+        return null;
+      }
     }
 
     let popover = null;
