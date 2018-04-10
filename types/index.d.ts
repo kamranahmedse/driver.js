@@ -649,7 +649,7 @@ declare module 'driver.js' {
        * Clicking outside the highlighted element should move next
        * @default false
        */
-      outsideClickNext?: boolean,
+      overlayClickNext?: boolean,
 
       /**
        * Background color for the stage behind the highlighted element

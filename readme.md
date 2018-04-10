@@ -160,7 +160,7 @@ const driver = new Driver({
   opacity: 0.75,                    // Background opacity (0 means only popovers and without overlay)
   padding: 10,                      // Distance of element from around the edges
   allowClose: true,                 // Whether the click on overlay should close or not
-  outsideClickNext: false,          // Whether the click on overlay should move next
+  overlayClickNext: false,          // Whether the click on overlay should move next
   doneBtnText: 'Done',              // Text on the final button
   closeBtnText: 'Close',            // Text on the close button for this step
   stageBackground: '#ffffff',       // Background color for the staged behind highlighted element
