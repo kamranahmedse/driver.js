@@ -138,7 +138,7 @@ declare module 'driver.js' {
       /**
        * Query selector representing the DOM Element
        */
-      element: string;
+      element: string | HTMLElement | Node;
 
       /**
        * Color of stage when this step is active
@@ -644,6 +644,12 @@ declare module 'driver.js' {
        * @default true
        */
       allowClose?: boolean,
+
+      /**
+       * Clicking outside the highlighted element should move next
+       * @default false
+       */
+      overlayClickNext?: boolean,
 
       /**
        * Background color for the stage behind the highlighted element

@@ -47,3 +47,11 @@ export const getStyleProperty = (element, propertyName, prefixVendor = false) =>
   return propertyValue && propertyValue.toLowerCase ? propertyValue.toLowerCase() : propertyValue;
 };
 
+/**
+ * Checks if the passed element is dom object or not
+ * @param element
+ * @returns {boolean}
+ */
+export const isDomElement = function (element) {
+  return element && typeof element === 'object' && 'nodeType' in element;
+};

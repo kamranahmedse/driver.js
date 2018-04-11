@@ -206,4 +206,5 @@ div#driver-highlighted-element-stage {
   -ms-transform-box: border-box !important;
   -o-transform-box: border-box !important;
   transform-box: border-box !important;
+  will-change: unset !important;
 }

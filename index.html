@@ -272,6 +272,7 @@ driver.highlight({
   opacity: 0.75,  // Background opacity (0 means only popovers and without overlay)
   padding: 10,    // Distance of element from around the edges
   allowClose: true, // Whether clicking on overlay should close or not
+  overlayClickNext: false, // Should it move to next step on overlay click
   doneBtnText: 'Done', // Text on the final button
   closeBtnText: 'Close', // Text on the close button for this step
   nextBtnText: 'Next', // Next button text for this step
@@ -291,9 +292,9 @@ driver.highlight({
       <p>Here are the set of options that you can pass in each step i.e. an item in array of steps or the object that
         you pass to <code>highlight</code> method</p>
       <pre><code class="javascript">const stepDefinition = {
-  element: '#some-item', // Query selector for the item to be highlighted
-  popover: {             // There will be no popover if empty or not given
-    title: 'Title',      // Title on the popover
+  element: '#some-item',  // Query selector string or Node to be highlighted
+  popover: {              // There will be no popover if empty or not given
+    title: 'Title',       // Title on the popover
     description: 'Description', // Body of the popover
     showButtons: false,      // Do not show control buttons in footer
     closeBtnText: 'Close',   // Text on the close button for this step

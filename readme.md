@@ -160,6 +160,7 @@ const driver = new Driver({
   opacity: 0.75,                    // Background opacity (0 means only popovers and without overlay)
   padding: 10,                      // Distance of element from around the edges
   allowClose: true,                 // Whether the click on overlay should close or not
+  overlayClickNext: false,          // Whether the click on overlay should move next
   doneBtnText: 'Done',              // Text on the final button
   closeBtnText: 'Close',            // Text on the close button for this step
   stageBackground: '#ffffff',       // Background color for the staged behind highlighted element
@@ -170,7 +171,7 @@ const driver = new Driver({
   onHighlightStarted: (Element) {}, // Called when element is about to be highlighted
   onHighlighted: (Element) {},      // Called when element is fully highlighted
   onDeselected: (Element) {},       // Called when element has been deselected
-  onReset: () {},                   // Called when element has been deselected
+  onReset: () {},                   // Called when overlay is about to be cleared
 });
 ```
 Note that all the button options that you provide in the driver definition can be overridden for a specific step by giving them in the step definition
@@ -181,7 +182,7 @@ Here are the set of options that you can pass while defining steps `defineSteps`
 
 ```javascript
 const stepDefinition = {
-  element: '#some-item',        // Query selector for the item to be highlighted
+  element: '#some-item',        // Query selector string or Node to be highlighted
   stageBackground: '#ffffff',   // This will override the one set in driver
   popover: {                    // There will be no popover if empty or not given
     title: 'Title',             // Title on the popover

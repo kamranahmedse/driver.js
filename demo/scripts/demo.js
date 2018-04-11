@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const tourSteps = [
     {
-      element: '#driver-demo-head',
+      element: document.getElementById('driver-demo-head'),
       popover: {
         title: 'Before we start',
         description: 'This is just one use-case, make sure to check out the rest of the docs below.',
