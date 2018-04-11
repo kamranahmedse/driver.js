@@ -269,6 +269,43 @@ activeElement.getNode();  // Gets the DOM Element behind this element
 
 ![](./demo/images/split.png)
 
+## BOOTSTRAPPER
+
+Bootstrapper instantiate Driver.js based in attributes.
+
+### Example:
+Put these attributes on your HTML element. Only driver, step, stage-background and popover-title aren't optional
+```html
+  <element
+    driver
+    step="1"
+    stage-background="#d9e6f7"
+    popover-title="Step title"
+    popover-description="Step tour description"
+    popover-position="bottom"
+    popover-show-buttons="false"
+    popover-done-btn-text="done"
+    popover-close-btn-text="close"
+    popover-next-btn-text="next"
+    popover-prev-btn-text="previous"
+  >
+  ...
+  </element>
+```
+
+Call the bootstrap function in your javascript. If you have more than one tour, you can specify the root element of your tour, if you have only one tour, the root element doesn't need to be informed
+```javascript
+Driver.bootstrap(options, rootElement);//if you have options and more one tour
+//or
+Driver.bootstrap(null, rootElement);//if you doesn't have options, but have more one tour
+//or
+Driver.bootstrap(options);//if you have options and only one tour
+//or
+Driver.bootstrap();//if you doesn't have options and have only one tour
+```
+
+![](./demo/images/split.png)
+
 ## Todo
 
 - [X] Single element highlighting
