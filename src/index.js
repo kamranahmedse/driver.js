@@ -18,6 +18,7 @@ import {
 } from './common/constants';
 import Stage from './core/stage';
 import { isDomElement } from './common/utils';
+import bootstrapper from './core/bootstrapper';
 
 /**
  * Plugin class that drives the plugin
@@ -356,5 +357,14 @@ export default class Driver {
     }
 
     this.overlay.highlight(element);
+  }
+
+  /**
+ * Instantiate Driver.js using element attributes
+ * @param {Object} options
+ * @param {string|element} rootElement
+ */
+  static bootstrap(options = {}, rootElement = window.document) {
+    return bootstrapper(options, rootElement);
   }
 }

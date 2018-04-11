@@ -105,6 +105,13 @@ document.addEventListener("DOMContentLoaded", function () {
     showButtons: true,
   });
 
+  const bootstrapDriver = Driver.bootstrap({
+    animate: true,
+    opacity: 0.8,
+    padding: 5,
+    showButtons: true,
+  });
+
   boringTourDriver.defineSteps(tourSteps);
   animatedTourDriver.defineSteps(tourSteps);
 
@@ -124,6 +131,11 @@ document.addEventListener("DOMContentLoaded", function () {
       }
 
       boringTourDriver.start();
+    });
+
+  document.querySelector('#bootstrapper-tour')
+    .addEventListener('click', () => {
+      bootstrapDriver.start();
     });
 
 

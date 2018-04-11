@@ -30,6 +30,20 @@ export const CLASS_BTN_DISABLED = 'driver-disabled';
 // It must match the one set in the animations in CSS file
 export const ANIMATION_DURATION_MS = 400;
 
+// Bootstrapper attributes
+export const ATTRIBUTE_DRIVER = 'driver';
+export const ATTRIBUTE_STEP = 'step';
+export const ATTRIBUTE_STAGE_BACKGROUND = 'stage-background';
+export const ATTRIBUTE_TITLE = 'popover-title';
+export const ATTRIBUTE_DESCRIPTION = 'popover-description';
+export const ATTRIBUTE_POSITION = 'popover-position';
+export const ATTRIBUTE_SHOW_BUTTONS = 'popover-show-buttons';
+export const ATTRIBUTE_DONE_BTN_TEXT = 'popover-done-btn-text';
+export const ATTRIBUTE_CLOSE_BTN_TEXT = 'popover-close-btn-text';
+export const ATTRIBUTE_NEXT_BTN_TEXT = 'popover-next-btn-text';
+export const ATTRIBUTE_PREV_BTN_TEXT = 'popover-prev-btn-text';
+
+
 // language=HTML
 export const POPOVER_HTML = `
   <div id="${ID_POPOVER}">
