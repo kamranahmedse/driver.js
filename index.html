@@ -13,14 +13,29 @@
 </head>
 <body>
 <div class="page-wrap">
-  <section class="section__header" id="driver-demo-head">
-    <h1><span id="logo_emoji" class="emoji">👨‍🔧️</span> <span id="name_driver">Driver</span></h1>
+  <section class="section__header" id="driver-demo-head"
+    driver step="1"
+    popover-title="Before we start"
+    popover-description="This is just one use-case, make sure to check out the rest of the docs below."
+    popover-next-btn-text="Okay, Start!"
+    >
+    <h1><span id="logo_emoji" class="emoji"
+      driver step="2"
+      popover-title="Focus Anything"
+      popover-description="You can use it to highlight literally anything, images, text, div, span, li etc."
+      popover-position="bottom"
+      >👨‍🔧️</span> <span id="name_driver"
+                      driver step="3"
+                      popover-title="Why Driver?"
+                      popover-description="Because it lets you drive the user across the page"
+                      popover-position="bottom">Driver</span></h1>
     <p class="text-muted tagline">Light-weight, no-dependency, vanilla JavaScript engine to drive user's focus across
       the
       page</p>
 
     <a id="animated-tour" href="javascript:void(0)" class="btn btn__example btn__dark">With Animation</a>
     <a id="boring-tour" href="javascript:void(0)" class="btn btn__example btn__dark">Without Animation</a>
+    <a id="bootstrapper-tour" href="javascript:void(0)" class="btn btn__example btn__dark">Bootstrapper</a>
 
     <div class="github-button top-30">
       <!-- Place this tag where you want the button to render. -->
@@ -41,14 +56,46 @@
     <p>Driver is compatible with all the major browsers and can be used for any of your overlay needs. Feature
       introductions, focus shifters, call-to-action are just a few examples.</p>
     <ul>
-      <li id="highlight_feature">🔆 <strong>Highlight</strong> any (literally any) item on page</li>
+      <li id="highlight_feature"
+        driver step="4"
+        popover-title="Highlight Feature"
+        popover-description="You may use it to highlight single elements (with or without popover) e.g. like facebook does while creating posts"
+        >🔆 <strong>Highlight</strong> any (literally any) item on page</li>
       <li id="interactions_feature">✋ <strong>Block user interactions</strong></li>
-      <li id="feature_introductions_feature">📣 Create <strong>feature introductions</strong></li>
-      <li id="focus_shifters_feature">👓 Add <strong>focus shifters</strong> for users</li>
-      <li id="customizable_feature">🛠️ Highly customizable – <strong>Use it anywhere</strong> for overlay</li>
-      <li id="keyboard_feature">⌨️ User Friendly – <strong>Controllable by keys</strong></li>
-      <li id="free_use_feature">🆓 <strong>MIT Licensed</strong> – Free for personal and commercial use</li>
-      <li id="lightweight_feature">🕊️ Lightweight – Only <strong>~4kb</strong> when gzipped</li>
+      <li id="feature_introductions_feature"
+        driver step="5"
+        popover-title="Feature Introductions"
+        popover-description="With it\'s powerful API you can use it to make programmatic or user driven feature introductions"
+        popover-position="bottom"
+      >📣 Create <strong>feature introductions</strong></li>
+      <li id="focus_shifters_feature"
+        driver step="6"
+        popover-title="Focus Shifters"
+        popover-description="If some element or part of the page needs user\'s interaction, you can just call the highlight method. Driver will take care of driving the user there"
+        popover-position="bottom"
+      >👓 Add <strong>focus shifters</strong> for users</li>
+      <li id="customizable_feature"
+        driver step="7"
+        popover-title="Highly Customizable"
+        popover-description="Driver has a powerful API allowing you to customize the experience as much as you can."
+        popover-position="bottom"
+      >🛠️ Highly customizable – <strong>Use it anywhere</strong> for overlay</li>
+      <li id="keyboard_feature"
+        driver step="8"
+        popover-title="User Friendly"
+        popover-description="Your users can control it with the arrow keys on keyboard, or escape to close it"
+        popover-position="bottom"
+      >⌨️ User Friendly – <strong>Controllable by keys</strong></li>
+      <li id="free_use_feature"
+        driver step="9"
+        popover-title="MIT License"
+        popover-description="I believe in open-source and thus Driver is completely free for both personal or commercial use"
+      >🆓 <strong>MIT Licensed</strong> – Free for personal and commercial use</li>
+      <li id="lightweight_feature"
+        driver step="10"
+        popover-title="Only ~4KB"
+        popover-description="Driver is free of bloat and written in Vanilla JS. There is no external dependency at all, thus keeping it smaller in size."
+      >🕊️ Lightweight – Only <strong>~4kb</strong> when gzipped</li>
       <li id="major_browsers_feature">🌀 <strong>Consistent behavior</strong> across all major browsers</li>
     </ul>
   </section>
@@ -61,7 +108,11 @@
   </section>
   <hr class="hr__fancy">
   <section class="section__examples">
-    <div id="examples_section">
+    <div id="examples_section"
+		  driver step="11"
+      popover-title="Usage Examples"
+      popover-description="Have a look at the usage examples and see how you can use it."
+    >
       <h3>Can you show some Examples?</h3>
       <p>Below you find some of the examples and sample use-cases on how you can use it. Run by clicking the
         <code>RUN</code> button.</p>
