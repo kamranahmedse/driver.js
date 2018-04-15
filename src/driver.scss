@@ -132,9 +132,7 @@ div#driver-popover-item {
   transition: none !important;
 
   background: transparent !important;
-  -webkit-appearance: none;
-  -webkit-box-shadow: 0 0 0 50px rgba(0, 0, 0, 0.75);
-  box-shadow: 0 0 0 50px rgba(0, 0, 0, 0.75);
+  outline: 5000px solid rgba(0, 0, 0, 0.75);
 }
 
 div#driver-page-overlay {
