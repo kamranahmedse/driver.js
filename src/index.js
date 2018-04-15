@@ -295,7 +295,7 @@ export default class Driver {
     }
 
     let popover = null;
-    if (elementOptions.popover && elementOptions.popover.description) {
+    if (elementOptions.popover && elementOptions.popover.title) {
       const popoverOptions = {
         ...this.options,
         ...elementOptions.popover,

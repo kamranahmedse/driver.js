@@ -120,7 +120,7 @@ export default class Popover extends Element {
 
     // Set the title and descriptions
     this.titleNode.innerHTML = this.options.title;
-    this.descriptionNode.innerHTML = this.options.description;
+    this.descriptionNode.innerHTML = this.options.description || '';
 
     this.renderButtons();
 
