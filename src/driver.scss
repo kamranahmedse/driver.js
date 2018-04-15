@@ -4,10 +4,10 @@ $stage-bg: #ffffff;
 $button-bg: #f1f1f1;
 $disabled-btn-color: #808080;
 
-$popover-zindex: 1000000000;
-$overlay-zindex: 100002;
-$stage-zindex: 100003;
-$highlighted-element-zindex: 100004;
+$popover-z-index: 1000000000;
+$overlay-z-index: 100002;
+$stage-z-index: 100003;
+$highlighted-element-z-index: 100004;
 
 // If you update this duration, make sure to
 // update `ANIMATION_DURATION_MS` constant
@@ -25,7 +25,7 @@ div#driver-popover-item {
   min-width: 250px;
   max-width: 300px;
   box-shadow: 0 1px 10px rgba(0, 0, 0, 0.4);
-  z-index: $popover-zindex;
+  z-index: $popover-z-index;
 
   .driver-popover-tip {
     border: 5px solid $popover-bg;
@@ -124,12 +124,17 @@ div#driver-popover-item {
   }
 }
 
-.driver-no-animation {
+.driver-stage-no-animation {
   -webkit-transition: none !important;
   -moz-transition: none !important;
   -ms-transition: none !important;
   -o-transition: none !important;
   transition: none !important;
+
+  background: transparent !important;
+  -webkit-appearance: none;
+  -webkit-box-shadow: 0 0 0 50px rgba(0, 0, 0, 0.75);
+  box-shadow: 0 0 0 50px rgba(0, 0, 0, 0.75);
 }
 
 div#driver-page-overlay {
@@ -145,7 +150,7 @@ div#driver-page-overlay {
   zoom: 1;
   filter: alpha(opacity=75);
   opacity: 0.75;
-  z-index: $overlay-zindex !important;
+  z-index: $overlay-z-index !important;
 
   -webkit-transition: all $animation-sec;
   -moz-transition: all $animation-sec;
@@ -161,8 +166,9 @@ div#driver-highlighted-element-stage {
   height: 50px;
   width: 300px;
   background: $stage-bg;
-  z-index: $stage-zindex !important;
+  z-index: $stage-z-index !important;
   display: none;
+  border-radius: 2px;
 
   -webkit-transition: all $animation-sec;
   -moz-transition: all $animation-sec;
@@ -172,7 +178,7 @@ div#driver-highlighted-element-stage {
 }
 
 .driver-highlighted-element {
-  z-index: $highlighted-element-zindex !important;
+  z-index: $highlighted-element-z-index !important;
 }
 
 .driver-position-relative {

@@ -1,4 +1,4 @@
-import { ANIMATION_DURATION_MS, CLASS_NO_ANIMATION, ID_OVERLAY, OVERLAY_HTML } from '../common/constants';
+import { ANIMATION_DURATION_MS, ID_OVERLAY, OVERLAY_HTML } from '../common/constants';
 import { createNodeFromString } from '../common/utils';
 
 /**
@@ -39,9 +39,15 @@ export default class Overlay {
     this.node.style.opacity = '0';
 
     if (!this.options.animate) {
-      this.node.classList.add(CLASS_NO_ANIMATION);
-    } else {
-      this.node.classList.remove(CLASS_NO_ANIMATION);
+      // For non-animation cases remove the overlay because we achieve this overlay by having
+      // a higher box-shadow on the stage. Why are we doing it that way? Because the stage that
+      // is shown "behind" the highlighted element to make it pop out of the screen, it introduces
+      // some stacking contexts issues. To avoid those issues we just make the stage background
+      // transparent and achieve the overlay using the shadow so to make the element below it visible
+      // through the stage even if there are stacking issues.
+      if (this.node.parentElement) {
+        this.node.parentElement.removeChild(this.node);
+      }
     }
   }
 
