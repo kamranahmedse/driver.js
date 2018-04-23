@@ -219,9 +219,9 @@ export default class Element {
     this.node.classList.remove(CLASS_POSITION_RELATIVE);
 
     const stackFixes = this.document.querySelectorAll(`.${CLASS_FIX_STACKING_CONTEXT}`);
-    stackFixes.forEach((stackFix) => {
-      stackFix.classList.remove(CLASS_FIX_STACKING_CONTEXT);
-    });
+    for (let i = 0; i < stackFixes.length; i++) {
+      stackFixes[i].classList.remove(CLASS_FIX_STACKING_CONTEXT);
+    }
   }
 
   /**
