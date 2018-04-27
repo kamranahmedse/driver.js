@@ -258,7 +258,7 @@ const activeElement = driver.getHighlightedElement();
 // Gets the last highlighted element, would be an instance of `/src/core/element.js`
 const lastActiveElement = driver.getLastHighlightedElement();
 
-activeElement.getScreenCoordinates(); // Gets screen co-ordinates of the active element
+activeElement.getCalculatedPosition(); // Gets screen co-ordinates of the active element
 activeElement.hidePopover();          // Hide the popover
 activeElement.showPopover();          // Show the popover
 
