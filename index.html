@@ -322,7 +322,7 @@ driver.hasPreviousStep(); // Checks if there is previous step to move to
 // Gets the currently highlighted element on screen
 const activeElement = driver.getHighlightedElement();
 const lastActiveElement = driver.getLastHighlightedElement();
-activeElement.getScreenCoordinates(); // Gets screen co-ordinates of the active element
+activeElement.getCalculatedPosition(); // Gets screen co-ordinates of the active element
 activeElement.hidePopover();  // Hide the popover
 activeElement.showPopover();  // Show the popover
 
