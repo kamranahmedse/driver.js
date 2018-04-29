@@ -167,6 +167,7 @@ const driver = new Driver({
   nextBtnText: 'Next',              // Next button text for this step
   prevBtnText: 'Previous',          // Previous button text for this step
   showButtons: false,               // Do not show control buttons in footer
+  keyboardControl: true,            // Allow controlling through keyboard (escape to close, arrow keys to move)
   scrollIntoViewOptions: {},        // We use `scrollIntoView()` when possible, pass here the options for it if you want any
   onHighlightStarted: (Element) {}, // Called when element is about to be highlighted
   onHighlighted: (Element) {},      // Called when element is fully highlighted
@@ -258,9 +259,9 @@ const activeElement = driver.getHighlightedElement();
 // Gets the last highlighted element, would be an instance of `/src/core/element.js`
 const lastActiveElement = driver.getLastHighlightedElement();
 
-activeElement.getScreenCoordinates(); // Gets screen co-ordinates of the active element
-activeElement.hidePopover();          // Hide the popover
-activeElement.showPopover();          // Show the popover
+activeElement.getCalculatedPosition(); // Gets screen co-ordinates of the active element
+activeElement.hidePopover();           // Hide the popover
+activeElement.showPopover();           // Show the popover
 
 activeElement.getNode();  // Gets the DOM Element behind this element
 ```

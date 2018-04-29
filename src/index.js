@@ -15,6 +15,7 @@ import {
   SHOULD_ANIMATE_OVERLAY,
   SHOULD_OUTSIDE_CLICK_CLOSE,
   SHOULD_OUTSIDE_CLICK_NEXT,
+  ALLOW_KEYBOARD_CONTROL,
 } from './common/constants';
 import Stage from './core/stage';
 import { isDomElement } from './common/utils';
@@ -33,6 +34,7 @@ export default class Driver {
       padding: OVERLAY_PADDING, // Spacing around the element from the overlay
       scrollIntoViewOptions: null,  // Options to be passed to `scrollIntoView`
       allowClose: SHOULD_OUTSIDE_CLICK_CLOSE,    // Whether to close overlay on click outside the element
+      keyboardControl: ALLOW_KEYBOARD_CONTROL,  // Whether to allow controlling through keyboard or not
       overlayClickNext: SHOULD_OUTSIDE_CLICK_NEXT,  // Whether to move next on click outside the element
       stageBackground: '#ffffff',   // Background color for the stage
       onHighlightStarted: () => {   // When element is about to be highlighted
@@ -137,7 +139,8 @@ export default class Driver {
    * @private
    */
   onKeyUp(event) {
-    if (!this.isActivated) {
+    // If driver is not active or keyboard control is disabled
+    if (!this.isActivated || !this.options.keyboardControl) {
       return;
     }
 
