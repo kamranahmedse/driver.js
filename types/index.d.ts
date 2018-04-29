@@ -646,6 +646,12 @@ declare module 'driver.js' {
       allowClose?: boolean,
 
       /**
+       * Whether to allow controlling steps through keyboard
+       * @default true
+       */
+      keyboardControl?: boolean,
+
+      /**
        * Clicking outside the highlighted element should move next
        * @default false
        */

@@ -278,6 +278,7 @@ driver.highlight({
   nextBtnText: 'Next', // Next button text for this step
   prevBtnText: 'Previous', // Previous button text for this step
   showButtons: false, // Do not show control buttons in footer
+  keyboardControl: true, // Allow controlling through keyboard (escape to close, arrow keys to move)
   scrollIntoViewOptions: {}, // We use `scrollIntoView()` when possible, pass here the options for it if you want any
   onHighlightStarted: (Element) {}, // Called when element is about to be highlighted
   onHighlighted: (Element) {}, // Called when element is fully highlighted
@@ -322,7 +323,7 @@ driver.hasPreviousStep(); // Checks if there is previous step to move to
 // Gets the currently highlighted element on screen
 const activeElement = driver.getHighlightedElement();
 const lastActiveElement = driver.getLastHighlightedElement();
-activeElement.getScreenCoordinates(); // Gets screen co-ordinates of the active element
+activeElement.getCalculatedPosition(); // Gets screen co-ordinates of the active element
 activeElement.hidePopover();  // Hide the popover
 activeElement.showPopover();  // Show the popover
 
