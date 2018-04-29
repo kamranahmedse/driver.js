@@ -248,14 +248,14 @@ export default class Driver {
   defineSteps(steps) {
     this.steps = [];
 
-    steps.forEach((step, index) => {
-      const element = this.prepareElementFromStep(step, steps, index);
+    for (let counter = 0; counter < steps.length; counter++) {
+      const element = this.prepareElementFromStep(steps[counter], steps, counter);
       if (!element) {
-        return;
+        continue;
       }
 
       this.steps.push(element);
-    });
+    }
   }
 
   /**
