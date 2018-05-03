@@ -168,7 +168,11 @@ export default class Driver {
   movePrevious() {
     this.currentStep -= 1;
     if (this.steps[this.currentStep]) {
-      this.overlay.highlight(this.steps[this.currentStep]);
+      let element = this.steps[this.currentStep];
+      this.overlay.highlight(element);
+      if (element.options.onPrev) {
+        element.options.onPrev.call(element);
+      }
     } else {
       this.reset();
     }
@@ -182,7 +186,11 @@ export default class Driver {
   moveNext() {
     this.currentStep += 1;
     if (this.steps[this.currentStep]) {
-      this.overlay.highlight(this.steps[this.currentStep]);
+      let element = this.steps[this.currentStep];
+      this.overlay.highlight(element);
+      if (element.options.onNext) {
+        element.options.onNext.call(element);
+      }      
     } else {
       this.reset();
     }
