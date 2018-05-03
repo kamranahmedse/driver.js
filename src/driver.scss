@@ -133,6 +133,7 @@ div#driver-popover-item {
 
   background: transparent !important;
   outline: 5000px solid rgba(0, 0, 0, 0.75);
+  pointer-events:none
 }
 
 div#driver-page-overlay {
