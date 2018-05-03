@@ -171,7 +171,7 @@ export default class Driver {
       let element = this.steps[this.currentStep];
       this.overlay.highlight(element);
       if (element.options.onPrev) {
-        element.options.onPrev.call(element);
+        element.options.onPrev(element);
       }
     } else {
       this.reset();
@@ -189,7 +189,7 @@ export default class Driver {
       let element = this.steps[this.currentStep];
       this.overlay.highlight(element);
       if (element.options.onNext) {
-        element.options.onNext.call(element);
+        element.options.onNext(element);
       }      
     } else {
       this.reset();
