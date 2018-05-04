@@ -166,13 +166,15 @@ export default class Driver {
    * @public
    */
   movePrevious() {
+    let element = this.steps[this.currentStep];
     this.currentStep -= 1;
     if (this.steps[this.currentStep]) {
-      let element = this.steps[this.currentStep];
-      this.overlay.highlight(element);
-      if (element.options.onPrev) {
-        element.options.onPrev(element);
+      if (element.options.onPrev && !element.options.onPrev(element)) {
+        // if the onPrev callback return false or undefined, stop go to previous
+        this.currentStep++;
+        return;
       }
+      this.overlay.highlight(this.steps[this.currentStep]);
     } else {
       this.reset();
     }
@@ -184,13 +186,15 @@ export default class Driver {
    * @public
    */
   moveNext() {
+    let element = this.steps[this.currentStep];
     this.currentStep += 1;
     if (this.steps[this.currentStep]) {
-      let element = this.steps[this.currentStep];
-      this.overlay.highlight(element);
-      if (element.options.onNext) {
-        element.options.onNext(element);
-      }      
+      if (element.options.onNext && !element.options.onNext(element)) {
+        // if the onNext callback return false or undefined, stop go to next
+        this.currentStep--;
+        return;
+      }
+      this.overlay.highlight(this.steps[this.currentStep]);
     } else {
       this.reset();
     }
