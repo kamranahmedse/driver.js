@@ -169,8 +169,8 @@ export default class Driver {
     let element = this.steps[this.currentStep];
     this.currentStep -= 1;
     if (this.steps[this.currentStep]) {
-      if (element.options.onPrev && !element.options.onPrev(element)) {
-        // if the onPrev callback return false or undefined, stop go to previous
+      if (element.options.onPrev && element.options.onPrev(element) === false) {
+        // if the onPrev callback return false, stop go to previous
         this.currentStep++;
         return;
       }
@@ -189,8 +189,8 @@ export default class Driver {
     let element = this.steps[this.currentStep];
     this.currentStep += 1;
     if (this.steps[this.currentStep]) {
-      if (element.options.onNext && !element.options.onNext(element)) {
-        // if the onNext callback return false or undefined, stop go to next
+      if (element.options.onNext && element.options.onNext(element) === false) {
+        // if the onNext callback return false, stop go to next
         this.currentStep--;
         return;
       }
