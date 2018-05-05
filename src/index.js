@@ -108,7 +108,9 @@ export default class Driver {
     const closeClicked = e.target.classList.contains(CLASS_CLOSE_BTN);
 
     if (closeClicked) {
-      this.reset();
+      // there is no onDone callback, or it can stop the popover close by return false
+      if (!highlightedElement.options.onDone || highlightedElement.options.onDone(highlightedElement) !== false)
+        this.reset();
       return;
     }
 
