@@ -198,7 +198,7 @@ export default class Driver {
         return;
       }
       this.overlay.highlight(this.steps[this.currentStep]);
-    } else if (!element.popover.options.isLast || !element.options.onDone || element.options.onDone(highlightedElement) !== false) {
+    } else if (!element.popover.options.isLast || !element.options.onDone || element.options.onDone(element) !== false) {
       // there is no onDone callback, or it can stop the popover close by return false
       this.reset();
     }
