@@ -108,9 +108,10 @@ export default class Driver {
     const closeClicked = e.target.classList.contains(CLASS_CLOSE_BTN);
 
     if (closeClicked) {
-      // there is no onDone callback, or it can stop the popover close by return false
-      if (!highlightedElement.options.onDone || highlightedElement.options.onDone(highlightedElement) !== false)
+      // there is no onClose callback, or it can stop the popover close by return false
+      if (!highlightedElement.options.onClose || highlightedElement.options.onClose(highlightedElement) !== false) {
         this.reset();
+      }
       return;
     }
 
@@ -197,7 +198,8 @@ export default class Driver {
         return;
       }
       this.overlay.highlight(this.steps[this.currentStep]);
-    } else {
+    } else if (!element.popover.options.isLast || !element.options.onDone || element.options.onDone(highlightedElement) !== false) {
+      // there is no onDone callback, or it can stop the popover close by return false
       this.reset();
     }
   }
