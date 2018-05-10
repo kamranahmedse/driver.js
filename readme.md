@@ -48,6 +48,12 @@ yarn add driver.js
 npm install driver.js
 ```
 
+Or include it via CDN
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/driver.js/dist/driver.min.js"></script>
+```
+
 Or grab the code from `dist` directory and include it directly.
 
 ```html
