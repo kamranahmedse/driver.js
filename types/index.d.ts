@@ -86,7 +86,7 @@ declare module 'driver.js' {
     /**
      * Resets the steps and clears the overlay
      */
-    public reset(): void;
+    public reset(immediate?: boolean): void;
 
     /**
      * Checks if there is any highlighted element or not
