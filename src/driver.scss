@@ -1,18 +1,18 @@
-$text-color: #2d2d2d;
-$popover-bg: #ffffff;
-$stage-bg: #ffffff;
-$button-bg: #f1f1f1;
-$disabled-btn-color: #808080;
+$text-color: #2d2d2d !default;
+$popover-bg: #ffffff !default;
+$stage-bg: #ffffff !default;
+$button-bg: #f1f1f1 !default;
+$disabled-btn-color: #808080 !default;
 
-$popover-z-index: 1000000000;
-$overlay-z-index: 100002;
-$stage-z-index: 100003;
-$highlighted-element-z-index: 100004;
+$popover-z-index: 1000000000 !default;
+$overlay-z-index: 100002 !default;
+$stage-z-index: 100003 !default;
+$highlighted-element-z-index: 100004 !default;
 
 // If you update this duration, make sure to
 // update `ANIMATION_DURATION_MS` constant
-$animation-ms: 400;
-$animation-sec: ($animation-ms / 1000) * 1s;
+$animation-ms: 400 !default;
+$animation-sec: ($animation-ms / 1000) * 1s !default;
 
 div#driver-popover-item {
   display: none;
