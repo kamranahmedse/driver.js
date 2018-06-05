@@ -48,11 +48,11 @@ yarn add driver.js
 npm install driver.js
 ```
 
-Or grab the code from `dist` directory and include it directly.
+Or use a CDN.
 
 ```html
-<link rel="stylesheet" href="/dist/driver.min.css">
-<script src="/dist/driver.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/driver.js/0.5.2/driver.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/driver.js/0.5.2/driver.min.js"></script>
 ```
 
 ![](./demo/images/split.png)
