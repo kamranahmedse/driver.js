@@ -1,5 +1,5 @@
 /* eslint-disable */
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener('DOMContentLoaded', function () {
 
   const tourSteps = [
     {
@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
         title: 'Before we start',
         description: 'This is just one use-case, make sure to check out the rest of the docs below.',
         nextBtnText: 'Okay, Start!'
-      }
+      },
     }, {
       element: '#logo_emoji',
       popover: {
@@ -102,7 +102,7 @@ document.addEventListener("DOMContentLoaded", function () {
     animate: false,
     opacity: 0.8,
     padding: 5,
-    showButtons: true,
+    showButtons: true
   });
 
   boringTourDriver.defineSteps(tourSteps);
@@ -145,7 +145,7 @@ document.addEventListener("DOMContentLoaded", function () {
 /////////////////////////////////////////////
 // Form focus examples
 /////////////////////////////////////////////
-  const focusDriver = new Driver({padding: 0});
+  const focusDriver = new Driver({ padding: 0 });
   const inputIds = ['creation-input', 'creation-input-2', 'creation-input-3', 'creation-input-4'];
   inputIds.forEach(inputId => {
     // Highlight the section on focus
@@ -375,7 +375,7 @@ document.addEventListener("DOMContentLoaded", function () {
       featureIntroductionDriver.start();
     });
 
-  const newURL = location.href.split("?")[0];
+  const newURL = location.href.split('?')[0];
   if (newURL !== location.href) {
     window.location = newURL;
     window.location.href = newURL;
