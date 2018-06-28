@@ -45,6 +45,10 @@ export default class Driver {
       },
       onReset: () => {              // When overlay is about to be cleared
       },
+      onNext: () => {               // When next button is clicked
+      },
+      onPrevious: () => {           // When previous button is clicked
+      },
       ...options,
     };
 
@@ -166,12 +170,21 @@ export default class Driver {
    * @public
    */
   movePrevious() {
-    this.currentStep -= 1;
-    if (this.steps[this.currentStep]) {
-      this.overlay.highlight(this.steps[this.currentStep]);
-    } else {
+    const currentStep = this.steps[this.currentStep];
+    const previousStep = this.steps[this.currentStep - 1];
+
+    if (!previousStep) {
       this.reset();
+      return;
     }
+
+    // If there is an event binding on the current step
+    if (currentStep.options.onPrevious) {
+      currentStep.options.onPrevious();
+    }
+
+    this.overlay.highlight(previousStep);
+    this.currentStep -= 1;
   }
 
   /**
@@ -180,12 +193,21 @@ export default class Driver {
    * @public
    */
   moveNext() {
-    this.currentStep += 1;
-    if (this.steps[this.currentStep]) {
-      this.overlay.highlight(this.steps[this.currentStep]);
-    } else {
+    const currentStep = this.steps[this.currentStep];
+    const nextStep = this.steps[this.currentStep + 1];
+
+    if (!nextStep) {
       this.reset();
+      return;
     }
+
+    // If there is an event binding on the current step
+    if (currentStep.options.onNext) {
+      currentStep.options.onNext();
+    }
+
+    this.overlay.highlight(nextStep);
+    this.currentStep += 1;
   }
 
   /**
@@ -285,12 +307,10 @@ export default class Driver {
 
     if (isStepDefinition) {
       querySelector = currentStep.element;
-      elementOptions = {
-        ...this.options,
-        ...currentStep,
-      };
+      elementOptions = { ...this.options, ...currentStep };
     }
 
+    // If the given element is a query selector or a DOM element?
     const domElement = isDomElement(querySelector) ? querySelector : this.document.querySelector(querySelector);
     if (!domElement) {
       console.warn(`Element to highlight ${querySelector} not found`);
