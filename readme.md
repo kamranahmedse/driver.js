@@ -7,9 +7,6 @@
   <a href="https://npmjs.org/package/driver.js">
     <img src="https://badge.fury.io/js/driver.js.svg" alt="version" />
   </a>
-  <a href="https://www.jsdelivr.com/package/npm/driver.js">
-    <img src="https://data.jsdelivr.com/v1/package/npm/driver.js/badge" />
-  </a>
 </p>
 
 <p align="center">
@@ -43,15 +40,14 @@ Driver.js is written in Vanilla JS, has zero dependencies and is highly customiz
 
 You can install it using `yarn` or `npm`, whatever you prefer.
 
-```sh
+```bash
 yarn add driver.js
 npm install driver.js
 ```
-Or include it using CDN
+Or include it using CDN. If you want a specific version, put it as `driver.js@0.5` in the name
 ```html
-<!-- Replace * with version number for any specific version -->
-<script src="https://cdn.jsdelivr.net/npm/driver.js@*/dist/driver.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/driver.js@*/dist/driver.min.css"></script>
+<script src="https://unpkg.com/driver.js/dist/driver.min.js"></script>
+<script src="https://unpkg.com/driver.js/dist/driver.min.css"></script>
 ```
 
 Or grab the code from `dist` directory and include it directly.
