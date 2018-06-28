@@ -109,7 +109,10 @@ export default class Driver {
     const closeClicked = e.target.classList.contains(CLASS_CLOSE_BTN);
 
     if (closeClicked) {
-      this.reset();
+      // there is no onClose callback, or it can stop the popover close by return false
+      if (!highlightedElement.options.onClose || highlightedElement.options.onClose(highlightedElement) !== false) {
+        this.reset();
+      }
       return;
     }
 
@@ -167,8 +170,14 @@ export default class Driver {
    * @public
    */
   movePrevious() {
+    let element = this.steps[this.currentStep];
     this.currentStep -= 1;
     if (this.steps[this.currentStep]) {
+      if (element.options.onPrev && element.options.onPrev(element) === false) {
+        // if the onPrev callback return false, stop go to previous
+        this.currentStep++;
+        return;
+      }
       this.overlay.highlight(this.steps[this.currentStep]);
     } else {
       this.reset();
@@ -181,10 +190,17 @@ export default class Driver {
    * @public
    */
   moveNext() {
+    let element = this.steps[this.currentStep];
     this.currentStep += 1;
     if (this.steps[this.currentStep]) {
+      if (element.options.onNext && element.options.onNext(element) === false) {
+        // if the onNext callback return false, stop go to next
+        this.currentStep--;
+        return;
+      }
       this.overlay.highlight(this.steps[this.currentStep]);
-    } else {
+    } else if (!element.popover.options.isLast || !element.options.onDone || element.options.onDone(element) !== false) {
+      // there is no onDone callback, or it can stop the popover close by return false
       this.reset();
     }
   }
