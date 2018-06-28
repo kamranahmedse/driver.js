@@ -344,7 +344,7 @@ declare module 'driver.js' {
       /**
        * Prepares the DOM element for overlay and appends to body
        */
-      private makeNode(): void;
+      private attachNode(): void;
 
       /**
        * Highlights the given Element while resetting the existing one
@@ -412,7 +412,7 @@ declare module 'driver.js' {
       /**
        * Prepares the DOM element for popover and appends to the body
        */
-      private makeNode(): void;
+      private attachNode(): void;
 
       /**
        * Hides the popover if visible
@@ -433,7 +433,7 @@ declare module 'driver.js' {
       /**
        * Renders the buttons in the footer of the popover
        */
-      private renderButtons(): void;
+      private renderFooter(): void;
 
       /**
        * Positions the popover to the left of the given element position
@@ -491,7 +491,7 @@ declare module 'driver.js' {
       /**
        * Prepares the node and appends to body if not there already
        */
-      private makeNode(): void;
+      private attachNode(): void;
 
       /**
        * Hides the stage by removing the node

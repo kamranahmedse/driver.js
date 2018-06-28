@@ -28,7 +28,7 @@ export default class Overlay {
    * Prepares the overlay
    * @private
    */
-  makeNode() {
+  attachNode() {
     let pageOverlay = this.document.getElementById(ID_OVERLAY);
     if (!pageOverlay) {
       pageOverlay = createNodeFromString(OVERLAY_HTML);
@@ -103,7 +103,7 @@ export default class Overlay {
       return;
     }
 
-    this.makeNode();
+    this.attachNode();
 
     window.setTimeout(() => {
       this.node.style.opacity = `${this.options.opacity}`;

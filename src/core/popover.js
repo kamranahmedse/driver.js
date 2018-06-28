@@ -42,7 +42,7 @@ export default class Popover extends Element {
     this.window = window;
     this.document = document;
 
-    this.makeNode();
+    this.attachNode();
     this.hide();
   }
 
@@ -50,7 +50,7 @@ export default class Popover extends Element {
    * Prepares the dom element for popover
    * @private
    */
-  makeNode() {
+  attachNode() {
     let popover = this.document.getElementById(ID_POPOVER);
     if (!popover) {
       popover = createNodeFromString(POPOVER_HTML);
@@ -122,7 +122,7 @@ export default class Popover extends Element {
     this.titleNode.innerHTML = this.options.title;
     this.descriptionNode.innerHTML = this.options.description || '';
 
-    this.renderButtons();
+    this.renderFooter();
 
     // Position the popover around the given position
     switch (this.options.position) {
@@ -150,7 +150,7 @@ export default class Popover extends Element {
    * decides if to show them or not
    * @private
    */
-  renderButtons() {
+  renderFooter() {
     this.nextBtnNode.innerHTML = this.options.nextBtnText;
     this.prevBtnNode.innerHTML = this.options.prevBtnText;
     this.closeBtnNode.innerHTML = this.options.closeBtnText;

@@ -24,7 +24,7 @@ export default class Stage extends Element {
    * Prepares the DOM element if not already there
    * @private
    */
-  makeNode() {
+  attachNode() {
     let stage = this.document.getElementById(ID_STAGE);
     if (!stage) {
       stage = createNodeFromString(STAGE_HTML);
@@ -70,7 +70,7 @@ export default class Stage extends Element {
    * @public
    */
   show(position) {
-    this.makeNode();
+    this.attachNode();
 
     this.setInitialStyle();
 
