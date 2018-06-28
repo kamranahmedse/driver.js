@@ -77,6 +77,7 @@ export default class Driver {
     this.window.addEventListener('resize', this.onResize, false);
     this.window.addEventListener('keyup', this.onKeyUp, false);
     this.window.addEventListener('click', this.onClick, false);
+    this.window.addEventListener('touchstart', this.onClick, false);
   }
 
   /**
