@@ -50,6 +50,12 @@ Or include it using CDN. If you want a specific version, put it as `driver.js@0.
 <script src="https://unpkg.com/driver.js/dist/driver.min.css"></script>
 ```
 
+Or include it via CDN
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/driver.js/dist/driver.min.js"></script>
+```
+
 Or grab the code from `dist` directory and include it directly.
 
 ```html
