@@ -169,6 +169,7 @@ const driver = new Driver({
   nextBtnText: 'Next',              // Next button text for this step
   prevBtnText: 'Previous',          // Previous button text for this step
   showButtons: false,               // Do not show control buttons in footer
+  showButtonsOnHighlight: true,     // Show footer buttons when highlighting a single element 
   keyboardControl: true,            // Allow controlling through keyboard (escape to close, arrow keys to move)
   scrollIntoViewOptions: {},        // We use `scrollIntoView()` when possible, pass here the options for it if you want any
   onHighlightStarted: (Element) {}, // Called when element is about to be highlighted
