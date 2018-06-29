@@ -284,7 +284,9 @@ driver.highlight({
   onHighlightStarted: (Element) {}, // Called when element is about to be highlighted
   onHighlighted: (Element) {}, // Called when element is fully highlighted
   onDeselected: (Element) {}, // Called when element has been deselected
-  onReset: (Element) {},      // Called when overlay is about to be cleared
+  onReset: (Element) {},        // Called when overlay is about to be cleared
+  onNext: (Element) => {},      // Called when moving to next step on any step
+  onPrevious: (Element) => {},  // Called when moving to next step on any step
 });
 </code></pre>
     </div>

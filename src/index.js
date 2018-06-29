@@ -48,14 +48,18 @@ export default class Driver {
     this.document = document;
     this.window = window;
     this.isActivated = false;
-    this.steps = [];            // steps to be presented if any
-    this.currentStep = 0;       // index for the currently highlighted step
+    this.steps = [];                    // steps to be presented if any
+    this.currentStep = 0;               // index for the currently highlighted step
+    this.currentMovePrevented = false;  // If the current move was prevented
 
     this.overlay = new Overlay(this.options, window, document);
 
     this.onResize = this.onResize.bind(this);
     this.onKeyUp = this.onKeyUp.bind(this);
     this.onClick = this.onClick.bind(this);
+    this.moveNext = this.moveNext.bind(this);
+    this.movePrevious = this.movePrevious.bind(this);
+    this.preventMove = this.preventMove.bind(this);
 
     // Event bindings
     this.bind();
@@ -91,7 +95,7 @@ export default class Driver {
     const clickedPopover = popover && popover.contains(e.target);
 
     if (!clickedHighlightedElement && !clickedPopover && this.options.overlayClickNext) {
-      this.moveNext();
+      this.handleNext();
       return;
     }
 
@@ -111,9 +115,9 @@ export default class Driver {
     }
 
     if (nextClicked) {
-      this.moveNext();
+      this.handleNext();
     } else if (prevClicked) {
-      this.movePrevious();
+      this.handlePrevious();
     }
   }
 
@@ -151,9 +155,9 @@ export default class Driver {
     // Arrow keys to only perform if it is stepped introduction
     if (this.steps.length !== 0) {
       if (event.keyCode === RIGHT_KEY_CODE) {
-        this.moveNext();
+        this.handleNext();
       } else if (event.keyCode === LEFT_KEY_CODE) {
-        this.movePrevious();
+        this.handlePrevious();
       }
     }
   }
@@ -164,21 +168,63 @@ export default class Driver {
    * @public
    */
   movePrevious() {
-    const currentStep = this.steps[this.currentStep];
     const previousStep = this.steps[this.currentStep - 1];
-
     if (!previousStep) {
       this.reset();
       return;
     }
 
-    // If there is an event binding on the current step
-    if (currentStep.options.onPrevious) {
-      currentStep.options.onPrevious();
-    }
-
     this.overlay.highlight(previousStep);
     this.currentStep -= 1;
+  }
+
+  /**
+   * Prevents the current move. Useful in `onNext` if you want to
+   * perform some asynchronous task and manually move to next step
+   * @public
+   */
+  preventMove() {
+    this.currentMovePrevented = true;
+  }
+
+  /**
+   * Handles the internal "move to next" event
+   * @private
+   */
+  handleNext() {
+    this.currentMovePrevented = false;
+
+    // Call the bound `onNext` handler if available
+    const currentStep = this.steps[this.currentStep];
+    if (currentStep.options.onNext) {
+      currentStep.options.onNext(this.overlay.highlightedElement);
+    }
+
+    if (this.currentMovePrevented) {
+      return;
+    }
+
+    this.moveNext();
+  }
+
+  /**
+   * Handles the internal "move to previous" event
+   * @private
+   */
+  handlePrevious() {
+    this.currentMovePrevented = false;
+
+    // Call the bound `onPrevious` handler if available
+    const currentStep = this.steps[this.currentStep];
+    if (currentStep.options.onPrevious) {
+      currentStep.options.onPrevious(this.overlay.highlightedElement);
+    }
+
+    if (this.currentMovePrevented) {
+      return;
+    }
+
+    this.movePrevious();
   }
 
   /**
@@ -187,17 +233,10 @@ export default class Driver {
    * @public
    */
   moveNext() {
-    const currentStep = this.steps[this.currentStep];
     const nextStep = this.steps[this.currentStep + 1];
-
     if (!nextStep) {
       this.reset();
       return;
-    }
-
-    // If there is an event binding on the current step
-    if (currentStep.options.onNext) {
-      currentStep.options.onNext();
     }
 
     this.overlay.highlight(nextStep);
