@@ -148,6 +148,57 @@ You can also hide the buttons and control the introductions programmatically by 
 
 ![](./demo/images/split.png)
 
+### Asynchronous Actions – [Demo](http://kamranahmed.info/driver)
+
+During the feature introductions, to delay the move to next step, you may handle that in `onNext` or `onPrevious` callbacks 
+
+```javascript
+const driver = new Driver();
+
+// Define the steps for introduction
+driver.defineSteps([
+  {
+    element: '#first-element-introduction',
+    popover: {
+      title: 'Title on Popover',
+      description: 'Body of the popover',
+      position: 'left'
+    }
+  },
+  {
+    element: '#second-element-introduction',
+    popover: {
+      title: 'Title on Popover',
+      description: 'Body of the popover',
+      position: 'top'
+    },
+    onNext: () => {
+      // Do not move to the next step yet
+      driver.preventMove();
+      // Perform some action and manually call `moveNext`
+      someAction()
+        .then(() => {
+          driver.moveNext();
+        });
+    }
+  },
+  {
+    element: '#third-element-introduction',
+    popover: {
+      title: 'Title on Popover',
+      description: 'Body of the popover',
+      position: 'right'
+    }
+  },
+]);
+
+// Start the introduction
+driver.start();
+```
+You can also hide the buttons and control the introductions programmatically by using the API methods listed below.
+
+![](./demo/images/split.png)
+
 ## API
 
 Driver comes with several options that you can manipulate to make Driver behave as you like
@@ -175,8 +226,8 @@ const driver = new Driver({
   onHighlighted: (Element) => {},      // Called when element is fully highlighted
   onDeselected: (Element) => {},       // Called when element has been deselected
   onReset: (Element) => {},            // Called when overlay is about to be cleared
-  onNext: () => {},                    // Called when moving to next step on any step
-  onPrevious: () => {},                // Called when moving to next step on any step
+  onNext: (Element) => {},                    // Called when moving to next step on any step
+  onPrevious: (Element) => {},                // Called when moving to next step on any step
 });
 ```
 Note that all the button options that you provide in the driver definition can be overridden for a specific step by giving them in the step definition
@@ -242,6 +293,10 @@ driver.movePrevious();         // Moves to previous step in the steps list
 driver.hasNextStep();          // Checks if there is next step to move to
 driver.hasPreviousStep();      // Checks if there is previous step to move to
 
+// Prevents the current move. Useful in `onNext` or `onPrevious` if you want to
+// perform some asynchronous task and manually move to next step
+driver.preventMove();
+
 // Highlights the element using query selector or the step definition
 driver.highlight(string|stepDefinition);
 
@@ -275,18 +330,6 @@ activeElement.getNode();  // Gets the DOM Element behind this element
 **Note –** Do not forget to add `e.stopPropagation()` to the `click` binding that triggers driver.
 
 ![](./demo/images/split.png)
-
-## Todo
-
-- [X] Single element highlighting
-- [X] Popovers on the highlighted elements
-- [X] Add smooth transition on changing highlighted elements
-- [X] Multi-step Journey Definitions
-- [X] Make it controllable by keyboard
-- [X] Bring highlighted element to viewport
-- [X] Add type definitions
-- [ ] Create wrappers for Angular, Vue and React
-- [ ] Write tests
 
 ## Contributions
 

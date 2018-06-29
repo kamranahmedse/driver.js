@@ -324,6 +324,10 @@ driver.hasHighlightedElement(); // Checks if there is any highlighted element
 driver.hasNextStep(); // Checks if there is next step to move to
 driver.hasPreviousStep(); // Checks if there is previous step to move to
 
+// Prevents the current move. Useful in `onNext` or `onPrevious` if you want to
+// perform some asynchronous task and manually move to next step
+driver.preventMove();
+
 // Gets the currently highlighted element on screen
 const activeElement = driver.getHighlightedElement();
 const lastActiveElement = driver.getLastHighlightedElement();
