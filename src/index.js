@@ -30,25 +30,19 @@ export default class Driver {
   constructor(options = {}) {
     this.options = {
       animate: SHOULD_ANIMATE_OVERLAY, // Whether to animate or not
-      opacity: OVERLAY_OPACITY, // Overlay opacity
-      padding: OVERLAY_PADDING, // Spacing around the element from the overlay
-      scrollIntoViewOptions: null,  // Options to be passed to `scrollIntoView`
-      allowClose: SHOULD_OUTSIDE_CLICK_CLOSE,    // Whether to close overlay on click outside the element
-      keyboardControl: ALLOW_KEYBOARD_CONTROL,  // Whether to allow controlling through keyboard or not
-      overlayClickNext: SHOULD_OUTSIDE_CLICK_NEXT,  // Whether to move next on click outside the element
-      stageBackground: '#ffffff',   // Background color for the stage
-      onHighlightStarted: () => {   // When element is about to be highlighted
-      },
-      onHighlighted: () => {        // When element has been highlighted
-      },
-      onDeselected: () => {         // When the element has been deselected
-      },
-      onReset: () => {              // When overlay is about to be cleared
-      },
-      onNext: () => {               // When next button is clicked
-      },
-      onPrevious: () => {           // When previous button is clicked
-      },
+      opacity: OVERLAY_OPACITY,    // Overlay opacity
+      padding: OVERLAY_PADDING,    // Spacing around the element from the overlay
+      scrollIntoViewOptions: null, // Options to be passed to `scrollIntoView`
+      allowClose: SHOULD_OUTSIDE_CLICK_CLOSE,      // Whether to close overlay on click outside the element
+      keyboardControl: ALLOW_KEYBOARD_CONTROL,     // Whether to allow controlling through keyboard or not
+      overlayClickNext: SHOULD_OUTSIDE_CLICK_NEXT, // Whether to move next on click outside the element
+      stageBackground: '#ffffff',       // Background color for the stage
+      onHighlightStarted: () => null,   // When element is about to be highlighted
+      onHighlighted: () => null,        // When element has been highlighted
+      onDeselected: () => null,         // When the element has been deselected
+      onReset: () => null,              // When overlay is about to be cleared
+      onNext: () => null,               // When next button is clicked
+      onPrevious: () => null,           // When previous button is clicked
       ...options,
     };
 

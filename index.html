@@ -186,7 +186,8 @@ driver.highlight({
       <p class="top-20">
         If you use this option, for multi-step driver, it would close after you are done with the popover or you can close it programmatically. For single element popover, you need to close it properly, otherwise it won't be closed
       </p>
-      <pre><code class="javascript">driver.reset()</code></div>
+      <pre><code class="javascript">driver.reset()</code>
+    </div>
 
     <hr class="hr__fancy">
     <div id="third-element-introduction" class="section__example">
@@ -283,6 +284,7 @@ driver.highlight({
   onHighlightStarted: (Element) {}, // Called when element is about to be highlighted
   onHighlighted: (Element) {}, // Called when element is fully highlighted
   onDeselected: (Element) {}, // Called when element has been deselected
+  onReset: (Element) {},      // Called when overlay is about to be cleared
 });
 </code></pre>
     </div>
@@ -369,10 +371,17 @@ activeElement.getNode();  // Gets the DOM Element behind this element
 <script src="./dist/demo/driver-demo.js"></script>
 
 <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  (function (i, s, o, g, r, a, m) {
+    i['GoogleAnalyticsObject'] = r;
+    i[r] = i[r] || function () {
+      (i[r].q = i[r].q || []).push(arguments);
+    }, i[r].l = 1 * new Date();
+    a = s.createElement(o),
+      m = s.getElementsByTagName(o)[0];
+    a.async = 1;
+    a.src = g;
+    m.parentNode.insertBefore(a, m);
+  })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
   ga('create', 'UA-58155965-1', 'auto');
   ga('send', 'pageview');
 </script>

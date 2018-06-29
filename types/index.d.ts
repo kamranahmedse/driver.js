@@ -150,6 +150,16 @@ declare module 'driver.js' {
        * Options representing popover for this step
        */
       popover?: Driver.PopoverOptions;
+
+      /**
+       * Is called when the next element is about to be highlighted
+       */
+      onNext?: () => void,
+
+      /**
+       * Is called when the previous element is about to be highlighted
+       */
+      onPrevious?: () => void,
     }
 
     class Element {
@@ -717,7 +727,17 @@ declare module 'driver.js' {
       /**
        * Is called when the overlay is about to reset
        */
-      onReset?: () => void,
+      onReset?: (element: Driver.Element) => void,
+
+      /**
+       * Is called when the next element is about to be highlighted
+       */
+      onNext?: () => void,
+
+      /**
+       * Is called when the previous element is about to be highlighted
+       */
+      onPrevious?: () => void,
     }
 
     interface ElementOptions extends Driver.DriverOptions {
