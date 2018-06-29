@@ -140,7 +140,7 @@ export default class Overlay {
   clear(immediate = false) {
     // Callback for when overlay is about to be reset
     if (this.options.onReset) {
-      this.options.onReset();
+      this.options.onReset(this.highlightedElement);
     }
 
     // Deselect the highlighted element if any
