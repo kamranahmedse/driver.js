@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', function () {
         title: 'Focus Anything',
         description: 'You can use it to highlight literally anything, images, text, div, span, li etc.',
         position: 'bottom'
-      }
+      },
     }, {
       element: '#name_driver',
       popover: {

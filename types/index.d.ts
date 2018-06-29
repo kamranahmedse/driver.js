@@ -16,6 +16,12 @@ declare module 'driver.js' {
     public isActivated: boolean;
 
     /**
+     * Flag for if the current move was prevented. It is used in
+     * onNext() or onPrevious() callbacks to stop the current transition
+     */
+    private currentMovePrevented: boolean;
+
+    /**
      * Refers to the array of steps to be presented if any
      */
     private steps: Array<Driver.Step>;
@@ -24,6 +30,11 @@ declare module 'driver.js' {
      * Refers to step index that is currently active
      */
     private currentStep: number;
+
+    /**
+     * Flag for if the current move was prevented or not
+     */
+    private currentMovePrevented: boolean;
 
     /**
      * Refers to the overlay for the screen
@@ -60,6 +71,22 @@ declare module 'driver.js' {
     private onKeyUp(e: Event): void;
 
     /**
+     * Handles the internal next event
+     */
+    private handleNext(): void;
+
+    /**
+     * Handles the internal previous event
+     */
+    private handlePrevious(): void;
+
+    /**
+     * Prevents the current move. Useful in `onNext` if you want to
+     * perform some asynchronous task and manually move to next step
+     */
+    public preventMove(): void;
+
+    /**
      * Moves to the previous step if possible
      * otherwise resets the overlay
      */
@@ -70,6 +97,12 @@ declare module 'driver.js' {
      * otherwise resets the overlay
      */
     public moveNext(): void;
+
+    /**
+     * Prevents the current move. Useful in `onNext` if you want to
+     * perform some asynchronous task and manually move to next step
+     */
+    preventMove(): void;
 
     /**
      * Checks if can be moved to next step
@@ -154,12 +187,12 @@ declare module 'driver.js' {
       /**
        * Is called when the next element is about to be highlighted
        */
-      onNext?: () => void,
+      onNext?: (element: Driver.Element) => void;
 
       /**
        * Is called when the previous element is about to be highlighted
        */
-      onPrevious?: () => void,
+      onPrevious?: (element: Driver.Element) => void;
     }
 
     class Element {
@@ -732,12 +765,12 @@ declare module 'driver.js' {
       /**
        * Is called when the next element is about to be highlighted
        */
-      onNext?: () => void,
+      onNext?: (element: Driver.Element) => void;
 
       /**
        * Is called when the previous element is about to be highlighted
        */
-      onPrevious?: () => void,
+      onPrevious?: (element: Driver.Element) => void;
     }
 
     interface ElementOptions extends Driver.DriverOptions {
