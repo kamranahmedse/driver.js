@@ -1,7 +1,6 @@
 import Overlay from './core/overlay';
 import Element from './core/element';
 import Popover from './core/popover';
-import './common/polyfill';
 import {
   CLASS_CLOSE_BTN,
   CLASS_NEXT_STEP_BTN,
