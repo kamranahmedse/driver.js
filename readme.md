@@ -63,7 +63,7 @@ Or grab the code from `dist` directory and include it directly.
 
 Demos and many more usage examples can be found [in the docs page](http://kamranahmed.info/driver.js).
 
-### Highlighting Single Element – [Demo](http://kamranahmed.info/driver#single-element-no-popover)
+### Highlighting Single Element – [Demo](http://kamranahmed.info/driver.js#single-element-no-popover)
 
 You can highlight a single element by simply passing the selector.
 
@@ -73,7 +73,7 @@ driver.highlight('#create-post');
 ```
 A real world usage example for this is: using it to dim the background and highlight the required element e.g. the way Facebook does it when creating a post.
 
-### Highlight and Popover – [Demo](http://kamranahmed.info/driver#single-element-with-popover)
+### Highlight and Popover – [Demo](http://kamranahmed.info/driver.js#single-element-with-popover)
 
 You can show additional details beside the highlighted element using the popover.
 
