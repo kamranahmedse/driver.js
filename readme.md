@@ -28,7 +28,7 @@
 
 ![](./demo/images/split.png)
 
-For Usage and Examples, [have a look at demo](http://kamranahmed.info/driver)
+For Usage and Examples, [have a look at demo](http://kamranahmed.info/driver.js)
 
 ## So, yet another tour library?
 
@@ -61,7 +61,7 @@ Or grab the code from `dist` directory and include it directly.
 
 ## Usage and Demo
 
-Demos and many more usage examples can be found [in the docs page](http://kamranahmed.info/driver).
+Demos and many more usage examples can be found [in the docs page](http://kamranahmed.info/driver.js).
 
 ### Highlighting Single Element – [Demo](http://kamranahmed.info/driver#single-element-no-popover)
 
@@ -90,7 +90,7 @@ driver.highlight({
 
 Also, `title` and `description` can have HTML as well.
 
-### Positioning the Popover – [Demo](http://kamranahmed.info/driver#single-element-with-popover-position)
+### Positioning the Popover – [Demo](http://kamranahmed.info/driver.js#single-element-with-popover-position)
 
 By default, driver automatically finds the suitable position for the popover and displays it. You can override it using `position` property.
 
@@ -106,7 +106,7 @@ driver.highlight({
 });
 ```
 
-### Creating Feature Introductions – [Demo](http://kamranahmed.info/driver)
+### Creating Feature Introductions – [Demo](http://kamranahmed.info/driver.js)
 
 Feature introductions are helpful when onboarding new users and giving them an idea about different parts of the application; you can create them seemlessly with Driver. Define the steps and call the `start` when you want to start presenting. User will be able to control the steps using the keyboard or using the buttons on popovers.
 
@@ -148,7 +148,7 @@ You can also hide the buttons and control the introductions programmatically by 
 
 ![](./demo/images/split.png)
 
-### Asynchronous Actions – [Demo](http://kamranahmed.info/driver)
+### Asynchronous Actions – [Demo](http://kamranahmed.info/driver.js)
 
 For any asynchronous actions between the transition steps, you may delay the execution till the action completes. All you have to do is stop the transition using `driver.preventMove()` in your `onNext` or `onPrevious` callbacks and initiate it manually using `driver.moveNext()`. Here is a sample implementation where it will stop at the second step for four seconds and then move on to the next step.
 
