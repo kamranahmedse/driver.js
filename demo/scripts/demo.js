@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function () {
         nextBtnText: 'Okay, Start!'
       },
     }, {
-      element: '#logo_emoji',
+      element: '#logo_img',
       popover: {
         title: 'Focus Anything',
         description: 'You can use it to highlight literally anything, images, text, div, span, li etc.',
