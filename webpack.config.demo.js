@@ -3,8 +3,8 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const isProduction = process.env.NODE_ENV === 'production';
-const scriptFileName = isProduction ? 'driver-demo.min.js' : 'driver-demo.js';
-const styleFileName = isProduction ? 'driver-demo.min.css' : 'driver-demo.css';
+const scriptFileName = 'driver-demo.min.js';
+const styleFileName = 'driver-demo.min.css';
 
 module.exports = {
   mode: isProduction ? 'production' : 'development',
