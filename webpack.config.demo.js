@@ -72,6 +72,7 @@ module.exports = {
     }),
     new CopyWebpackPlugin([
       './demo/images/separator.png',
+      './demo/images/driver.png',
     ]),
   ],
   stats: {

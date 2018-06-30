@@ -8,6 +8,17 @@ img.emoji {
   vertical-align: -0.1em;
 }
 
+.brand {
+  position: relative;
+
+  img {
+    height: 67px;
+    position: absolute;
+    top: -6px;
+    left: 55px;
+  }
+}
+
 .page-wrap {
   max-width: 550px;
   margin: 50px auto;
