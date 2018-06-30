@@ -150,7 +150,7 @@ You can also hide the buttons and control the introductions programmatically by 
 
 ### Asynchronous Actions – [Demo](http://kamranahmed.info/driver)
 
-During the feature introductions, to delay the move to next step, you may handle that in `onNext` or `onPrevious` callbacks 
+For any asynchronous actions between the transition steps, you may delay the execution till the action completes. All you have to do is stop the transition using `driver.preventMove()` in your `onNext` or `onPrevious` callbacks and initiate it manually using `driver.moveNext()`. Here is a sample implementation where it will stop at the second step for four seconds and then move on to the next step.
 
 ```javascript
 const driver = new Driver();
@@ -173,13 +173,14 @@ driver.defineSteps([
       position: 'top'
     },
     onNext: () => {
-      // Do not move to the next step yet
+      // Prevent moving to the next step
       driver.preventMove();
-      // Perform some action and manually call `moveNext`
-      someAction()
-        .then(() => {
-          driver.moveNext();
-        });
+      
+      // Perform some action or create the element to move to
+      // And then move to that element
+      setTimeout(() => {
+        driver.moveNext();
+      }, 4000);
     }
   },
   {
