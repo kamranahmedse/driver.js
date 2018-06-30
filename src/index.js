@@ -147,7 +147,7 @@ export default class Driver {
     }
 
     // If escape was pressed and it is allowed to click outside to close
-    if (event.keyCode === ESC_KEY_CODE && this.options.allowClose) {
+    if (event.keyCode === ESC_KEY_CODE) {
       this.reset();
       return;
     }
