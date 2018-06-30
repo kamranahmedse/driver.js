@@ -1,4 +1,5 @@
 .editorconfig
+.idea
 .eslintrc.json
 index.html
 server.js
