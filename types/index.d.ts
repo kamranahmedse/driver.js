@@ -50,7 +50,12 @@ declare module 'driver.js' {
      * Public getter for steps property
      */
     public getSteps(): Array<Driver.Step>;
-    
+
+    /**
+     * Public setter for steps property
+     */
+    public setSteps(): Array<Driver.Step>;
+
     /**
      * Does the required bindings for DOM Events
      */
