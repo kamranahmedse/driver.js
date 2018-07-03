@@ -66,6 +66,15 @@ export default class Driver {
   }
 
   /**
+   * Getter for steps property
+   * @readonly
+   * @public
+   */
+  getSteps() {
+    return this.steps;
+  }
+
+  /**
    * Binds any DOM events listeners
    * @todo: add throttling in all the listeners
    * @private
