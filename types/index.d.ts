@@ -32,11 +32,6 @@ declare module 'driver.js' {
     private currentStep: number;
 
     /**
-     * Flag for if the current move was prevented or not
-     */
-    private currentMovePrevented: boolean;
-
-    /**
      * Refers to the overlay for the screen
      */
     private overlay: Driver.Overlay;
