@@ -1,6 +1,6 @@
 {
   "name": "driver.js",
-  "version": "0.6.1",
+  "version": "0.6.2",
   "description": "A light-weight, no-dependency, vanilla JavaScript library to drive the user's focus across the page",
   "main": "dist/driver.min.js",
   "types": "types/index.d.ts",
