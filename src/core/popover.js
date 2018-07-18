@@ -36,6 +36,7 @@ export default class Popover extends Element {
       startBtnText: 'Next &rarr;',
       nextBtnText: 'Next &rarr;',
       prevBtnText: '&larr; Previous',
+      offset: 0,
       ...options,
     };
 
@@ -186,7 +187,7 @@ export default class Popover extends Element {
     const popoverMargin = this.options.padding + 10;  // adding 10 to give it a little distance from the element
 
     this.node.style.left = `${elementPosition.left - popoverWidth - popoverMargin}px`;
-    this.node.style.top = `${elementPosition.top - this.options.padding}px`;
+    this.node.style.top = `${(elementPosition.top - this.options.padding) + this.options.offset}px`;
     this.node.style.right = '';
     this.node.style.bottom = '';
 
@@ -202,7 +203,7 @@ export default class Popover extends Element {
     const popoverMargin = this.options.padding + 10;  // adding 10 to give it a little distance from the element
 
     this.node.style.left = `${elementPosition.right + popoverMargin}px`;
-    this.node.style.top = `${elementPosition.top - this.options.padding}px`;
+    this.node.style.top = `${(elementPosition.top - this.options.padding) + this.options.offset}px`;
     this.node.style.right = '';
     this.node.style.bottom = '';
 
@@ -219,7 +220,7 @@ export default class Popover extends Element {
     const popoverMargin = this.options.padding + 10;  // adding 10 to give it a little distance from the element
 
     this.node.style.top = `${elementPosition.top - popoverHeight - popoverMargin}px`;
-    this.node.style.left = `${elementPosition.left - this.options.padding}px`;
+    this.node.style.left = `${(elementPosition.left - this.options.padding) + this.options.offset}px`;
     this.node.style.right = '';
     this.node.style.bottom = '';
 
@@ -235,7 +236,7 @@ export default class Popover extends Element {
     const popoverMargin = this.options.padding + 10;  // adding 10 to give it a little distance from the element
 
     this.node.style.top = `${elementPosition.bottom + popoverMargin}px`;
-    this.node.style.left = `${elementPosition.left - this.options.padding}px`;
+    this.node.style.left = `${(elementPosition.left - this.options.padding) + this.options.offset}px`;
     this.node.style.right = '';
     this.node.style.bottom = '';
 
