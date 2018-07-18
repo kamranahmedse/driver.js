@@ -116,3 +116,9 @@ section {
   color: white !important;
   border-radius: 6px;
 }
+
+.center-contents {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

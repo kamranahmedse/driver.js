@@ -205,7 +205,8 @@ document.addEventListener('DOMContentLoaded', function () {
         popover: {
           title: 'Did you know?',
           description: 'You can add HTML in title or description also!',
-          position: 'left'
+          position: 'left',
+          offset: parseInt(document.getElementById("offset-input").value, 10)
         }
       });
     });
@@ -219,7 +220,8 @@ document.addEventListener('DOMContentLoaded', function () {
         popover: {
           title: 'Did you know?',
           description: 'You can add HTML in title or description also!',
-          position: 'right'
+          position: 'right',
+          offset: parseInt(document.getElementById("offset-input").value, 10)
         }
       });
     });
@@ -233,7 +235,8 @@ document.addEventListener('DOMContentLoaded', function () {
         popover: {
           title: 'Did you know?',
           description: 'You can add HTML in title or description also!',
-          position: 'bottom'
+          position: 'bottom',
+          offset: parseInt(document.getElementById("offset-input").value, 10)
         }
       });
     });
@@ -247,7 +250,8 @@ document.addEventListener('DOMContentLoaded', function () {
         popover: {
           title: 'Did you know?',
           description: 'You can add HTML in title or description also!',
-          position: 'top'
+          position: 'top',
+          offset: parseInt(document.getElementById("offset-input").value, 10)
         }
       });
     });
