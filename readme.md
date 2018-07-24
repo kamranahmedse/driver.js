@@ -32,7 +32,7 @@ For Usage and Examples, [have a look at demo](http://kamranahmed.info/driver.js)
 
 ## So, yet another tour library?
 
-**No**, it is not. **Tours are just one of the many use-cases**. Driver.js can be used wherever you need some sort of overlay for the page; some common usecases could be: e.g. dimming the background when user is interacting with some component i.e. [the way Facebook does](https://i.imgur.com/Q3PzaKk.png) when you try to create a post, using it as a focus shifter to bring user's attention to some component on page, or using it to simulate those "Turn off the Lights" widgets that you might have seen on video players online, etc.
+**No**, it is not. **Tours are just one of the many use-cases**. Driver.js can be used wherever you need some sort of overlay for the page; some common usecases could be: e.g. dimming the background when user is interacting with some component i.e. [the way Facebook does](https://i.imgur.com/Q3PzaKkr.png) when you try to create a post, using it as a focus shifter to bring user's attention to some component on page, or using it to simulate those "Turn off the Lights" widgets that you might have seen on video players online, etc.
 
 Driver.js is written in Vanilla JS, has zero dependencies and is highly customizable. It has several options allowing you to manipulate how it behaves and also **provides you the hooks** to manipulate the elements as they are highlighted, about to be highlighted, or deselected.
 
