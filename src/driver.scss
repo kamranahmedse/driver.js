@@ -66,8 +66,12 @@ div#driver-popover-item {
       border-left-color: transparent;
     }
 
-    &.center {
+    &.position-center {
       left: 49%;
+    }
+
+    &.position-right {
+      right: 20px;
     }
   }
 
