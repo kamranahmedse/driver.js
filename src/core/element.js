@@ -111,6 +111,7 @@ export default class Element {
    * Gets the calculated position on screen, around which
    * we need to draw
    * @public
+   * @return {Position}
    */
   getCalculatedPosition() {
     const body = this.document.body;

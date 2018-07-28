@@ -7,14 +7,15 @@ document.addEventListener('DOMContentLoaded', function () {
       popover: {
         title: 'Before we start',
         description: 'This is just one use-case, make sure to check out the rest of the docs below.',
-        nextBtnText: 'Okay, Start!'
+        nextBtnText: 'Okay, Start!',
+        position: 'bottom-center'
       },
     }, {
       element: '#logo_img',
       popover: {
         title: 'Focus Anything',
         description: 'You can use it to highlight literally anything, images, text, div, span, li etc.',
-        position: 'bottom'
+        position: 'bottom-center',
       },
     }, {
       element: '#name_driver',
