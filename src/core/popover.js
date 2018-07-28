@@ -142,6 +142,9 @@ export default class Popover extends Element {
       case 'bottom-center':
         this.positionOnBottomCenter(position);
         break;
+      case 'bottom-right':
+        this.positionOnBottomRight(position);
+        break;
       case 'auto':
       default:
         this.autoPosition(position);
@@ -262,7 +265,27 @@ export default class Popover extends Element {
     this.node.style.bottom = '';
 
     // Add the tip at the top center
-    this.tipNode.classList.add('top', 'center');
+    this.tipNode.classList.add('top', 'position-center');
+  }
+
+  /**
+   * Shows the popover on the bottom-right of the given position
+   * @param {Position} elementPosition
+   * @private
+   */
+  positionOnBottomRight(elementPosition) {
+    // const popoverWidth = this.getSize().width / 2;
+    // const nodeCenter = elementPosition.left + ((elementPosition.right - elementPosition.left) / 2);
+    const popoverMargin = this.options.padding + 10;  // adding 10 to give it a little distance from the element
+
+    this.node.style.top = `${elementPosition.bottom + popoverMargin}px`;
+    this.node.style.right = `${elementPosition.left - this.options.padding}px`;
+    // this.node.style.left = `${nodeCenter - popoverWidth - this.options.padding}px`;
+    this.node.style.left = '';
+    this.node.style.bottom = '';
+
+    // Add the tip at the top center
+    this.tipNode.classList.add('top', 'position-right');
   }
 
   /**

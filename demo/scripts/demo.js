@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function () {
         title: 'Before we start',
         description: 'This is just one use-case, make sure to check out the rest of the docs below.',
         nextBtnText: 'Okay, Start!',
-        position: 'bottom-center'
+        position: 'bottom-right'
       },
     }, {
       element: '#logo_img',
