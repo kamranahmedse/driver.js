@@ -65,6 +65,10 @@ div#driver-popover-item {
       border-bottom-color: $popover-bg;
       border-left-color: transparent;
     }
+
+    &.center {
+      left: 49%;
+    }
   }
 
   .driver-popover-footer {
