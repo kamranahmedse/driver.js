@@ -490,10 +490,34 @@ declare module 'driver.js' {
       private positionOnLeft(position: Driver.Position): void;
 
       /**
+       * Positions the popover to the left-center of the given element position
+       * @param {Driver.Position} position
+       */
+      private positionOnLeftCenter(position: Driver.Position): void;
+
+      /**
+       * Positions the popover to the left-bottom of the given element position
+       * @param {Driver.Position} position
+       */
+      private positionOnLeftBottom(position: Driver.Position): void;
+
+      /**
        * Positions the popover to the right of the given element position
        * @param {Driver.Position} position
        */
       private positionOnRight(position: Driver.Position): void;
+
+      /**
+       * Positions the popover to the right-center of the given element position
+       * @param {Driver.Position} position
+       */
+      private positionOnRightCenter(position: Driver.Position): void;
+
+      /**
+       * Positions the popover to the right-bottom of the given element position
+       * @param {Driver.Position} position
+       */
+      private positionOnRightBottom(position: Driver.Position): void;
 
       /**
        * Positions the popover to the top of the given element position
@@ -502,10 +526,34 @@ declare module 'driver.js' {
       private positionOnTop(position: Driver.Position): void;
 
       /**
+       * Positions the popover to the top-center of the given element position
+       * @param {Driver.Position} position
+       */
+      private positionOnTopCenter(position: Driver.Position): void;
+
+      /**
+       * Positions the popover to the top-right of the given element position
+       * @param {Driver.Position} position
+       */
+      private positionOnTopRight(position: Driver.Position): void;
+
+      /**
        * Positions the popover to the bottom of the given element position
        * @param {Driver.Position} position
        */
       private positionOnBottom(position: Driver.Position): void;
+
+      /**
+       * Positions the popover to the bottom-center of the given element position
+       * @param {Driver.Position} position
+       */
+      private positionOnBottomCenter(position: Driver.Position): void;
+
+      /**
+       * Positions the popover to the bottom-right of the given element position
+       * @param {Driver.Position} position
+       */
+      private positionOnBottomRight(position: Driver.Position): void;
 
       /**
        * Positions the popover automatically around the element position
