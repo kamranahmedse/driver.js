@@ -101,7 +101,10 @@ driver.highlight({
   popover: {
     title: 'Title for the Popover',
     description: 'Description for it',
-    position: 'left', // can be `top`, `left`, `right`, `bottom`
+    // position can be left, left-center, left-bottom, top,
+    // top-center, top-right, right, right-center, right-bottom,
+    // bottom, bottom-center, bottom-right
+    position: 'left',
   }
 });
 ```
