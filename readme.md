@@ -109,6 +109,23 @@ driver.highlight({
 });
 ```
 
+You can also add offset to the popover position by using the `offset` property
+
+```javascript
+const driver = new Driver();
+driver.highlight({
+  element: '#some-element',
+  popover: {
+    title: 'Title for the Popover',
+    description: 'Description for it',
+    position: 'bottom',
+    // Will show it 20 pixels away from the actual position of popover
+    // You may also provide the negative values
+    offset: 20,
+  }
+});
+```
+
 ### Creating Feature Introductions – [Demo](http://kamranahmed.info/driver.js)
 
 Feature introductions are helpful when onboarding new users and giving them an idea about different parts of the application; you can create them seemlessly with Driver. Define the steps and call the `start` when you want to start presenting. User will be able to control the steps using the keyboard or using the buttons on popovers.
