@@ -685,6 +685,12 @@ declare module 'driver.js' {
       totalCount?: number;
 
       /**
+       * Additional offset of the popover
+       * @default 0
+       */
+      offset?: number;
+
+      /**
        * Counter for the current popover
        * @default 0
        */
