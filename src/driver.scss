@@ -62,6 +62,7 @@ div#driver-popover-item {
       }
 
       &.position-bottom {
+        top: auto;
         bottom: 20px;
       }
     }

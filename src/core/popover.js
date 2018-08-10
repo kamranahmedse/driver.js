@@ -132,6 +132,9 @@ export default class Popover extends Element {
       case 'left-center':
         this.positionOnLeftCenter(position);
         break;
+      case 'left-bottom':
+        this.positionOnLeftBottom(position);
+        break;
       case 'right':
         this.positionOnRight(position);
         break;
@@ -201,6 +204,25 @@ export default class Popover extends Element {
     this.node.style.bottom = '';
 
     this.tipNode.classList.add('right');
+  }
+
+  /**
+   * Shows the popover on the left of the given position
+   * @param {Position} elementPosition
+   * @private
+   */
+  positionOnLeftBottom(elementPosition) {
+    const popoverDimensions = this.getSize();
+
+    const popoverWidth = popoverDimensions.width;
+    const popoverMargin = this.options.padding + 10;  // adding 10 to give it a little distance from the element
+
+    this.node.style.left = `${elementPosition.left - popoverWidth - popoverMargin}px`;
+    this.node.style.top = `${(elementPosition.bottom + this.options.padding) - popoverDimensions.height}px`;
+    this.node.style.bottom = '';
+    this.node.style.right = '';
+
+    this.tipNode.classList.add('right', 'position-bottom');
   }
 
   /**
@@ -303,13 +325,10 @@ export default class Popover extends Element {
    * @private
    */
   positionOnBottomRight(elementPosition) {
-    // const popoverWidth = this.getSize().width / 2;
-    // const nodeCenter = elementPosition.left + ((elementPosition.right - elementPosition.left) / 2);
     const popoverMargin = this.options.padding + 10;  // adding 10 to give it a little distance from the element
 
     this.node.style.top = `${elementPosition.bottom + popoverMargin}px`;
     this.node.style.right = `${elementPosition.left - this.options.padding}px`;
-    // this.node.style.left = `${nodeCenter - popoverWidth - this.options.padding}px`;
     this.node.style.left = '';
     this.node.style.bottom = '';
 
