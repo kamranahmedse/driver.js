@@ -129,6 +129,9 @@ export default class Popover extends Element {
       case 'left':
         this.positionOnLeft(position);
         break;
+      case 'left-center':
+        this.positionOnLeftCenter(position);
+        break;
       case 'right':
         this.positionOnRight(position);
         break;
@@ -198,6 +201,32 @@ export default class Popover extends Element {
     this.node.style.bottom = '';
 
     this.tipNode.classList.add('right');
+  }
+
+  /**
+   * Shows the popover on the left center of the given position
+   * @param {Position} elementPosition
+   * @private
+   */
+  positionOnLeftCenter(elementPosition) {
+    const popoverDimensions = this.getSize();
+
+    const popoverWidth = popoverDimensions.width;
+    const popoverHeight = popoverDimensions.height;
+    const popoverCenter = popoverHeight / 2;
+
+    const popoverMargin = this.options.padding + 10;  // adding 10 to give it a little distance from the element
+
+    const elementCenter = (elementPosition.bottom - elementPosition.top) / 2;
+
+    const centerPosition = (elementPosition.top - popoverCenter) + elementCenter;
+
+    this.node.style.left = `${elementPosition.left - popoverWidth - popoverMargin}px`;
+    this.node.style.top = `${centerPosition}px`;
+    this.node.style.right = '';
+    this.node.style.bottom = '';
+
+    this.tipNode.classList.add('right', 'position-center');
   }
 
   /**

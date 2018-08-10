@@ -8,21 +8,21 @@ document.addEventListener('DOMContentLoaded', function () {
         title: 'Before we start',
         description: 'This is just one use-case, make sure to check out the rest of the docs below.',
         nextBtnText: 'Okay, Start!',
-        position: 'bottom-right'
+        position: 'left-center'
       },
     }, {
       element: '#logo_img',
       popover: {
         title: 'Focus Anything',
         description: 'You can use it to highlight literally anything, images, text, div, span, li etc.',
-        position: 'bottom-center',
+        position: 'left-center',
       },
     }, {
       element: '#name_driver',
       popover: {
         title: 'Why Driver?',
         description: 'Because it lets you drive the user across the page',
-        position: 'bottom'
+        position: 'left-center'
       }
     }, {
       element: '#driver-demo-head',

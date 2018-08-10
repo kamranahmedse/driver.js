@@ -56,6 +56,14 @@ div#driver-popover-item {
       border-right-color: transparent;
       border-bottom-color: transparent;
       border-left-color: $popover-bg;
+
+      &.position-center {
+        top: 46%;
+      }
+
+      &.position-bottom {
+        bottom: 20px;
+      }
     }
 
     &.top {
@@ -64,14 +72,14 @@ div#driver-popover-item {
       border-right-color: transparent;
       border-bottom-color: $popover-bg;
       border-left-color: transparent;
-    }
 
-    &.position-center {
-      left: 49%;
-    }
+      &.position-center {
+        left: 49%;
+      }
 
-    &.position-right {
-      right: 20px;
+      &.position-right {
+        right: 20px;
+      }
     }
   }
 
