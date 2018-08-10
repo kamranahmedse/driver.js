@@ -127,6 +127,7 @@ export default class Popover extends Element {
     // Position the popover around the given position
     switch (this.options.position) {
       case 'left':
+      case 'left-top':
         this.positionOnLeft(position);
         break;
       case 'left-center':
@@ -136,7 +137,11 @@ export default class Popover extends Element {
         this.positionOnLeftBottom(position);
         break;
       case 'right':
+      case 'right-top':
         this.positionOnRight(position);
+        break;
+      case 'right-center':
+        this.positionOnRightCenter(position);
         break;
       case 'top':
         this.positionOnTop(position);
@@ -238,9 +243,7 @@ export default class Popover extends Element {
     const popoverCenter = popoverHeight / 2;
 
     const popoverMargin = this.options.padding + 10;  // adding 10 to give it a little distance from the element
-
     const elementCenter = (elementPosition.bottom - elementPosition.top) / 2;
-
     const centerPosition = (elementPosition.top - popoverCenter) + elementCenter;
 
     this.node.style.left = `${elementPosition.left - popoverWidth - popoverMargin}px`;
@@ -265,6 +268,28 @@ export default class Popover extends Element {
     this.node.style.bottom = '';
 
     this.tipNode.classList.add('left');
+  }
+
+  /**
+   * Shows the popover on the right of the given position
+   * @param {Position} elementPosition
+   * @private
+   */
+  positionOnRightCenter(elementPosition) {
+    const popoverDimensions = this.getSize();
+    const popoverMargin = this.options.padding + 10;  // adding 10 to give it a little distance from the element
+
+    const popoverHeight = popoverDimensions.height;
+    const popoverCenter = popoverHeight / 2;
+    const elementCenter = (elementPosition.bottom - elementPosition.top) / 2;
+    const centerPosition = (elementPosition.top - popoverCenter) + elementCenter;
+
+    this.node.style.left = `${elementPosition.right + popoverMargin}px`;
+    this.node.style.top = `${centerPosition}px`;
+    this.node.style.right = '';
+    this.node.style.bottom = '';
+
+    this.tipNode.classList.add('left', 'position-center');
   }
 
   /**
