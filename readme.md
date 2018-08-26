@@ -47,7 +47,7 @@ npm install driver.js
 Or include it using CDN. If you want a specific version, put it as `driver.js@0.5` in the name
 ```html
 <script src="https://unpkg.com/driver.js/dist/driver.min.js"></script>
-<script src="https://unpkg.com/driver.js/dist/driver.min.css"></script>
+<link rel="stylesheet" href="https://unpkg.com/driver.js/dist/driver.min.css">
 ```
 
 Or grab the code from `dist` directory and include it directly.
