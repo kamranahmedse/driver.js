@@ -356,6 +356,8 @@ activeElement.getNode();  // Gets the DOM Element behind this element
 
 Feel free to submit pull requests, create issues or spread the word.
 
+[![](https://img.shields.io/badge/paypal-buy%20me%20a%20coffee-green.svg?style=for-the-badge)](https://paypal.me/kamranahmedse)
+
 ## Sponsored By
 
 Thanks to [BrowserStack](https://browserstack.com) for sponsoring the compatibility testing needs.
