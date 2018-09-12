@@ -49,11 +49,7 @@ declare module 'driver.js' {
     /**
      * Public setter for steps property
      */
-<<<<<<< HEAD
     public setSteps(): Array<Driver.Step>;
-=======
-    public setSteps(): void;
->>>>>>> 6b78d75234017665cdb45484b443bc6854563cee
 
     /**
      * Does the required bindings for DOM Events
