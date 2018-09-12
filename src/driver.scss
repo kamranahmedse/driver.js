@@ -38,6 +38,14 @@ div#driver-popover-item {
       border-right-color: transparent;
       border-bottom-color: transparent;
       border-left-color: transparent;
+
+      &.position-center {
+        left: 49%;
+      }
+
+      &.position-right {
+        right: 20px;
+      }
     }
 
     &.left {
@@ -47,6 +55,15 @@ div#driver-popover-item {
       border-right-color: $popover-bg;
       border-bottom-color: transparent;
       border-left-color: transparent;
+
+      &.position-center {
+        top: 46%;
+      }
+
+      &.position-bottom {
+        top: auto;
+        bottom: 20px;
+      }
     }
 
     &.right {
@@ -56,6 +73,15 @@ div#driver-popover-item {
       border-right-color: transparent;
       border-bottom-color: transparent;
       border-left-color: $popover-bg;
+
+      &.position-center {
+        top: 46%;
+      }
+
+      &.position-bottom {
+        top: auto;
+        bottom: 20px;
+      }
     }
 
     &.top {
@@ -64,6 +90,14 @@ div#driver-popover-item {
       border-right-color: transparent;
       border-bottom-color: $popover-bg;
       border-left-color: transparent;
+
+      &.position-center {
+        left: 49%;
+      }
+
+      &.position-right {
+        right: 20px;
+      }
     }
   }
 

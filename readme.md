@@ -32,7 +32,7 @@ For Usage and Examples, [have a look at demo](http://kamranahmed.info/driver.js)
 
 ## So, yet another tour library?
 
-**No**, it is not. **Tours are just one of the many use-cases**. Driver.js can be used wherever you need some sort of overlay for the page; some common usecases could be: e.g. dimming the background when user is interacting with some component i.e. [the way Facebook does](https://i.imgur.com/Q3PzaKk.png) when you try to create a post, using it as a focus shifter to bring user's attention to some component on page, or using it to simulate those "Turn off the Lights" widgets that you might have seen on video players online, etc.
+**No**, it is not. **Tours are just one of the many use-cases**. Driver.js can be used wherever you need some sort of overlay for the page; some common usecases could be: e.g. dimming the background when user is interacting with some component i.e. [the way Facebook does](https://i.imgur.com/Q3PzaKkr.png) when you try to create a post, using it as a focus shifter to bring user's attention to some component on page, or using it to simulate those "Turn off the Lights" widgets that you might have seen on video players online, etc.
 
 Driver.js is written in Vanilla JS, has zero dependencies and is highly customizable. It has several options allowing you to manipulate how it behaves and also **provides you the hooks** to manipulate the elements as they are highlighted, about to be highlighted, or deselected.
 
@@ -47,7 +47,7 @@ npm install driver.js
 Or include it using CDN. If you want a specific version, put it as `driver.js@0.5` in the name
 ```html
 <script src="https://unpkg.com/driver.js/dist/driver.min.js"></script>
-<script src="https://unpkg.com/driver.js/dist/driver.min.css"></script>
+<link rel="stylesheet" href="https://unpkg.com/driver.js/dist/driver.min.css">
 ```
 
 Or grab the code from `dist` directory and include it directly.
@@ -101,7 +101,27 @@ driver.highlight({
   popover: {
     title: 'Title for the Popover',
     description: 'Description for it',
-    position: 'left', // can be `top`, `left`, `right`, `bottom`
+    // position can be left, left-center, left-bottom, top,
+    // top-center, top-right, right, right-center, right-bottom,
+    // bottom, bottom-center, bottom-right
+    position: 'left',
+  }
+});
+```
+
+You can also add offset to the popover position by using the `offset` property
+
+```javascript
+const driver = new Driver();
+driver.highlight({
+  element: '#some-element',
+  popover: {
+    title: 'Title for the Popover',
+    description: 'Description for it',
+    position: 'bottom',
+    // Will show it 20 pixels away from the actual position of popover
+    // You may also provide the negative values
+    offset: 20,
   }
 });
 ```
@@ -335,6 +355,8 @@ activeElement.getNode();  // Gets the DOM Element behind this element
 ## Contributions
 
 Feel free to submit pull requests, create issues or spread the word.
+
+[![](https://img.shields.io/badge/paypal-buy%20me%20a%20coffee-green.svg?style=for-the-badge)](https://paypal.me/kamranahmedse)
 
 ## Sponsored By
 

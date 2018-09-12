@@ -111,6 +111,7 @@ export default class Element {
    * Gets the calculated position on screen, around which
    * we need to draw
    * @public
+   * @return {Position}
    */
   getCalculatedPosition() {
     const body = this.document.body;
@@ -190,7 +191,6 @@ export default class Element {
    */
   onHighlighted() {
     this.showPopover();
-    this.showStage();
 
     this.addHighlightClasses();
 
@@ -208,6 +208,7 @@ export default class Element {
     if (this.options.onHighlighted) {
       this.options.onHighlighted(this);
     }
+    this.showStage();
   }
 
   /**
