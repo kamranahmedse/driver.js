@@ -190,10 +190,6 @@ export default class Element {
    * @public
    */
   onHighlighted() {
-    this.showPopover();
-
-    this.addHighlightClasses();
-
     const highlightedElement = this;
     const popoverElement = this.popover;
 
@@ -208,7 +204,9 @@ export default class Element {
     if (this.options.onHighlighted) {
       this.options.onHighlighted(this);
     }
+    this.showPopover();
     this.showStage();
+    this.addHighlightClasses();
   }
 
   /**
