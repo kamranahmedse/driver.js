@@ -7,7 +7,8 @@
   "scripts": {
     "start": "node server.js",
     "build-demo": "NODE_ENV=production webpack --config config/webpack.config.demo.js",
-    "build": "webpack --config config/webpack.config.prod.js"
+    "build": "webpack --config config/webpack.config.prod.js",
+    "deploy-demo": "gh-pages -d dist/demo"
   },
   "bugs": {
     "url": "https://github.com/kamranahmedse/driver.js/issues"
@@ -34,6 +35,7 @@
     "extract-loader": "^3.0.0",
     "extract-text-webpack-plugin": "next",
     "file-loader": "^2.0.0",
+    "gh-pages": "^2.0.1",
     "node-sass": "^4.7.2",
     "opn": "^5.2.0",
     "optimize-css-assets-webpack-plugin": "^5.0.1",
