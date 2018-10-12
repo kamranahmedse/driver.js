@@ -2,6 +2,7 @@ const path = require('path');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const isProduction = process.env.NODE_ENV === 'production';
 const scriptFileName = 'driver-demo.min.js';
@@ -17,7 +18,7 @@ module.exports = {
   ],
   output: {
     path: path.join(__dirname, '/../dist/demo'),
-    publicPath: '/dist/demo/',
+    publicPath: './',
     filename: scriptFileName,
     libraryTarget: 'umd',
     library: 'Driver',
@@ -71,9 +72,12 @@ module.exports = {
       canPrint: true,
     }),
     new CopyWebpackPlugin([
-      './demo/images/separator.png',
-      './demo/images/driver.png',
+      { from: './demo/images/', to: 'images' }
     ]),
+    new HtmlWebpackPlugin({
+      template: 'demo/index.html',
+      favicon: 'demo/images/favicon.png',
+    }),
   ],
   stats: {
     colors: true,

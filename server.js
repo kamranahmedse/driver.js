@@ -6,7 +6,7 @@ const config = require('./config/webpack.config.demo');
 
 const PORT = 3000;
 const HOST = 'localhost';
-const URL = `http://${HOST}:${PORT}`;
+const URL = `http://${HOST}:${PORT}/dist/demo`;
 
 new WebpackDevServer(webpack(config), {
   publicPath: config.output.publicPath,
