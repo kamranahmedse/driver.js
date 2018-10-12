@@ -11,11 +11,11 @@ const styleFileName = 'driver-demo.min.css';
 module.exports = {
   mode: isProduction ? 'production' : 'development',
   entry: [
-    'webpack-dev-server/client?http://localhost:3000',
+    !isProduction && 'webpack-dev-server/client?http://localhost:3000',
     './demo/styles/demo.scss',
     './demo/scripts/demo.js',
     './src/index.js',
-  ],
+  ].filter(entryPoint => !!entryPoint),
   output: {
     path: path.join(__dirname, '/../dist/demo'),
     publicPath: './',
