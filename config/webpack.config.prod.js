@@ -30,20 +30,6 @@ module.exports = {
         test: /\.js$/,
         exclude: /node_modules/,
         loader: 'babel-loader',
-        options: {
-          presets: [
-            [
-              'env',
-              {
-                useBuiltIns: 'usage',
-              },
-            ],
-          ],
-          plugins: [
-            'babel-plugin-add-module-exports',
-            'transform-object-rest-spread',
-          ],
-        },
       },
       {
         test: /.scss$/,
