@@ -2,7 +2,7 @@ const webpack = require('webpack');
 const WebpackDevServer = require('webpack-dev-server');
 const opn = require('opn');
 
-const config = require('./webpack.config.demo');
+const config = require('./config/webpack.config.demo');
 
 const PORT = 3000;
 const HOST = 'localhost';
@@ -13,6 +13,7 @@ new WebpackDevServer(webpack(config), {
 }).listen(PORT, HOST, (error, result) => {
   if (error) {
     console.error(error);
+    return;
   }
 
   opn(URL);
