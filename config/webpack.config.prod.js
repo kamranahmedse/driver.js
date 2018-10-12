@@ -1,5 +1,6 @@
 const path = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 module.exports = {
   mode: 'production',
@@ -8,7 +9,7 @@ module.exports = {
     './src/index.js',
   ],
   output: {
-    path: path.join(__dirname, '/dist'),
+    path: path.join(__dirname, '/../dist'),
     publicPath: '/dist/',
     filename: 'driver.min.js',
     libraryTarget: 'umd',
@@ -47,6 +48,20 @@ module.exports = {
     new ExtractTextPlugin({
       filename: 'driver.min.css',
       allChunks: true,
+    }),
+    new OptimizeCssAssetsPlugin({
+      assetNameRegExp: /\.min\.css$/g,
+      // eslint-disable-next-line global-require
+      cssProcessor: require('cssnano'),
+      cssProcessorPluginOptions: {
+        preset: [
+          'default',
+          {
+            discardComments: { removeAll: true },
+          },
+        ],
+      },
+      canPrint: true,
     }),
   ],
   stats: {

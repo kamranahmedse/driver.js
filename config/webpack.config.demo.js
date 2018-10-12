@@ -1,6 +1,7 @@
 const path = require('path');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 const isProduction = process.env.NODE_ENV === 'production';
 const scriptFileName = 'driver-demo.min.js';
@@ -15,7 +16,7 @@ module.exports = {
     './src/index.js',
   ],
   output: {
-    path: path.join(__dirname, '/dist/demo'),
+    path: path.join(__dirname, '/../dist/demo'),
     publicPath: '/dist/demo/',
     filename: scriptFileName,
     libraryTarget: 'umd',
@@ -54,6 +55,20 @@ module.exports = {
     new ExtractTextPlugin({
       filename: styleFileName,
       allChunks: true,
+    }),
+    new OptimizeCssAssetsPlugin({
+      assetNameRegExp: /\.min\.css$/g,
+      // eslint-disable-next-line global-require
+      cssProcessor: require('cssnano'),
+      cssProcessorPluginOptions: {
+        preset: [
+          'default',
+          {
+            discardComments: { removeAll: true },
+          },
+        ],
+      },
+      canPrint: true,
     }),
     new CopyWebpackPlugin([
       './demo/images/separator.png',
