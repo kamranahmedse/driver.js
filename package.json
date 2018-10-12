@@ -6,8 +6,8 @@
   "types": "types/index.d.ts",
   "scripts": {
     "start": "node server.js",
-    "build-demo": "NODE_ENV=production webpack --config webpack.config.demo.js",
-    "build": "webpack --config webpack.config.prod.js"
+    "build-demo": "NODE_ENV=production webpack --config config/webpack.config.demo.js",
+    "build": "webpack --config config/webpack.config.prod.js"
   },
   "bugs": {
     "url": "https://github.com/kamranahmedse/driver.js/issues"
