@@ -1,6 +1,7 @@
 /* eslint-disable */
-document.addEventListener('DOMContentLoaded', function () {
+import Driver from '../../src';
 
+document.addEventListener('DOMContentLoaded', function () {
   const tourSteps = [
     {
       element: document.getElementById('driver-demo-head'),

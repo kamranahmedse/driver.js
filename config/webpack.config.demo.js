@@ -11,7 +11,6 @@ module.exports = {
   entry: [
     'webpack-dev-server/client?http://localhost:3000',
     './demo/styles/demo.scss',
-    './demo/scripts/emoji.js',
     './demo/scripts/demo.js',
     './src/index.js',
   ],
@@ -38,20 +37,6 @@ module.exports = {
         test: /\.js$/,
         exclude: /node_modules/,
         loader: 'babel-loader',
-        options: {
-          presets: [
-            [
-              'env',
-              {
-                useBuiltIns: 'usage',
-              },
-            ],
-          ],
-          plugins: [
-            'babel-plugin-add-module-exports',
-            'transform-object-rest-spread',
-          ],
-        },
       },
       {
         test: /.scss$/,

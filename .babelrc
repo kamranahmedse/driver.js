@@ -1,0 +1,14 @@
+{
+  "presets": [
+    [
+      "@babel/preset-env",
+      {
+        "useBuiltIns": "usage"
+      }
+    ]
+  ],
+  "plugins": [
+    "babel-plugin-add-module-exports",
+    "@babel/plugin-proposal-object-rest-spread"
+  ]
+}

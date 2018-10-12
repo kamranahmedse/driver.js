@@ -62,10 +62,10 @@ export default class Element {
     }
 
     return (
-      top >= this.window.pageYOffset &&
-      left >= this.window.pageXOffset &&
-      (top + height) <= (this.window.pageYOffset + this.window.innerHeight) &&
-      (left + width) <= (this.window.pageXOffset + this.window.innerWidth)
+      top >= this.window.pageYOffset
+      && left >= this.window.pageXOffset
+      && (top + height) <= (this.window.pageYOffset + this.window.innerHeight)
+      && (left + width) <= (this.window.pageXOffset + this.window.innerWidth)
     );
   }
 
@@ -267,13 +267,13 @@ export default class Element {
       // - Opacity is below 0
       // - Filter/transform or perspective is applied
       if (
-        /[0-9]+/.test(zIndex) ||
-        opacity < 1 ||
-        (transform && transform !== 'none') ||
-        (transformStyle && transformStyle !== 'flat') ||
-        (transformBox && transformBox !== 'border-box') ||
-        (filter && filter !== 'none') ||
-        (perspective && perspective !== 'none')
+        /[0-9]+/.test(zIndex)
+        || opacity < 1
+        || (transform && transform !== 'none')
+        || (transformStyle && transformStyle !== 'flat')
+        || (transformBox && transformBox !== 'border-box')
+        || (filter && filter !== 'none')
+        || (perspective && perspective !== 'none')
       ) {
         parentNode.classList.add(CLASS_FIX_STACKING_CONTEXT);
       }
