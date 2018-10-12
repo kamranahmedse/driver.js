@@ -14,6 +14,7 @@ module.exports = {
     filename: 'driver.min.js',
     libraryTarget: 'umd',
     library: 'Driver',
+    libraryExport: 'default',
   },
   module: {
     rules: [

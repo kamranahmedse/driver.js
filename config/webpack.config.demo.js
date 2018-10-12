@@ -22,6 +22,7 @@ module.exports = {
     filename: scriptFileName,
     libraryTarget: 'umd',
     library: 'Driver',
+    libraryExport: 'default',
   },
   module: {
     rules: [
