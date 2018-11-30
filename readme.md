@@ -348,6 +348,8 @@ activeElement.showPopover();           // Show the popover
 activeElement.getNode();  // Gets the DOM Element behind this element
 ```
 
+![](./demo/images/split.png)
+
 **Note –** Do not forget to add `e.stopPropagation()` to the `click` binding that triggers driver.
 
 ![](./demo/images/split.png)
