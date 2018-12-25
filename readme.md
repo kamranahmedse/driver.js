@@ -61,6 +61,14 @@ Or grab the code from `dist` directory and include it directly.
 
 ## Usage and Demo
 
+If you are using some sort of module bundler, import the library and the CSS file
+
+```javascript
+import Driver from 'driver.js';
+import 'driver.js/dist/driver.min.css';
+```
+otherwise use the `script` and `link` tags to import the JavaScript and CSS files.
+
 Demos and many more usage examples can be found [in the docs page](http://kamranahmed.info/driver.js).
 
 ### Highlighting Single Element – [Demo](http://kamranahmed.info/driver.js#single-element-no-popover)
