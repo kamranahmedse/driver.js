@@ -54,7 +54,7 @@ export default class Popover extends Element {
   attachNode() {
     let popover = this.document.getElementById(ID_POPOVER);
     if (!popover) {
-      popover = createNodeFromString(POPOVER_HTML);
+      popover = createNodeFromString(POPOVER_HTML(this.options.className));
       document.body.appendChild(popover);
     }
 

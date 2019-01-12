@@ -32,8 +32,8 @@ export const CLASS_BTN_DISABLED = 'driver-disabled';
 export const ANIMATION_DURATION_MS = 400;
 
 // language=HTML
-export const POPOVER_HTML = `
-  <div id="${ID_POPOVER}">
+export const POPOVER_HTML = (className = '') => `
+  <div id="${ID_POPOVER} ${className}">
     <div class="${CLASS_POPOVER_TIP}"></div>
     <div class="${CLASS_POPOVER_TITLE}">Popover Title</div>
     <div class="${CLASS_POPOVER_DESCRIPTION}">Popover Description</div>
