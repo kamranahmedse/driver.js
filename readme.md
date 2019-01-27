@@ -146,6 +146,7 @@ driver.defineSteps([
   {
     element: '#first-element-introduction',
     popover: {
+      className: 'first-step-popover-class',
       title: 'Title on Popover',
       description: 'Body of the popover',
       position: 'left'
@@ -238,6 +239,7 @@ Here are the options that Driver understands:
 
 ```javascript
 const driver = new Driver({
+  className: 'scoped-class',        // className to wrap driver.js popover
   animate: true,                    // Whether to animate or not
   opacity: 0.75,                    // Background opacity (0 means only popovers and without overlay)
   padding: 10,                      // Distance of element from around the edges
@@ -270,6 +272,7 @@ const stepDefinition = {
   element: '#some-item',        // Query selector string or Node to be highlighted
   stageBackground: '#ffffff',   // This will override the one set in driver
   popover: {                    // There will be no popover if empty or not given
+    className: 'popover-class', // className to wrap this specific step popover in addition to the general className in Driver options
     title: 'Title',             // Title on the popover
     description: 'Description', // Body of the popover
     showButtons: false,         // Do not show control buttons in footer

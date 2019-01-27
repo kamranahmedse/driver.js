@@ -370,9 +370,15 @@ export default class Driver {
 
     let popover = null;
     if (elementOptions.popover && elementOptions.popover.title) {
+      const mergedClassNames = [
+        this.options.className,
+        elementOptions.popover.className,
+      ].filter(c => c).join(' ');
+
       const popoverOptions = {
         ...this.options,
         ...elementOptions.popover,
+        className: mergedClassNames,
         totalCount: allSteps.length,
         currentIndex: index,
         isFirst: index === 0,
