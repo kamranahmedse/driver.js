@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', function () {
     {
       element: document.getElementById('driver-demo-head'),
       popover: {
+        className: 'scoped-driver-popover',
         title: 'Before we start',
         description: 'This is just one use-case, make sure to check out the rest of the docs below.',
         nextBtnText: 'Okay, Start!',
@@ -101,7 +102,8 @@ document.addEventListener('DOMContentLoaded', function () {
     animate: false,
     opacity: 0.8,
     padding: 5,
-    showButtons: true
+    showButtons: true,
+    className: 'boring-scope'
   });
 
   boringTourDriver.defineSteps(tourSteps);
