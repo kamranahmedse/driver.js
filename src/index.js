@@ -106,6 +106,11 @@ export default class Driver {
       return;
     }
 
+    // Stop the event propagation on click/tap. `onClick` handles
+    // both touch and click events – which on some browsers causes
+    // the click to close the tour
+    e.stopPropagation();
+
     const highlightedElement = this.overlay.getHighlightedElement();
     const popover = this.document.getElementById(ID_POPOVER);
 
