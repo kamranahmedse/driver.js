@@ -99,6 +99,10 @@ div#driver-popover-item {
         right: 20px;
       }
     }
+
+    &.mid-center {
+      display: none;
+    }
   }
 
   .driver-popover-footer {

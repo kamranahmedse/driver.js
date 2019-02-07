@@ -556,6 +556,12 @@ declare module 'driver.js' {
       private positionOnBottomRight(position: Driver.Position): void;
 
       /**
+       * Positions the popover to the middle center of the given element position
+       * @param {Driver.Position} position
+       */
+      private positionOnMidCenter(position: Driver.Position): void;
+
+      /**
        * Positions the popover automatically around the element position
        * @param {Driver.Position} position
        */
