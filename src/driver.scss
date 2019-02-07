@@ -9,9 +9,9 @@ $overlay-z-index: 100002 !default;
 $stage-z-index: 100003 !default;
 $highlighted-element-z-index: 100004 !default;
 
-// If you update this duration, make sure to
+// Note: If you update this duration, make sure to
 // update `ANIMATION_DURATION_MS` constant
-$animation-ms: 400 !default;
+$animation-ms: 300 !default;
 $animation-sec: ($animation-ms / 1000) * 1s !default;
 
 div#driver-popover-item {

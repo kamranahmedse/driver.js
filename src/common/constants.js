@@ -28,12 +28,12 @@ export const CLASS_NEXT_STEP_BTN = 'driver-next-btn';
 export const CLASS_PREV_STEP_BTN = 'driver-prev-btn';
 export const CLASS_BTN_DISABLED = 'driver-disabled';
 
-// It must match the one set in the animations in CSS file
-export const ANIMATION_DURATION_MS = 400;
+// NOTE: It must match the one set in the animations in CSS file
+export const ANIMATION_DURATION_MS = 300;
 
 // language=HTML
 export const POPOVER_HTML = (className = '') => `
-  <div id="${ID_POPOVER} ${className}">
+  <div id="${ID_POPOVER}" class="${className}">
     <div class="${CLASS_POPOVER_TIP}"></div>
     <div class="${CLASS_POPOVER_TITLE}">Popover Title</div>
     <div class="${CLASS_POPOVER_DESCRIPTION}">Popover Description</div>

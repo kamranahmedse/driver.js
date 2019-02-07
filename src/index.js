@@ -417,7 +417,6 @@ export default class Driver {
     }
 
     this.isActivated = true;
-
     this.currentStep = index;
     this.overlay.highlight(this.steps[index]);
   }
