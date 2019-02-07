@@ -38,14 +38,13 @@ export default class Element {
     this.overlay = overlay;
     this.popover = popover;
     this.stage = stage;
-
     this.animationTimeout = null;
   }
 
   /**
    * Checks if the current element is visible in viewport
    * @returns {boolean}
-   * @private
+   * @public
    */
   isInView() {
     let top = this.node.offsetTop;
@@ -83,10 +82,11 @@ export default class Element {
 
   /**
    * Brings the element to middle of the view port if not in view
-   * @private
+   * @public
    */
   bringInView() {
-    if (this.isInView()) {
+    // If the node is not there or already is in view
+    if (!this.node || this.isInView()) {
       return;
     }
 
@@ -196,12 +196,6 @@ export default class Element {
     this.addHighlightClasses();
 
     const highlightedElement = this;
-    const popoverElement = this.popover;
-
-    if (popoverElement && !popoverElement.isInView()) {
-      popoverElement.bringInView();
-    }
-
     if (!highlightedElement.isInView()) {
       highlightedElement.bringInView();
     }
