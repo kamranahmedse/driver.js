@@ -155,6 +155,13 @@ export default class Driver {
       return;
     }
 
+    this.refresh();
+  }
+
+  /**
+   * Refreshes and repositions the popover and the overlay
+   */
+  refresh() {
     this.overlay.refresh();
   }
 
