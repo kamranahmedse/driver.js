@@ -208,6 +208,7 @@ driver.defineSteps([
   {
     element: '#first-element-introduction',
     popover: {
+      className: 'first-step-popover-class',
       title: 'Title on Popover',
       description: 'Body of the popover',
       position: 'left'
@@ -273,6 +274,7 @@ driver.highlight({
       <h4>Driver Definition</h4>
       <p>Here are the options that Driver understands</p>
       <pre><code class="javascript">const driver = new Driver({
+  className: 'scoped-class', // className to wrap driver.js popover
   animate: true,  // Animate while changing highlighted element
   opacity: 0.75,  // Background opacity (0 means only popovers and without overlay)
   padding: 10,    // Distance of element from around the edges
@@ -301,14 +303,15 @@ driver.highlight({
       <p>Here are the set of options that you can pass in each step i.e. an item in array of steps or the object that
         you pass to <code>highlight</code> method</p>
       <pre><code class="javascript">const stepDefinition = {
-  element: '#some-item',  // Query selector string or Node to be highlighted
-  popover: {              // There will be no popover if empty or not given
-    title: 'Title',       // Title on the popover
+  element: '#some-item',        // Query selector string or Node to be highlighted
+  popover: {                    // There will be no popover if empty or not given
+    className: 'popover-class', // className to wrap this specific step popover in addition to the general className in Driver options
+    title: 'Title',             // Title on the popover
     description: 'Description', // Body of the popover
-    showButtons: false,      // Do not show control buttons in footer
-    closeBtnText: 'Close',   // Text on the close button for this step
-    nextBtnText: 'Next',     // Next button text for this step
-    prevBtnText: 'Previous', // Previous button text for this step
+    showButtons: false,         // Do not show control buttons in footer
+    closeBtnText: 'Close',      // Text on the close button for this step
+    nextBtnText: 'Next',        // Next button text for this step
+    prevBtnText: 'Previous',    // Previous button text for this step
   }
 };
 </code></pre>
