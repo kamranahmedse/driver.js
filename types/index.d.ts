@@ -70,6 +70,11 @@ declare module 'driver.js' {
     private onResize(): void;
 
     /**
+     * Refreshes and repositions the popover and the overlay
+     */
+    private refresh(): void;
+
+    /**
      * Makes it operable with keyboard
      * @param {Event} e
      */
