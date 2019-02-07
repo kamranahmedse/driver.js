@@ -38,14 +38,13 @@ export default class Element {
     this.overlay = overlay;
     this.popover = popover;
     this.stage = stage;
-
     this.animationTimeout = null;
   }
 
   /**
    * Checks if the current element is visible in viewport
    * @returns {boolean}
-   * @private
+   * @public
    */
   isInView() {
     let top = this.node.offsetTop;
@@ -62,10 +61,10 @@ export default class Element {
     }
 
     return (
-      top >= this.window.pageYOffset &&
-      left >= this.window.pageXOffset &&
-      (top + height) <= (this.window.pageYOffset + this.window.innerHeight) &&
-      (left + width) <= (this.window.pageXOffset + this.window.innerWidth)
+      top >= this.window.pageYOffset
+      && left >= this.window.pageXOffset
+      && (top + height) <= (this.window.pageYOffset + this.window.innerHeight)
+      && (left + width) <= (this.window.pageXOffset + this.window.innerWidth)
     );
   }
 
@@ -83,10 +82,11 @@ export default class Element {
 
   /**
    * Brings the element to middle of the view port if not in view
-   * @private
+   * @public
    */
   bringInView() {
-    if (this.isInView()) {
+    // If the node is not there or already is in view
+    if (!this.node || this.isInView()) {
       return;
     }
 
@@ -191,12 +191,6 @@ export default class Element {
    */
   onHighlighted() {
     const highlightedElement = this;
-    const popoverElement = this.popover;
-
-    if (popoverElement && !popoverElement.isInView()) {
-      popoverElement.bringInView();
-    }
-
     if (!highlightedElement.isInView()) {
       highlightedElement.bringInView();
     }
@@ -265,13 +259,13 @@ export default class Element {
       // - Opacity is below 0
       // - Filter/transform or perspective is applied
       if (
-        /[0-9]+/.test(zIndex) ||
-        opacity < 1 ||
-        (transform && transform !== 'none') ||
-        (transformStyle && transformStyle !== 'flat') ||
-        (transformBox && transformBox !== 'border-box') ||
-        (filter && filter !== 'none') ||
-        (perspective && perspective !== 'none')
+        /[0-9]+/.test(zIndex)
+        || opacity < 1
+        || (transform && transform !== 'none')
+        || (transformStyle && transformStyle !== 'flat')
+        || (transformBox && transformBox !== 'border-box')
+        || (filter && filter !== 'none')
+        || (perspective && perspective !== 'none')
       ) {
         parentNode.classList.add(CLASS_FIX_STACKING_CONTEXT);
       }

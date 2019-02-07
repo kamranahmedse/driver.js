@@ -612,6 +612,11 @@ declare module 'driver.js' {
                     top,
                     bottom,
                     right,
+                  }: {
+                    left: number,
+                    top: number,
+                    bottom: number,
+                    right: number
                   });
 
       /**
@@ -713,6 +718,11 @@ declare module 'driver.js' {
        * @default auto
        */
       position?: string;
+
+      /**
+       * className for the popover on element
+       */
+      className?: string;
     }
 
     interface DriverOptions {
@@ -794,6 +804,11 @@ declare module 'driver.js' {
        * @default 'Previous'
        */
       prevBtnText?: string;
+
+      /**
+       * className for the driver popovers
+       */
+      className?: string;
 
       /**
        * Callback to be called when element is about to be highlighted

@@ -1,10 +1,12 @@
 /* eslint-disable */
-document.addEventListener('DOMContentLoaded', function () {
+import Driver from '../../src';
 
+document.addEventListener('DOMContentLoaded', function () {
   const tourSteps = [
     {
       element: document.getElementById('driver-demo-head'),
       popover: {
+        className: 'scoped-driver-popover',
         title: 'Before we start',
         description: 'This is just one use-case, make sure to check out the rest of the docs below.',
         nextBtnText: 'Okay, Start!',
@@ -100,7 +102,8 @@ document.addEventListener('DOMContentLoaded', function () {
     animate: false,
     opacity: 0.8,
     padding: 5,
-    showButtons: true
+    showButtons: true,
+    className: 'boring-scope',
   });
 
   boringTourDriver.defineSteps(tourSteps);
@@ -125,9 +128,10 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
 
-  document.querySelectorAll('pre code').forEach((element) => {
-    hljs.highlightBlock(element);
-  });
+  document.querySelectorAll('pre code')
+    .forEach((element) => {
+      hljs.highlightBlock(element);
+    });
 
 
 /////////////////////////////////////////////
@@ -147,9 +151,10 @@ document.addEventListener('DOMContentLoaded', function () {
   const inputIds = ['creation-input', 'creation-input-2', 'creation-input-3', 'creation-input-4'];
   inputIds.forEach(inputId => {
     // Highlight the section on focus
-    document.getElementById(inputId).addEventListener('focus', () => {
-      focusDriver.highlight(`#${inputId}`);
-    });
+    document.getElementById(inputId)
+      .addEventListener('focus', () => {
+        focusDriver.highlight(`#${inputId}`);
+      });
   });
 
 /////////////////////////////////////////////
@@ -314,10 +319,11 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }]);
 
-  document.querySelector('#run-single-element-no-close').addEventListener('click', function (e) {
-    e.preventDefault();
-    singleNoClose.start();
-  });
+  document.querySelector('#run-single-element-no-close')
+    .addEventListener('click', function (e) {
+      e.preventDefault();
+      singleNoClose.start();
+    });
 
 /////////////////////////////////////////////////////
 // Highlighting single element with popover position
@@ -327,6 +333,7 @@ document.addEventListener('DOMContentLoaded', function () {
     {
       element: '#first-element-introduction',
       popover: {
+        className: 'first-step-popover-class',
         title: 'Title on Popover',
         description: 'Body of the popover',
         position: 'top'

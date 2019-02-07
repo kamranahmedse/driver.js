@@ -90,4 +90,3 @@ export default class Stage extends Element {
     this.node.style.backgroundColor = this.options.stageBackground;
   }
 }
-

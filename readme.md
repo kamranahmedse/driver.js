@@ -61,6 +61,14 @@ Or grab the code from `dist` directory and include it directly.
 
 ## Usage and Demo
 
+If you are using some sort of module bundler, import the library and the CSS file
+
+```javascript
+import Driver from 'driver.js';
+import 'driver.js/dist/driver.min.css';
+```
+otherwise use the `script` and `link` tags to import the JavaScript and CSS files.
+
 Demos and many more usage examples can be found [in the docs page](http://kamranahmed.info/driver.js).
 
 ### Highlighting Single Element – [Demo](http://kamranahmed.info/driver.js#single-element-no-popover)
@@ -128,7 +136,7 @@ driver.highlight({
 
 ### Creating Feature Introductions – [Demo](http://kamranahmed.info/driver.js)
 
-Feature introductions are helpful when onboarding new users and giving them an idea about different parts of the application; you can create them seemlessly with Driver. Define the steps and call the `start` when you want to start presenting. User will be able to control the steps using the keyboard or using the buttons on popovers.
+Feature introductions are helpful when onboarding new users and giving them an idea about different parts of the application; you can create them seamlessly with Driver. Define the steps and call the `start` when you want to start presenting. User will be able to control the steps using the keyboard or using the buttons on popovers.
 
 ```javascript
 const driver = new Driver();
@@ -138,6 +146,7 @@ driver.defineSteps([
   {
     element: '#first-element-introduction',
     popover: {
+      className: 'first-step-popover-class',
       title: 'Title on Popover',
       description: 'Body of the popover',
       position: 'left'
@@ -230,6 +239,7 @@ Here are the options that Driver understands:
 
 ```javascript
 const driver = new Driver({
+  className: 'scoped-class',        // className to wrap driver.js popover
   animate: true,                    // Whether to animate or not
   opacity: 0.75,                    // Background opacity (0 means only popovers and without overlay)
   padding: 10,                      // Distance of element from around the edges
@@ -262,6 +272,7 @@ const stepDefinition = {
   element: '#some-item',        // Query selector string or Node to be highlighted
   stageBackground: '#ffffff',   // This will override the one set in driver
   popover: {                    // There will be no popover if empty or not given
+    className: 'popover-class', // className to wrap this specific step popover in addition to the general className in Driver options
     title: 'Title',             // Title on the popover
     description: 'Description', // Body of the popover
     showButtons: false,         // Do not show control buttons in footer
@@ -348,6 +359,8 @@ activeElement.showPopover();           // Show the popover
 activeElement.getNode();  // Gets the DOM Element behind this element
 ```
 
+![](./demo/images/split.png)
+
 **Note –** Do not forget to add `e.stopPropagation()` to the `click` binding that triggers driver.
 
 ![](./demo/images/split.png)
@@ -355,8 +368,6 @@ activeElement.getNode();  // Gets the DOM Element behind this element
 ## Contributions
 
 Feel free to submit pull requests, create issues or spread the word.
-
-[![](https://img.shields.io/badge/paypal-buy%20me%20a%20coffee-green.svg?style=for-the-badge)](https://paypal.me/kamranahmedse)
 
 ## Sponsored By
 

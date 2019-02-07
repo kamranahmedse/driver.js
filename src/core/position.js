@@ -29,17 +29,4 @@ export default class Position {
   canHighlight() {
     return this.left < this.right && this.top < this.bottom;
   }
-
-  /**
-   * Checks if the given position is equal to the passed position
-   * @param position Position
-   * @returns {boolean}
-   * @public
-   */
-  equals(position) {
-    return Math.round(this.left) === Math.round(position.left) &&
-      Math.round(this.right) === Math.round(position.right) &&
-      Math.round(this.top) === Math.round(position.top) &&
-      Math.round(this.bottom) === Math.round(position.bottom);
-  }
 }
