@@ -194,13 +194,17 @@ export default class Element {
     if (!highlightedElement.isInView()) {
       highlightedElement.bringInView();
     }
+    
+    // Show the popover and stage once the item has been
+    // brought in the view, this would allow us to handle
+    // the cases where the container has scroll overflow
+    this.showPopover();
+    this.showStage();
+    this.addHighlightClasses();
 
     if (this.options.onHighlighted) {
       this.options.onHighlighted(this);
     }
-    this.showPopover();
-    this.showStage();
-    this.addHighlightClasses();
   }
 
   /**
