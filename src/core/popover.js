@@ -42,9 +42,6 @@ export default class Popover extends Element {
 
     this.window = window;
     this.document = document;
-
-    this.attachNode();
-    this.hide();
   }
 
   /**
@@ -53,10 +50,12 @@ export default class Popover extends Element {
    */
   attachNode() {
     let popover = this.document.getElementById(ID_POPOVER);
-    if (!popover) {
-      popover = createNodeFromString(POPOVER_HTML(this.options.className));
-      document.body.appendChild(popover);
+    if (popover) {
+      popover.parentElement.removeChild(popover);
     }
+
+    popover = createNodeFromString(POPOVER_HTML(this.options.className));
+    document.body.appendChild(popover);
 
     this.node = popover;
     this.tipNode = popover.querySelector(`.${CLASS_POPOVER_TIP}`);
@@ -117,6 +116,7 @@ export default class Popover extends Element {
    * @public
    */
   show(position) {
+    this.attachNode();
     this.setInitialState();
 
     // Set the title and descriptions
@@ -172,6 +172,9 @@ export default class Popover extends Element {
         this.autoPosition(position);
         break;
     }
+
+    // Bring the popover in view port once it is displayed
+    this.bringInView();
   }
 
   /**

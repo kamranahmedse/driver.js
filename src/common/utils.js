@@ -1,9 +1,8 @@
 /**
  * Turn a string into a node
  * @param  {String} htmlString to convert
- * @return {Node}   Converted node element
+ * @return {HTMLElement|Node}   Converted node element
  */
-// eslint-disable-next-line
 export const createNodeFromString = (htmlString) => {
   const div = document.createElement('div');
   div.innerHTML = htmlString.trim();
