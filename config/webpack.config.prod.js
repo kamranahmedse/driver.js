@@ -38,7 +38,7 @@ module.exports = {
         loader: ExtractTextPlugin.extract([
           {
             loader: 'css-loader',
-            options: { minimize: true, url: false },
+            options: { url: false },
           },
           'sass-loader',
         ]),

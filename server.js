@@ -6,16 +6,17 @@ const config = require('./config/webpack.config.demo');
 
 const PORT = 3000;
 const HOST = 'localhost';
-const URL = `http://${HOST}:${PORT}/dist/demo`;
+const URL = `http://${HOST}:${PORT}`;
 
-new WebpackDevServer(webpack(config), {
-  publicPath: config.output.publicPath,
-}).listen(PORT, HOST, (error, result) => {
-  if (error) {
-    console.error(error);
-    return;
-  }
+config.entry.unshift(`webpack-dev-server/client?${URL}`);
 
-  opn(URL);
-  console.log(`Listening at ${URL}`);
-});
+new WebpackDevServer(webpack(config))
+  .listen(PORT, HOST, (error) => {
+    if (error) {
+      console.error(error);
+      return;
+    }
+
+    opn(URL);
+    console.log(`Listening at ${URL}`);
+  });
