@@ -332,8 +332,12 @@ driver.preventMove();
 // Highlights the element using query selector or the step definition
 driver.highlight(string|stepDefinition);
 
+// Reposition the popover and highlighted element
+driver.refresh();
+
 // Resets the overlay and clears the screen
 driver.reset();
+
 // Additionally you can pass a boolean parameter
 // to clear immediately and not do the animations etc
 // Could be useful when you, let's say, want to run
