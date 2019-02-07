@@ -111,7 +111,7 @@ driver.highlight({
     description: 'Description for it',
     // position can be left, left-center, left-bottom, top,
     // top-center, top-right, right, right-center, right-bottom,
-    // bottom, bottom-center, bottom-right
+    // bottom, bottom-center, bottom-right, mid-center
     position: 'left',
   }
 });
