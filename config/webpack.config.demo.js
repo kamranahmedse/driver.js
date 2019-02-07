@@ -11,7 +11,6 @@ const styleFileName = 'driver-demo.min.css';
 module.exports = {
   mode: isProduction ? 'production' : 'development',
   entry: [
-    !isProduction && 'webpack-dev-server/client?http://localhost:3000',
     './demo/styles/demo.scss',
     './demo/scripts/demo.js',
     './src/index.js',
@@ -46,7 +45,7 @@ module.exports = {
         loader: ExtractTextPlugin.extract([
           {
             loader: 'css-loader',
-            options: { minimize: isProduction, url: false },
+            options: { url: false },
           },
           'sass-loader',
         ]),
@@ -73,7 +72,10 @@ module.exports = {
       canPrint: true,
     }),
     new CopyWebpackPlugin([
-      { from: './demo/images/', to: 'images' }
+      {
+        from: './demo/images/',
+        to: 'images',
+      },
     ]),
     new HtmlWebpackPlugin({
       template: 'demo/index.html',
