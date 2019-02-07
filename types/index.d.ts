@@ -612,6 +612,11 @@ declare module 'driver.js' {
                     top,
                     bottom,
                     right,
+                  }: {
+                    left: number,
+                    top: number,
+                    bottom: number,
+                    right: number
                   });
 
       /**
