@@ -357,6 +357,7 @@ export default class Element {
       showAfterMs = 0;
     }
 
+    // @todo remove timeout and handle with CSS
     this.animationTimeout = this.window.setTimeout(() => {
       this.popover.show(showAtPosition);
     }, showAfterMs);
