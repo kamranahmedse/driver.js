@@ -170,6 +170,7 @@ document.addEventListener('DOMContentLoaded', function () {
       e.preventDefault();
       singleDriverWithPopover.highlight({
         element: '#single-element-with-popover',
+        showButtons: false,
         popover: {
           title: 'Did you know?',
           description: 'You can add HTML in title or description also!',
@@ -188,6 +189,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
       singleDriverWithPopoverPosition.highlight({
         element: '#single-element-with-popover-position',
+        showButtons: false,
         popover: {
           title: 'Did you know?',
           description: 'You can add HTML in title or description also!',
@@ -209,6 +211,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
       positionBtnsDriver.highlight({
         element: '#position-btn-left',
+        showButtons: false,
         popover: {
           title: 'Did you know?',
           description: 'You can add HTML in title or description also!',
@@ -223,6 +226,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
       positionBtnsDriver.highlight({
         element: '#position-btn-right',
+        showButtons: false,
         popover: {
           title: 'Did you know?',
           description: 'You can add HTML in title or description also!',
@@ -237,6 +241,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
       positionBtnsDriver.highlight({
         element: '#position-btn-bottom',
+        showButtons: false,
         popover: {
           title: 'Did you know?',
           description: 'You can add HTML in title or description also!',
@@ -251,6 +256,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
       positionBtnsDriver.highlight({
         element: '#position-btn-top',
+        showButtons: false,
         popover: {
           title: 'Did you know?',
           description: 'You can add HTML in title or description also!',
@@ -270,6 +276,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
       htmlDriver.highlight({
         element: '#single-element-with-popover-html',
+        showButtons: false,
         popover: {
           title: '<em>Tags</em> in title or <u>body</u>',
           description: 'Body can also have <strong>html tags</strong>!',
