@@ -4,7 +4,6 @@
     "browser": true
   },
   "rules": {
-    "no-console": "off",
     "no-underscore-dangle": "off",
     "no-plusplus": "off",
     "no-cond-assign": "off",

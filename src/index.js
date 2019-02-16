@@ -182,13 +182,17 @@ export default class Driver {
       return;
     }
 
-    // Arrow keys to only perform if it is stepped introduction
-    if (this.steps.length !== 0) {
-      if (event.keyCode === RIGHT_KEY_CODE) {
-        this.handleNext();
-      } else if (event.keyCode === LEFT_KEY_CODE) {
-        this.handlePrevious();
-      }
+    // If there is no highlighted element or there is a highlighted element
+    // without popover or if the popover does not allow buttons - ignore
+    const highlightedElement = this.getHighlightedElement();
+    if (!highlightedElement || !highlightedElement.popover || !highlightedElement.popover.options.showButtons) {
+      return;
+    }
+
+    if (event.keyCode === RIGHT_KEY_CODE) {
+      this.handleNext();
+    } else if (event.keyCode === LEFT_KEY_CODE) {
+      this.handlePrevious();
     }
   }
 
@@ -226,7 +230,7 @@ export default class Driver {
 
     // Call the bound `onNext` handler if available
     const currentStep = this.steps[this.currentStep];
-    if (currentStep.options.onNext) {
+    if (currentStep && currentStep.options && currentStep.options.onNext) {
       currentStep.options.onNext(this.overlay.highlightedElement);
     }
 
@@ -246,7 +250,7 @@ export default class Driver {
 
     // Call the bound `onPrevious` handler if available
     const currentStep = this.steps[this.currentStep];
-    if (currentStep.options.onPrevious) {
+    if (currentStep && currentStep.options && currentStep.options.onPrevious) {
       currentStep.options.onPrevious(this.overlay.highlightedElement);
     }
 
@@ -357,7 +361,7 @@ export default class Driver {
    * @private
    */
   prepareElementFromStep(currentStep, allSteps = [], index = 0) {
-    let elementOptions = {};
+    let elementOptions = { ...this.options };
     let querySelector = currentStep;
 
     // If the `currentStep` is step definition
@@ -388,23 +392,19 @@ export default class Driver {
       ].filter(c => c).join(' ');
 
       const popoverOptions = {
-        ...this.options,
+        ...elementOptions,
         ...elementOptions.popover,
         className: mergedClassNames,
         totalCount: allSteps.length,
         currentIndex: index,
         isFirst: index === 0,
-        isLast: index === allSteps.length - 1,
+        isLast: allSteps.length === 0 || index === allSteps.length - 1, // Only one item or last item
       };
 
       popover = new Popover(popoverOptions, this.window, this.document);
     }
 
-    const stageOptions = {
-      ...this.options,
-      ...elementOptions,
-    };
-
+    const stageOptions = { ...elementOptions };
     const stage = new Stage(stageOptions, this.window, this.document);
 
     return new Element({

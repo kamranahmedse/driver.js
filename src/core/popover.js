@@ -2,6 +2,7 @@ import Element from './element';
 import {
   CLASS_BTN_DISABLED,
   CLASS_CLOSE_BTN,
+  CLASS_CLOSE_ONLY_BTN,
   CLASS_NEXT_STEP_BTN,
   CLASS_POPOVER_DESCRIPTION,
   CLASS_POPOVER_FOOTER,
@@ -190,10 +191,25 @@ export default class Popover extends Element {
     this.prevBtnNode.innerHTML = this.options.prevBtnText;
     this.closeBtnNode.innerHTML = this.options.closeBtnText;
 
+    const hasSteps = this.options.totalCount && this.options.totalCount !== 1;
+
     // If there was only one item, hide the buttons
-    if (!this.options.showButtons || !this.options.totalCount || this.options.totalCount === 1) {
+    if (!this.options.showButtons) {
       this.footerNode.style.display = 'none';
       return;
+    }
+
+    // If this is just a single highlighted element i.e. there
+    // are no other steps to go to – just hide the navigation buttons
+    if (!hasSteps) {
+      this.nextBtnNode.style.display = 'none';
+      this.prevBtnNode.style.display = 'none';
+      this.closeBtnNode.classList.add(CLASS_CLOSE_ONLY_BTN);
+    } else {
+      // @todo modify CSS to use block
+      this.nextBtnNode.style.display = 'inline-block';
+      this.prevBtnNode.style.display = 'inline-block';
+      this.closeBtnNode.classList.remove(CLASS_CLOSE_ONLY_BTN);
     }
 
     this.footerNode.style.display = 'block';

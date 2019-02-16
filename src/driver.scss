@@ -107,8 +107,7 @@ div#driver-popover-item {
 
   .driver-popover-footer {
     display: block;
-    clear: both;
-    margin-top: 5px;
+    margin-top: 10px;
 
     button {
       display: inline-block;
@@ -123,7 +122,6 @@ div#driver-popover-item {
       background-color: $button-bg;
       border-radius: 2px;
       zoom: 1;
-      margin: 10px 0 0;
       line-height: 1.3;
     }
 
@@ -135,6 +133,10 @@ div#driver-popover-item {
 
     .driver-close-btn {
       float: left;
+    }
+
+    .driver-close-only-btn {
+      float: right;
     }
 
     .driver-btn-group {
@@ -160,6 +162,17 @@ div#driver-popover-item {
     font-weight: normal;
     zoom: 1;
   }
+}
+
+.driver-clearfix:before {
+  content: "";
+  display: table;
+}
+
+.driver-clearfix:after {
+  clear: both;
+  content: "";
+  display: table;
 }
 
 .driver-stage-no-animation {

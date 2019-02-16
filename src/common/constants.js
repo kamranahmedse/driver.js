@@ -27,6 +27,8 @@ export const CLASS_CLOSE_BTN = 'driver-close-btn';
 export const CLASS_NEXT_STEP_BTN = 'driver-next-btn';
 export const CLASS_PREV_STEP_BTN = 'driver-prev-btn';
 export const CLASS_BTN_DISABLED = 'driver-disabled';
+export const CLASS_CLOSE_ONLY_BTN = 'driver-close-only-btn';
+export const CLASS_NAVIGATION_BTNS = 'driver-navigation-btns';
 
 // NOTE: It must match the one set in the animations in CSS file
 export const ANIMATION_DURATION_MS = 300;
@@ -37,9 +39,9 @@ export const POPOVER_HTML = (className = '') => `
     <div class="${CLASS_POPOVER_TIP}"></div>
     <div class="${CLASS_POPOVER_TITLE}">Popover Title</div>
     <div class="${CLASS_POPOVER_DESCRIPTION}">Popover Description</div>
-    <div class="${CLASS_POPOVER_FOOTER}">
+    <div class="driver-clearfix ${CLASS_POPOVER_FOOTER}">
       <button class="${CLASS_CLOSE_BTN}">Close</button>
-      <span class="driver-btn-group">
+      <span class="driver-btn-group ${CLASS_NAVIGATION_BTNS}">
         <button class="${CLASS_PREV_STEP_BTN}">&larr; Previous</button>
         <button class="${CLASS_NEXT_STEP_BTN}">Next &rarr;</button>
       </span>
