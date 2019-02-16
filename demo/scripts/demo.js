@@ -128,10 +128,14 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
 
-  document.querySelectorAll('pre code')
-    .forEach((element) => {
-      hljs.highlightBlock(element);
-    });
+  try {
+    document.querySelectorAll('pre code')
+      .forEach((element) => {
+        hljs.highlightBlock(element);
+      });
+  } catch (e) {
+    // Silently ignore the highlight errors
+  }
 
 
 /////////////////////////////////////////////
