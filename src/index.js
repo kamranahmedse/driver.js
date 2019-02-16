@@ -185,7 +185,7 @@ export default class Driver {
     // If there is no highlighted element or there is a highlighted element
     // without popover or if the popover does not allow buttons - ignore
     const highlightedElement = this.getHighlightedElement();
-    if (!highlightedElement || !highlightedElement.popover || !highlightedElement.popover.options.showButtons) {
+    if (!highlightedElement || !highlightedElement.popover) {
       return;
     }
 
