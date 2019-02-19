@@ -9,6 +9,7 @@
     "no-cond-assign": "off",
     "func-names": "off",
     "no-continue": "off",
+    "no-console": "off",
     "no-bitwise": "off",
     "class-methods-use-this": "off",
     "prefer-destructuring": "off",
