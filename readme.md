@@ -258,7 +258,7 @@ const driver = new Driver({
   onDeselected: (Element) => {},       // Called when element has been deselected
   onReset: (Element) => {},            // Called when overlay is about to be cleared
   onNext: (Element) => {},                    // Called when moving to next step on any step
-  onPrevious: (Element) => {},                // Called when moving to next step on any step
+  onPrevious: (Element) => {},                // Called when moving to previous step on any step
 });
 ```
 Note that all the button options that you provide in the driver definition can be overridden for a specific step by giving them in the step definition
@@ -282,7 +282,7 @@ const stepDefinition = {
     prevBtnText: 'Previous',    // Previous button text
   },
   onNext: () => {},             // Called when moving to next step from current step
-  onPrevious: () => {},         // Called when moving to next step from current step
+  onPrevious: () => {},         // Called when moving to previous step from current step
 };
 ```
 
