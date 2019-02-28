@@ -117,6 +117,7 @@ export default class Driver {
     const clickedHighlightedElement = highlightedElement.node.contains(e.target);
     const clickedPopover = popover && popover.contains(e.target);
 
+    // Perform the 'Next' operation when clicked outside the highlighted element
     if (!clickedHighlightedElement && !clickedPopover && this.options.overlayClickNext) {
       this.handleNext();
       return;
