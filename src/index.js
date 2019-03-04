@@ -145,7 +145,6 @@ export default class Driver {
     }
   }
 
-
   /**
    * Handler for the onResize DOM event
    * Makes sure highlighted element stays at valid position

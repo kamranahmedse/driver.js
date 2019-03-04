@@ -91,6 +91,11 @@ export default class Popover extends Element {
    * @public
    */
   hide() {
+    // If hide is called when the node isn't created yet
+    if (!this.node) {
+      return;
+    }
+
     this.node.style.display = 'none';
   }
 
