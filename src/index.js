@@ -12,6 +12,7 @@ import {
   OVERLAY_PADDING,
   RIGHT_KEY_CODE,
   SHOULD_ANIMATE_OVERLAY,
+  SHOULD_INSIDE_CLICK_NEXT,
   SHOULD_OUTSIDE_CLICK_CLOSE,
   SHOULD_OUTSIDE_CLICK_NEXT,
   ALLOW_KEYBOARD_CONTROL,
@@ -35,6 +36,7 @@ export default class Driver {
       allowClose: SHOULD_OUTSIDE_CLICK_CLOSE,      // Whether to close overlay on click outside the element
       keyboardControl: ALLOW_KEYBOARD_CONTROL,     // Whether to allow controlling through keyboard or not
       overlayClickNext: SHOULD_OUTSIDE_CLICK_NEXT, // Whether to move next on click outside the element
+      highlightedElementClickNext: SHOULD_INSIDE_CLICK_NEXT, // Whether to move next on click inside the element
       stageBackground: '#ffffff',       // Background color for the stage
       onHighlightStarted: () => null,   // When element is about to be highlighted
       onHighlighted: () => null,        // When element has been highlighted
@@ -119,13 +121,19 @@ export default class Driver {
     const clickedPopover = popover && popover.contains(e.target);
 
     // Perform the 'Next' operation when clicked outside the highlighted element
-    if (!clickedHighlightedElement && !clickedPopover && this.options.overlayClickNext) {
+    if (!clickedHighlightedElement && !clickedPopover && highlightedElement.options.overlayClickNext) {
+      this.handleNext();
+      return;
+    }
+
+    // Perform the 'Next' operation when clicked highlighted element
+    if (clickedHighlightedElement && highlightedElement.options.highlightedElementClickNext) {
       this.handleNext();
       return;
     }
 
     // Remove the overlay If clicked outside the highlighted element
-    if (!clickedHighlightedElement && !clickedPopover && this.options.allowClose) {
+    if (!clickedHighlightedElement && !clickedPopover && highlightedElement.options.allowClose) {
       this.reset();
       return;
     }
