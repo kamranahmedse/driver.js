@@ -360,6 +360,9 @@ export default class Element {
     // @todo remove timeout and handle with CSS
     this.animationTimeout = this.window.setTimeout(() => {
       this.popover.show(showAtPosition);
+      if (this.options.onShowPopover) {
+        this.options.onShowPopover(this);
+      }
     }, showAfterMs);
   }
 
