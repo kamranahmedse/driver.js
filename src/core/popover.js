@@ -34,6 +34,7 @@ export default class Popover extends Element {
       offset: 0,
       showButtons: true,
       showPrevButton: true,
+      showNextButton: true,
       showCloseButton: true,
       closeBtnText: 'Close',
       doneBtnText: 'Done',
@@ -214,7 +215,12 @@ export default class Popover extends Element {
       this.closeBtnNode.classList.add(CLASS_CLOSE_ONLY_BTN);
     } else {
       // @todo modify CSS to use block
-      this.nextBtnNode.style.display = 'inline-block';
+      if (this.options.showNextButton) {
+        this.nextBtnNode.style.display = 'inline-block';
+      } else {
+        this.nextBtnNode.style.display = 'none';
+      }
+
       if (this.options.showPrevButton) {
         this.prevBtnNode.style.display = 'inline-block';
       } else {
@@ -222,6 +228,8 @@ export default class Popover extends Element {
       }
 
       if (this.options.showCloseButton) {
+        this.closeBtnNode.style.display = 'inline-block';
+      } else {
         this.closeBtnNode.style.display = 'none';
       }
 
