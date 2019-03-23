@@ -38,6 +38,7 @@ export default class Driver {
       overlayClickNext: SHOULD_OUTSIDE_CLICK_NEXT, // Whether to move next on click outside the element
       highlightedElementClickNext: SHOULD_INSIDE_CLICK_NEXT, // Whether to move next on click inside the element
       stageBackground: '#ffffff',       // Background color for the stage
+      confirmClose: false,              // Show confirm windows to close
       onHighlightStarted: () => null,   // When element is about to be highlighted
       onHighlighted: () => null,        // When element has been highlighted
       onDeselected: () => null,         // When the element has been deselected
@@ -143,7 +144,13 @@ export default class Driver {
     const closeClicked = e.target.classList.contains(CLASS_CLOSE_BTN);
 
     if (closeClicked) {
-      this.reset();
+      if(this.options.confirmClose) {
+        if(window.confirm("Would you like to finish this tutorial?")) {
+          this.reset();
+        }
+      } else {
+          this.reset();
+      }
       return;
     }
 
