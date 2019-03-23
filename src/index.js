@@ -144,12 +144,12 @@ export default class Driver {
     const closeClicked = e.target.classList.contains(CLASS_CLOSE_BTN);
 
     if (closeClicked) {
-      if(this.options.confirmClose) {
-        if(window.confirm("Would you like to finish this tutorial?")) {
+      if (this.options.confirmClose) {
+        if (window.confirm('Would you like to finish this tutorial?')) {
           this.reset();
         }
       } else {
-          this.reset();
+        this.reset();
       }
       return;
     }
