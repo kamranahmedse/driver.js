@@ -70,7 +70,7 @@ export default class Overlay {
     element.onHighlightStarted();
 
     // Old element has been deselected
-    if (this.highlightedElement && !this.highlightedElement.isSame(this.lastHighlightedElement)) {
+    if (this.highlightedElement) {
       this.highlightedElement.onDeselected();
     }
 
