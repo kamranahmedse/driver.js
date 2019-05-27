@@ -108,6 +108,17 @@ section {
   }
 }
 
+.position-btns {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  grid-gap: 8px;
+  text-align: center;
+
+  #position-btn-mid-center{
+    grid-column: 2/ span 1;
+  }
+}
+
 .position-btns a {
   text-decoration: none;
   font-size: 13px;
