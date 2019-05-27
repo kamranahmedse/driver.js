@@ -205,221 +205,25 @@ document.addEventListener('DOMContentLoaded', function () {
     padding: 0,
   });
 
-  document.querySelector('#position-btn-left')
+  document.querySelector('#position-btns')
     .addEventListener('click', (e) => {
       e.preventDefault();
 
+      let id = e.target.id;
+      let alignment = e.target.dataset.alignment;
+
+      if (!alignment) return;
+
       positionBtnsDriver.highlight({
-        element: '#position-btn-left',
+        element: `#${id}`,
         showButtons: false,
         popover: {
           title: 'Did you know?',
           description: 'You can add HTML in title or description also!',
-          position: 'left'
+          position: alignment
         }
       });
-    });
-
-  document.querySelector('#position-btn-left-center')
-    .addEventListener('click', (e) => {
-      e.preventDefault();
-
-      positionBtnsDriver.highlight({
-        element: '#position-btn-left-center',
-        showButtons: false,
-        popover: {
-          title: 'Did you know?',
-          description: 'You can add HTML in title or description also!',
-          position: 'left-center'
-        }
-      });
-    });
-
-  document.querySelector('#position-btn-left-bottom')
-    .addEventListener('click', (e) => {
-      e.preventDefault();
-
-      positionBtnsDriver.highlight({
-        element: '#position-btn-left-bottom',
-        showButtons: false,
-        popover: {
-          title: 'Did you know?',
-          description: 'You can add HTML in title or description also!',
-          position: 'left-bottom'
-        }
-      });
-    });
-
-  document.querySelector('#position-btn-right')
-    .addEventListener('click', (e) => {
-      e.preventDefault();
-
-      positionBtnsDriver.highlight({
-        element: '#position-btn-right',
-        showButtons: false,
-        popover: {
-          title: 'Did you know?',
-          description: 'You can add HTML in title or description also!',
-          position: 'right'
-        }
-      });
-    });
-
-
-  document.querySelector('#position-btn-right-center')
-    .addEventListener('click', (e) => {
-      e.preventDefault();
-
-      positionBtnsDriver.highlight({
-        element: '#position-btn-right-center',
-        showButtons: false,
-        popover: {
-          title: 'Did you know?',
-          description: 'You can add HTML in title or description also!',
-          position: 'right-center'
-        }
-      });
-    });
-
-
-  document.querySelector('#position-btn-right-bottom')
-    .addEventListener('click', (e) => {
-      e.preventDefault();
-
-      positionBtnsDriver.highlight({
-        element: '#position-btn-right-bottom',
-        showButtons: false,
-        popover: {
-          title: 'Did you know?',
-          description: 'You can add HTML in title or description also!',
-          position: 'right-bottom'
-        }
-      });
-    });
-
-
-  document.querySelector('#position-btn-top')
-    .addEventListener('click', (e) => {
-      e.preventDefault();
-
-      positionBtnsDriver.highlight({
-        element: '#position-btn-top',
-        showButtons: false,
-        popover: {
-          title: 'Did you know?',
-          description: 'You can add HTML in title or description also!',
-          position: 'top'
-        }
-      });
-    });
-
-
-  document.querySelector('#position-btn-top-center')
-    .addEventListener('click', (e) => {
-      e.preventDefault();
-
-      positionBtnsDriver.highlight({
-        element: '#position-btn-top-center',
-        showButtons: false,
-        popover: {
-          title: 'Did you know?',
-          description: 'You can add HTML in title or description also!',
-          position: 'top-center'
-        }
-      });
-    });
-
-
-  document.querySelector('#position-btn-top-right')
-    .addEventListener('click', (e) => {
-      e.preventDefault();
-
-      positionBtnsDriver.highlight({
-        element: '#position-btn-top-right',
-        showButtons: false,
-        popover: {
-          title: 'Did you know?',
-          description: 'You can add HTML in title or description also!',
-          position: 'top-right'
-        }
-      });
-    });
-
-  document.querySelector('#position-btn-bottom')
-    .addEventListener('click', (e) => {
-      e.preventDefault();
-
-      positionBtnsDriver.highlight({
-        element: '#position-btn-bottom',
-        showButtons: false,
-        popover: {
-          title: 'Did you know?',
-          description: 'You can add HTML in title or description also!',
-          position: 'bottom'
-        }
-      });
-    });
-
-  document.querySelector('#position-btn-bottom-center')
-    .addEventListener('click', (e) => {
-      e.preventDefault();
-
-      positionBtnsDriver.highlight({
-        element: '#position-btn-bottom-center',
-        showButtons: false,
-        popover: {
-          title: 'Did you know?',
-          description: 'You can add HTML in title or description also!',
-          position: 'bottom-center'
-        }
-      });
-    });
-
-  document.querySelector('#position-btn-bottom-right')
-    .addEventListener('click', (e) => {
-      e.preventDefault();
-
-      positionBtnsDriver.highlight({
-        element: '#position-btn-bottom-right',
-        showButtons: false,
-        popover: {
-          title: 'Did you know?',
-          description: 'You can add HTML in title or description also!',
-          position: 'bottom-right'
-        }
-      });
-    });
-
-  document.querySelector('#position-btn-mid-center')
-    .addEventListener('click', (e) => {
-      e.preventDefault();
-
-      positionBtnsDriver.highlight({
-        element: '#position-btn-mid-center',
-        showButtons: false,
-        popover: {
-          title: 'Did you know?',
-          description: 'You can add HTML in title or description also!',
-          position: 'mid-center'
-        }
-      });
-    });
-
-  document.querySelector('#position-btn-auto')
-    .addEventListener('click', (e) => {
-      e.preventDefault();
-
-      positionBtnsDriver.highlight({
-        element: '#position-btn-auto',
-        showButtons: false,
-        popover: {
-          title: 'Did you know?',
-          description: 'You can add HTML in title or description also!',
-          position: 'auto'
-        }
-      });
-    });
-
+    })
 
 /////////////////////////////////////////////////////
 // Highlighting single element with popover position
