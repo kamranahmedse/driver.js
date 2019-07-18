@@ -204,7 +204,7 @@ driver.defineSteps([
     onNext: () => {
       // Prevent moving to the next step
       driver.preventMove();
-      
+
       // Perform some action or create the element to move to
       // And then move to that element
       setTimeout(() => {
@@ -250,7 +250,7 @@ const driver = new Driver({
   stageBackground: '#ffffff',       // Background color for the staged behind highlighted element
   nextBtnText: 'Next',              // Next button text for this step
   prevBtnText: 'Previous',          // Previous button text for this step
-  showButtons: false,               // Do not show control buttons in footer
+  showButtons: false | ['next', 'prev', 'close'],               // Do not show control buttons in footer
   keyboardControl: true,            // Allow controlling through keyboard (escape to close, arrow keys to move)
   scrollIntoViewOptions: {},        // We use `scrollIntoView()` when possible, pass here the options for it if you want any
   onHighlightStarted: (Element) => {}, // Called when element is about to be highlighted
