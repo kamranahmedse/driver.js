@@ -5,7 +5,10 @@
     <img src="https://img.shields.io/badge/License-MIT-yellow.svg" />
   </a>
   <a href="https://npmjs.org/package/driver.js">
-    <img src="https://badge.fury.io/js/driver.js.svg" alt="version" />
+    <img src="https://img.shields.io/npm/v/driver.js.svg" alt="version" />
+  </a>
+  <a href="https://npmjs.org/package/driver.js">
+    <img src="https://img.shields.io/npm/dm/driver.js.svg" alt="downloads" />
   </a>
 </p>
 
