@@ -40,8 +40,9 @@ export default class Driver {
       onHighlighted: () => null,        // When element has been highlighted
       onDeselected: () => null,         // When the element has been deselected
       onReset: () => null,              // When overlay is about to be cleared
-      onNext: () => null,               // When next button is clicked
+      onNext: () => null,               // When next button or the Done button is clicked at the last step
       onPrevious: () => null,           // When previous button is clicked
+      onClose: () => null,              // When the Close button is clicked
       ...options,
     };
 
@@ -141,7 +142,9 @@ export default class Driver {
     const closeClicked = e.target.classList.contains(CLASS_CLOSE_BTN);
 
     if (closeClicked) {
-      this.reset();
+      if (!highlightedElement.options.onClose || highlightedElement.options.onClose(highlightedElement) !== false) {
+        this.reset();
+      }
       return;
     }
 
