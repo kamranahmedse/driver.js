@@ -142,11 +142,25 @@ driver.highlight({
 </code></pre>
     </div>
     <div class="section__example">
-      <div class="top-20 position-btns">
-        <a href="#" id="position-btn-left">On my Left</a>
-        <a href="#" id="position-btn-top">On my Top</a>
-        <a href="#" id="position-btn-bottom">On my Bottom</a>
-        <a href="#" id="position-btn-right">On my Right</a>
+      <div class="top-90 position-btns" id="position-btns">
+        <a href="#" id="position-btn-left" data-alignment="left">Left, Left Top</a>
+        <a href="#" id="position-btn-left-center" data-alignment="left-center">Left Center</a>
+        <a href="#" id="position-btn-left-bottom" data-alignment="left-bottom">Left Bottom</a>
+
+        <a href="#" id="position-btn-right" data-alignment="right">Right, Right Top</a>
+        <a href="#" id="position-btn-right-center" data-alignment="right-center">Right Center</a>
+        <a href="#" id="position-btn-right-bottom" data-alignment="right-bottom">Right Bottom</a>
+
+        <a href="#" id="position-btn-top" data-alignment="top">Top, Top-left</a>
+        <a href="#" id="position-btn-top-center" data-alignment="top-center">Top Center</a>
+        <a href="#" id="position-btn-top-right" data-alignment="top-right">Top Right</a>
+
+        <a href="#" id="position-btn-bottom" data-alignment="bottom">Bottom, Bottom left</a>
+        <a href="#" id="position-btn-bottom-center" data-alignment="bottom-center">Bottom center</a>
+        <a href="#" id="position-btn-bottom-right" data-alignment="bottom-right">Bottom right</a>
+
+        <a href="#" id="position-btn-mid-center" data-alignment="mid-center">Mid Center</a>
+        <!-- <a href="#" id="position-btn-auto" data-alignment="auto">Auto</a> -->
       </div>
       <p class="top-20">If you don't specify the position or specify it to be <code>auto</code>, it will automatically
         find the suitable position for the popover and show it</p>
