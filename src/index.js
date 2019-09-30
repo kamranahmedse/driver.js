@@ -97,9 +97,9 @@ export default class Driver {
     // Issue: https://github.com/kamranahmedse/driver.js/issues/150
     if (!('ontouchstart' in document.documentElement)) {
       this.window.addEventListener('click', this.onClick, false);
+    } else {
+      this.window.addEventListener('touchstart', this.onClick, false);
     }
-
-    this.window.addEventListener('touchstart', this.onClick, false);
   }
 
   /**
