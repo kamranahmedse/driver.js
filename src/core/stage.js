@@ -82,7 +82,7 @@ export default class Stage extends Element {
 
     // Show the stage
     this.node.style.display = 'block';
-    this.node.style.position = 'absolute';
+    this.node.style.position = (this.options.elementPosition === 'fixed') ? 'fixed' : 'absolute';
     this.node.style.width = `${width}px`;
     this.node.style.height = `${height}px`;
     this.node.style.top = `${position.top - (requiredPadding / 2)}px`;

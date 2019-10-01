@@ -190,6 +190,12 @@ declare module 'driver.js' {
       stageBackground?: string;
 
       /**
+       * Positioning of driverjs elements relative to the elements position
+       * @default absolute
+       */
+      elementPosition?: string;
+
+      /**
        * Options representing popover for this step
        */
       popover?: Driver.PopoverOptions;

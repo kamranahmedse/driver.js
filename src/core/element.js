@@ -122,11 +122,13 @@ export default class Element {
     const scrollLeft = window.pageXOffset || documentElement.scrollLeft || body.scrollLeft;
     const elementRect = this.node.getBoundingClientRect();
 
+    const topOffset = this.options.elementPosition === 'fixed' ? 0 : scrollTop;
+
     return new Position({
-      top: elementRect.top + scrollTop,
+      top: elementRect.top + topOffset,
       left: elementRect.left + scrollLeft,
       right: elementRect.left + scrollLeft + elementRect.width,
-      bottom: elementRect.top + scrollTop + elementRect.height,
+      bottom: elementRect.top + topOffset + elementRect.height,
     });
   }
 

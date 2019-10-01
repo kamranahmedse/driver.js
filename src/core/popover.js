@@ -131,6 +131,10 @@ export default class Popover extends Element {
 
     this.renderFooter();
 
+    if (this.options.elementPosition === 'fixed') {
+      this.node.style.position = 'fixed';
+    }
+
     // Position the popover around the given position
     switch (this.options.position) {
       case 'left':
