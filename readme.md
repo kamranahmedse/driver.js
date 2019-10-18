@@ -8,19 +8,18 @@
     <img src="https://img.shields.io/npm/v/driver.js.svg" alt="version" />
   </a>
   <a href="https://npmjs.org/package/driver.js">
-    <img src="https://img.shields.io/npm/dm/driver.js.svg" alt="downloads" />
+    <img src="https://img.shields.io/npm/dt/driver.js.svg" alt="downloads" />
   </a>
 </p>
 
 <p align="center">
-  <b>Powerful yet light-weight, vanilla JavaScript engine to drive the user's focus across the page</b></br>
-  <sub>Only ~4kb, no external dependency, supports all major browsers and highly customizable <sub>
+  <b>Powerful, highly customizable vanilla JavaScript engine to drive the user's focus across the page</b></br>
+  <sub>No external dependencies, supports all major browsers and highly customizable <sub>
 </p>
 
 <br />
 
 * **Simple**: is simple to use and has no external dependency at all
-* **Light-weight**: ~4kb in size, vanilla JavaScript and no external dependency
 * **Highly customizable**: has a powerful API and can be used however you want
 * **Highlight anything**: highlight any (literally any) element on page
 * **Feature introductions**: create powerful feature introductions for your web applications
