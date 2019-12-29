@@ -392,7 +392,9 @@ export default class Driver {
     }
 
     let popover = null;
-    if (elementOptions.popover && elementOptions.popover.title) {
+    if (elementOptions.popover && elementOptions.popover.title !== undefined) {
+      // specify popover.title as null or empty string can make it optional
+      elementOptions.popover.title = elementOptions.popover.title || '';
       const mergedClassNames = [
         this.options.className,
         elementOptions.popover.className,
