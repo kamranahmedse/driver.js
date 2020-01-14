@@ -9,6 +9,7 @@ import {
   CLASS_POPOVER_TIP,
   CLASS_POPOVER_TITLE,
   CLASS_PREV_STEP_BTN,
+  CLASS_STEPS_COUNTER,
   ID_POPOVER,
   POPOVER_HTML,
 } from '../common/constants';
@@ -66,6 +67,7 @@ export default class Popover extends Element {
     this.nextBtnNode = popover.querySelector(`.${CLASS_NEXT_STEP_BTN}`);
     this.prevBtnNode = popover.querySelector(`.${CLASS_PREV_STEP_BTN}`);
     this.closeBtnNode = popover.querySelector(`.${CLASS_CLOSE_BTN}`);
+    this.stepsCounterNode = popover.querySelector(`.${CLASS_STEPS_COUNTER}`);
   }
 
   /**
@@ -194,7 +196,20 @@ export default class Popover extends Element {
   renderFooter() {
     this.nextBtnNode.innerHTML = this.options.nextBtnText;
     this.prevBtnNode.innerHTML = this.options.prevBtnText;
-    this.closeBtnNode.innerHTML = this.options.closeBtnText;
+
+    if (this.options.showStepsCounter) {
+      const stepsCounterWord = this.options.stepsCounterWord || 'of';
+      this.stepsCounterNode.innerHTML = `${this.options.currentIndex + 1} ${stepsCounterWord} ${this.options.totalCount}`;
+    } else {
+      this.stepsCounterNode.innerHTML = '';
+    }
+
+    if (this.options.xCloseButton || this.options.showStepsCounter) {
+      this.closeBtnNode.classList.add('driver-close-btn-top-right');
+      this.closeBtnNode.innerHTML = '×';
+    } else {
+      this.closeBtnNode.innerHTML = this.options.closeBtnText;
+    }
 
     const hasSteps = this.options.totalCount && this.options.totalCount !== 1;
 
@@ -209,11 +224,13 @@ export default class Popover extends Element {
     if (!hasSteps) {
       this.nextBtnNode.style.display = 'none';
       this.prevBtnNode.style.display = 'none';
+      this.stepsCounterNode.style.display = 'none';
       this.closeBtnNode.classList.add(CLASS_CLOSE_ONLY_BTN);
     } else {
       // @todo modify CSS to use block
       this.nextBtnNode.style.display = 'inline-block';
       this.prevBtnNode.style.display = 'inline-block';
+      this.stepsCounterNode.style.display = 'inline-block';
       this.closeBtnNode.classList.remove(CLASS_CLOSE_ONLY_BTN);
     }
 

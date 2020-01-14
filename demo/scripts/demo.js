@@ -296,6 +296,43 @@ document.addEventListener('DOMContentLoaded', function () {
       singleNoClose.start();
     });
 
+
+/////////////////////////////////////////////
+// Introduction showing steps
+/////////////////////////////////////////////
+  const showStepsCounter = new Driver({
+    showStepsCounter: true,
+    stepsCounterWord: 'of'
+  });
+
+  showStepsCounter.defineSteps([
+    {
+      element: '#first-element-introduction-with-steps-counter',
+      popover: {
+        className: 'first-step-popover-class',
+        title: 'First step of introduction',
+        description: 'Body of the popover',
+        position: 'top'
+      }
+    },
+    {
+      element: '#second-element-introduction-with-steps-counter',
+      popover: {
+        title: 'Second step of introduction',
+        description: 'Body of the popover',
+        position: 'top'
+      }
+    }
+  ]);
+
+  document.querySelector('#run-show-steps-in-popover')
+    .addEventListener('click', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      showStepsCounter.start();
+    });
+
+
 /////////////////////////////////////////////////////
 // Highlighting single element with popover position
 /////////////////////////////////////////////////////
