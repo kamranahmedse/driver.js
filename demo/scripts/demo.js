@@ -298,16 +298,17 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 /////////////////////////////////////////////
-// Introduction showing steps
+// Introduction showing steps counter
 /////////////////////////////////////////////
-  const showStepsCounter = new Driver({
-    showStepsCounter: true,
-    stepsCounterWord: 'of'
+  const showCounter = new Driver({
+    showCounter: true,
+    counterTemplate: '{current} of {total}',
+    xCloseButton: true,
   });
 
-  showStepsCounter.defineSteps([
+  showCounter.defineSteps([
     {
-      element: '#first-element-introduction-with-steps-counter',
+      element: '#first-element-introduction-with-counter',
       popover: {
         className: 'first-step-popover-class',
         title: 'First step of introduction',
@@ -316,20 +317,28 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     },
     {
-      element: '#second-element-introduction-with-steps-counter',
+      element: '#second-element-introduction-with-counter',
       popover: {
         title: 'Second step of introduction',
+        description: 'Body of the popover',
+        position: 'top'
+      }
+    },
+    {
+      element: '#third-element-introduction-with-counter',
+      popover: {
+        title: 'Third step of introduction',
         description: 'Body of the popover',
         position: 'top'
       }
     }
   ]);
 
-  document.querySelector('#run-show-steps-in-popover')
+  document.querySelector('#run-show-counter-in-popover')
     .addEventListener('click', function (e) {
       e.preventDefault();
       e.stopPropagation();
-      showStepsCounter.start();
+      showCounter.start();
     });
 
 

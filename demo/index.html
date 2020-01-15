@@ -255,19 +255,20 @@ driver.start();
       keys on keyboard. Or you may control it using the methods provided by Driver.</p>
 
     <hr class="hr__fancy">
-    <div id="show-steps-in-popover" class="section__example">
-      <h4 id="first-element-introduction-with-steps-counter">Show Steps Counter In Footer</h4>
-      <p id="second-element-introduction-with-steps-counter">This option enables the steps counter in footer to inform user about their feature introduction journey.</p>
-      <a href="#" class="btn__run-demo" id="run-show-steps-in-popover">Show Demo</a>
+    <div id="show-counter-in-popover" class="section__example">
+      <h4 id="first-element-introduction-with-counter">Show Counter In Footer</h4>
+      <p id="second-element-introduction-with-counter">This option enables a steps counter in footer to inform user about their feature introduction journey.</p>
+      <a href="#" class="btn__run-demo" id="run-show-counter-in-popover">Show Demo</a>
       <pre><code class="javascript">const driver = new Driver({
-  showStepsCounter: true,
-  stepsCounterWord: 'of', // optional, default is 'of' already.
+  showCounter: true,
+  counterTemplate: '{current} of {total}', // optional, default is '{current} of {total}' already
+  xCloseButton: true, // optional, to change close button layout
 });
 
 // Define the steps for introduction
 driver.defineSteps([
   {
-    element: '#first-element-introduction-with-steps',
+    element: '#first-element-introduction-with-counter',
     popover: {
       className: 'first-step-popover-class',
       title: 'First step of introduction',
@@ -276,7 +277,7 @@ driver.defineSteps([
     }
   },
   {
-    element: '#second-element-introduction-with-steps',
+    element: '#second-element-introduction-with-counter',
     popover: {
       title: 'Second step of introduction',
       description: 'Body of the popover',
@@ -287,8 +288,8 @@ driver.defineSteps([
 
 // Start the introduction
 driver.start();</code></pre>
-      <p class="top-20">
-        Using this option, the close button becomes a X symbol on the top right corner, and the steps counter goes at the bottom left corner instead of close button. It's the same behavior of enabling the <strong>xCloseButton</strong> property (listed below in <a href="#driver-definition">Driver Definition</a>).
+      <p id="third-element-introduction-with-counter" class="top-20">
+        We encourage you to also enable the option <strong>xCloseButton</strong> (listed below in <a href="#driver-definition">Driver Definition</a>) when showing the steps counter, because this close button style fits better in the popover layout.
       </p>
     </div>
 
@@ -338,9 +339,9 @@ driver.highlight({
   showButtons: false, // Do not show control buttons in footer
   keyboardControl: true, // Allow controlling through keyboard (escape to close, arrow keys to move)
   scrollIntoViewOptions: {}, // We use `scrollIntoView()` when possible, pass here the options for it if you want any
-  xCloseButton: false, // Put the close buton as an X on top right corner of popover
-  showStepsCounter: false, // Enable the steps counter
-  stepsCounterWord: 'of' // Text on steps counter (e.g. 5 of 8)
+  xCloseButton: false, // Put the close button as an X on the top right corner of popover
+  showCounter: false, // Enables the steps counter
+  counterTemplate: '{current} of {total}', // Template of steps counter
   onHighlightStarted: (Element) {}, // Called when element is about to be highlighted
   onHighlighted: (Element) {}, // Called when element is fully highlighted
   onDeselected: (Element) {}, // Called when element has been deselected
