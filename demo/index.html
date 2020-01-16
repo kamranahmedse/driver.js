@@ -255,6 +255,45 @@ driver.start();
       keys on keyboard. Or you may control it using the methods provided by Driver.</p>
 
     <hr class="hr__fancy">
+    <div id="show-counter-in-popover" class="section__example">
+      <h4 id="first-element-introduction-with-counter">Show Counter In Footer</h4>
+      <p id="second-element-introduction-with-counter">This option enables a steps counter in footer to inform user about their feature introduction journey.</p>
+      <a href="#" class="btn__run-demo" id="run-show-counter-in-popover">Show Demo</a>
+      <pre><code class="javascript">const driver = new Driver({
+  showCounter: true,
+  counterTemplate: '{current} of {total}', // optional, default is '{current} of {total}' already
+  xCloseButton: true, // optional, to change close button layout
+});
+
+// Define the steps for introduction
+driver.defineSteps([
+  {
+    element: '#first-element-introduction-with-counter',
+    popover: {
+      className: 'first-step-popover-class',
+      title: 'First step of introduction',
+      description: 'Body of the popover',
+      position: 'top'
+    }
+  },
+  {
+    element: '#second-element-introduction-with-counter',
+    popover: {
+      title: 'Second step of introduction',
+      description: 'Body of the popover',
+      position: 'top'
+    }
+  },
+]);
+
+// Start the introduction
+driver.start();</code></pre>
+      <p id="third-element-introduction-with-counter" class="top-20">
+        We encourage you to also enable the option <strong>xCloseButton</strong> (listed below in <a href="#driver-definition">Driver Definition</a>) when showing the steps counter, because this close button style fits better in the popover layout.
+      </p>
+    </div>
+
+    <hr class="hr__fancy">
 
     <div id="element-without-popover" class="section__example">
       <h4>Without Overlay</h4>
@@ -284,7 +323,7 @@ driver.highlight({
         <h3>..and much much more</h3>
         <p>Driver comes with many options that you can manipulate to make driver behave as you may like</p>
       </div>
-      <h4>Driver Definition</h4>
+      <h4 id="driver-definition">Driver Definition</h4>
       <p>Here are the options that Driver understands</p>
       <pre><code class="javascript">const driver = new Driver({
   className: 'scoped-class', // className to wrap driver.js popover
@@ -300,6 +339,9 @@ driver.highlight({
   showButtons: false, // Do not show control buttons in footer
   keyboardControl: true, // Allow controlling through keyboard (escape to close, arrow keys to move)
   scrollIntoViewOptions: {}, // We use `scrollIntoView()` when possible, pass here the options for it if you want any
+  xCloseButton: false, // Put the close button as an X on the top right corner of popover
+  showCounter: false, // Enables the steps counter
+  counterTemplate: '{current} of {total}', // Template of steps counter
   onHighlightStarted: (Element) {}, // Called when element is about to be highlighted
   onHighlighted: (Element) {}, // Called when element is fully highlighted
   onDeselected: (Element) {}, // Called when element has been deselected

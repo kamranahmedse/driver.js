@@ -263,3 +263,17 @@ div#driver-highlighted-element-stage {
   transform-box: border-box !important;
   will-change: unset !important;
 }
+
+.driver-counter {
+  font-size: 13px;
+  color: #999;
+}
+
+div#driver-popover-item .driver-popover-footer .driver-close-btn-top-right {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: transparent;
+  border: none;
+  font-size: 13px;
+}

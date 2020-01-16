@@ -36,6 +36,9 @@ export default class Driver {
       keyboardControl: ALLOW_KEYBOARD_CONTROL,     // Whether to allow controlling through keyboard or not
       overlayClickNext: SHOULD_OUTSIDE_CLICK_NEXT, // Whether to move next on click outside the element
       stageBackground: '#ffffff',       // Background color for the stage
+      xCloseButton: false, // Put the close button as an X on the top right corner of popover
+      showCounter: false, // Enable the steps counter
+      counterTemplate: '{current} of {total}', // Template of steps counter
       onHighlightStarted: () => null,   // When element is about to be highlighted
       onHighlighted: () => null,        // When element has been highlighted
       onDeselected: () => null,         // When the element has been deselected
