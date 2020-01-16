@@ -822,6 +822,24 @@ declare module 'driver.js' {
       className?: string;
 
       /**
+       * Whether to show tiny close button in X format at top right corner or not
+       * @default false
+       */
+      xCloseButton?: boolean;
+
+      /**
+       * Whether to show counter or not
+       * @default false
+       */
+      showCounter?: boolean;
+
+      /**
+       * Template of counter
+       * @default '{current} of {total}'
+       */
+      counterTemplate?: string;
+
+      /**
        * Callback to be called when element is about to be highlighted
        * @param {Driver.Element} element
        * @returns any
