@@ -40,6 +40,13 @@ module.exports = {
             loader: 'css-loader',
             options: { url: false },
           },
+          {
+            loader: 'postcss-loader',
+            options: {
+              ident: 'postcss',
+              plugins: [require('autoprefixer')()], // eslint-disable-line global-require
+            },
+          },
           'sass-loader',
         ]),
       },
