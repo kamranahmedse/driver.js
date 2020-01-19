@@ -26,151 +26,103 @@ $animation-sec: ($animation-ms / 1000) * 1s !default;
   max-width: 300px;
   box-shadow: 0 1px 10px rgba(0, 0, 0, 0.4);
   z-index: $popover-z-index;
+}
 
-  .driver-popover-tip {
-    border: 5px solid $popover-bg;
-    content: '';
-    position: absolute;
+.driver-popover-tip {
+  border: 5px solid $popover-bg;
+  content: '';
+  position: absolute;
 
-    &.bottom {
-      bottom: -10px;
-      border-top-color: $popover-bg;
-      border-right-color: transparent;
-      border-bottom-color: transparent;
-      border-left-color: transparent;
+  &.bottom {
+    bottom: -10px;
+    border-top-color: $popover-bg;
+    border-right-color: transparent;
+    border-bottom-color: transparent;
+    border-left-color: transparent;
 
-      &.position-center {
-        left: 49%;
-      }
-
-      &.position-right {
-        right: 20px;
-      }
+    &.position-center {
+      left: 49%;
     }
 
-    &.left {
-      left: -10px;
-      top: 10px;
-      border-top-color: transparent;
-      border-right-color: $popover-bg;
-      border-bottom-color: transparent;
-      border-left-color: transparent;
-
-      &.position-center {
-        top: 46%;
-      }
-
-      &.position-bottom {
-        top: auto;
-        bottom: 20px;
-      }
-    }
-
-    &.right {
-      right: -10px;
-      top: 10px;
-      border-top-color: transparent;
-      border-right-color: transparent;
-      border-bottom-color: transparent;
-      border-left-color: $popover-bg;
-
-      &.position-center {
-        top: 46%;
-      }
-
-      &.position-bottom {
-        top: auto;
-        bottom: 20px;
-      }
-    }
-
-    &.top {
-      top: -10px;
-      border-top-color: transparent;
-      border-right-color: transparent;
-      border-bottom-color: $popover-bg;
-      border-left-color: transparent;
-
-      &.position-center {
-        left: 49%;
-      }
-
-      &.position-right {
-        right: 20px;
-      }
-    }
-
-    &.mid-center {
-      display: none;
+    &.position-right {
+      right: 20px;
     }
   }
 
-  .driver-popover-footer {
-    display: block;
-    margin-top: 10px;
+  &.left {
+    left: -10px;
+    top: 10px;
+    border-top-color: transparent;
+    border-right-color: $popover-bg;
+    border-bottom-color: transparent;
+    border-left-color: transparent;
 
-    button {
-      display: inline-block;
-      padding: 3px 10px;
-      border: 1px solid #d4d4d4;
-      text-decoration: none;
-      text-shadow: 1px 1px 0 #fff;
-      color: $text-color;
-      font: 11px/normal sans-serif;
-      cursor: pointer;
-      outline: 0;
-      background-color: $button-bg;
-      border-radius: 2px;
-      zoom: 1;
-      line-height: 1.3;
+    &.position-center {
+      top: 46%;
     }
 
-    button.driver-disabled {
-      color: $disabled-btn-color;
-      cursor: default;
-      pointer-events: none;
-    }
-
-    .driver-close-btn {
-      float: left;
-    }
-
-    .driver-close-btn-top-right {
-      position: absolute;
-      top: 0;
-      right: 0;
-      background-color: transparent;
-      border: none;
-      font-size: 13px;
-    }
-
-    .driver-close-only-btn {
-      float: right;
-    }
-
-    .driver-btn-group {
-      float: right;
+    &.position-bottom {
+      top: auto;
+      bottom: 20px;
     }
   }
 
-  .driver-popover-title {
-    font: 19px/normal sans-serif;
-    margin: 0 0 5px;
-    font-weight: bold;
-    display: block;
-    position: relative;
-    line-height: 1.5;
-    zoom: 1;
+  &.right {
+    right: -10px;
+    top: 10px;
+    border-top-color: transparent;
+    border-right-color: transparent;
+    border-bottom-color: transparent;
+    border-left-color: $popover-bg;
+
+    &.position-center {
+      top: 46%;
+    }
+
+    &.position-bottom {
+      top: auto;
+      bottom: 20px;
+    }
   }
 
-  .driver-popover-description {
-    margin-bottom: 0;
-    font: 14px/normal sans-serif;
-    line-height: 1.5;
-    color: $text-color;
-    font-weight: normal;
-    zoom: 1;
+  &.top {
+    top: -10px;
+    border-top-color: transparent;
+    border-right-color: transparent;
+    border-bottom-color: $popover-bg;
+    border-left-color: transparent;
+
+    &.position-center {
+      left: 49%;
+    }
+
+    &.position-right {
+      right: 20px;
+    }
   }
+
+  &.mid-center {
+    display: none;
+  }
+}
+
+.driver-popover-title {
+  font: 19px/normal sans-serif;
+  margin: 0 0 5px;
+  font-weight: bold;
+  display: block;
+  position: relative;
+  line-height: 1.5;
+  zoom: 1;
+}
+
+.driver-popover-description {
+  margin-bottom: 0;
+  font: 14px/normal sans-serif;
+  line-height: 1.5;
+  color: $text-color;
+  font-weight: normal;
+  zoom: 1;
 }
 
 .driver-clearfix:before {
@@ -182,6 +134,54 @@ $animation-sec: ($animation-ms / 1000) * 1s !default;
   clear: both;
   content: "";
   display: table;
+}
+
+.driver-popover-footer {
+  display: block;
+  margin-top: 10px;
+
+  button {
+    display: inline-block;
+    padding: 3px 10px;
+    border: 1px solid #d4d4d4;
+    text-decoration: none;
+    text-shadow: 1px 1px 0 #fff;
+    color: $text-color;
+    font: 11px/normal sans-serif;
+    cursor: pointer;
+    outline: 0;
+    background-color: $button-bg;
+    border-radius: 2px;
+    zoom: 1;
+    line-height: 1.3;
+
+    &.driver-disabled {
+      color: $disabled-btn-color;
+      cursor: default;
+      pointer-events: none;
+    }
+  }
+}
+
+.driver-close-btn {
+  float: left;
+}
+
+.driver-close-btn-top-right {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: transparent;
+  border: none;
+  font-size: 13px;
+}
+
+.driver-close-only-btn {
+  float: right;
+}
+
+.driver-btn-group {
+  float: right;
 }
 
 .driver-stage-no-animation {
