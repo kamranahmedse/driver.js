@@ -176,10 +176,6 @@ div#driver-popover-item {
 }
 
 .driver-stage-no-animation {
-  -webkit-transition: none !important;
-  -moz-transition: none !important;
-  -ms-transition: none !important;
-  -o-transition: none !important;
   transition: none !important;
 
   background: transparent !important;
@@ -201,10 +197,6 @@ div#driver-page-overlay {
   opacity: 0.75;
   z-index: $overlay-z-index !important;
 
-  -webkit-transition: all $animation-sec;
-  -moz-transition: all $animation-sec;
-  -ms-transition: all $animation-sec;
-  -o-transition: all $animation-sec;
   transition: all $animation-sec;
 }
 
@@ -219,10 +211,6 @@ div#driver-highlighted-element-stage {
   display: none;
   border-radius: 2px;
 
-  -webkit-transition: all $animation-sec;
-  -moz-transition: all $animation-sec;
-  -ms-transition: all $animation-sec;
-  -o-transition: all $animation-sec;
   transition: all $animation-sec;
 }
 
@@ -237,29 +225,10 @@ div#driver-highlighted-element-stage {
 .driver-fix-stacking {
   z-index: auto !important;
   opacity: 1.0 !important;
-  -webkit-transform: none !important;
-  -moz-transform: none !important;
-  -ms-transform: none !important;
-  -o-transform: none !important;
   transform: none !important;
-  -webkit-filter: none !important;
-  -moz-filter: none !important;
-  -ms-filter: none !important;
-  -o-filter: none !important;
   filter: none !important;
-  -webkit-perspective: none !important;
-  -moz-perspective: none !important;
-  -ms-perspective: none !important;
-  -o-perspective: none !important;
   perspective: none !important;
-  -webkit-transform-style: flat !important;
-  -moz-transform-style: flat !important;
-  -ms-transform-style: flat !important;
   transform-style: flat !important;
-  -webkit-transform-box: border-box !important;
-  -moz-transform-box: border-box !important;
-  -ms-transform-box: border-box !important;
-  -o-transform-box: border-box !important;
   transform-box: border-box !important;
   will-change: unset !important;
 }

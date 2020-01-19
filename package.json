@@ -21,6 +21,7 @@
     "@babel/core": "^7.4.5",
     "@babel/plugin-proposal-object-rest-spread": "^7.4.4",
     "@babel/preset-env": "^7.4.5",
+    "autoprefixer": "^9.7.4",
     "babel-eslint": "^10.0.1",
     "babel-loader": "^8.0.6",
     "copy-webpack-plugin": "^5.0.3",
@@ -46,5 +47,8 @@
     "webpack-cli": "^3.3.4",
     "webpack-dev-server": "^3.7.1"
   },
-  "dependencies": {}
+  "dependencies": {},
+  "browserslist": [
+    "defaults"
+  ]
 }
