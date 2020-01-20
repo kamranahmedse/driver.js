@@ -14,7 +14,7 @@ $highlighted-element-z-index: 100004 !default;
 $animation-ms: 300 !default;
 $animation-sec: ($animation-ms / 1000) * 1s !default;
 
-#driver-popover-item {
+[#driver-popover-item] {
   display: none;
   position: absolute;
   background: $popover-bg;
@@ -191,7 +191,7 @@ $animation-sec: ($animation-ms / 1000) * 1s !default;
   outline: 5000px solid rgba(0, 0, 0, 0.75);
 }
 
-#driver-page-overlay {
+[#driver-page-overlay] {
   background: #000000;
   position: fixed;
   top: 0;
@@ -209,7 +209,7 @@ $animation-sec: ($animation-ms / 1000) * 1s !default;
   transition: all $animation-sec;
 }
 
-#driver-highlighted-element-stage {
+[#driver-highlighted-element-stage] {
   position: absolute;
   top: 0;
   left: 0;
