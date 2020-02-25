@@ -12,6 +12,7 @@ import {
   CLASS_COUNTER,
   ID_POPOVER,
   POPOVER_HTML,
+  TIP_SIZE,
 } from '../common/constants';
 import { createNodeFromString } from '../common/utils';
 
@@ -233,8 +234,7 @@ export default class Popover extends Element {
     } else {
       // @todo modify CSS to use block
       this.nextBtnNode.style.display = 'inline-block';
-      // If moved back from 2nd step to the 1st one, hide the previous button.
-      this.prevBtnNode.style.display = (this.options.currentIndex === 0) ? 'none' : 'inline-block';
+      this.prevBtnNode.style.display = 'inline-block';
       this.counterNode.style.display = 'inline-block';
       this.closeBtnNode.classList.remove(CLASS_CLOSE_ONLY_BTN);
     }
