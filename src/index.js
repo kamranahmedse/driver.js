@@ -45,6 +45,7 @@ export default class Driver {
       onReset: () => null,              // When overlay is about to be cleared
       onNext: () => null,               // When next button is clicked
       onPrevious: () => null,           // When previous button is clicked
+      onSkipTour: () => null,           // When "Skip tour" button is clicked
       ...options,
     };
 
@@ -62,6 +63,7 @@ export default class Driver {
     this.onClick = this.onClick.bind(this);
     this.moveNext = this.moveNext.bind(this);
     this.movePrevious = this.movePrevious.bind(this);
+    this.skipTour = this.skipTour.bind(this);
     this.preventMove = this.preventMove.bind(this);
 
     // Event bindings
@@ -144,7 +146,7 @@ export default class Driver {
     const closeClicked = e.target.classList.contains(CLASS_CLOSE_BTN);
 
     if (closeClicked) {
-      this.reset();
+      this.handleSkipTour();
       return;
     }
 
@@ -269,6 +271,28 @@ export default class Driver {
     }
 
     this.movePrevious();
+  }
+
+  /**
+   * Handles the internal "close" event
+   * @private
+   */
+  handleSkipTour() {
+    if (this.options.onSkipTour) {
+      this.options.onSkipTour();
+    }
+
+    this.skipTour();
+  }
+
+  /**
+   * Function for skip tour button pressed
+   * @public
+   */
+  skipTour() {
+    this.currentStep = 0;
+    this.isActivated = false;
+    this.overlay.clear(true);
   }
 
   /**
