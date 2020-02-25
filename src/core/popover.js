@@ -12,6 +12,7 @@ import {
   CLASS_COUNTER,
   ID_POPOVER,
   POPOVER_HTML,
+  TIP_SIZE,
 } from '../common/constants';
 import { createNodeFromString } from '../common/utils';
 
