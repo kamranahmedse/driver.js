@@ -11,8 +11,7 @@ import {
   CLASS_PREV_STEP_BTN,
   CLASS_COUNTER,
   ID_POPOVER,
-  POPOVER_HTML,
-  TIP_SIZE,
+  POPOVER_HTML
 } from '../common/constants';
 import { createNodeFromString } from '../common/utils';
 
