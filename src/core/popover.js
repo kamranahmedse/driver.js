@@ -87,6 +87,33 @@ export default class Popover extends Element {
   }
 
   /**
+   * Gets the next-button node for the popover
+   * @returns {Element | null | *}
+   * @public
+   */
+  getNextBtnNode() {
+    return this.nextBtnNode;
+  }
+
+  /**
+   * Gets the previous-button node for the popover
+   * @returns {Element | null | *}
+   * @public
+   */
+  getPreviousBtnNode() {
+    return this.prevBtnNode;
+  }
+
+  /**
+   * Gets the close-button node for the popover
+   * @returns {Element | null | *}
+   * @public
+   */
+  getCloseBtnNode() {
+    return this.closeBtnNode;
+  }
+
+  /**
    * Hides the popover
    * @public
    */
@@ -188,6 +215,8 @@ export default class Popover extends Element {
 
     // Bring the popover in view port once it is displayed
     this.bringInView();
+
+    this.options.onPopoverRenderDone(this);
   }
 
   /**

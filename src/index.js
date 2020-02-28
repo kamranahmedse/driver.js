@@ -42,6 +42,7 @@ export default class Driver {
       onReset: () => null,              // When overlay is about to be cleared
       onNext: () => null,               // When next button is clicked
       onPrevious: () => null,           // When previous button is clicked
+      onPopoverRenderDone: () => null,  // When popover has been rendered
       ...options,
     };
 
