@@ -137,9 +137,9 @@ export default class Driver {
       return;
     }
 
-    const nextClicked = e.target.classList.contains(CLASS_NEXT_STEP_BTN);
-    const prevClicked = e.target.classList.contains(CLASS_PREV_STEP_BTN);
-    const closeClicked = e.target.classList.contains(CLASS_CLOSE_BTN);
+    const nextClicked = e.target.classList.contains(CLASS_NEXT_STEP_BTN) || e.target.parentNode.classList.contains(CLASS_NEXT_STEP_BTN);
+    const prevClicked = e.target.classList.contains(CLASS_PREV_STEP_BTN) || e.target.parentNode.classList.contains(CLASS_PREV_STEP_BTN);
+    const closeClicked = e.target.classList.contains(CLASS_CLOSE_BTN) || e.target.parentNode.classList.contains(CLASS_CLOSE_BTN);
 
     if (closeClicked) {
       this.reset();
