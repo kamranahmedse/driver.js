@@ -42,6 +42,7 @@ export default class Driver {
       onReset: () => null,              // When overlay is about to be cleared
       onNext: () => null,               // When next button is clicked
       onPrevious: () => null,           // When previous button is clicked
+      onPopoverRenderDone: () => null,  // When popover has been rendered
       ...options,
     };
 
@@ -136,9 +137,9 @@ export default class Driver {
       return;
     }
 
-    const nextClicked = e.target.classList.contains(CLASS_NEXT_STEP_BTN);
-    const prevClicked = e.target.classList.contains(CLASS_PREV_STEP_BTN);
-    const closeClicked = e.target.classList.contains(CLASS_CLOSE_BTN);
+    const nextClicked = e.target.classList.contains(CLASS_NEXT_STEP_BTN) || e.target.parentNode.classList.contains(CLASS_NEXT_STEP_BTN);
+    const prevClicked = e.target.classList.contains(CLASS_PREV_STEP_BTN) || e.target.parentNode.classList.contains(CLASS_PREV_STEP_BTN);
+    const closeClicked = e.target.classList.contains(CLASS_CLOSE_BTN) || e.target.parentNode.classList.contains(CLASS_CLOSE_BTN);
 
     if (closeClicked) {
       this.reset();
