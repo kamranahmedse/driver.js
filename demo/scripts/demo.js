@@ -296,6 +296,52 @@ document.addEventListener('DOMContentLoaded', function () {
       singleNoClose.start();
     });
 
+
+/////////////////////////////////////////////
+// Introduction showing steps counter
+/////////////////////////////////////////////
+  const showCounter = new Driver({
+    showCounter: true,
+    counterTemplate: '{current} of {total}',
+    xCloseButton: true,
+  });
+
+  showCounter.defineSteps([
+    {
+      element: '#first-element-introduction-with-counter',
+      popover: {
+        className: 'first-step-popover-class',
+        title: 'First step of introduction',
+        description: 'Body of the popover',
+        position: 'top'
+      }
+    },
+    {
+      element: '#second-element-introduction-with-counter',
+      popover: {
+        title: 'Second step of introduction',
+        description: 'Body of the popover',
+        position: 'top'
+      }
+    },
+    {
+      element: '#third-element-introduction-with-counter',
+      popover: {
+        title: 'Third step of introduction',
+        description: 'Body of the popover',
+        position: 'top'
+      }
+    }
+  ]);
+
+  document.querySelector('#run-show-counter-in-popover')
+    .addEventListener('click', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      showCounter.start();
+    });
+
+
 /////////////////////////////////////////////////////
 // Highlighting single element with popover position
 /////////////////////////////////////////////////////

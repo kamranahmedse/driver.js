@@ -9,6 +9,7 @@ import {
   CLASS_POPOVER_TIP,
   CLASS_POPOVER_TITLE,
   CLASS_PREV_STEP_BTN,
+  CLASS_COUNTER,
   ID_POPOVER,
   POPOVER_HTML,
 } from '../common/constants';
@@ -66,6 +67,7 @@ export default class Popover extends Element {
     this.nextBtnNode = popover.querySelector(`.${CLASS_NEXT_STEP_BTN}`);
     this.prevBtnNode = popover.querySelector(`.${CLASS_PREV_STEP_BTN}`);
     this.closeBtnNode = popover.querySelector(`.${CLASS_CLOSE_BTN}`);
+    this.counterNode = popover.querySelector(`.${CLASS_COUNTER}`);
   }
 
   /**
@@ -194,7 +196,24 @@ export default class Popover extends Element {
   renderFooter() {
     this.nextBtnNode.innerHTML = this.options.nextBtnText;
     this.prevBtnNode.innerHTML = this.options.prevBtnText;
-    this.closeBtnNode.innerHTML = this.options.closeBtnText;
+
+    if (this.options.showCounter) {
+      const counterTemplate = this.options.counterTemplate;
+      const currentStep = this.options.currentIndex + 1;
+      const totalCount = this.options.totalCount;
+      this.counterNode.innerHTML = counterTemplate
+        .replace('{current}', currentStep)
+        .replace('{total}', totalCount);
+    } else {
+      this.counterNode.innerHTML = '';
+    }
+
+    if (this.options.xCloseButton) {
+      this.closeBtnNode.classList.add('driver-close-btn-top-right');
+      this.closeBtnNode.innerHTML = '×';
+    } else {
+      this.closeBtnNode.innerHTML = this.options.closeBtnText;
+    }
 
     const hasSteps = this.options.totalCount && this.options.totalCount !== 1;
 
@@ -209,11 +228,13 @@ export default class Popover extends Element {
     if (!hasSteps) {
       this.nextBtnNode.style.display = 'none';
       this.prevBtnNode.style.display = 'none';
+      this.counterNode.style.display = 'none';
       this.closeBtnNode.classList.add(CLASS_CLOSE_ONLY_BTN);
     } else {
       // @todo modify CSS to use block
       this.nextBtnNode.style.display = 'inline-block';
       this.prevBtnNode.style.display = 'inline-block';
+      this.counterNode.style.display = 'inline-block';
       this.closeBtnNode.classList.remove(CLASS_CLOSE_ONLY_BTN);
     }
 

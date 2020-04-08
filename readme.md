@@ -255,6 +255,9 @@ const driver = new Driver({
   showButtons: false,               // Do not show control buttons in footer
   keyboardControl: true,            // Allow controlling through keyboard (escape to close, arrow keys to move)
   scrollIntoViewOptions: {},        // We use `scrollIntoView()` when possible, pass here the options for it if you want any
+  xCloseButton: false, // Put the close button as an X on the top right corner of popover
+  showCounter: false, // Enables the steps counter
+  counterTemplate: '{current} of {total}', // Template of steps counter
   onHighlightStarted: (Element) => {}, // Called when element is about to be highlighted
   onHighlighted: (Element) => {},      // Called when element is fully highlighted
   onDeselected: (Element) => {},       // Called when element has been deselected
