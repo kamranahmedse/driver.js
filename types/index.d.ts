@@ -1,4 +1,4 @@
-declare module 'driver.js' {
+declare module '@contaazul/driver.js' {
   class Driver {
     /**
      * Refers to the global document object
