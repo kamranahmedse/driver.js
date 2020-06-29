@@ -206,7 +206,7 @@ driver.defineSteps([
     onNext: () => {
       // Prevent moving to the next step
       driver.preventMove();
-      
+
       // Perform some action or create the element to move to
       // And then move to that element
       setTimeout(() => {
@@ -261,6 +261,7 @@ const driver = new Driver({
   onReset: (Element) => {},            // Called when overlay is about to be cleared
   onNext: (Element) => {},                    // Called when moving to next step on any step
   onPrevious: (Element) => {},                // Called when moving to previous step on any step
+  onRefresh: (Element) => {},           // Called when the popover and highlighted element are repositioned
 });
 ```
 Note that all the button options that you provide in the driver definition can be overridden for a specific step by giving them in the step definition

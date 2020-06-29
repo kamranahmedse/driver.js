@@ -856,6 +856,11 @@ declare module 'driver.js' {
        * Is called when the previous element is about to be highlighted
        */
       onPrevious?: (element: Driver.Element) => void;
+
+      /**
+       * Is called when the popover and highlighted element are repositioned
+       */
+      onRefresh?: (element: Driver.Element) => void;
     }
 
     interface ElementOptions extends Driver.DriverOptions {
