@@ -119,11 +119,16 @@ export default class Popover extends Element {
   /**
    * Shows the popover at the given position
    * @param {Position} position
+   * @param {boolean} fixed
    * @public
    */
-  show(position) {
+  show(position, fixed) {
     this.attachNode();
     this.setInitialState();
+
+    if (fixed){
+      this.node.style.position = 'fixed';
+    }
 
     // Set the title and descriptions
     this.titleNode.innerHTML = this.options.title;

@@ -67,9 +67,10 @@ export default class Stage extends Element {
   /**
    * Shows the stage at provided position
    * @param {Position} position
+   * @param {boolean} fixed
    * @public
    */
-  show(position) {
+  show(position, fixed) {
     this.attachNode();
 
     this.setInitialStyle();
@@ -82,7 +83,7 @@ export default class Stage extends Element {
 
     // Show the stage
     this.node.style.display = 'block';
-    this.node.style.position = 'absolute';
+    this.node.style.position = fixed ? 'fixed' : 'absolute';
     this.node.style.width = `${width}px`;
     this.node.style.height = `${height}px`;
     this.node.style.top = `${position.top - (requiredPadding / 2)}px`;
