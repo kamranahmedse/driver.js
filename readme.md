@@ -206,7 +206,7 @@ driver.defineSteps([
     onNext: () => {
       // Prevent moving to the next step
       driver.preventMove();
-      
+
       // Perform some action or create the element to move to
       // And then move to that element
       setTimeout(() => {
@@ -374,6 +374,20 @@ activeElement.getNode();  // Gets the DOM Element behind this element
 ## Contributions
 
 Feel free to submit pull requests, create issues or spread the word.
+
+### Online one-click setup
+
+You can use Gitpod(An online IDE which is free for Open Source) for contributing. With a single click it will launch a workspace and automatically:
+
+- clone the driver.js repo.
+- install the dependencies.
+- run `yarn run start`.
+
+So that anyone interested in contributing can start straight away.
+
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/kamranahmedse/driver.js)
+
+
 
 ## Sponsored By
 
