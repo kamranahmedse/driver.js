@@ -58,6 +58,9 @@ export default class Element {
       el = el.offsetParent;
       top += el.offsetTop;
       left += el.offsetLeft;
+      if (this.window.getComputedStyle(el, null).getPropertyValue('position') == 'fixed'){
+        break;
+      }
     }
 
     return (
@@ -66,6 +69,22 @@ export default class Element {
       && (top + height) <= (this.window.pageYOffset + this.window.innerHeight)
       && (left + width) <= (this.window.pageXOffset + this.window.innerWidth)
     );
+  }
+
+  /**
+   * Checks if the current element has position fixed or if it has a fixed positioned ancestor
+   * @returns {boolean}
+   * @public
+   */
+  isFixedPositioned() {
+    let el = this.node;
+    while (el.parentElement){
+      if (this.window.getComputedStyle(el, null).getPropertyValue('position') == 'fixed'){
+        return true;
+      }
+      el = el.parentElement;
+    }
+    return false;
   }
 
   /**
@@ -118,8 +137,9 @@ export default class Element {
     const documentElement = this.document.documentElement;
     const window = this.window;
 
-    const scrollTop = this.window.pageYOffset || documentElement.scrollTop || body.scrollTop;
-    const scrollLeft = window.pageXOffset || documentElement.scrollLeft || body.scrollLeft;
+    let isFixedPositioned = this.isFixedPositioned();
+    const scrollTop = isFixedPositioned ? 0 : (this.window.pageYOffset || documentElement.scrollTop || body.scrollTop);
+    const scrollLeft = isFixedPositioned ? 0 : (window.pageXOffset || documentElement.scrollLeft || body.scrollLeft);
     const elementRect = this.node.getBoundingClientRect();
 
     return new Position({
@@ -307,7 +327,7 @@ export default class Element {
    * @public
    */
   showStage() {
-    this.stage.show(this.getCalculatedPosition());
+    this.stage.show(this.getCalculatedPosition(), this.isFixedPositioned());
   }
 
   /**
@@ -359,7 +379,7 @@ export default class Element {
 
     // @todo remove timeout and handle with CSS
     this.animationTimeout = this.window.setTimeout(() => {
-      this.popover.show(showAtPosition);
+      this.popover.show(showAtPosition, this.isFixedPositioned());
     }, showAfterMs);
   }
 
