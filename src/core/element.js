@@ -215,10 +215,17 @@ export default class Element {
     this.node.classList.remove(CLASS_DRIVER_HIGHLIGHTED_ELEMENT);
     this.node.classList.remove(CLASS_POSITION_RELATIVE);
 
-    const stackFixes = this.document.querySelectorAll(`.${CLASS_FIX_STACKING_CONTEXT}`);
+    const stackFixes = this.findInLightAndShadowDom(document, `.${CLASS_FIX_STACKING_CONTEXT}`);
     for (let counter = 0; counter < stackFixes.length; counter++) {
       stackFixes[counter].classList.remove(CLASS_FIX_STACKING_CONTEXT);
     }
+  }
+
+  findInLightAndShadowDom(element, selector) {
+    const lightDom = Array.from(element.querySelectorAll(selector));
+    const allElements = Array.from(element.querySelectorAll('*'));
+    const shadowDom = allElements.filter(e => e.shadowRoot).flatMap(e => this.findInLightAndShadowDom(e.shadowRoot, selector));
+    return [...lightDom, ...shadowDom];
   }
 
   /**
@@ -238,14 +245,24 @@ export default class Element {
     this.fixStackingContext();
   }
 
+  getParent(node) {
+    /* Traverse upwards inside shadow roots so that the stacking context is fixed also for elements inside a shadow root */
+    return node.assignedSlot || node.host || node.parentNode;
+  }
+
   /**
    * Walks through the parents of the current element and fixes
    * the stacking context
    * @private
    */
   fixStackingContext() {
-    let parentNode = this.node.parentNode;
+    let parentNode = this.getParent(this.node);
     while (parentNode) {
+      if (parentNode.host) {
+        // A shadow root has a host property. A shadow root cannot and should not have a "class"
+        parentNode = this.getParent(parentNode);
+        continue;
+      }
       if (!parentNode.tagName || parentNode.tagName.toLowerCase() === 'body') {
         break;
       }
@@ -274,7 +291,7 @@ export default class Element {
         parentNode.classList.add(CLASS_FIX_STACKING_CONTEXT);
       }
 
-      parentNode = parentNode.parentNode;
+      parentNode = this.getParent(parentNode);
     }
   }
 
