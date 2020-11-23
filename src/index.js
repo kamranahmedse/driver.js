@@ -42,6 +42,7 @@ export default class Driver {
       onReset: () => null,              // When overlay is about to be cleared
       onNext: () => null,               // When next button is clicked
       onPrevious: () => null,           // When previous button is clicked
+      onRefresh: () => null,            // When the popover and highlighted element are repositioned
       ...options,
     };
 
@@ -170,6 +171,10 @@ export default class Driver {
    */
   refresh() {
     this.overlay.refresh();
+
+    if (this.options.onRefresh && this.hasHighlightedElement()) {
+      this.options.onRefresh(this.getHighlightedElement());
+    }
   }
 
   /**
