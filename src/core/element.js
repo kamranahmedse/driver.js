@@ -75,9 +75,12 @@ export default class Element {
   scrollManually() {
     const elementRect = this.node.getBoundingClientRect();
     const absoluteElementTop = elementRect.top + this.window.pageYOffset;
-    const middle = absoluteElementTop - (this.window.innerHeight / 2);
+    const absoluteElementLeft = elementRect.left + this.window.pageXOffset;
 
-    this.window.scrollTo(0, middle);
+    const middleX = absoluteElementLeft - (this.window.innerWidth / 2);
+    const middleY = absoluteElementTop - (this.window.innerHeight / 2);
+
+    this.window.scrollTo(middleX, middleY);
   }
 
   /**
