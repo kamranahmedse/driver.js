@@ -8,6 +8,7 @@
     "start": "node server.js",
     "build-demo": "NODE_ENV=production webpack --config config/webpack.config.demo.js",
     "build": "webpack --config config/webpack.config.prod.js",
+    "build-dev": "webpack --config config/webpack.config.dev.js",
     "deploy-demo": "NODE_DEBUG=gh-pages gh-pages -d dist/demo"
   },
   "bugs": {
