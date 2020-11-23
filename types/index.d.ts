@@ -190,6 +190,12 @@ declare module 'driver.js' {
       stageBackground?: string;
 
       /**
+       * Positioning of driverjs elements relative to the elements position
+       * @default absolute
+       */
+      elementPosition?: string;
+
+      /**
        * Options representing popover for this step
        */
       popover?: Driver.PopoverOptions;
@@ -203,6 +209,11 @@ declare module 'driver.js' {
        * Is called when the previous element is about to be highlighted
        */
       onPrevious?: (element: Driver.Element) => void;
+
+      /**
+       * Is called when the popover has been rendered
+       */
+      onPopoverRenderDone?: (popover: Driver.Popover) => void;
     }
 
     class Element {
@@ -583,6 +594,25 @@ declare module 'driver.js' {
        * @returns {Node | HTMLElement}
        */
       public getDescriptionNode(): Node | HTMLElement;
+
+      /**
+       * Gets the next-button node for the popover
+       * @returns {Node | HTMLElement}
+       * @public
+       */
+      public getNextBtnNode(): Node | HTMLElement
+
+      /**
+       * Gets the previous-button node for the popover
+       * @returns {Node | HTMLElement}
+       */
+      public getPreviousBtnNode(): Node | HTMLElement
+
+      /**
+       * Gets the close-button node for the popover
+       * @returns {Node | HTMLElement}
+       */
+      public getCloseBtnNode(): Node | HTMLElement
     }
 
     class Stage extends Element {
@@ -856,6 +886,11 @@ declare module 'driver.js' {
        * Is called when the previous element is about to be highlighted
        */
       onPrevious?: (element: Driver.Element) => void;
+
+      /**
+       * Is called when the popover has been rendered
+       */
+      onPopoverRenderDone?: (popover: Driver.Popover) => void;
     }
 
     interface ElementOptions extends Driver.DriverOptions {
