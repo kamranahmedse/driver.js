@@ -267,6 +267,27 @@ document.addEventListener('DOMContentLoaded', function () {
       });
     });
 
+/////////////////////////////////////////////////////
+// With Custom Button Class
+/////////////////////////////////////////////////////
+  const withCustomButtonClass = new Driver({
+    closeBtnClass: 'custom-btn'
+  });
+
+  document.querySelector('#run-element-with-custom-classes')
+    .addEventListener('click', (e) => {
+      e.preventDefault();
+
+      withCustomButtonClass.highlight({
+        element: '#run-element-with-custom-classes',
+        popover: {
+          title: 'Title for the Popover',
+          description: 'Description for it',
+          position: 'top', // can be `top`, `left`, `right`, `bottom`
+        }
+      });
+    });
+
 /////////////////////////////////////////////
 // Single no close demo
 /////////////////////////////////////////////
