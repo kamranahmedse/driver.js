@@ -34,10 +34,15 @@ export default class Popover extends Element {
       offset: 0,
       showButtons: true,
       closeBtnText: 'Close',
+      closeBtnClass: '',
       doneBtnText: 'Done',
+      doneBtnClass: '',
       startBtnText: 'Next &rarr;',
+      startBtnClass: '',
       nextBtnText: 'Next &rarr;',
+      nextBtnClass: '',
       prevBtnText: '&larr; Previous',
+      prevBtnClass: '',
       ...options,
     };
 
@@ -55,7 +60,7 @@ export default class Popover extends Element {
       popover.parentElement.removeChild(popover);
     }
 
-    popover = createNodeFromString(POPOVER_HTML(this.options.className));
+    popover = createNodeFromString(POPOVER_HTML(this.options.className, this.options));
     document.body.appendChild(popover);
 
     this.node = popover;

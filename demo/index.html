@@ -279,6 +279,26 @@ driver.highlight({
 
     <hr class="hr__fancy">
 
+    <div id="element-with-custom-classes" class="section__example">
+      <h4>Custom Button Classes</h4>
+      <p>You can define custom classes for the whole tour, as well as per step.</p>
+      <a href="#" class="btn__run-demo" id="run-element-with-custom-classes">Show Demo</a>
+      <pre><code class="javascript">const driver = new Driver({
+    closeBtnClass: 'custom-btn'
+});
+
+driver.highlight({
+  element: '#run-element-with-custom-classes',
+  popover: {
+    title: 'Title for the Popover',
+    description: 'Description for it',
+  }
+});
+</code></pre>
+    </div>
+
+    <hr class="hr__fancy">
+
     <div class="section__example">
       <div id="api_section">
         <h3>..and much much more</h3>
@@ -294,9 +314,13 @@ driver.highlight({
   allowClose: true, // Whether clicking on overlay should close or not
   overlayClickNext: false, // Should it move to next step on overlay click
   doneBtnText: 'Done', // Text on the final button
+  doneBtnClass: 'custom-btn', // Optional custom classes
   closeBtnText: 'Close', // Text on the close button for this step
+  closeBtnClass: 'custom-btn', // Optional custom classes
   nextBtnText: 'Next', // Next button text for this step
+  nextBtnClass: 'custom-btn', // Optional custom classes
   prevBtnText: 'Previous', // Previous button text for this step
+  prevBtnClass: 'custom-btn', // Optional custom classes
   showButtons: false, // Do not show control buttons in footer
   keyboardControl: true, // Allow controlling through keyboard (escape to close, arrow keys to move)
   scrollIntoViewOptions: {}, // We use `scrollIntoView()` when possible, pass here the options for it if you want any
@@ -323,7 +347,8 @@ driver.highlight({
     description: 'Description', // Body of the popover
     showButtons: false,         // Do not show control buttons in footer
     closeBtnText: 'Close',      // Text on the close button for this step
-    nextBtnText: 'Next',        // Next button text for this step
+    nextBtnText: 'Next',        // Next button text for this step,
+    nextBtnClass: 'next-btn',   // Optional custom classes
     prevBtnText: 'Previous',    // Previous button text for this step
   }
 };
