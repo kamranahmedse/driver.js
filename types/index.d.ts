@@ -793,6 +793,24 @@ declare module 'driver.js' {
       showButtons?: boolean;
 
       /**
+       * Whether to show close button or not
+       * @default true
+       */
+      showCloseButton?: boolean;
+
+      /**
+       * Whether to show next button or not
+       * @default true
+       */
+      showNextButton?: boolean;
+
+      /**
+       * Whether to show prev button or not
+       * @default true
+       */
+      showPrevButton?: boolean;
+
+      /**
        * Text on the button in the final step
        * @default 'Done'
        */

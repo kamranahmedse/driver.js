@@ -33,6 +33,9 @@ export default class Popover extends Element {
       currentIndex: 0,
       offset: 0,
       showButtons: true,
+      showNextButton: true,
+      showPrevButton: true,
+      showCloseButton: true,
       closeBtnText: 'Close',
       doneBtnText: 'Done',
       startBtnText: 'Next &rarr;',
@@ -202,6 +205,15 @@ export default class Popover extends Element {
     if (!this.options.showButtons) {
       this.footerNode.style.display = 'none';
       return;
+    }
+    if (!this.options.showNextButton) {
+      this.nextBtnNode.style.display = 'none';
+    }
+    if (!this.options.showPrevButton) {
+      this.prevBtnNode.style.display = 'none';
+    }
+    if (!this.options.showCloseButton) {
+      this.closeBtnNode.style.display = 'none';
     }
 
     // If this is just a single highlighted element i.e. there
