@@ -224,6 +224,7 @@ div#driver-highlighted-element-stage {
 
 .driver-fix-stacking {
   z-index: auto !important;
+  position: unset !important;
   opacity: 1.0 !important;
   transform: none !important;
   filter: none !important;
