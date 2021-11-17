@@ -1,6 +1,7 @@
 import {
   ANIMATION_DURATION_MS,
   CLASS_DRIVER_HIGHLIGHTED_ELEMENT,
+  CLASS_DRIVER_HIGHLIGHTED_ELEMENT_Z_INDEX,
   CLASS_FIX_STACKING_CONTEXT,
   CLASS_POSITION_RELATIVE,
 } from '../common/constants';
@@ -215,6 +216,7 @@ export default class Element {
    */
   removeHighlightClasses() {
     this.node.classList.remove(CLASS_DRIVER_HIGHLIGHTED_ELEMENT);
+    this.node.classList.remove(CLASS_DRIVER_HIGHLIGHTED_ELEMENT_Z_INDEX);
     this.node.classList.remove(CLASS_POSITION_RELATIVE);
 
     const stackFixes = this.document.querySelectorAll(`.${CLASS_FIX_STACKING_CONTEXT}`);
@@ -229,6 +231,10 @@ export default class Element {
    * @private
    */
   addHighlightClasses() {
+    if (this.options.highlightedElementZIndex) {
+      this.node.classList.add(CLASS_DRIVER_HIGHLIGHTED_ELEMENT_Z_INDEX);
+    }
+
     this.node.classList.add(CLASS_DRIVER_HIGHLIGHTED_ELEMENT);
 
     // Don't make relative if element already has some position set

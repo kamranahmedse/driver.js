@@ -15,6 +15,8 @@ import {
   SHOULD_OUTSIDE_CLICK_CLOSE,
   SHOULD_OUTSIDE_CLICK_NEXT,
   ALLOW_KEYBOARD_CONTROL,
+  SHOULD_ADD_Z_INDEX_TO_HIGHLIGHTED_ELEMENT,
+  DISABLE_INTERACTION_BLOCKING_OVERLAY,
 } from './common/constants';
 import Stage from './core/stage';
 import { isDomElement } from './common/utils';
@@ -29,12 +31,14 @@ export default class Driver {
   constructor(options = {}) {
     this.options = {
       animate: SHOULD_ANIMATE_OVERLAY, // Whether to animate or not
-      opacity: OVERLAY_OPACITY,    // Overlay opacity
+      overlayOpacity: OVERLAY_OPACITY,    // Overlay opacity
       padding: OVERLAY_PADDING,    // Spacing around the element from the overlay
       scrollIntoViewOptions: null, // Options to be passed to `scrollIntoView`
       allowClose: SHOULD_OUTSIDE_CLICK_CLOSE,      // Whether to close overlay on click outside the element
       keyboardControl: ALLOW_KEYBOARD_CONTROL,     // Whether to allow controlling through keyboard or not
       overlayClickNext: SHOULD_OUTSIDE_CLICK_NEXT, // Whether to move next on click outside the element
+      highlightedElementZIndex: SHOULD_ADD_Z_INDEX_TO_HIGHLIGHTED_ELEMENT,   // If true a Z-Index will be added to the highlighted Element so that it will be displayed above the stage.
+      disableInteractionBlockingOverlay: DISABLE_INTERACTION_BLOCKING_OVERLAY,
       stageBackground: '#ffffff',       // Background color for the stage
       onHighlightStarted: () => null,   // When element is about to be highlighted
       onHighlighted: () => null,        // When element has been highlighted
