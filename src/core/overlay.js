@@ -38,7 +38,7 @@ export default class Overlay {
     this.node = pageOverlay;
     this.node.style.opacity = '0';
 
-    if (!this.options.disableInteractionBlockingOverlay) {
+    if (this.options.disableInteractionBlockingOverlay) {
       if (this.node.parentElement) {
         this.node.parentElement.removeChild(this.node);
       }
