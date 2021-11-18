@@ -38,13 +38,7 @@ export default class Overlay {
     this.node = pageOverlay;
     this.node.style.opacity = '0';
 
-    if (!this.options.animate) {
-      // For non-animation cases remove the overlay because we achieve this overlay by having
-      // a higher box-shadow on the stage. Why are we doing it that way? Because the stage that
-      // is shown "behind" the highlighted element to make it pop out of the screen, it introduces
-      // some stacking contexts issues. To avoid those issues we just make the stage background
-      // transparent and achieve the overlay using the shadow so to make the element below it visible
-      // through the stage even if there are stacking issues.
+    if (this.options.disableInteractionBlockingOverlay) {
       if (this.node.parentElement) {
         this.node.parentElement.removeChild(this.node);
       }
@@ -106,7 +100,7 @@ export default class Overlay {
     this.attachNode();
 
     window.setTimeout(() => {
-      this.node.style.opacity = `${this.options.opacity}`;
+      this.node.style.opacity = `${this.options.overlayOpacity}`;
       this.node.style.position = 'fixed';
       this.node.style.left = '0';
       this.node.style.top = '0';

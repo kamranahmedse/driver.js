@@ -2,19 +2,21 @@ import Overlay from './core/overlay';
 import Element from './core/element';
 import Popover from './core/popover';
 import {
+  ALLOW_KEYBOARD_CONTROL,
   CLASS_CLOSE_BTN,
   CLASS_NEXT_STEP_BTN,
   CLASS_PREV_STEP_BTN,
+  DISABLE_INTERACTION_BLOCKING_OVERLAY,
   ESC_KEY_CODE,
   ID_POPOVER,
   LEFT_KEY_CODE,
   OVERLAY_OPACITY,
   OVERLAY_PADDING,
   RIGHT_KEY_CODE,
+  SHOULD_ADD_Z_INDEX_TO_HIGHLIGHTED_ELEMENT,
   SHOULD_ANIMATE_OVERLAY,
   SHOULD_OUTSIDE_CLICK_CLOSE,
   SHOULD_OUTSIDE_CLICK_NEXT,
-  ALLOW_KEYBOARD_CONTROL,
 } from './common/constants';
 import Stage from './core/stage';
 import { isDomElement } from './common/utils';
@@ -29,12 +31,14 @@ export default class Driver {
   constructor(options = {}) {
     this.options = {
       animate: SHOULD_ANIMATE_OVERLAY, // Whether to animate or not
-      opacity: OVERLAY_OPACITY,    // Overlay opacity
+      overlayOpacity: OVERLAY_OPACITY,    // Overlay opacity
       padding: OVERLAY_PADDING,    // Spacing around the element from the overlay
       scrollIntoViewOptions: null, // Options to be passed to `scrollIntoView`
       allowClose: SHOULD_OUTSIDE_CLICK_CLOSE,      // Whether to close overlay on click outside the element
       keyboardControl: ALLOW_KEYBOARD_CONTROL,     // Whether to allow controlling through keyboard or not
       overlayClickNext: SHOULD_OUTSIDE_CLICK_NEXT, // Whether to move next on click outside the element
+      highlightedElementZIndex: SHOULD_ADD_Z_INDEX_TO_HIGHLIGHTED_ELEMENT,   // If true a Z-Index will be added to the highlighted Element so that it will be displayed above the stage.
+      disableInteractionBlockingOverlay: DISABLE_INTERACTION_BLOCKING_OVERLAY,
       stageBackground: '#ffffff',       // Background color for the stage
       onHighlightStarted: () => null,   // When element is about to be highlighted
       onHighlighted: () => null,        // When element has been highlighted
@@ -93,14 +97,7 @@ export default class Driver {
     this.window.addEventListener('resize', this.onResize, false);
     this.window.addEventListener('keyup', this.onKeyUp, false);
 
-    // Binding both touch and click results in popup getting shown and then immediately get hidden.
-    // Adding the check to not bind the click event if the touch is supported i.e. on mobile devices
-    // Issue: https://github.com/kamranahmedse/driver.js/issues/150
-    if (!('ontouchstart' in document.documentElement)) {
-      this.window.addEventListener('click', this.onClick, false);
-    } else {
-      this.window.addEventListener('touchstart', this.onClick, false);
-    }
+    this.window.addEventListener('click', this.onClick, false);
   }
 
   /**

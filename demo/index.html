@@ -259,10 +259,10 @@ driver.start();
     <div id="element-without-popover" class="section__example">
       <h4>Without Overlay</h4>
       <p>You can create feature introductions and do everything listed above without overlays also. All you have to do
-        is just set the opacity to `0`.</p>
+        is just set the overlayOpacity to `0`.</p>
       <a href="#" class="btn__run-demo" id="run-element-without-popover">Show Demo</a>
       <pre><code class="javascript">const driver = new Driver({
-    opacity: 0,
+    overlayOpacity: 0,
 });
 
 driver.highlight({
@@ -289,7 +289,7 @@ driver.highlight({
       <pre><code class="javascript">const driver = new Driver({
   className: 'scoped-class', // className to wrap driver.js popover
   animate: true,  // Animate while changing highlighted element
-  opacity: 0.75,  // Background opacity (0 means only popovers and without overlay)
+  overlayOpacity: 0.75,  // Background overlayOpacity (0 means only popovers and without overlay)
   padding: 10,    // Distance of element from around the edges
   allowClose: true, // Whether clicking on overlay should close or not
   overlayClickNext: false, // Should it move to next step on overlay click

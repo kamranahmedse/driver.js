@@ -775,10 +775,16 @@ declare module 'driver.js' {
       animate?: boolean;
 
       /**
+       * Removes the div overlay, instead the overlay will be displayed with an outline. No visual difference.
+       * @default false
+       * */
+      disableInteractionBlockingOverlay?: boolean;
+
+      /**
        * Opacity for the overlay
        * @default 0.75
        */
-      opacity?: number,
+      overlayOpacity?: number,
 
       /**
        * Distance of elements corner from the edges of the overlay
@@ -809,6 +815,12 @@ declare module 'driver.js' {
        * @default false
        */
       overlayClickNext?: boolean,
+
+      /**
+       * If true a Z-Index will be added to the highlighted Element so that it will be displayed above the stage.
+       * @default true
+       * */
+      highlightedElementZIndex?: boolean;
 
       /**
        * Background color for the stage behind the highlighted element

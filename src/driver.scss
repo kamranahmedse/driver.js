@@ -183,7 +183,6 @@ div#driver-popover-item {
   transition: none !important;
 
   background: transparent !important;
-  outline: 5000px solid rgba(0, 0, 0, 0.75);
 }
 
 div#driver-page-overlay {
@@ -219,6 +218,7 @@ div#driver-highlighted-element-stage {
   display: none;
   border-radius: 2px;
 
+  outline: 5000px solid rgba(0, 0, 0, 0.75);
   -webkit-transition: all $animation-sec;
   -moz-transition: all $animation-sec;
   -ms-transition: all $animation-sec;
@@ -226,7 +226,7 @@ div#driver-highlighted-element-stage {
   transition: all $animation-sec;
 }
 
-.driver-highlighted-element {
+.driver-highlighted-element-z-index {
   z-index: $highlighted-element-z-index !important;
 }
 

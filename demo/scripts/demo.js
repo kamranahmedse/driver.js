@@ -93,14 +93,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
   const animatedTourDriver = new Driver({
     animate: true,
-    opacity: 0.8,
+    overlayOpacity: 0.8,
     padding: 5,
     showButtons: true,
   });
 
   const boringTourDriver = new Driver({
     animate: false,
-    opacity: 0.8,
+    overlayOpacity: 0.8,
     padding: 5,
     showButtons: true,
     className: 'boring-scope',
@@ -249,7 +249,7 @@ document.addEventListener('DOMContentLoaded', function () {
 // Without Overlay Example
 /////////////////////////////////////////////////////
   const withoutOverlay = new Driver({
-    opacity: 0,
+    overlayOpacity: 0,
     padding: 0
   });
 
