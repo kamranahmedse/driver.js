@@ -37,7 +37,7 @@
     "file-loader": "^4.0.0",
     "gh-pages": "^2.0.1",
     "html-webpack-plugin": "^3.2.0",
-    "node-sass": "^4.12.0",
+    "node-sass": "^7.0.0",
     "opn": "^6.0.0",
     "optimize-css-assets-webpack-plugin": "^5.0.1",
     "postcss-loader": "^3.0.0",
