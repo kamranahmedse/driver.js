@@ -447,6 +447,7 @@ declare module 'driver.js' {
       private titleNode: Node | HTMLElement;
       private descriptionNode: Node | HTMLElement;
       private footerNode: Node | HTMLElement;
+      private stepDotsNode: Node | HTMLElement;
       private nextBtnNode: Node | HTMLElement;
       private prevBtnNode: Node | HTMLElement;
       private closeBtnNode: Node | HTMLElement;
@@ -487,6 +488,25 @@ declare module 'driver.js' {
        * Renders the buttons in the footer of the popover
        */
       private renderFooter(): void;
+
+      /**
+       * Renders step dots in the footer of the popover
+       */
+      private renderStepDots(): void;
+
+      /**
+       * add custom class name to node
+       * @param {Element} node
+       * @param {string} className
+       */
+      private addCustomClass(node: Element, className: string): void;
+
+      /**
+       * remove custom class name from node
+       * @param {Element} node
+       * @param {string} className
+       */
+      private removeCustomClass(node: Element, className: string): void;
 
       /**
        * Positions the popover to the left of the given element position
@@ -671,10 +691,23 @@ declare module 'driver.js' {
       showButtons?: boolean;
 
       /**
+       * Whether to show step dots or not
+       * Only show when step length > 1
+       * @default true
+       */
+      showStepDots?:boolean;
+
+      /**
        * Text on the button in the final step
        * @default 'Done'
        */
       doneBtnText?: string;
+
+      /**
+       * className on the button in the final step
+       * @default ''
+       */
+      doneBtnClassName?: string;
 
       /**
        * Text on the close button
@@ -683,16 +716,34 @@ declare module 'driver.js' {
       closeBtnText?: string;
 
       /**
+       * className on the close button
+       * @default ''
+       */
+      closeBtnClassName?: string;
+
+      /**
        * Text on the next button
        * @default 'Next'
        */
       nextBtnText?: string;
 
       /**
+       * className on the next button
+       * @default ''
+       */
+      nextBtnClassName?: string;
+
+      /**
        * Text on the previous button
        * @default 'Previous'
        */
       prevBtnText?: string;
+
+      /**
+       * className on the previous button
+       * @default ''
+       */
+      prevBtnClassName?: string;
 
       /**
        * Total number of elements with popovers
@@ -748,13 +799,13 @@ declare module 'driver.js' {
        * Opacity for the overlay
        * @default 0.75
        */
-      opacity?: number,
+      opacity?: number;
 
       /**
        * Distance of elements corner from the edges of the overlay
        * @default 10
        */
-      padding?: number,
+      padding?: number;
 
       /**
        * Options to be passed to scrollIntoView if supported by browser
@@ -766,25 +817,32 @@ declare module 'driver.js' {
        * Clicking outside the highlighted element should reset driver or not
        * @default true
        */
-      allowClose?: boolean,
+      allowClose?: boolean;
 
       /**
        * Whether to allow controlling steps through keyboard
        * @default true
        */
-      keyboardControl?: boolean,
+      keyboardControl?: boolean;
 
       /**
        * Clicking outside the highlighted element should move next
        * @default false
        */
-      overlayClickNext?: boolean,
+      overlayClickNext?: boolean;
 
       /**
        * Background color for the stage behind the highlighted element
        * @default '#ffffff'
        */
-      stageBackground?: string,
+      stageBackground?: string;
+
+      /**
+       * Whether to show step dots or not
+       * Only show when step length > 1
+       * @default true
+       */
+      showStepDots?:boolean;
 
       /**
        * Whether to show control buttons or not
@@ -799,10 +857,22 @@ declare module 'driver.js' {
       doneBtnText?: string;
 
       /**
+       * className on the button in the final step
+       * @default ''
+       */
+      doneBtnClassName?: string;
+
+      /**
        * Text on the close button
        * @default 'Close'
        */
       closeBtnText?: string;
+
+      /**
+       * className on the close button
+       * @default ''
+       */
+      closeBtnClassName?: string;
 
       /**
        * Text on the next button
@@ -811,10 +881,22 @@ declare module 'driver.js' {
       nextBtnText?: string;
 
       /**
+       * className on the next button
+       * @default ''
+       */
+      nextBtnClassName?: string;
+
+      /**
        * Text on the previous button
        * @default 'Previous'
        */
       prevBtnText?: string;
+
+      /**
+       * className on the previous button
+       * @default ''
+       */
+      prevBtnClassName?: string;
 
       /**
        * className for the driver popovers

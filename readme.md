@@ -206,7 +206,7 @@ driver.defineSteps([
     onNext: () => {
       // Prevent moving to the next step
       driver.preventMove();
-      
+
       // Perform some action or create the element to move to
       // And then move to that element
       setTimeout(() => {
@@ -241,26 +241,31 @@ Here are the options that Driver understands:
 
 ```javascript
 const driver = new Driver({
-  className: 'scoped-class',        // className to wrap driver.js popover
-  animate: true,                    // Whether to animate or not
-  opacity: 0.75,                    // Background opacity (0 means only popovers and without overlay)
-  padding: 10,                      // Distance of element from around the edges
-  allowClose: true,                 // Whether the click on overlay should close or not
-  overlayClickNext: false,          // Whether the click on overlay should move next
-  doneBtnText: 'Done',              // Text on the final button
-  closeBtnText: 'Close',            // Text on the close button for this step
-  stageBackground: '#ffffff',       // Background color for the staged behind highlighted element
-  nextBtnText: 'Next',              // Next button text for this step
-  prevBtnText: 'Previous',          // Previous button text for this step
-  showButtons: false,               // Do not show control buttons in footer
-  keyboardControl: true,            // Allow controlling through keyboard (escape to close, arrow keys to move)
-  scrollIntoViewOptions: {},        // We use `scrollIntoView()` when possible, pass here the options for it if you want any
-  onHighlightStarted: (Element) => {}, // Called when element is about to be highlighted
-  onHighlighted: (Element) => {},      // Called when element is fully highlighted
-  onDeselected: (Element) => {},       // Called when element has been deselected
-  onReset: (Element) => {},            // Called when overlay is about to be cleared
-  onNext: (Element) => {},                    // Called when moving to next step on any step
-  onPrevious: (Element) => {},                // Called when moving to previous step on any step
+  className: 'scoped-class',            // className to wrap driver.js popover
+  animate: true,                        // Whether to animate or not
+  opacity: 0.75,                        // Background opacity (0 means only popovers and without overlay)
+  padding: 10,                          // Distance of element from around the edges
+  allowClose: true,                     // Whether the click on overlay should close or not
+  overlayClickNext: false,              // Whether the click on overlay should move next
+  doneBtnText: 'Done',                  // Text on the final button
+  doneBtnClassName: '',                 // className to wrap on the final button
+  closeBtnText: 'Close',                // Text on the close button for this step
+  closeBtnClassName: '',                // className to wrap close button for this step
+  stageBackground: '#ffffff',           // Background color for the staged behind highlighted element
+  nextBtnText: 'Next',                  // Next button text for this step
+  nextBtnClassName: '',                 // className to wrap next button for this step
+  prevBtnText: 'Previous',              // Previous button text for this step
+  prevBtnClassName: '',                 // className to wrap previous button for this step
+  showButtons: false,                   // Do not show control buttons in footer
+  showStepDots: false,                  // Do not show step dots in footer
+  keyboardControl: true,                // Allow controlling through keyboard (escape to close, arrow keys to move)
+  scrollIntoViewOptions: {},            // We use `scrollIntoView()` when possible, pass here the options for it if you want any
+  onHighlightStarted: (Element) => {},  // Called when element is about to be highlighted
+  onHighlighted: (Element) => {},       // Called when element is fully highlighted
+  onDeselected: (Element) => {},        // Called when element has been deselected
+  onReset: (Element) => {},             // Called when overlay is about to be cleared
+  onNext: (Element) => {},              // Called when moving to next step on any step
+  onPrevious: (Element) => {},          // Called when moving to previous step on any step
 });
 ```
 Note that all the button options that you provide in the driver definition can be overridden for a specific step by giving them in the step definition
@@ -271,20 +276,25 @@ Here are the set of options that you can pass while defining steps `defineSteps`
 
 ```javascript
 const stepDefinition = {
-  element: '#some-item',        // Query selector string or Node to be highlighted
-  stageBackground: '#ffffff',   // This will override the one set in driver
-  popover: {                    // There will be no popover if empty or not given
-    className: 'popover-class', // className to wrap this specific step popover in addition to the general className in Driver options
-    title: 'Title',             // Title on the popover
-    description: 'Description', // Body of the popover
-    showButtons: false,         // Do not show control buttons in footer
-    doneBtnText: 'Done',        // Text on the last button
-    closeBtnText: 'Close',      // Text on the close button
-    nextBtnText: 'Next',        // Next button text
-    prevBtnText: 'Previous',    // Previous button text
+  element: '#some-item',                // Query selector string or Node to be highlighted
+  stageBackground: '#ffffff',           // This will override the one set in driver
+  popover: {                            // There will be no popover if empty or not given
+    className: 'popover-class',         // className to wrap this specific step popover in addition to the general className in Driver options
+    title: 'Title',                     // Title on the popover
+    description: 'Description',         // Body of the popover
+    showButtons: false,                 // Do not show control buttons in footer
+    showStepDots: false,                // Do not show step dots in footer
+    doneBtnText: 'Done',                // Text on the last button
+    doneBtnClassName: '',               // className to wrap on the last button
+    closeBtnText: 'Close',              // Text on the close button
+    closeBtnClassName: '',              // className to wrap close button
+    nextBtnText: 'Next',                // Next button text
+    nextBtnClassName: '',               // className to wrap next button
+    prevBtnText: 'Previous',            // Previous button text
+    prevBtnClassName: '',               // className to wrap previous button
   },
-  onNext: () => {},             // Called when moving to next step from current step
-  onPrevious: () => {},         // Called when moving to previous step from current step
+  onNext: () => {},                     // Called when moving to next step from current step
+  onPrevious: () => {},                 // Called when moving to previous step from current step
 };
 ```
 

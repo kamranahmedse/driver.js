@@ -15,6 +15,7 @@ import {
   SHOULD_OUTSIDE_CLICK_CLOSE,
   SHOULD_OUTSIDE_CLICK_NEXT,
   ALLOW_KEYBOARD_CONTROL,
+  CLASS_POPOVER_CLOSE_ICON,
 } from './common/constants';
 import Stage from './core/stage';
 import { isDomElement } from './common/utils';
@@ -138,7 +139,7 @@ export default class Driver {
 
     const nextClicked = e.target.classList.contains(CLASS_NEXT_STEP_BTN);
     const prevClicked = e.target.classList.contains(CLASS_PREV_STEP_BTN);
-    const closeClicked = e.target.classList.contains(CLASS_CLOSE_BTN);
+    const closeClicked = e.target.classList.contains(CLASS_CLOSE_BTN) || e.target.classList.contains(CLASS_POPOVER_CLOSE_ICON);
 
     if (closeClicked) {
       this.reset();
@@ -398,10 +399,35 @@ export default class Driver {
         elementOptions.popover.className,
       ].filter(c => c).join(' ');
 
+      const mergedDoneBtnClassNames = [
+        this.options.doneBtnClassName,
+        elementOptions.popover.doneBtnClassName,
+      ].filter(c => c).join(' ');
+
+      const mergedCloseBtnClassNames = [
+        this.options.closeBtnClassName,
+        elementOptions.popover.closeBtnClassName,
+      ].filter(c => c).join(' ');
+
+      const mergedNextBtnClassNames = [
+        this.options.nextBtnClassName,
+        elementOptions.popover.nextBtnClassName,
+      ].filter(c => c).join(' ');
+
+      const mergedPrevBtnClassNames = [
+        this.options.prevBtnClassName,
+        elementOptions.popover.prevBtnClassName,
+      ].filter(c => c).join(' ');
+
+
       const popoverOptions = {
         ...elementOptions,
         ...elementOptions.popover,
         className: mergedClassNames,
+        doneBtnClassName: mergedDoneBtnClassNames,
+        closeBtnClassName: mergedCloseBtnClassNames,
+        nextBtnClassName: mergedNextBtnClassNames,
+        prevBtnClassName: mergedPrevBtnClassNames,
         totalCount: allSteps.length,
         currentIndex: index,
         isFirst: index === 0,

@@ -2,13 +2,15 @@ import Element from './element';
 import {
   CLASS_BTN_DISABLED,
   CLASS_CLOSE_BTN,
-  CLASS_CLOSE_ONLY_BTN,
   CLASS_NEXT_STEP_BTN,
   CLASS_POPOVER_DESCRIPTION,
   CLASS_POPOVER_FOOTER,
   CLASS_POPOVER_TIP,
   CLASS_POPOVER_TITLE,
   CLASS_PREV_STEP_BTN,
+  CLASS_STEP_DOTS,
+  CLASS_STEP_DOT,
+  CLASS_STEP_DOT_ACTIVE,
   ID_POPOVER,
   POPOVER_HTML,
 } from '../common/constants';
@@ -32,12 +34,17 @@ export default class Popover extends Element {
       totalCount: 1,
       currentIndex: 0,
       offset: 0,
+      showStepDots: true,
       showButtons: true,
       closeBtnText: 'Close',
+      closeBtnClassName: '',
       doneBtnText: 'Done',
+      doneBtnClassName: '',
       startBtnText: 'Next &rarr;',
       nextBtnText: 'Next &rarr;',
+      nextBtnClassName: '',
       prevBtnText: '&larr; Previous',
+      prevBtnClassName: '',
       ...options,
     };
 
@@ -63,6 +70,7 @@ export default class Popover extends Element {
     this.titleNode = popover.querySelector(`.${CLASS_POPOVER_TITLE}`);
     this.descriptionNode = popover.querySelector(`.${CLASS_POPOVER_DESCRIPTION}`);
     this.footerNode = popover.querySelector(`.${CLASS_POPOVER_FOOTER}`);
+    this.stepDotsNode = popover.querySelector(`.${CLASS_STEP_DOTS}`);
     this.nextBtnNode = popover.querySelector(`.${CLASS_NEXT_STEP_BTN}`);
     this.prevBtnNode = popover.querySelector(`.${CLASS_PREV_STEP_BTN}`);
     this.closeBtnNode = popover.querySelector(`.${CLASS_CLOSE_BTN}`);
@@ -196,6 +204,9 @@ export default class Popover extends Element {
     this.prevBtnNode.innerHTML = this.options.prevBtnText;
     this.closeBtnNode.innerHTML = this.options.closeBtnText;
 
+    this.addCustomClass(this.prevBtnNode, this.options.prevBtnClassName);
+    this.addCustomClass(this.closeBtnNode, this.options.closeBtnClassName);
+
     const hasSteps = this.options.totalCount && this.options.totalCount !== 1;
 
     // If there was only one item, hide the buttons
@@ -209,27 +220,80 @@ export default class Popover extends Element {
     if (!hasSteps) {
       this.nextBtnNode.style.display = 'none';
       this.prevBtnNode.style.display = 'none';
-      this.closeBtnNode.classList.add(CLASS_CLOSE_ONLY_BTN);
+      this.stepDotsNode.style.display = 'none';
+      this.closeBtnNode.style.display = 'inline-block';
     } else {
       // @todo modify CSS to use block
       this.nextBtnNode.style.display = 'inline-block';
       this.prevBtnNode.style.display = 'inline-block';
-      this.closeBtnNode.classList.remove(CLASS_CLOSE_ONLY_BTN);
+      this.closeBtnNode.style.display = 'none';
+      this.renderStepDots();
     }
 
-    this.footerNode.style.display = 'block';
     if (this.options.isFirst) {
       this.prevBtnNode.classList.add(CLASS_BTN_DISABLED);
       this.nextBtnNode.innerHTML = this.options.startBtnText;
+      this.prevBtnNode.setAttribute('disabled', '');
     } else {
       this.prevBtnNode.classList.remove(CLASS_BTN_DISABLED);
+      this.prevBtnNode.removeAttribute('disabled');
     }
 
     if (this.options.isLast) {
       this.nextBtnNode.innerHTML = this.options.doneBtnText;
+      this.removeCustomClass(this.nextBtnNode, this.options.nextBtnClassName);
+      this.addCustomClass(this.nextBtnNode, this.options.doneBtnClassName);
     } else {
       this.nextBtnNode.innerHTML = this.options.nextBtnText;
+      this.removeCustomClass(this.nextBtnNode, this.options.doneBtnClassName);
+      this.addCustomClass(this.nextBtnNode, this.options.nextBtnClassName);
     }
+  }
+
+  /**
+   * render step dots
+   * decides which is active
+   * @private
+   */
+  renderStepDots() {
+    if (!this.options.showStepDots) {
+      this.stepDotsNode.style.display = 'none';
+      return;
+    }
+    let htmlString = '';
+    for (let counter = 0; counter < this.options.totalCount; counter++) {
+      htmlString += `<li class="${CLASS_STEP_DOT} ${counter === this.options.currentIndex ? CLASS_STEP_DOT_ACTIVE : ''}"></li>`;
+    }
+    this.stepDotsNode.innerHTML = htmlString;
+  }
+
+
+  /**
+   * add custom class name to node
+   * @param {Element} node
+   * @param {string} className
+   * @private
+   */
+  addCustomClass(node, className) {
+    className.split(' ').forEach((item) => {
+      if (item && item.trim().length) {
+        node.classList.add(item);
+      }
+    });
+  }
+
+  /**
+   * remove custom class name from node
+   * @param {Element} node
+   * @param {string} className
+   * @private
+   */
+  removeCustomClass(node, className) {
+    className.split(' ').forEach((item) => {
+      if (item && item.trim().length) {
+        node.classList.remove(item);
+      }
+    });
   }
 
   /**
