@@ -61,6 +61,9 @@ export default class Driver {
     this.movePrevious = this.movePrevious.bind(this);
     this.preventMove = this.preventMove.bind(this);
 
+    this.isFullscreen = false;
+    this.onFullscreenChange = this.onFullscreenChange.bind(this);
+
     // Event bindings
     this.bind();
   }
@@ -91,6 +94,7 @@ export default class Driver {
   bind() {
     this.window.addEventListener('resize', this.onResize, false);
     this.window.addEventListener('keyup', this.onKeyUp, false);
+    this.window.addEventListener('fullscreenchange', this.onFullscreenChange, false);
 
     // Binding both touch and click results in popup getting shown and then immediately get hidden.
     // Adding the check to not bind the click event if the touch is supported i.e. on mobile devices
@@ -162,7 +166,7 @@ export default class Driver {
       return;
     }
 
-    this.refresh();
+    window.setTimeout(this.timedRefresh.bind(this), 600);
   }
 
   /**
@@ -170,6 +174,37 @@ export default class Driver {
    */
   refresh() {
     this.overlay.refresh();
+  }
+
+  /**
+   * Handler for setTimeout to make sure we aren't moving during fullscreen
+   */
+  timedRefresh() {
+    if (!this.isFullscreen) {
+      this.refresh();
+    }
+  }
+
+  /**
+   * Handles full screen changes to wait for element resize
+   */
+  onFullscreenChange() {
+    // switching to full screen
+    if (this.document.fullscreenElement) {
+      this.isFullscreen = true;
+      // leaving full screen
+    } else {
+      // short delay to let browser finish resizing the viewport
+      window.setTimeout(this.handleReturnFromFullscreen.bind(this), 100);
+    }
+  }
+
+  /**
+   * Handler for setTimeout to make sure we don't move while fullscreen is ending
+   */
+  handleReturnFromFullscreen() {
+    this.isFullscreen = false;
+    this.refresh();
   }
 
   /**

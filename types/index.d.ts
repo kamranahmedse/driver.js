@@ -75,6 +75,21 @@ declare module 'driver.js' {
     private refresh(): void;
 
     /**
+     * Refreshes only if browser is not in fullscreen
+     */
+    private timedRefresh(): void;
+
+    /**
+     * Handles browser going in and out of fullscreen
+     */
+    private onFullscreenChange(): void;
+
+    /**
+     * Refreshes Driver position after fullscreen ends
+     */
+    private handleReturnFromFullscreen(): void;
+
+    /**
      * Makes it operable with keyboard
      * @param {Event} e
      */
