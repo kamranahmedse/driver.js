@@ -4,5 +4,6 @@ npm-debug.log
 .idea
 .vscode
 package-lock.json
+yarn.lock
 yarn-error.log
 dist/demo

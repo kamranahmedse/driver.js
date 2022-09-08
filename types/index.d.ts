@@ -49,7 +49,7 @@ declare module 'driver.js' {
     /**
      * Public setter for steps property
      */
-    public setSteps(): void;
+    public setSteps(steps: Array<Driver.Step>): void;
 
     /**
      * Does the required bindings for DOM Events
@@ -786,6 +786,11 @@ declare module 'driver.js' {
        */
       stageBackground?: string,
 
+      /**
+       * Set `true` to lazy process the step
+       * @default false
+       */
+      lazy?: boolean,
       /**
        * Whether to show control buttons or not
        * @default true

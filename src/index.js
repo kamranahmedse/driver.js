@@ -36,6 +36,7 @@ export default class Driver {
       keyboardControl: ALLOW_KEYBOARD_CONTROL,     // Whether to allow controlling through keyboard or not
       overlayClickNext: SHOULD_OUTSIDE_CLICK_NEXT, // Whether to move next on click outside the element
       stageBackground: '#ffffff',       // Background color for the stage
+      lazy: false,
       onHighlightStarted: () => null,   // When element is about to be highlighted
       onHighlighted: () => null,        // When element has been highlighted
       onDeselected: () => null,         // When the element has been deselected
@@ -215,7 +216,7 @@ export default class Driver {
       return;
     }
 
-    this.overlay.highlight(previousStep);
+    this.overlay.highlight(this.options.lazy ? this.prepareElementFromStep(previousStep, this.steps, this.currentStep - 1) : previousStep);
     this.currentStep -= 1;
   }
 
@@ -236,7 +237,9 @@ export default class Driver {
     this.currentMovePrevented = false;
 
     // Call the bound `onNext` handler if available
-    const currentStep = this.steps[this.currentStep];
+    const currentStep = this.options.lazy
+      ? this.prepareElementFromStep(this.steps[this.currentStep], this.steps, this.currentStep)
+      : this.steps[this.currentStep];
     if (currentStep && currentStep.options && currentStep.options.onNext) {
       currentStep.options.onNext(this.overlay.highlightedElement);
     }
@@ -256,7 +259,9 @@ export default class Driver {
     this.currentMovePrevented = false;
 
     // Call the bound `onPrevious` handler if available
-    const currentStep = this.steps[this.currentStep];
+    const currentStep = this.options.lazy
+      ? this.prepareElementFromStep(this.steps[this.currentStep], this.steps, this.currentStep)
+      : this.steps[this.currentStep];
     if (currentStep && currentStep.options && currentStep.options.onPrevious) {
       currentStep.options.onPrevious(this.overlay.highlightedElement);
     }
@@ -280,7 +285,7 @@ export default class Driver {
       return;
     }
 
-    this.overlay.highlight(nextStep);
+    this.overlay.highlight(this.options.lazy ? this.prepareElementFromStep(nextStep, this.steps, this.currentStep + 1) : nextStep);
     this.currentStep += 1;
   }
 
@@ -345,6 +350,11 @@ export default class Driver {
    * @public
    */
   defineSteps(steps) {
+    if (this.options.lazy) {
+      this.setSteps(steps);
+      return;
+    }
+
     this.steps = [];
 
     for (let counter = 0; counter < steps.length; counter++) {
@@ -437,7 +447,7 @@ export default class Driver {
 
     this.isActivated = true;
     this.currentStep = index;
-    this.overlay.highlight(this.steps[index]);
+    this.overlay.highlight(this.options.lazy ? this.prepareElementFromStep(this.steps[index], this.steps, index) : this.steps[index]);
   }
 
   /**
