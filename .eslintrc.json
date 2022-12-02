@@ -17,6 +17,9 @@
       "off"
     ],
     "max-len": "off",
-    "no-multi-spaces": "off"
+    "no-multi-spaces": "off",
+		"comma-dangle": "off",
+		"object-shorthand": "off",
+		"quote-props": "off"
   }
 }

@@ -45,6 +45,7 @@ module.exports = {
 						],
 						"retainLines": true,
 						"plugins": [ "@babel/plugin-transform-member-expression-literals" ],
+						"cacheDirectory": true
 					}
       },
       {
