@@ -1,5 +1,9 @@
 Changelog
 
+v0.9.10:
+				* Fix element not scrolling into view if contained in a scrollable container that is not BODY.
+				* driver.js now depends on Element.scrollIntoViewIfNeeded() which users need to provide as polyfill.
+
 v0.9.9:	* Fix build errors: updated dependencies: sass-loader to ^10.0.0, postcss-loader to ^4.0.0, node-sass to ^6.0.0, @babel/preset-env to ^7.9.0.
 				* Fix webpack.config.prod.js postcss-loader options
 				*   added babel-loader presets for compatibility with MS WebBrowser control (IE8).
