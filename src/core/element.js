@@ -85,6 +85,7 @@ export default class Element {
    * @public
    */
   bringInView() {
+    /*
     // If the node is not there or already is in view
     if (!this.node || this.isInView()) {
       return;
@@ -95,12 +96,13 @@ export default class Element {
       this.scrollManually();
       return;
     }
-
+ */
     try {
-      this.node.scrollIntoView(this.options.scrollIntoViewOptions || {
+      this.node.scrollIntoViewIfNeeded();
+      /* this.node.scrollIntoView(this.options.scrollIntoViewOptions || {
         behavior: 'instant',
         block: 'center',
-      });
+      }); */
     } catch (e) {
       // `block` option is not allowed in older versions of firefox, scroll manually
       this.scrollManually();
@@ -191,9 +193,8 @@ export default class Element {
    */
   onHighlighted() {
     const highlightedElement = this;
-    if (!highlightedElement.isInView()) {
-      highlightedElement.bringInView();
-    }
+    // Since bringInView() uses Element.scrollIntoViewIfNeeded() we always have to call it:
+    highlightedElement.bringInView();
 
     // Show the popover and stage once the item has been
     // brought in the view, this would allow us to handle
