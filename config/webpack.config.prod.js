@@ -32,6 +32,20 @@ module.exports = {
         test: /\.js$/,
         exclude: /node_modules/,
         loader: 'babel-loader',
+					options: {
+						presets: [
+							[
+								'@babel/preset-env', {
+									targets: {
+										"chrome": "99",
+										"ie": "8"		// target for IE 8 ~ MS WebBrowser control
+									}, debug: false
+								}
+							]
+						],
+						"retainLines": true,
+						"plugins": [ "@babel/plugin-transform-member-expression-literals" ],
+					}
       },
       {
         test: /.scss$/,
@@ -42,10 +56,12 @@ module.exports = {
           },
           {
             loader: 'postcss-loader',
-            options: {
-              ident: 'postcss',
-              plugins: [require('autoprefixer')()], // eslint-disable-line global-require
-            },
+            options: { 
+							postcssOptions: {
+								ident: 'postcss',
+								plugins: [require('autoprefixer')()], // eslint-disable-line global-require
+							}
+						},
           },
           'sass-loader',
         ]),
