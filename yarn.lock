@@ -8214,13 +8214,13 @@
   "resolved" "https://registry.npmjs.org/strip-url-auth/-/strip-url-auth-1.0.1.tgz"
   "version" "1.0.1"
 
-"style-loader@^0.23.1":
-  "integrity" "sha512-XK+uv9kWwhZMZ1y7mysB+zoihsEj4wneFWAS5qoiLwzW0WzSqMrrsIy+a3zkQJq0ipFtBpX5W3MqyRIBF/WFGg=="
-  "resolved" "https://registry.npmjs.org/style-loader/-/style-loader-0.23.1.tgz"
-  "version" "0.23.1"
+"style-loader@^1.0.0":
+  "integrity" "sha512-V7TCORko8rs9rIqkSrlMfkqA63DfoGBBJmK1kKGCcSi+BWb4cqz0SRsnp4l6rU5iwOEd0/2ePv68SV22VXon4Q=="
+  "resolved" "https://registry.npmjs.org/style-loader/-/style-loader-1.3.0.tgz"
+  "version" "1.3.0"
   dependencies:
-    "loader-utils" "^1.1.0"
-    "schema-utils" "^1.0.0"
+    "loader-utils" "^2.0.0"
+    "schema-utils" "^2.7.0"
 
 "stylehacks@^4.0.0":
   "integrity" "sha512-7GlLk9JwlElY4Y6a/rmbH2MhVlTyVmiJd1PfTCqFaIBEGMYNsrO/v3SeGTdhBThLg4Z+NbOk/qFMwCa+J+3p/g=="

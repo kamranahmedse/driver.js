@@ -33,21 +33,21 @@ module.exports = {
         test: /\.js$/,
         exclude: /node_modules/,
         loader: 'babel-loader',
-					options: {
-						presets: [
-							[
-								'@babel/preset-env', {
-									targets: {
-										"chrome": "99",
-										"ie": "8"		// target for IE 8 ~ MS WebBrowser control
-									}, debug: false
-								}
-							]
-						],
-						"retainLines": true,
-						"plugins": [ "@babel/plugin-transform-member-expression-literals" ],
-						"cacheDirectory": true
-					}
+          options: {
+            presets: [
+              [
+                '@babel/preset-env', {
+                  targets: {
+                    "chrome": "99",
+                    "ie": "8"   // target for IE 8 ~ MS WebBrowser control
+                  }, debug: false
+                }
+              ]
+            ],
+            "retainLines": true,
+            "plugins": [ "@babel/plugin-transform-member-expression-literals" ],
+            "cacheDirectory": true
+          }
       },
       {
         test: /.scss$/,
@@ -59,11 +59,11 @@ module.exports = {
           {
             loader: 'postcss-loader',
             options: { 
-							postcssOptions: {
-								ident: 'postcss',
-								plugins: [require('autoprefixer')()], // eslint-disable-line global-require
-							}
-						},
+              postcssOptions: {
+                ident: 'postcss',
+                plugins: [require('autoprefixer')()], // eslint-disable-line global-require
+              }
+            },
           },
           'sass-loader',
         ]),
@@ -72,7 +72,19 @@ module.exports = {
   },
   optimization: {
     minimize: true,
-		minimizer: [new TerserPlugin()],
+    minimizer: [new TerserPlugin({
+          terserOptions: {
+            compress: true,
+            /* compress: {
+              defaults: true,
+              properties: false,    // important: don't rewrite property access using the dot notation, e.g. foo["bar"] → foo.bar
+            },*/
+            //mangle: true,
+            keep_fnames: false,
+            keep_classnames: true,
+            ie8: true,
+          }
+        })],
   },
   plugins: [
     new ExtractTextPlugin({
@@ -91,11 +103,15 @@ module.exports = {
           },
         ],
       },
-      canPrint: true,
+      canPrint: true, // A boolean indicating if the plugin can print messages to the console,
     }),
   ],
   stats: {
     colors: true,
   },
   devtool: 'cheap-module-source-map',
+  node: {
+    Buffer: false,
+    process: false,
+  },
 };

@@ -252,7 +252,7 @@ const driver = new Driver({
   stageBackground: '#ffffff',       // Background color for the staged behind highlighted element
   nextBtnText: 'Next',              // Next button text for this step
   prevBtnText: 'Previous',          // Previous button text for this step
-  showButtons: false,               // Do not show control buttons in footer
+  showButtons: false | ['next', 'prev', 'close'], // Which control buttons to show in footer
   keyboardControl: true,            // Allow controlling through keyboard (escape to close, arrow keys to move)
   scrollIntoViewOptions: {},        // We use `scrollIntoView()` when possible, pass here the options for it if you want any
   onHighlightStarted: (Element) => {}, // Called when element is about to be highlighted
@@ -277,7 +277,7 @@ const stepDefinition = {
     className: 'popover-class', // className to wrap this specific step popover in addition to the general className in Driver options
     title: 'Title',             // Title on the popover
     description: 'Description', // Body of the popover
-    showButtons: false,         // Do not show control buttons in footer
+    sshowButtons: false | ['next', 'prev', 'close'], // Which control buttons to show in footer
     doneBtnText: 'Done',        // Text on the last button
     closeBtnText: 'Close',      // Text on the close button
     nextBtnText: 'Next',        // Next button text

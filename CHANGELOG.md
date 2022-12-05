@@ -1,5 +1,12 @@
 ## Changelog
 
+v0.9.11:
+ * Upgrade style-loader devDependency from 0.23.1 to ^1.0.0
+ * Implement option.showButtons to support only showing specific buttons (PR #177) https://github.com/kamranahmedse/driver.js/pull/177
+   Buttons will be hidden, but layout will remain the same (i.e. other buttons won't move).
+ * Add babel-loader options to webpack.config.prod.js to target >= IE8
+ * Add terser-plugin to webpack.config.prod.js
+
 v0.9.10:
  * Fix element not scrolling into view if contained in a scrollable container that is not BODY.
  * driver.js now depends on Element.scrollIntoViewIfNeeded() which users need to provide as polyfill.

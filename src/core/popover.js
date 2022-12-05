@@ -192,17 +192,36 @@ export default class Popover extends Element {
    * @private
    */
   renderFooter() {
+    const showButtons = this.options.showButtons;
+    // If the type is Boolean
+    if (typeof showButtons === 'boolean') {
+      // false means hide
+      if (!showButtons) {
+        this.footerNode.style.display = 'none';
+        return;
+      }
+    }
+    let isPrevInButtons = true;
+    let isNextInButtons = true;
+    let isCloseInButtons = true;
+    // If the type is Array
+    if (Array.isArray(showButtons)) {
+      // The array length is 0
+      if (showButtons.length === 0) {
+        this.footerNode.style.display = 'none';
+        return;
+      }
+
+      isNextInButtons = showButtons.indexOf('next') !== -1;
+      isCloseInButtons = showButtons.indexOf('close') !== -1;
+      isPrevInButtons = showButtons.indexOf('prev') !== -1;
+    }
+
     this.nextBtnNode.innerHTML = this.options.nextBtnText;
     this.prevBtnNode.innerHTML = this.options.prevBtnText;
     this.closeBtnNode.innerHTML = this.options.closeBtnText;
 
     const hasSteps = this.options.totalCount && this.options.totalCount !== 1;
-
-    // If there was only one item, hide the buttons
-    if (!this.options.showButtons) {
-      this.footerNode.style.display = 'none';
-      return;
-    }
 
     // If this is just a single highlighted element i.e. there
     // are no other steps to go to – just hide the navigation buttons
@@ -214,6 +233,9 @@ export default class Popover extends Element {
       // @todo modify CSS to use block
       this.nextBtnNode.style.display = 'inline-block';
       this.prevBtnNode.style.display = 'inline-block';
+      this.nextBtnNode.style.visibility = isNextInButtons ? 'visible' : 'hidden';
+      this.prevBtnNode.style.visibility = isPrevInButtons ? 'visible' : 'hidden';
+      this.closeBtnNode.style.visibility = isCloseInButtons ? 'visible' : 'hidden';
       this.closeBtnNode.classList.remove(CLASS_CLOSE_ONLY_BTN);
     }
 

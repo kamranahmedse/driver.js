@@ -1,6 +1,6 @@
 {
   "name": "driver.js",
-  "version": "0.9.10",
+  "version": "0.9.11",
   "description": "A light-weight, no-dependency, vanilla JavaScript library to drive the user's focus across the page",
   "main": "dist/driver.min.js",
   "types": "types/index.d.ts",
@@ -42,7 +42,7 @@
     "optimize-css-assets-webpack-plugin": "^5.0.1",
     "postcss-loader": "^4.0.0",
     "sass-loader": "^10.0.0",
-    "style-loader": "^0.23.1",
+    "style-loader": "^1.0.0",
     "terser-webpack-plugin": "^4.0.0",
     "webpack": "^4.34.0",
     "webpack-cli": "^4.0.0",
