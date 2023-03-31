@@ -1000,6 +1000,18 @@
   "resolved" "https://registry.npmjs.org/@types/q/-/q-1.5.2.tgz"
   "version" "1.5.2"
 
+"@vue/reactivity@^3.2.47":
+  "integrity" "sha512-7khqQ/75oyyg+N/e+iwV6lpy1f5wq759NdlS1fpAhFXa8VeAIKGgk2E/C4VF59lx5b+Ezs5fpp/5WsRYXQiKxQ=="
+  "resolved" "https://registry.npmjs.org/@vue/reactivity/-/reactivity-3.2.47.tgz"
+  "version" "3.2.47"
+  dependencies:
+    "@vue/shared" "3.2.47"
+
+"@vue/shared@3.2.47":
+  "integrity" "sha512-BHGyyGN3Q97EZx0taMQ+OLNuZcW3d37ZEVmEAyeoA9ERdGvm9Irc/0Fua8SNyOtV1w6BS4q25wbMzJujO9HIfQ=="
+  "resolved" "https://registry.npmjs.org/@vue/shared/-/shared-3.2.47.tgz"
+  "version" "3.2.47"
+
 "@webassemblyjs/ast@1.8.5":
   "integrity" "sha512-aJMfngIZ65+t71C3y2nBBg5FFG0Okt9m0XEgWZ7Ywgn1oMAT8cNwx00Uv1cQyHtidq0Xn94R4TAywO+LCQ+ZAQ=="
   "resolved" "https://registry.npmjs.org/@webassemblyjs/ast/-/ast-1.8.5.tgz"

@@ -1,3 +1,4 @@
+import { ref } from '@vue/reactivity';
 import Overlay from './core/overlay';
 import Element from './core/element';
 import Popover from './core/popover';
@@ -18,7 +19,6 @@ import {
 } from './common/constants';
 import Stage from './core/stage';
 import { isDomElement } from './common/utils';
-import { ref } from 'vue';
 
 /**
  * Plugin class that drives the plugin
