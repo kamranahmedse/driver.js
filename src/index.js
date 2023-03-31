@@ -18,6 +18,7 @@ import {
 } from './common/constants';
 import Stage from './core/stage';
 import { isDomElement } from './common/utils';
+import { ref } from 'vue';
 
 /**
  * Plugin class that drives the plugin
@@ -51,6 +52,8 @@ export default class Driver {
     this.steps = [];                    // steps to be presented if any
     this.currentStep = 0;               // index for the currently highlighted step
     this.currentMovePrevented = false;  // If the current move was prevented
+
+    this.isActivatedForVue3 = ref(false);
 
     this.overlay = new Overlay(this.options, window, document);
 
@@ -142,6 +145,7 @@ export default class Driver {
 
     if (closeClicked) {
       this.reset();
+      this.isActivatedForVue3.value = true;
       return;
     }
 
