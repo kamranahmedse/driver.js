@@ -76,4 +76,5 @@ module.exports = {
     colors: true,
   },
   devtool: 'cheap-module-source-map',
+  externals: {   vue: 'vue' },
 };

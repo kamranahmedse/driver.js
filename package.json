@@ -52,6 +52,7 @@
     "defaults"
   ],
   "dependencies": {
-    "@vue/reactivity": "^3.2.47"
+    "@vue/reactivity": "^3.2.47",
+    "vue": "^3.2.47"
   }
 }

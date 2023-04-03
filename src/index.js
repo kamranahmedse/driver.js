@@ -1,4 +1,4 @@
-import { ref } from '@vue/reactivity';
+import { ref } from 'vue';
 import Overlay from './core/overlay';
 import Element from './core/element';
 import Popover from './core/popover';
@@ -53,7 +53,7 @@ export default class Driver {
     this.currentStep = 0;               // index for the currently highlighted step
     this.currentMovePrevented = false;  // If the current move was prevented
 
-    this.isActivatedForVue3 = ref(false);
+    this.isActivatedClosedForVue3 = ref(false);
 
     this.overlay = new Overlay(this.options, window, document);
 
@@ -145,7 +145,7 @@ export default class Driver {
 
     if (closeClicked) {
       this.reset();
-      this.isActivatedForVue3.value = true;
+      this.isActivatedClosedForVue3.value = true;
       return;
     }
 
