@@ -400,7 +400,7 @@ export default class Driver {
       const mergedClassNames = [
         this.options.className,
         elementOptions.popover.className,
-      ].filter(c => c).join(' ');
+      ].filter((c) => c).join(' ');
 
       const popoverOptions = {
         ...elementOptions,
