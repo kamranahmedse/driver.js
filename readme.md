@@ -19,14 +19,14 @@
 
 <br />
 
-* **Simple**: is simple to use and has no external dependency at all
-* **Highly customizable**: has a powerful API and can be used however you want
-* **Highlight anything**: highlight any (literally any) element on page
-* **Feature introductions**: create powerful feature introductions for your web applications
-* **Focus shifters**: add focus shifters for users
-* **User friendly**: Everything is controllable by keyboard
-* **Consistent behavior**: usable across all browsers (including in-famous IE)
-* **MIT Licensed**: free for personal and commercial use
+- **Simple**: is simple to use and has no external dependency at all
+- **Highly customizable**: has a powerful API and can be used however you want
+- **Highlight anything**: highlight any (literally any) element on page
+- **Feature introductions**: create powerful feature introductions for your web applications
+- **Focus shifters**: add focus shifters for users
+- **User friendly**: Everything is controllable by keyboard
+- **Consistent behavior**: usable across all browsers (including in-famous IE)
+- **MIT Licensed**: free for personal and commercial use
 
 ![](./demo/images/split.png)
 
@@ -46,16 +46,18 @@ You can install it using `yarn` or `npm`, whatever you prefer.
 yarn add driver.js
 npm install driver.js
 ```
+
 Or include it using CDN. If you want a specific version, put it as `driver.js@0.5` in the name
+
 ```html
 <script src="https://unpkg.com/driver.js/dist/driver.min.js"></script>
-<link rel="stylesheet" href="https://unpkg.com/driver.js/dist/driver.min.css">
+<link rel="stylesheet" href="https://unpkg.com/driver.js/dist/driver.min.css" />
 ```
 
 Or grab the code from `dist` directory and include it directly.
 
 ```html
-<link rel="stylesheet" href="/dist/driver.min.css">
+<link rel="stylesheet" href="/dist/driver.min.css" />
 <script src="/dist/driver.min.js"></script>
 ```
 
@@ -66,9 +68,10 @@ Or grab the code from `dist` directory and include it directly.
 If you are using some sort of module bundler, import the library and the CSS file
 
 ```javascript
-import Driver from 'driver.js';
-import 'driver.js/dist/driver.min.css';
+import Driver from "driver.js";
+import "driver.js/dist/driver.min.css";
 ```
+
 otherwise use the `script` and `link` tags to import the JavaScript and CSS files.
 
 Demos and many more usage examples can be found [in the docs page](http://kamranahmed.info/driver.js).
@@ -79,8 +82,9 @@ You can highlight a single element by simply passing the selector.
 
 ```javascript
 const driver = new Driver();
-driver.highlight('#create-post');
+driver.highlight("#create-post");
 ```
+
 A real world usage example for this is: using it to dim the background and highlight the required element e.g. the way Facebook does it when creating a post.
 
 ### Highlight and Popover – [Demo](http://kamranahmed.info/driver.js#single-element-with-popover)
@@ -90,11 +94,11 @@ You can show additional details beside the highlighted element using the popover
 ```javascript
 const driver = new Driver();
 driver.highlight({
-  element: '#some-element',
+  element: "#some-element",
   popover: {
-    title: 'Title for the Popover',
-    description: 'Description for it',
-  }
+    title: "Title for the Popover",
+    description: "Description for it",
+  },
 });
 ```
 
@@ -107,15 +111,15 @@ By default, driver automatically finds the suitable position for the popover and
 ```javascript
 const driver = new Driver();
 driver.highlight({
-  element: '#some-element',
+  element: "#some-element",
   popover: {
-    title: 'Title for the Popover',
-    description: 'Description for it',
+    title: "Title for the Popover",
+    description: "Description for it",
     // position can be left, left-center, left-bottom, top,
     // top-center, top-right, right, right-center, right-bottom,
     // bottom, bottom-center, bottom-right, mid-center
-    position: 'left',
-  }
+    position: "left",
+  },
 });
 ```
 
@@ -124,15 +128,15 @@ You can also add offset to the popover position by using the `offset` property
 ```javascript
 const driver = new Driver();
 driver.highlight({
-  element: '#some-element',
+  element: "#some-element",
   popover: {
-    title: 'Title for the Popover',
-    description: 'Description for it',
-    position: 'bottom',
+    title: "Title for the Popover",
+    description: "Description for it",
+    position: "bottom",
     // Will show it 20 pixels away from the actual position of popover
     // You may also provide the negative values
     offset: 20,
-  }
+  },
 });
 ```
 
@@ -146,35 +150,36 @@ const driver = new Driver();
 // Define the steps for introduction
 driver.defineSteps([
   {
-    element: '#first-element-introduction',
+    element: "#first-element-introduction",
     popover: {
-      className: 'first-step-popover-class',
-      title: 'Title on Popover',
-      description: 'Body of the popover',
-      position: 'left'
-    }
+      className: "first-step-popover-class",
+      title: "Title on Popover",
+      description: "Body of the popover",
+      position: "left",
+    },
   },
   {
-    element: '#second-element-introduction',
+    element: "#second-element-introduction",
     popover: {
-      title: 'Title on Popover',
-      description: 'Body of the popover',
-      position: 'top'
-    }
+      title: "Title on Popover",
+      description: "Body of the popover",
+      position: "top",
+    },
   },
   {
-    element: '#third-element-introduction',
+    element: "#third-element-introduction",
     popover: {
-      title: 'Title on Popover',
-      description: 'Body of the popover',
-      position: 'right'
-    }
+      title: "Title on Popover",
+      description: "Body of the popover",
+      position: "right",
+    },
   },
 ]);
 
 // Start the introduction
 driver.start();
 ```
+
 You can also hide the buttons and control the introductions programmatically by using the API methods listed below.
 
 ![](./demo/images/split.png)
@@ -189,44 +194,45 @@ const driver = new Driver();
 // Define the steps for introduction
 driver.defineSteps([
   {
-    element: '#first-element-introduction',
+    element: "#first-element-introduction",
     popover: {
-      title: 'Title on Popover',
-      description: 'Body of the popover',
-      position: 'left'
-    }
+      title: "Title on Popover",
+      description: "Body of the popover",
+      position: "left",
+    },
   },
   {
-    element: '#second-element-introduction',
+    element: "#second-element-introduction",
     popover: {
-      title: 'Title on Popover',
-      description: 'Body of the popover',
-      position: 'top'
+      title: "Title on Popover",
+      description: "Body of the popover",
+      position: "top",
     },
     onNext: () => {
       // Prevent moving to the next step
       driver.preventMove();
-      
+
       // Perform some action or create the element to move to
       // And then move to that element
       setTimeout(() => {
         driver.moveNext();
       }, 4000);
-    }
+    },
   },
   {
-    element: '#third-element-introduction',
+    element: "#third-element-introduction",
     popover: {
-      title: 'Title on Popover',
-      description: 'Body of the popover',
-      position: 'right'
-    }
+      title: "Title on Popover",
+      description: "Body of the popover",
+      position: "right",
+    },
   },
 ]);
 
 // Start the introduction
 driver.start();
 ```
+
 You can also hide the buttons and control the introductions programmatically by using the API methods listed below.
 
 ![](./demo/images/split.png)
@@ -241,28 +247,29 @@ Here are the options that Driver understands:
 
 ```javascript
 const driver = new Driver({
-  className: 'scoped-class',        // className to wrap driver.js popover
-  animate: true,                    // Whether to animate or not
-  opacity: 0.75,                    // Background opacity (0 means only popovers and without overlay)
-  padding: 10,                      // Distance of element from around the edges
-  allowClose: true,                 // Whether the click on overlay should close or not
-  overlayClickNext: false,          // Whether the click on overlay should move next
-  doneBtnText: 'Done',              // Text on the final button
-  closeBtnText: 'Close',            // Text on the close button for this step
-  stageBackground: '#ffffff',       // Background color for the staged behind highlighted element
-  nextBtnText: 'Next',              // Next button text for this step
-  prevBtnText: 'Previous',          // Previous button text for this step
-  showButtons: false,               // Do not show control buttons in footer
-  keyboardControl: true,            // Allow controlling through keyboard (escape to close, arrow keys to move)
-  scrollIntoViewOptions: {},        // We use `scrollIntoView()` when possible, pass here the options for it if you want any
-  onHighlightStarted: (Element) => {}, // Called when element is about to be highlighted
-  onHighlighted: (Element) => {},      // Called when element is fully highlighted
-  onDeselected: (Element) => {},       // Called when element has been deselected
-  onReset: (Element) => {},            // Called when overlay is about to be cleared
-  onNext: (Element) => {},                    // Called when moving to next step on any step
-  onPrevious: (Element) => {},                // Called when moving to previous step on any step
+  className: "scoped-class", // className to wrap driver.js popover
+  animate: true, // Whether to animate or not
+  opacity: 0.75, // Background opacity (0 means only popovers and without overlay)
+  padding: 10, // Distance of element from around the edges
+  allowClose: true, // Whether the click on overlay should close or not
+  overlayClickNext: false, // Whether the click on overlay should move next
+  doneBtnText: "Done", // Text on the final button
+  closeBtnText: "Close", // Text on the close button for this step
+  stageBackground: "#ffffff", // Background color for the staged behind highlighted element
+  nextBtnText: "Next", // Next button text for this step
+  prevBtnText: "Previous", // Previous button text for this step
+  showButtons: false, // Do not show control buttons in footer
+  keyboardControl: true, // Allow controlling through keyboard (escape to close, arrow keys to move)
+  scrollIntoViewOptions: {}, // We use `scrollIntoView()` when possible, pass here the options for it if you want any
+  onHighlightStarted: Element => {}, // Called when element is about to be highlighted
+  onHighlighted: Element => {}, // Called when element is fully highlighted
+  onDeselected: Element => {}, // Called when element has been deselected
+  onReset: Element => {}, // Called when overlay is about to be cleared
+  onNext: Element => {}, // Called when moving to next step on any step
+  onPrevious: Element => {}, // Called when moving to previous step on any step
 });
 ```
+
 Note that all the button options that you provide in the driver definition can be overridden for a specific step by giving them in the step definition
 
 ### Step Definition
@@ -271,20 +278,21 @@ Here are the set of options that you can pass while defining steps `defineSteps`
 
 ```javascript
 const stepDefinition = {
-  element: '#some-item',        // Query selector string or Node to be highlighted
-  stageBackground: '#ffffff',   // This will override the one set in driver
-  popover: {                    // There will be no popover if empty or not given
-    className: 'popover-class', // className to wrap this specific step popover in addition to the general className in Driver options
-    title: 'Title',             // Title on the popover
-    description: 'Description', // Body of the popover
-    showButtons: false,         // Do not show control buttons in footer
-    doneBtnText: 'Done',        // Text on the last button
-    closeBtnText: 'Close',      // Text on the close button
-    nextBtnText: 'Next',        // Next button text
-    prevBtnText: 'Previous',    // Previous button text
+  element: "#some-item", // Query selector string or Node to be highlighted
+  stageBackground: "#ffffff", // This will override the one set in driver
+  popover: {
+    // There will be no popover if empty or not given
+    className: "popover-class", // className to wrap this specific step popover in addition to the general className in Driver options
+    title: "Title", // Title on the popover
+    description: "Description", // Body of the popover
+    showButtons: false, // Do not show control buttons in footer
+    doneBtnText: "Done", // Text on the last button
+    closeBtnText: "Close", // Text on the close button
+    nextBtnText: "Next", // Next button text
+    prevBtnText: "Previous", // Previous button text
   },
-  onNext: () => {},             // Called when moving to next step from current step
-  onPrevious: () => {},         // Called when moving to previous step from current step
+  onNext: () => {}, // Called when moving to next step from current step
+  onPrevious: () => {}, // Called when moving to previous step from current step
 };
 ```
 
@@ -300,10 +308,10 @@ And this is how it would look when creating a step by step guide:
 ```javascript
 const driver = new Driver(driverOptions);
 driver.defineSteps([
-    stepDefinition1,
-    stepDefinition2,
-    stepDefinition3,
-    stepDefinition4,
+  stepDefinition1,
+  stepDefinition2,
+  stepDefinition3,
+  stepDefinition4,
 ]);
 ```
 
@@ -316,23 +324,23 @@ const driver = new Driver(driverOptions);
 
 // Checks if the driver is active or not
 if (driver.isActivated) {
-    console.log('Driver is active');
+  console.log("Driver is active");
 }
 
 // In case of the steps guide, you can call below methods
-driver.defineSteps([ stepDefinition1, stepDefinition2, stepDefinition3 ]);
-driver.start(stepNumber = 0);  // Starts driving through the defined steps
-driver.moveNext();             // Moves to next step in the steps list
-driver.movePrevious();         // Moves to previous step in the steps list
-driver.hasNextStep();          // Checks if there is next step to move to
-driver.hasPreviousStep();      // Checks if there is previous step to move to
+driver.defineSteps([stepDefinition1, stepDefinition2, stepDefinition3]);
+driver.start((stepNumber = 0)); // Starts driving through the defined steps
+driver.moveNext(); // Moves to next step in the steps list
+driver.movePrevious(); // Moves to previous step in the steps list
+driver.hasNextStep(); // Checks if there is next step to move to
+driver.hasPreviousStep(); // Checks if there is previous step to move to
 
 // Prevents the current move. Useful in `onNext` or `onPrevious` if you want to
 // perform some asynchronous task and manually move to next step
 driver.preventMove();
 
 // Highlights the element using query selector or the step definition
-driver.highlight(string|stepDefinition);
+driver.highlight(string | stepDefinition);
 
 // Reposition the popover and highlighted element
 driver.refresh();
@@ -344,11 +352,11 @@ driver.reset();
 // to clear immediately and not do the animations etc
 // Could be useful when you, let's say, want to run
 // a different instance of driver while one was running
-driver.reset(clearImmediately = false);
+driver.reset((clearImmediately = false));
 
 // Checks if there is any highlighted element
-if(driver.hasHighlightedElement()) {
-    console.log('There is an element highlighted');
+if (driver.hasHighlightedElement()) {
+  console.log("There is an element highlighted");
 }
 
 // Gets the currently highlighted element on screen
@@ -359,10 +367,10 @@ const activeElement = driver.getHighlightedElement();
 const lastActiveElement = driver.getLastHighlightedElement();
 
 activeElement.getCalculatedPosition(); // Gets screen co-ordinates of the active element
-activeElement.hidePopover();           // Hide the popover
-activeElement.showPopover();           // Show the popover
+activeElement.hidePopover(); // Hide the popover
+activeElement.showPopover(); // Show the popover
 
-activeElement.getNode();  // Gets the DOM Element behind this element
+activeElement.getNode(); // Gets the DOM Element behind this element
 ```
 
 ![](./demo/images/split.png)
@@ -384,5 +392,3 @@ Thanks to [BrowserStack](https://browserstack.com) for sponsoring the compatibil
 ## License
 
 MIT &copy; [Kamran Ahmed](https://twitter.com/kamranahmedse)
-
-
