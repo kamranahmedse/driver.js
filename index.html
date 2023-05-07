@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite App</title>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+        font-size: 14px;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+      }
+
+      h1 {
+        margin: 40px 0 10px;
+        font-size: 48px;
+        font-weight: 600;
+        text-align: center;
+      }
+
+      h1 sup {
+        font-size: 18px;
+        font-weight: 400;
+      }
+
+      ul {
+        list-style: none;
+        padding: 0;
+        margin: 20px 10px 0;
+        line-height: 1.5;
+      }
+
+      ul li:before {
+        content: "•";
+        margin-right: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>driver.js <sup>next</sup></h1>
+      <p>Rewritten and enhanced version of driver.js</p>
+
+      <ul>
+        <li>Written in TypeScript</li>
+        <li>Lightweight — only 5kb gzipped</li>
+        <li>No dependencies</li>
+        <li>MIT Licensed</li>
+      </ul>
+    </div>
+    <script type="module">
+      import { driver } from "./src/driver.ts";
+
+      const driverObj = driver();
+
+      window.setTimeout(() => {
+        driverObj.highlight({
+          element: "h1",
+          popover: {
+            title: "Welcome to driver.js!",
+            description: "It's a rewritten version of driver.js",
+            position: "bottom",
+          },
+        });
+      }, 1000);
+
+      window.setTimeout(() => {
+        driverObj.highlight({
+          element: "p",
+          popover: {
+            title: "Welcome to driver.js!",
+            description: "It's a rewritten version of driver.js",
+            position: "bottom",
+          },
+        });
+      }, 2000);
+
+      window.setTimeout(() => {
+        driverObj.highlight({
+          element: "ul",
+          popover: {
+            title: "Welcome to driver.js!",
+            description: "It's a rewritten version of driver.js",
+            position: "bottom",
+          },
+        });
+      }, 3000);
+    </script>
+  </body>
+</html>
