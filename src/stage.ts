@@ -153,7 +153,7 @@ function createStageSvg(stage: StageDefinition): SVGSVGElement {
 }
 
 function generateSvgCutoutPathString(stage: StageDefinition) {
-  const padding = 10;
+  const padding = 4;
   const radius = 5;
 
   const windowX = window.innerWidth;

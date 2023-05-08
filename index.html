@@ -2,7 +2,6 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite App</title>
 
@@ -70,38 +69,9 @@
 
       const driverObj = driver();
 
-      window.setTimeout(() => {
-        driverObj.highlight({
-          element: "h1",
-          popover: {
-            title: "Welcome to driver.js!",
-            description: "It's a rewritten version of driver.js",
-            position: "bottom",
-          },
-        });
-      }, 1000);
-
-      window.setTimeout(() => {
-        driverObj.highlight({
-          element: "p",
-          popover: {
-            title: "Welcome to driver.js!",
-            description: "It's a rewritten version of driver.js",
-            position: "bottom",
-          },
-        });
-      }, 2000);
-
-      window.setTimeout(() => {
-        driverObj.highlight({
-          element: "ul",
-          popover: {
-            title: "Welcome to driver.js!",
-            description: "It's a rewritten version of driver.js",
-            position: "bottom",
-          },
-        });
-      }, 3000);
+      driverObj.highlight({
+        element: "li",
+      });
     </script>
   </body>
 </html>

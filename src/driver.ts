@@ -1,14 +1,10 @@
 import { initEvents, destroyEvents } from "./events";
 import { destroyHighlight, highlight } from "./highlight";
 import { destroyStage } from "./stage";
+import "./style.css";
 
 export type DriveStep = {
   element?: string | Element;
-  popover: {
-    title: string;
-    description: string;
-    position: "top" | "bottom" | "left" | "right";
-  };
 };
 
 export function driver() {
