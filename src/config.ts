@@ -1,5 +1,6 @@
 export type Config = {
   animate?: boolean;
+  allowClose?: boolean;
 };
 
 let currentConfig: Config = {};
@@ -7,6 +8,7 @@ let currentConfig: Config = {};
 export function configure(config: Config = {}) {
   currentConfig = {
     animate: true,
+    allowClose: true,
     ...config,
   };
 }

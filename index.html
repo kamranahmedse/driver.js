@@ -57,6 +57,8 @@
         display: flex;
         margin-top: 20px;
         gap: 10px;
+        max-width: 500px;
+        flex-wrap: wrap;
       }
 
       button {
@@ -75,7 +77,10 @@
       <p>Rewritten and enhanced version of driver.js</p>
 
       <div class="buttons">
-        <button id="highlight-btn">Simple Highlight</button>
+        <button id="highlight-btn">Animated Highlight</button>
+        <button id="simple-highlight-btn">Simple Highlight</button>
+        <button id="transition-highlight-btn">Multiple Highlight Calls</button>
+        <button id="disallow-close">Disallow Close</button>
         <button id="tour-btn">Start Tour</button>
         <button id="destroy-btn">Destroy</button>
       </div>
@@ -90,24 +95,43 @@
     <script type="module">
       import { driver } from "./src/driver.ts";
 
-      const driverObj = driver({
-        animate: true,
+      document.getElementById("highlight-btn").addEventListener("click", () => {
+        driver({ animate: true }).highlight({ element: "h1" });
       });
 
-      document.getElementById("highlight-btn").addEventListener("click", () => {
-        driverObj.highlight({
-          element: "h1",
+      document
+        .getElementById("simple-highlight-btn")
+        .addEventListener("click", () => {
+          driver({ animate: false }).highlight({ element: "ul" });
         });
 
-        window.setTimeout(() => {
+      document
+        .getElementById("transition-highlight-btn")
+        .addEventListener("click", () => {
+          const driverObj = driver({ animate: true });
+
+          driverObj.highlight({ element: "h1" });
+
+          window.setTimeout(() => {
+            driverObj.highlight({ element: ".buttons" });
+          }, 1000);
+        });
+
+      document
+        .getElementById("disallow-close")
+        .addEventListener("click", () => {
+          const driverObj = driver({
+            animate: true,
+            allowClose: false,
+          });
+
           driverObj.highlight({
             element: ".buttons",
           });
-        }, 1000);
-      });
+        });
 
       document.getElementById("destroy-btn").addEventListener("click", () => {
-        driverObj.destroy();
+        driver().destroy();
       });
     </script>
   </body>

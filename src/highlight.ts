@@ -4,7 +4,7 @@ import { getConfig } from "./config";
 
 let previousHighlight: Element | undefined;
 let activeHighlight: Element | undefined;
-let isTransitioning = false;
+let currentTransitionCallback: undefined | (() => void);
 
 export function highlight(step: DriveStep) {
   const { element } = step;
@@ -34,10 +34,11 @@ function transferHighlight(from: Element, to: Element) {
   const duration = 400;
   const start = Date.now();
 
-  isTransitioning = true;
-
   const animate = () => {
-    if (!isTransitioning) {
+    // This makes sure that the repeated calls to transferHighlight
+    // don't interfere with each other. Only the last call will be
+    // executed.
+    if (currentTransitionCallback !== animate) {
       return;
     }
 
@@ -47,25 +48,23 @@ function transferHighlight(from: Element, to: Element) {
       transitionStage(elapsed, duration, from, to);
     } else {
       trackActiveElement(to);
-
-      isTransitioning = false;
+      currentTransitionCallback = undefined;
     }
 
     refreshStage();
     window.requestAnimationFrame(animate);
   };
 
+  currentTransitionCallback = animate;
   window.requestAnimationFrame(animate);
 
   from.classList.remove("driver-active-element");
   to.classList.add("driver-active-element");
-
-  isTransitioning = true;
 }
 
 export function destroyHighlight() {
   activeHighlight = undefined;
-  isTransitioning = false;
+  currentTransitionCallback = undefined;
   previousHighlight = undefined;
   activeHighlight = undefined;
 

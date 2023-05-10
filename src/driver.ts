@@ -10,26 +10,40 @@ export type DriveStep = {
   element?: string | Element;
 };
 
+let isInitialized = false;
+
 export function driver(options: Config = {}) {
   configure(options);
 
-  const shouldAnimate = getConfig("animate");
-
   function init() {
+    // Avoid multiple initialization
+    if (isInitialized) {
+      return;
+    }
+
+    isInitialized = true;
     document.body.classList.add(
       "driver-active",
-      shouldAnimate ? "driver-fade" : "driver-simple"
+      getConfig("animate") ? "driver-fade" : "driver-simple"
     );
 
     initEvents();
 
-    register("overlayClick", destroy);
+    // Register hooks
+    register("overlayClick", () => {
+      if (!getConfig("allowClose")) {
+        return;
+      }
+
+      destroy();
+    });
   }
 
   function destroy() {
+    isInitialized = false;
     document.body.classList.remove(
       "driver-active",
-      shouldAnimate ? "driver-fade" : "driver-simple"
+      getConfig("animate") ? "driver-fade" : "driver-simple"
     );
 
     destroyEvents();
