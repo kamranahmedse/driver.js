@@ -25,6 +25,8 @@
         align-items: center;
         justify-content: center;
         height: 100vh;
+        max-width: 1200px;
+        margin: 0 auto;
       }
 
       h1 {
@@ -50,12 +52,33 @@
         content: "•";
         margin-right: 10px;
       }
+
+      .buttons {
+        display: flex;
+        margin-top: 20px;
+        gap: 10px;
+      }
+
+      button {
+        all: unset;
+        border: 1px solid #ccc;
+        padding: 5px 15px;
+        border-radius: 5px;
+        display: block;
+        cursor: pointer;
+      }
     </style>
   </head>
   <body>
     <div class="container">
       <h1>driver.js <sup>next</sup></h1>
       <p>Rewritten and enhanced version of driver.js</p>
+
+      <div class="buttons">
+        <button id="highlight-btn">Simple Highlight</button>
+        <button id="tour-btn">Start Tour</button>
+        <button id="highlight-destroy">Destroy after 2s</button>
+      </div>
 
       <ul>
         <li>Written in TypeScript</li>
@@ -69,9 +92,22 @@
 
       const driverObj = driver();
 
-      driverObj.highlight({
-        element: "li",
+      document.getElementById("highlight-btn").addEventListener("click", () => {
+        driverObj.highlight({
+          element: "h1",
+        });
       });
+
+      document
+        .getElementById("highlight-destroy")
+        .addEventListener("click", () => {
+          driverObj.highlight({
+            element: "h1",
+          });
+          setTimeout(() => {
+            driverObj.destroy();
+          }, 2000);
+        });
     </script>
   </body>
 </html>

@@ -11,3 +11,17 @@
   pointer-events: auto;
   cursor: auto;
 }
+
+@keyframes animate-fade-in {
+  0% {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.driver-fade .driver-stage {
+  animation: animate-fade-in 100ms ease-in-out;
+}

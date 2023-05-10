@@ -9,13 +9,13 @@ export type DriveStep = {
 
 export function driver() {
   function init() {
-    document.body.classList.add("driver-active");
+    document.body.classList.add("driver-active", "driver-fade");
 
     initEvents();
   }
 
   function destroy() {
-    document.body.classList.remove("driver-active");
+    document.body.classList.remove("driver-active", "driver-fade");
 
     destroyEvents();
     destroyHighlight();
