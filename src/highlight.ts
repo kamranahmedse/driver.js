@@ -1,5 +1,6 @@
 import { DriveStep } from "./driver";
 import { refreshStage, trackActiveElement, transitionStage } from "./stage";
+import { getConfig } from "./config";
 
 let previousHighlight: Element | undefined;
 let activeHighlight: Element | undefined;
@@ -32,6 +33,7 @@ export function refreshActiveHighlight() {
 function transferHighlight(from: Element, to: Element) {
   const duration = 400;
   const start = Date.now();
+
   isTransitioning = true;
 
   const animate = () => {
@@ -41,7 +43,7 @@ function transferHighlight(from: Element, to: Element) {
 
     const elapsed = Date.now() - start;
 
-    if (elapsed < duration) {
+    if (getConfig("animate") && elapsed < duration) {
       transitionStage(elapsed, duration, from, to);
     } else {
       trackActiveElement(to);

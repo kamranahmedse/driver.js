@@ -1,4 +1,5 @@
 import { easeInOutQuad } from "./math";
+import { onDriverClick } from "./events";
 
 export type StageDefinition = {
   x: number;
@@ -95,10 +96,24 @@ export function refreshStage() {
   stageSvg.setAttribute("viewBox", `0 0 ${windowX} ${windowY}`);
 }
 
+function mountStage(stagePosition: StageDefinition) {
+  stageSvg = createStageSvg(stagePosition);
+
+  document.body.appendChild(stageSvg);
+
+  onDriverClick(stageSvg, e => {
+    const target = e.target as SVGElement;
+    if (target.tagName !== "path") {
+      return;
+    }
+
+    console.log("Overlay clicked");
+  });
+}
+
 function renderStage(stagePosition: StageDefinition) {
   if (!stageSvg) {
-    stageSvg = createStageSvg(stagePosition);
-    document.body.appendChild(stageSvg);
+    mountStage(stagePosition);
 
     return;
   }

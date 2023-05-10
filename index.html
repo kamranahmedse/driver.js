@@ -77,7 +77,7 @@
       <div class="buttons">
         <button id="highlight-btn">Simple Highlight</button>
         <button id="tour-btn">Start Tour</button>
-        <button id="highlight-destroy">Destroy after 2s</button>
+        <button id="destroy-btn">Destroy</button>
       </div>
 
       <ul>
@@ -90,24 +90,25 @@
     <script type="module">
       import { driver } from "./src/driver.ts";
 
-      const driverObj = driver();
+      const driverObj = driver({
+        animate: true,
+      });
 
       document.getElementById("highlight-btn").addEventListener("click", () => {
         driverObj.highlight({
           element: "h1",
         });
+
+        window.setTimeout(() => {
+          driverObj.highlight({
+            element: ".buttons",
+          });
+        }, 1000);
       });
 
-      document
-        .getElementById("highlight-destroy")
-        .addEventListener("click", () => {
-          driverObj.highlight({
-            element: "h1",
-          });
-          setTimeout(() => {
-            driverObj.destroy();
-          }, 2000);
-        });
+      document.getElementById("destroy-btn").addEventListener("click", () => {
+        driverObj.destroy();
+      });
     </script>
   </body>
 </html>

@@ -9,7 +9,6 @@
 .driver-active .driver-active-element,
 .driver-active .driver-active-element * {
   pointer-events: auto;
-  cursor: auto;
 }
 
 @keyframes animate-fade-in {
