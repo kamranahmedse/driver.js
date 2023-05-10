@@ -1,6 +1,7 @@
 import { easeInOutQuad } from "./math";
 import { onDriverClick } from "./events";
 import { trigger } from "./hooks";
+import { getConfig } from "./config";
 
 export type StageDefinition = {
   x: number;
@@ -158,7 +159,7 @@ function createStageSvg(stage: StageDefinition): SVGSVGElement {
   cutoutPath.setAttribute("d", generateSvgCutoutPathString(stage));
 
   cutoutPath.style.fill = "rgb(0,0,0)";
-  cutoutPath.style.opacity = `0.7`;
+  cutoutPath.style.opacity = `${getConfig("opacity")}`;
   cutoutPath.style.pointerEvents = "auto";
   cutoutPath.style.cursor = "auto";
 

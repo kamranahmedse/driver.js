@@ -81,6 +81,8 @@
         <button id="simple-highlight-btn">Simple Highlight</button>
         <button id="transition-highlight-btn">Multiple Highlight Calls</button>
         <button id="disallow-close">Disallow Close</button>
+        <button id="dark-highlight-btn">Super Dark Highlight</button>
+        <button id="dim-highlight-btn">Super Dim Highlight</button>
         <button id="tour-btn">Start Tour</button>
         <button id="destroy-btn">Destroy</button>
       </div>
@@ -103,6 +105,24 @@
         .getElementById("simple-highlight-btn")
         .addEventListener("click", () => {
           driver({ animate: false }).highlight({ element: "ul" });
+        });
+
+      document
+        .getElementById("dark-highlight-btn")
+        .addEventListener("click", () => {
+          driver({
+            animate: true,
+            opacity: 0.9,
+          }).highlight({ element: "ul" });
+        });
+
+      document
+        .getElementById("dim-highlight-btn")
+        .addEventListener("click", () => {
+          driver({
+            animate: true,
+            opacity: 0.2,
+          }).highlight({ element: ".buttons" });
         });
 
       document
