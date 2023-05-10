@@ -1,9 +1,10 @@
-import { initEvents, destroyEvents } from "./events";
-import { destroyHighlight, highlight } from "./highlight";
 import { destroyStage } from "./stage";
-import { configure, Config, getConfig } from "./config";
+import { destroyEvents, initEvents } from "./events";
+import { Config, configure, getConfig } from "./config";
+import { destroyHighlight, highlight } from "./highlight";
 
 import "./style.css";
+import { destroyHooks, register } from "./hooks";
 
 export type DriveStep = {
   element?: string | Element;
@@ -21,6 +22,8 @@ export function driver(options: Config = {}) {
     );
 
     initEvents();
+
+    register("overlayClick", destroy);
   }
 
   function destroy() {
@@ -32,6 +35,7 @@ export function driver(options: Config = {}) {
     destroyEvents();
     destroyHighlight();
     destroyStage();
+    destroyHooks();
   }
 
   return {

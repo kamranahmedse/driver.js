@@ -1,5 +1,6 @@
 import { easeInOutQuad } from "./math";
 import { onDriverClick } from "./events";
+import { trigger } from "./hooks";
 
 export type StageDefinition = {
   x: number;
@@ -98,7 +99,6 @@ export function refreshStage() {
 
 function mountStage(stagePosition: StageDefinition) {
   stageSvg = createStageSvg(stagePosition);
-
   document.body.appendChild(stageSvg);
 
   onDriverClick(stageSvg, e => {
@@ -107,7 +107,7 @@ function mountStage(stagePosition: StageDefinition) {
       return;
     }
 
-    console.log("Overlay clicked");
+    trigger("overlayClick");
   });
 }
 
