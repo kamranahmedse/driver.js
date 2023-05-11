@@ -1,13 +1,15 @@
+import { Popover } from "./popover";
 import { destroyStage } from "./stage";
 import { destroyEvents, initEvents } from "./events";
 import { Config, configure, getConfig } from "./config";
 import { destroyHighlight, highlight } from "./highlight";
+import { destroyHooks, register } from "./hooks";
 
 import "./style.css";
-import { destroyHooks, register } from "./hooks";
 
 export type DriveStep = {
   element?: string | Element;
+  popover?: Popover;
 };
 
 let isInitialized = false;

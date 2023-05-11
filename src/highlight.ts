@@ -1,6 +1,7 @@
 import { DriveStep } from "./driver";
 import { refreshStage, trackActiveElement, transitionStage } from "./stage";
 import { getConfig } from "./config";
+import { refreshPopover, renderPopover } from "./popover";
 
 let previousHighlight: Element | undefined;
 let activeHighlight: Element | undefined;
@@ -47,11 +48,15 @@ function transferHighlight(from: Element, to: Element) {
     if (getConfig("animate") && elapsed < duration) {
       transitionStage(elapsed, duration, from, to);
     } else {
+      bringInView(to);
       trackActiveElement(to);
+      renderPopover(to);
+
       currentTransitionCallback = undefined;
     }
 
     refreshStage();
+    refreshPopover();
     window.requestAnimationFrame(animate);
   };
 
@@ -60,6 +65,30 @@ function transferHighlight(from: Element, to: Element) {
 
   from.classList.remove("driver-active-element");
   to.classList.add("driver-active-element");
+}
+
+function bringInView(element: Element) {
+  if (!element || isElementInView(element)) {
+    return;
+  }
+
+  element.scrollIntoView({
+    behavior: "smooth",
+    inline: "center",
+    block: "center",
+  });
+}
+
+function isElementInView(element: Element) {
+  const rect = element.getBoundingClientRect();
+
+  return (
+    rect.top >= 0 &&
+    rect.left >= 0 &&
+    rect.bottom <=
+      (window.innerHeight || document.documentElement.clientHeight) &&
+    rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+  );
 }
 
 export function destroyHighlight() {

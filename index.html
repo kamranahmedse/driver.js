@@ -19,18 +19,34 @@
         -moz-osx-font-smoothing: grayscale;
       }
 
+      p {
+        line-height: 1.5;
+        margin-bottom: 15px;
+      }
+
+      .page-header {
+        text-align: center;
+        margin-bottom: 10px;
+      }
+
       .container {
         display: flex;
         flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        height: 100vh;
-        max-width: 1200px;
+        max-width: 500px;
         margin: 0 auto;
+        text-align: left;
+      }
+
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        margin: 30px 0 10px;
       }
 
       h1 {
-        margin: 40px 0 10px;
         font-size: 48px;
         font-weight: 600;
         text-align: center;
@@ -69,12 +85,23 @@
         display: block;
         cursor: pointer;
       }
+
+      pre {
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        background: whitesmoke;
+        border-radius: 5px;
+        padding: 10px;
+        line-height: 1.75;
+      }
     </style>
   </head>
   <body>
     <div class="container">
-      <h1>driver.js <sup>next</sup></h1>
-      <p>Rewritten and enhanced version of driver.js</p>
+      <div class="page-header">
+        <h1>driver.js <sup>next</sup></h1>
+        <p>Rewritten and enhanced version of driver.js</p>
+      </div>
 
       <div class="buttons">
         <button id="highlight-btn">Animated Highlight</button>
@@ -93,6 +120,91 @@
         <li>No dependencies</li>
         <li>MIT Licensed</li>
       </ul>
+
+      <h2>Yet another Tour Library?</h2>
+      <p>
+        No, it is not. Tours are just one of the many use-cases. Driver.js can
+        be used wherever you need some sort of overlay for the page; some common
+        usecases could be: e.g. dimming the background when user is interacting
+        with some component, using it as a focus shifter to bring user's
+        attention to some component on page, or using it to simulate those "Turn
+        off the Lights" widgets that you might have seen on video players
+        online, etc.
+      </p>
+      <p>
+        Driver.js is written in Vanilla JS, has zero dependencies and is highly
+        customizable. It has several options allowing you to manipulate how it
+        behaves and also provides you the hooks to manipulate the elements as
+        they are highlighted, about to be highlighted, or deselected.
+      </p>
+
+      <h2>Installation</h2>
+      <p>You can install it using yarn or npm, whatever you prefer.</p>
+
+      <pre>
+yarn add driver.js
+npm install driver.js</pre
+      >
+
+      <p>
+        Or include it using CDN — put the version as driver.js@0.5 in the name
+      </p>
+
+      <pre>https://unpkg.com/driver.js/dist/driver.min.js</pre>
+
+      <h2>Usage and Demo</h2>
+
+      <p id="large-paragraph-text">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi
+        blanditiis consectetur ea eligendi id in inventore ipsa iure laudantium
+        libero, minus molestias necessitatibus nesciunt non omnis, quasi
+        recusandae tempore voluptates! Lorem ipsum dolor sit amet, consectetur
+        adipisicing elit. Animi blanditiis consectetur ea eligendi id in
+        inventore ipsa iure laudantium libero, minus molestias necessitatibus
+        nesciunt non omnis, quasi recusandae tempore voluptates!
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi
+        blanditiis consectetur ea eligendi id in inventore ipsa iure laudantium
+        libero, minus molestias necessitatibus nesciunt non omnis, quasi
+        recusandae tempore voluptates!
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi
+        blanditiis consectetur ea eligendi id in inventore ipsa iure laudantium
+        libero, minus molestias necessitatibus nesciunt non omnis, quasi
+        recusandae tempore voluptates!
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi
+        blanditiis consectetur ea eligendi id in inventore ipsa iure laudantium
+        libero, minus molestias necessitatibus nesciunt non omnis, quasi
+        recusandae tempore voluptates!
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi
+        blanditiis consectetur ea eligendi id in inventore ipsa iure laudantium
+        libero, minus molestias necessitatibus nesciunt non omnis, quasi
+        recusandae tempore voluptates!
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi
+        blanditiis consectetur ea eligendi id in inventore ipsa iure laudantium
+        libero, minus molestias necessitatibus nesciunt non omnis, quasi
+        recusandae tempore voluptates!
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi
+        blanditiis consectetur ea eligendi id in inventore ipsa iure laudantium
+        libero, minus molestias necessitatibus nesciunt non omnis, quasi
+        recusandae tempore voluptates!
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi
+        blanditiis consectetur ea eligendi id in inventore ipsa iure laudantium
+        libero, minus molestias necessitatibus nesciunt non omnis, quasi
+        recusandae tempore voluptates!
+      </p>
     </div>
     <script type="module">
       import { driver } from "./src/driver.ts";
@@ -104,7 +216,9 @@
       document
         .getElementById("simple-highlight-btn")
         .addEventListener("click", () => {
-          driver({ animate: false }).highlight({ element: "ul" });
+          driver({ animate: false }).highlight({
+            element: "#large-paragraph-text",
+          });
         });
 
       document

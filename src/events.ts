@@ -2,7 +2,7 @@ import { refreshActiveHighlight } from "./highlight";
 
 let resizeTimeout: number;
 
-function onResize() {
+function requireRefresh() {
   if (resizeTimeout) {
     window.cancelAnimationFrame(resizeTimeout);
   }
@@ -64,9 +64,11 @@ export function onDriverClick(
 }
 
 export function initEvents() {
-  window.addEventListener("resize", onResize);
+  window.addEventListener("resize", requireRefresh);
+  window.addEventListener("scroll", requireRefresh);
 }
 
 export function destroyEvents() {
-  window.removeEventListener("resize", onResize);
+  window.removeEventListener("resize", requireRefresh);
+  window.removeEventListener("scroll", requireRefresh);
 }
