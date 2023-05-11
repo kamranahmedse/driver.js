@@ -1,4 +1,4 @@
-import { easeInOutQuad } from "./math";
+import { easeInOutQuad } from "./utils";
 import { onDriverClick } from "./events";
 import { trigger } from "./hooks";
 import { getConfig } from "./config";

@@ -94,6 +94,15 @@
         padding: 10px;
         line-height: 1.75;
       }
+
+      #scrollable-area {
+        height: 300px;
+        overflow: auto;
+        border: 1px solid #ccc;
+        padding: 10px;
+        border-radius: 5px;
+        margin: 50px 0;
+      }
     </style>
   </head>
   <body>
@@ -110,6 +119,8 @@
         <button id="disallow-close">Disallow Close</button>
         <button id="dark-highlight-btn">Super Dark Highlight</button>
         <button id="dim-highlight-btn">Super Dim Highlight</button>
+        <button id="scrollable-area-btn">Scrollable Area</button>
+        <button id="inner-scroll-area-btn">Inner Scroll Area</button>
         <button id="tour-btn">Start Tour</button>
         <button id="destroy-btn">Destroy</button>
       </div>
@@ -131,14 +142,14 @@
         off the Lights" widgets that you might have seen on video players
         online, etc.
       </p>
-      <p>
+      <p class="second-para">
         Driver.js is written in Vanilla JS, has zero dependencies and is highly
         customizable. It has several options allowing you to manipulate how it
         behaves and also provides you the hooks to manipulate the elements as
         they are highlighted, about to be highlighted, or deselected.
       </p>
 
-      <h2>Installation</h2>
+      <h2 id="installation-head">Installation</h2>
       <p>You can install it using yarn or npm, whatever you prefer.</p>
 
       <pre>
@@ -175,6 +186,62 @@ npm install driver.js</pre
         libero, minus molestias necessitatibus nesciunt non omnis, quasi
         recusandae tempore voluptates!
       </p>
+      <div id="scrollable-area">
+        <p>
+          First -> Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+          Consequuntur dicta ipsum labore quod tempora ullam? Alias consequatur
+          doloremque laborum maxime necessitatibus nostrum odio, officiis
+          quibusdam veniam! Doloribus eos id quaerat.
+        </p>
+        <p>
+          Second -> Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+          Consequuntur dicta ipsum labore quod tempora ullam? Alias consequatur
+          doloremque laborum maxime necessitatibus nostrum odio, officiis
+          quibusdam veniam! Doloribus eos id quaerat.
+        </p>
+        <p id="third-scroll-paragraph">
+          Third -> Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+          Consequuntur dicta ipsum labore quod tempora ullam? Alias consequatur
+          doloremque laborum maxime necessitatibus nostrum odio, officiis
+          quibusdam veniam! Doloribus eos id quaerat.
+        </p>
+        <p>
+          Fourth -> Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+          Consequuntur dicta ipsum labore quod tempora ullam? Alias consequatur
+          doloremque laborum maxime necessitatibus nostrum odio, officiis
+          quibusdam veniam! Doloribus eos id quaerat.
+        </p>
+        <p>
+          Fifth -> Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+          Consequuntur dicta ipsum labore quod tempora ullam? Alias consequatur
+          doloremque laborum maxime necessitatibus nostrum odio, officiis
+          quibusdam veniam! Doloribus eos id quaerat.
+        </p>
+        <p>
+          Sixth -> Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+          Consequuntur dicta ipsum labore quod tempora ullam? Alias consequatur
+          doloremque laborum maxime necessitatibus nostrum odio, officiis
+          quibusdam veniam! Doloribus eos id quaerat.
+        </p>
+        <p>
+          Seventh -> Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+          Consequuntur dicta ipsum labore quod tempora ullam? Alias consequatur
+          doloremque laborum maxime necessitatibus nostrum odio, officiis
+          quibusdam veniam! Doloribus eos id quaerat.
+        </p>
+        <p>
+          Eighth -> Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+          Consequuntur dicta ipsum labore quod tempora ullam? Alias consequatur
+          doloremque laborum maxime necessitatibus nostrum odio, officiis
+          quibusdam veniam! Doloribus eos id quaerat.
+        </p>
+        <p>
+          Ninth -> Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+          Consequuntur dicta ipsum labore quod tempora ullam? Alias consequatur
+          doloremque laborum maxime necessitatibus nostrum odio, officiis
+          quibusdam veniam! Doloribus eos id quaerat.
+        </p>
+      </div>
       <p>
         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi
         blanditiis consectetur ea eligendi id in inventore ipsa iure laudantium
@@ -249,6 +316,24 @@ npm install driver.js</pre
           window.setTimeout(() => {
             driverObj.highlight({ element: ".buttons" });
           }, 1000);
+
+          window.setTimeout(() => {
+            driverObj.highlight({ element: "#installation-head" });
+          }, 1500);
+        });
+
+      document
+        .getElementById("scrollable-area-btn")
+        .addEventListener("click", () => {
+          const driverObj = driver({ animate: true });
+          driverObj.highlight({ element: "#scrollable-area" });
+        });
+
+      document
+        .getElementById("inner-scroll-area-btn")
+        .addEventListener("click", () => {
+          const driverObj = driver({ animate: true });
+          driverObj.highlight({ element: "#third-scroll-paragraph" });
         });
 
       document

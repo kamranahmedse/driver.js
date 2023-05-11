@@ -1,5 +1,6 @@
 export type Config = {
   animate?: boolean;
+  smoothScroll?: boolean;
   allowClose?: boolean;
   opacity?: number;
 };
@@ -11,6 +12,7 @@ export function configure(config: Config = {}) {
     animate: true,
     allowClose: true,
     opacity: 0.7,
+    smoothScroll: true,
     ...config,
   };
 }
