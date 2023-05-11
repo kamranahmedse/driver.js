@@ -115,7 +115,7 @@
       <div class="buttons">
         <button id="highlight-btn">Animated Highlight</button>
         <button id="simple-highlight-btn">Simple Highlight</button>
-        <button id="transition-highlight-btn">Multiple Highlight Calls</button>
+        <button id="transition-highlight-btn">Transition Highlight</button>
         <button id="disallow-close">Disallow Close</button>
         <button id="dark-highlight-btn">Super Dark Highlight</button>
         <button id="dim-highlight-btn">Super Dim Highlight</button>
@@ -314,12 +314,16 @@ npm install driver.js</pre
           driverObj.highlight({ element: "h1" });
 
           window.setTimeout(() => {
-            driverObj.highlight({ element: ".buttons" });
-          }, 1000);
+            driverObj.highlight({ element: ".buttons button:first-child" });
+          }, 800);
 
           window.setTimeout(() => {
-            driverObj.highlight({ element: "#installation-head" });
+            driverObj.highlight({ element: ".buttons button:nth-child(5)" });
           }, 1500);
+
+          window.setTimeout(() => {
+            driverObj.highlight({ element: "h2" });
+          }, 2500);
         });
 
       document
