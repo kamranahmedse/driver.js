@@ -1,6 +1,6 @@
 import { easeInOutQuad } from "./utils";
 import { onDriverClick } from "./events";
-import { trigger } from "./hooks";
+import { emit } from "./emitter";
 import { getConfig } from "./config";
 
 export type StageDefinition = {
@@ -108,7 +108,7 @@ function mountStage(stagePosition: StageDefinition) {
       return;
     }
 
-    trigger("overlayClick");
+    emit("overlayClick");
   });
 }
 

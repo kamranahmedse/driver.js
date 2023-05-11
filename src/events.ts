@@ -1,4 +1,5 @@
 import { refreshActiveHighlight } from "./highlight";
+import { emit } from "./emitter";
 
 let resizeTimeout: number;
 
@@ -8,6 +9,12 @@ function requireRefresh() {
   }
 
   resizeTimeout = window.requestAnimationFrame(refreshActiveHighlight);
+}
+
+function onKeyup(e: KeyboardEvent) {
+  if (e.key === "Escape") {
+    emit("escape");
+  }
 }
 
 /**
@@ -64,6 +71,7 @@ export function onDriverClick(
 }
 
 export function initEvents() {
+  window.addEventListener("keyup", onKeyup, false);
   window.addEventListener("resize", requireRefresh);
   window.addEventListener("scroll", requireRefresh);
 }

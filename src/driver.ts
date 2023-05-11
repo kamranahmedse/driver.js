@@ -3,7 +3,7 @@ import { destroyStage } from "./stage";
 import { destroyEvents, initEvents } from "./events";
 import { Config, configure, getConfig } from "./config";
 import { destroyHighlight, highlight } from "./highlight";
-import { destroyHooks, register } from "./hooks";
+import { destroyEmitter, listen } from "./emitter";
 
 import "./style.css";
 
@@ -16,6 +16,14 @@ let isInitialized = false;
 
 export function driver(options: Config = {}) {
   configure(options);
+
+  function handleClose() {
+    if (!getConfig("allowClose")) {
+      return;
+    }
+
+    destroy();
+  }
 
   function init() {
     // Avoid multiple initialization
@@ -32,13 +40,8 @@ export function driver(options: Config = {}) {
     initEvents();
 
     // Register hooks
-    register("overlayClick", () => {
-      if (!getConfig("allowClose")) {
-        return;
-      }
-
-      destroy();
-    });
+    listen("overlayClick", handleClose);
+    listen("escape", handleClose);
   }
 
   function destroy() {
@@ -51,7 +54,7 @@ export function driver(options: Config = {}) {
     destroyEvents();
     destroyHighlight();
     destroyStage();
-    destroyHooks();
+    destroyEmitter();
   }
 
   return {
