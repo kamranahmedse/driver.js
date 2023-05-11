@@ -12,7 +12,7 @@ export function configure(config: Config = {}) {
     animate: true,
     allowClose: true,
     opacity: 0.7,
-    smoothScroll: true,
+    smoothScroll: false,
     ...config,
   };
 }
