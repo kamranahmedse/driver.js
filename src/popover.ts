@@ -1,98 +1,122 @@
 import { bringInView } from "./utils";
 
+export type Side = "top" | "right" | "bottom" | "left";
+export type Alignment = "start" | "center" | "end";
+
 export type Popover = {
   title?: string;
   description: string;
-  preferredPosition?: "top" | "right" | "bottom" | "left";
-  align?: "start" | "center" | "end";
+  side?: Side;
+  align?: Alignment;
 };
 
-let popoverEl: HTMLElement | undefined;
+type PopoverDOM = {
+  wrapper: HTMLElement;
+  tip: HTMLElement;
+  title: HTMLElement;
+  description: HTMLElement;
+  footer: HTMLElement;
+  previousButton: HTMLElement;
+  nextButton: HTMLElement;
+  closeButton: HTMLElement;
+  footerButtons: HTMLElement;
+};
+
+let popover: PopoverDOM | undefined;
 
 export function renderPopover(element: Element) {
-  if (!popoverEl) {
-    const popover = createPopover();
-    document.body.appendChild(popover.popoverWrapper);
-
-    popoverEl = popover.popoverWrapper;
+  if (!popover) {
+    popover = createPopover();
+    document.body.appendChild(popover.wrapper);
   }
 
-  popoverEl.style.display = "block";
-  popoverEl.style.left = "0";
-  popoverEl.style.top = "0";
-  popoverEl.style.bottom = "";
-  popoverEl.style.right = "";
+  const popoverWrapper = popover.wrapper;
 
-  refreshPopover();
-  bringInView(popoverEl);
+  popoverWrapper.style.display = "block";
+  popoverWrapper.style.left = "0";
+  popoverWrapper.style.top = "0";
+  popoverWrapper.style.bottom = "";
+  popoverWrapper.style.right = "";
+
+  refreshPopover(element);
+  bringInView(popoverWrapper);
 }
 
-export function refreshPopover() {
-  console.log("rendering popover");
+export function refreshPopover(element: Element) {
+  if (!popover) {
+    return;
+  }
+
+  const popoverTip = popover.tip;
+
+  // const position = calculatePopoverPosition(element);
+  popoverTip?.classList.add("driver-popover-tip-left");
 }
 
-function createPopover() {
-  const popoverWrapper = document.createElement("div");
-  popoverWrapper.classList.add("driver-popover");
+function calculatePopoverPosition(element: Element) {}
 
-  const popoverTip = document.createElement("div");
-  popoverTip.classList.add("driver-popover-tip");
+function createPopover(): PopoverDOM {
+  const wrapper = document.createElement("div");
+  wrapper.classList.add("driver-popover");
 
-  const popoverTitle = document.createElement("div");
-  popoverTitle.classList.add("driver-popover-title");
-  popoverTitle.innerText = "Popover Title";
+  const tip = document.createElement("div");
+  tip.classList.add("driver-popover-tip");
 
-  const popoverDescription = document.createElement("div");
-  popoverDescription.classList.add("driver-popover-description");
-  popoverDescription.innerText = "Popover Description";
+  const title = document.createElement("div");
+  title.classList.add("driver-popover-title");
+  title.innerText = "Popover Title";
 
-  const popoverFooter = document.createElement("div");
-  popoverFooter.classList.add("driver-popover-footer");
+  const description = document.createElement("div");
+  description.classList.add("driver-popover-description");
+  description.innerText = "Popover Description";
 
-  const popoverCloseBtn = document.createElement("button");
-  popoverCloseBtn.classList.add("driver-popover-close-btn");
-  popoverCloseBtn.innerText = "Close";
+  const footer = document.createElement("div");
+  footer.classList.add("driver-popover-footer");
 
-  const popoverFooterBtnGroup = document.createElement("span");
-  popoverFooterBtnGroup.classList.add("driver-popover-footer-btns");
+  const closeButton = document.createElement("button");
+  closeButton.classList.add("driver-popover-close-btn");
+  closeButton.innerText = "Close";
 
-  const popoverPrevBtn = document.createElement("button");
-  popoverPrevBtn.classList.add("driver-popover-prev-btn");
-  popoverPrevBtn.innerHTML = "&larr; Previous";
+  const footerButtons = document.createElement("span");
+  footerButtons.classList.add("driver-popover-footer-btns");
 
-  const popoverNextBtn = document.createElement("button");
-  popoverNextBtn.classList.add("driver-popover-next-btn");
-  popoverNextBtn.innerHTML = "Next &rarr;";
+  const previousButton = document.createElement("button");
+  previousButton.classList.add("driver-popover-prev-btn");
+  previousButton.innerHTML = "&larr; Previous";
 
-  popoverFooterBtnGroup.appendChild(popoverPrevBtn);
-  popoverFooterBtnGroup.appendChild(popoverNextBtn);
+  const nextButton = document.createElement("button");
+  nextButton.classList.add("driver-popover-next-btn");
+  nextButton.innerHTML = "Next &rarr;";
 
-  popoverFooter.appendChild(popoverCloseBtn);
-  popoverFooter.appendChild(popoverFooterBtnGroup);
+  footerButtons.appendChild(previousButton);
+  footerButtons.appendChild(nextButton);
 
-  popoverWrapper.appendChild(popoverTip);
-  popoverWrapper.appendChild(popoverTitle);
-  popoverWrapper.appendChild(popoverDescription);
-  popoverWrapper.appendChild(popoverFooter);
+  footer.appendChild(closeButton);
+  footer.appendChild(footerButtons);
+
+  wrapper.appendChild(tip);
+  wrapper.appendChild(title);
+  wrapper.appendChild(description);
+  wrapper.appendChild(footer);
 
   return {
-    popoverWrapper,
-    popoverTip,
-    popoverTitle,
-    popoverDescription,
-    popoverFooter,
-    popoverPrevBtn,
-    popoverNextBtn,
-    popoverCloseBtn,
-    popoverFooterBtnGroup,
+    wrapper,
+    tip,
+    title,
+    description,
+    footer,
+    previousButton,
+    nextButton,
+    closeButton,
+    footerButtons,
   };
 }
 
 export function destroyPopover() {
-  if (!popoverEl) {
+  if (!popover) {
     return;
   }
 
-  popoverEl.parentElement?.removeChild(popoverEl);
-  popoverEl = undefined;
+  popover.wrapper.parentElement?.removeChild(popover.wrapper);
+  popover = undefined;
 }

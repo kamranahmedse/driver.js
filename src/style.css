@@ -39,3 +39,17 @@
   right: 0;
   background-color: #fff;
 }
+
+.driver-popover-tip {
+  content: "";
+  position: absolute;
+  border: 5px solid #fff;
+}
+
+.driver-popover-tip-left {
+  top: 15px;
+  left: 100%;
+  border-right-color: transparent;
+  border-bottom-color: transparent;
+  border-top-color: transparent;
+}
