@@ -50,13 +50,12 @@ function transferHighlight(from: Element, to: Element) {
       transitionStage(elapsed, duration, from, to);
     } else {
       trackActiveElement(to);
-      renderPopover(to);
 
       currentTransitionCallback = undefined;
     }
 
-    refreshStage();
-    refreshPopover();
+    // refreshStage();
+    // refreshPopover();
     window.requestAnimationFrame(animate);
   };
 
@@ -64,6 +63,7 @@ function transferHighlight(from: Element, to: Element) {
   window.requestAnimationFrame(animate);
 
   bringInView(to);
+  renderPopover(to);
 
   from.classList.remove("driver-active-element");
   to.classList.add("driver-active-element");

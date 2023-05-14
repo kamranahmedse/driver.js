@@ -1,4 +1,4 @@
-import { Popover } from "./popover";
+import { destroyPopover, Popover } from "./popover";
 import { destroyStage } from "./stage";
 import { destroyEvents, initEvents } from "./events";
 import { Config, configure, getConfig } from "./config";
@@ -52,6 +52,7 @@ export function driver(options: Config = {}) {
     );
 
     destroyEvents();
+    destroyPopover();
     destroyHighlight();
     destroyStage();
     destroyEmitter();

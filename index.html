@@ -285,6 +285,12 @@ npm install driver.js</pre
         .addEventListener("click", () => {
           driver({ animate: false }).highlight({
             element: "#large-paragraph-text",
+            popover: {
+              title: "driver.js",
+              description: "Highlight anything, anywhere on the page",
+              align: "end",
+              preferredPosition: "top",
+            },
           });
         });
 
