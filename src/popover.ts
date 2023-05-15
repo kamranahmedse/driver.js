@@ -64,20 +64,46 @@ function calculatePopoverPosition(element: Element) {
   const popoverArrowDimensions = popover.arrow.getBoundingClientRect();
   const elementDimensions = element.getBoundingClientRect();
 
-  const popoverWidth = popoverDimensions.width + popoverPadding;
-  const popoverHeight = popoverDimensions.height + popoverPadding;
+  const popoverPaddedWidth = popoverDimensions.width + popoverPadding;
+  const popoverPaddedHeight = popoverDimensions.height + popoverPadding;
 
-  const topValue = elementDimensions.top - popoverHeight;
+  const topValue = elementDimensions.top - popoverPaddedHeight;
   const isTopOptimal = topValue >= 0;
 
-  const bottomValue = window.innerHeight - (elementDimensions.bottom + popoverHeight);
+  const bottomValue = window.innerHeight - (elementDimensions.bottom + popoverPaddedHeight);
   const isBottomOptimal = bottomValue >= 0;
 
-  const leftValue = elementDimensions.left - popoverWidth;
+  const leftValue = elementDimensions.left - popoverPaddedWidth;
   const isLeftOptimal = leftValue >= 0;
 
-  const rightValue = window.innerWidth - (elementDimensions.right + popoverWidth);
+  const rightValue = window.innerWidth - (elementDimensions.right + popoverPaddedWidth);
   const isRightOptimal = rightValue >= 0;
+
+  const noneOptimal = !isTopOptimal && !isBottomOptimal && !isLeftOptimal && !isRightOptimal;
+  if (noneOptimal) {
+    return {
+      left: window.innerWidth / 2 - popoverDimensions.width / 2,
+      bottom: 10,
+    };
+  }
+
+  // @todo placement based on the side and alignment
+}
+
+function getLeftValueAfterAlignment(element: Element) {
+  if (!popover) {
+    return;
+  }
+
+  const popoverRect = popover.wrapper.getBoundingClientRect();
+  const elementRect = element.getBoundingClientRect();
+
+  const requiredAlignment = 'left';
+  const popoverWidth = popoverRect.width;
+  const pos = element.getBoundingClientRect().left;
+  const end = window.innerWidth;
+  const elementLength = elementRect.width;
+  const extraPadding = popover.arrow.getBoundingClientRect().width;
 }
 
 function createPopover(): PopoverDOM {
