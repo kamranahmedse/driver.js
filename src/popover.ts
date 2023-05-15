@@ -12,7 +12,7 @@ export type Popover = {
 
 type PopoverDOM = {
   wrapper: HTMLElement;
-  tip: HTMLElement;
+  arrow: HTMLElement;
   title: HTMLElement;
   description: HTMLElement;
   footer: HTMLElement;
@@ -47,10 +47,13 @@ export function refreshPopover(element: Element) {
     return;
   }
 
-  const popoverTip = popover.tip;
+  const popoverArrow = popover.arrow;
 
   // const position = calculatePopoverPosition(element);
-  popoverTip?.classList.add("driver-popover-tip-left");
+  popoverArrow?.classList.add(
+    "driver-popover-arrow-side-bottom",
+    "driver-popover-arrow-align-center"
+  );
 }
 
 function calculatePopoverPosition(element: Element) {}
@@ -59,8 +62,8 @@ function createPopover(): PopoverDOM {
   const wrapper = document.createElement("div");
   wrapper.classList.add("driver-popover");
 
-  const tip = document.createElement("div");
-  tip.classList.add("driver-popover-tip");
+  const arrow = document.createElement("div");
+  arrow.classList.add("driver-popover-arrow");
 
   const title = document.createElement("div");
   title.classList.add("driver-popover-title");
@@ -94,14 +97,14 @@ function createPopover(): PopoverDOM {
   footer.appendChild(closeButton);
   footer.appendChild(footerButtons);
 
-  wrapper.appendChild(tip);
+  wrapper.appendChild(arrow);
   wrapper.appendChild(title);
   wrapper.appendChild(description);
   wrapper.appendChild(footer);
 
   return {
     wrapper,
-    tip,
+    arrow,
     title,
     description,
     footer,
