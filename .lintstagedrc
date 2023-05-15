@@ -1,4 +1,0 @@
-{
-  "./**/*.{ts,html,json}": "npm run format:scripts",
-  "./**/*.{css,scss}": "npm run format:styles"
-}

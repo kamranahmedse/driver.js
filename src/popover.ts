@@ -50,13 +50,35 @@ export function refreshPopover(element: Element) {
   const popoverArrow = popover.arrow;
 
   // const position = calculatePopoverPosition(element);
-  popoverArrow?.classList.add(
-    "driver-popover-arrow-side-bottom",
-    "driver-popover-arrow-align-center"
-  );
+  popoverArrow?.classList.add("driver-popover-arrow-side-bottom", "driver-popover-arrow-align-center");
 }
 
-function calculatePopoverPosition(element: Element) {}
+function calculatePopoverPosition(element: Element) {
+  if (!popover) {
+    return;
+  }
+
+  const popoverPadding = 10;
+
+  const popoverDimensions = popover.wrapper.getBoundingClientRect();
+  const popoverArrowDimensions = popover.arrow.getBoundingClientRect();
+  const elementDimensions = element.getBoundingClientRect();
+
+  const popoverWidth = popoverDimensions.width + popoverPadding;
+  const popoverHeight = popoverDimensions.height + popoverPadding;
+
+  const topValue = elementDimensions.top - popoverHeight;
+  const isTopOptimal = topValue >= 0;
+
+  const bottomValue = window.innerHeight - (elementDimensions.bottom + popoverHeight);
+  const isBottomOptimal = bottomValue >= 0;
+
+  const leftValue = elementDimensions.left - popoverWidth;
+  const isLeftOptimal = leftValue >= 0;
+
+  const rightValue = window.innerWidth - (elementDimensions.right + popoverWidth);
+  const isRightOptimal = rightValue >= 0;
+}
 
 function createPopover(): PopoverDOM {
   const wrapper = document.createElement("div");
