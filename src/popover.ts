@@ -101,11 +101,7 @@ export function repositionPopover(element: Element) {
     popover.wrapper.style.top = `auto`;
 
     popover.arrow.classList.add("driver-popover-arrow-none");
-
-    return;
-  }
-
-  if (isTopOptimal) {
+  } else if (isTopOptimal) {
     const topToSet = Math.min(topValue, window.innerHeight - popoverDimensions.height - popoverArrowDimensions.width);
 
     let leftToSet = 0;
@@ -118,8 +114,6 @@ export function repositionPopover(element: Element) {
         ),
         popoverArrowDimensions.width
       );
-
-      popover.arrow.classList.add("driver-popover-arrow-side-top", "driver-popover-arrow-align-start");
     } else if (requiredAlignment === "end") {
       leftToSet = Math.max(
         Math.min(
@@ -128,16 +122,24 @@ export function repositionPopover(element: Element) {
         ),
         popoverArrowDimensions.width
       );
-      popover.arrow.classList.add("driver-popover-arrow-side-top", "driver-popover-arrow-align-end");
     }
 
-    // popover.arrow.classList.add("driver-popover-arrow-bottom");
 
     popover.wrapper.style.top = `${topToSet}px`;
     popover.wrapper.style.left = `${leftToSet}px`;
     popover.wrapper.style.bottom = `auto`;
     popover.wrapper.style.right = "auto";
+  } else if (isBottomOptimal) {
+    // @todo - handle bottom rendering
   }
+
+  // We need to check which position we end up rendering the popover at
+  // to be able to assign the proper arrow class
+  renderPopoverArrow();
+}
+
+function renderPopoverArrow() {
+  // @todo
 }
 
 function createPopover(): PopoverDOM {
