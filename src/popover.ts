@@ -114,10 +114,21 @@ export function repositionPopover(element: Element) {
       leftToSet = Math.max(
         Math.min(
           elementDimensions.left - popoverPadding,
-          window.innerWidth - popoverDimensions.width - popoverArrowDimensions.width
+          window.innerWidth - popoverDimensions!.realWidth - popoverArrowDimensions.width
         ),
         popoverArrowDimensions.width
       );
+
+      popover.arrow.classList.add("driver-popover-arrow-side-top", "driver-popover-arrow-align-start");
+    } else if (requiredAlignment === "end") {
+      leftToSet = Math.max(
+        Math.min(
+          elementDimensions.left - popoverDimensions?.realWidth + elementDimensions.width + popoverPadding,
+          window.innerWidth - popoverDimensions?.realWidth - popoverArrowDimensions.width
+        ),
+        popoverArrowDimensions.width
+      );
+      popover.arrow.classList.add("driver-popover-arrow-side-top", "driver-popover-arrow-align-end");
     }
 
     // popover.arrow.classList.add("driver-popover-arrow-bottom");
