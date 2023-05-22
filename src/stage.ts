@@ -3,6 +3,9 @@ import { onDriverClick } from "./events";
 import { emit } from "./emitter";
 import { getConfig } from "./config";
 
+export const STAGE_PADDING = 10;
+export const STAGE_RADIUS = 5;
+
 export type StageDefinition = {
   x: number;
   y: number;
@@ -15,45 +18,18 @@ let stageSvg: SVGSVGElement | undefined;
 
 // This method calculates the animated new position of the
 // stage (called for each frame by requestAnimationFrame)
-export function transitionStage(
-  elapsed: number,
-  duration: number,
-  from: Element,
-  to: Element
-) {
-  const fromDefinition = activeStagePosition
-    ? activeStagePosition
-    : from.getBoundingClientRect();
+export function transitionStage(elapsed: number, duration: number, from: Element, to: Element) {
+  const fromDefinition = activeStagePosition ? activeStagePosition : from.getBoundingClientRect();
 
   const toDefinition = to.getBoundingClientRect();
 
-  const x = easeInOutQuad(
-    elapsed,
-    fromDefinition.x,
-    toDefinition.x - fromDefinition.x,
-    duration
-  );
+  const x = easeInOutQuad(elapsed, fromDefinition.x, toDefinition.x - fromDefinition.x, duration);
 
-  const y = easeInOutQuad(
-    elapsed,
-    fromDefinition.y,
-    toDefinition.y - fromDefinition.y,
-    duration
-  );
+  const y = easeInOutQuad(elapsed, fromDefinition.y, toDefinition.y - fromDefinition.y, duration);
 
-  const width = easeInOutQuad(
-    elapsed,
-    fromDefinition.width,
-    toDefinition.width - fromDefinition.width,
-    duration
-  );
+  const width = easeInOutQuad(elapsed, fromDefinition.width, toDefinition.width - fromDefinition.width, duration);
 
-  const height = easeInOutQuad(
-    elapsed,
-    fromDefinition.height,
-    toDefinition.height - fromDefinition.height,
-    duration
-  );
+  const height = easeInOutQuad(elapsed, fromDefinition.height, toDefinition.height - fromDefinition.height, duration);
 
   activeStagePosition = {
     x,
@@ -151,10 +127,7 @@ function createStageSvg(stage: StageDefinition): SVGSVGElement {
   svg.style.width = "100%";
   svg.style.height = "100%";
 
-  const cutoutPath = document.createElementNS(
-    "http://www.w3.org/2000/svg",
-    "path"
-  );
+  const cutoutPath = document.createElementNS("http://www.w3.org/2000/svg", "path");
 
   cutoutPath.setAttribute("d", generateSvgCutoutPathString(stage));
 
@@ -169,23 +142,20 @@ function createStageSvg(stage: StageDefinition): SVGSVGElement {
 }
 
 function generateSvgCutoutPathString(stage: StageDefinition) {
-  const padding = 4;
-  const radius = 5;
-
   const windowX = window.innerWidth;
   const windowY = window.innerHeight;
 
-  const stageWidth = stage.width + padding * 2;
-  const stageHeight = stage.height + padding * 2;
+  const stageWidth = stage.width + STAGE_PADDING * 2;
+  const stageHeight = stage.height + STAGE_PADDING * 2;
 
   // prevent glitches when stage is too small for radius
-  const limitedRadius = Math.min(radius, stageWidth / 2, stageHeight / 2);
+  const limitedRadius = Math.min(STAGE_RADIUS, stageWidth / 2, stageHeight / 2);
 
   // no value below 0 allowed + round down
   const normalizedRadius = Math.floor(Math.max(limitedRadius, 0));
 
-  const highlightBoxX = stage.x - padding + normalizedRadius;
-  const highlightBoxY = stage.y - padding;
+  const highlightBoxX = stage.x - STAGE_PADDING + normalizedRadius;
+  const highlightBoxY = stage.y - STAGE_PADDING;
   const highlightBoxWidth = stageWidth - normalizedRadius * 2;
   const highlightBoxHeight = stageHeight - normalizedRadius * 2;
 

@@ -1,7 +1,7 @@
 import { DriveStep } from "./driver";
 import { refreshStage, trackActiveElement, transitionStage } from "./stage";
 import { getConfig } from "./config";
-import { refreshPopover, renderPopover } from "./popover";
+import { repositionPopover, renderPopover } from "./popover";
 import { bringInView } from "./utils";
 
 let previousHighlight: Element | undefined;

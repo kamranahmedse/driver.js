@@ -116,3 +116,8 @@
   left: 50%;
   margin-left: -5px;
 }
+
+/* No arrow */
+.driver-popover-arrow-none {
+  display: none;
+}

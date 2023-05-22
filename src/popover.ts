@@ -1,7 +1,10 @@
 import { bringInView } from "./utils";
+import { STAGE_PADDING } from "./stage";
 
 export type Side = "top" | "right" | "bottom" | "left";
 export type Alignment = "start" | "center" | "end";
+
+const POPOVER_OFFSET = 10;
 
 export type Popover = {
   title?: string;
@@ -30,80 +33,100 @@ export function renderPopover(element: Element) {
     document.body.appendChild(popover.wrapper);
   }
 
+  // Reset the popover position
   const popoverWrapper = popover.wrapper;
-
   popoverWrapper.style.display = "block";
-  popoverWrapper.style.left = "0";
-  popoverWrapper.style.top = "0";
+  popoverWrapper.style.left = "";
+  popoverWrapper.style.top = "";
   popoverWrapper.style.bottom = "";
   popoverWrapper.style.right = "";
 
-  refreshPopover(element);
+  // Reset the classes responsible for the arrow position
+  const popoverArrow = popover.arrow;
+  popoverArrow.className = "driver-popover-arrow";
+
+  repositionPopover(element);
   bringInView(popoverWrapper);
 }
 
-export function refreshPopover(element: Element) {
-  if (!popover) {
+function getPopoverDimensions() {
+  if (!popover?.wrapper) {
     return;
   }
 
-  const popoverArrow = popover.arrow;
+  const boundingClientRect = popover.wrapper.getBoundingClientRect();
 
-  // const position = calculatePopoverPosition(element);
-  popoverArrow?.classList.add("driver-popover-arrow-side-bottom", "driver-popover-arrow-align-center");
+  return {
+    width: boundingClientRect.width + STAGE_PADDING + POPOVER_OFFSET,
+    height: boundingClientRect.height + STAGE_PADDING + POPOVER_OFFSET,
+
+    realWidth: boundingClientRect.width,
+    realHeight: boundingClientRect.height,
+  };
 }
 
-function calculatePopoverPosition(element: Element) {
+export function repositionPopover(element: Element) {
   if (!popover) {
     return;
   }
 
-  const popoverPadding = 10;
+  const requiredAlignment: Alignment = "start";
+  const popoverPadding = STAGE_PADDING;
 
-  const popoverDimensions = popover.wrapper.getBoundingClientRect();
+  const popoverDimensions = getPopoverDimensions();
   const popoverArrowDimensions = popover.arrow.getBoundingClientRect();
   const elementDimensions = element.getBoundingClientRect();
 
-  const popoverPaddedWidth = popoverDimensions.width + popoverPadding;
-  const popoverPaddedHeight = popoverDimensions.height + popoverPadding;
-
-  const topValue = elementDimensions.top - popoverPaddedHeight;
+  const topValue = elementDimensions.top - popoverDimensions!.height;
   const isTopOptimal = topValue >= 0;
 
-  const bottomValue = window.innerHeight - (elementDimensions.bottom + popoverPaddedHeight);
+  const bottomValue = window.innerHeight - (elementDimensions.bottom + popoverDimensions!.height);
   const isBottomOptimal = bottomValue >= 0;
 
-  const leftValue = elementDimensions.left - popoverPaddedWidth;
+  const leftValue = elementDimensions.left - popoverDimensions!.width;
   const isLeftOptimal = leftValue >= 0;
 
-  const rightValue = window.innerWidth - (elementDimensions.right + popoverPaddedWidth);
+  const rightValue = window.innerWidth - (elementDimensions.right + popoverDimensions!.width);
   const isRightOptimal = rightValue >= 0;
 
   const noneOptimal = !isTopOptimal && !isBottomOptimal && !isLeftOptimal && !isRightOptimal;
+
   if (noneOptimal) {
-    return {
-      left: window.innerWidth / 2 - popoverDimensions.width / 2,
-      bottom: 10,
-    };
-  }
+    const leftValue = window.innerWidth / 2 - popoverDimensions?.realWidth! / 2;
+    const bottomValue = 10;
 
-  // @todo placement based on the side and alignment
-}
+    popover.wrapper.style.left = `${leftValue}px`;
+    popover.wrapper.style.right = `auto`;
+    popover.wrapper.style.bottom = `${bottomValue}px`;
+    popover.wrapper.style.top = `auto`;
 
-function getLeftValueAfterAlignment(element: Element) {
-  if (!popover) {
+    popover.arrow.classList.add("driver-popover-arrow-none");
+
     return;
   }
 
-  const popoverRect = popover.wrapper.getBoundingClientRect();
-  const elementRect = element.getBoundingClientRect();
+  if (isTopOptimal) {
+    const topToSet = Math.min(topValue, window.innerHeight - popoverDimensions.height - popoverArrowDimensions.width);
 
-  const requiredAlignment = 'left';
-  const popoverWidth = popoverRect.width;
-  const pos = element.getBoundingClientRect().left;
-  const end = window.innerWidth;
-  const elementLength = elementRect.width;
-  const extraPadding = popover.arrow.getBoundingClientRect().width;
+    let leftToSet = 0;
+
+    if (requiredAlignment === "start") {
+      leftToSet = Math.max(
+        Math.min(
+          elementDimensions.left - popoverPadding,
+          window.innerWidth - popoverDimensions.width - popoverArrowDimensions.width
+        ),
+        popoverArrowDimensions.width
+      );
+    }
+
+    // popover.arrow.classList.add("driver-popover-arrow-bottom");
+
+    popover.wrapper.style.top = `${topToSet}px`;
+    popover.wrapper.style.left = `${leftToSet}px`;
+    popover.wrapper.style.bottom = `auto`;
+    popover.wrapper.style.right = "auto";
+  }
 }
 
 function createPopover(): PopoverDOM {
@@ -119,7 +142,7 @@ function createPopover(): PopoverDOM {
 
   const description = document.createElement("div");
   description.classList.add("driver-popover-description");
-  description.innerText = "Popover Description";
+  description.innerText = "Popover description is here";
 
   const footer = document.createElement("div");
   footer.classList.add("driver-popover-footer");
