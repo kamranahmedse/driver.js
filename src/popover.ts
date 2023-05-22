@@ -65,6 +65,50 @@ function getPopoverDimensions() {
   };
 }
 
+function calculatePopoverPositionForLeftRight(
+  alignment: Alignment,
+  config: {
+    elementDimensions: DOMRect;
+    popoverDimensions?: ReturnType<typeof getPopoverDimensions>;
+    popoverPadding: number;
+    popoverArrowDimensions: { width: number; height: number };
+  }
+): number {
+  const { elementDimensions, popoverDimensions, popoverPadding, popoverArrowDimensions } = config;
+
+  if (alignment === "start") {
+    return Math.max(
+      Math.min(
+        elementDimensions.top - popoverPadding,
+        window.innerHeight - popoverDimensions!.realHeight - popoverArrowDimensions.width
+      ),
+      popoverArrowDimensions.width
+    );
+  }
+
+  if (alignment === "end") {
+    return Math.max(
+      Math.min(
+        elementDimensions.top - popoverDimensions?.realHeight + elementDimensions.height + popoverPadding,
+        window.innerHeight - popoverDimensions?.realHeight - popoverArrowDimensions.width
+      ),
+      popoverArrowDimensions.width
+    );
+  }
+
+  if (alignment === "center") {
+    return Math.max(
+      Math.min(
+        elementDimensions.top + elementDimensions.height / 2 - popoverDimensions?.realHeight / 2,
+        window.innerHeight - popoverDimensions?.realHeight - popoverArrowDimensions.width
+      ),
+      popoverArrowDimensions.width
+    );
+  }
+
+  return 0;
+}
+
 // Calculate the left placement for top and bottom sides
 function calculateLeftForTopBottom(
   alignment: Alignment,
@@ -146,8 +190,44 @@ export function repositionPopover(element: Element) {
     popover.wrapper.style.top = `auto`;
 
     popover.arrow.classList.add("driver-popover-arrow-none");
+  } else if (isLeftOptimal) {
+    const leftToSet = Math.min(
+      leftValue,
+      window.innerWidth - popoverDimensions?.realWidth - popoverArrowDimensions.width
+    );
+
+    const topToSet = calculatePopoverPositionForLeftRight(requiredAlignment, {
+      elementDimensions,
+      popoverDimensions,
+      popoverPadding,
+      popoverArrowDimensions,
+    });
+
+    popover.wrapper.style.left = `${leftToSet}px`;
+    popover.wrapper.style.top = `${topToSet}px`;
+    popover.wrapper.style.bottom = `auto`;
+    popover.wrapper.style.right = "auto";
+  } else if (isRightOptimal) {
+    const rightToSet = Math.min(
+      rightValue,
+      window.innerWidth - popoverDimensions?.realWidth - popoverArrowDimensions.width
+    );
+    const topToSet = calculatePopoverPositionForLeftRight(requiredAlignment, {
+      elementDimensions,
+      popoverDimensions,
+      popoverPadding,
+      popoverArrowDimensions,
+    });
+
+    popover.wrapper.style.right = `${rightToSet}px`;
+    popover.wrapper.style.top = `${topToSet}px`;
+    popover.wrapper.style.bottom = `auto`;
+    popover.wrapper.style.left = "auto";
   } else if (isTopOptimal) {
-    const topToSet = Math.min(topValue, window.innerHeight - popoverDimensions!.realHeight - popoverArrowDimensions.width);
+    const topToSet = Math.min(
+      topValue,
+      window.innerHeight - popoverDimensions!.realHeight - popoverArrowDimensions.width
+    );
     let leftToSet = calculateLeftForTopBottom(requiredAlignment, {
       elementDimensions,
       popoverDimensions,
