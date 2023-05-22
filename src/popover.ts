@@ -65,6 +65,51 @@ function getPopoverDimensions() {
   };
 }
 
+// Calculate the left placement for top and bottom sides
+function calculateLeftForTopBottom(
+  alignment: Alignment,
+  config: {
+    elementDimensions: DOMRect;
+    popoverDimensions?: ReturnType<typeof getPopoverDimensions>;
+    popoverPadding: number;
+    popoverArrowDimensions: { width: number; height: number };
+  }
+): number {
+  const { elementDimensions, popoverDimensions, popoverPadding, popoverArrowDimensions } = config;
+
+  if (alignment === "start") {
+    return Math.max(
+      Math.min(
+        elementDimensions.left - popoverPadding,
+        window.innerWidth - popoverDimensions!.realWidth - popoverArrowDimensions.width
+      ),
+      popoverArrowDimensions.width
+    );
+  }
+
+  if (alignment === "end") {
+    return Math.max(
+      Math.min(
+        elementDimensions.left - popoverDimensions?.realWidth + elementDimensions.width + popoverPadding,
+        window.innerWidth - popoverDimensions?.realWidth - popoverArrowDimensions.width
+      ),
+      popoverArrowDimensions.width
+    );
+  }
+
+  if (alignment === "center") {
+    return Math.max(
+      Math.min(
+        elementDimensions.left + elementDimensions.width / 2 - popoverDimensions?.realWidth / 2,
+        window.innerWidth - popoverDimensions?.realWidth - popoverArrowDimensions.width
+      ),
+      popoverArrowDimensions.width
+    );
+  }
+
+  return 0;
+}
+
 export function repositionPopover(element: Element) {
   if (!popover) {
     return;
@@ -102,35 +147,35 @@ export function repositionPopover(element: Element) {
 
     popover.arrow.classList.add("driver-popover-arrow-none");
   } else if (isTopOptimal) {
-    const topToSet = Math.min(topValue, window.innerHeight - popoverDimensions.height - popoverArrowDimensions.width);
-
-    let leftToSet = 0;
-
-    if (requiredAlignment === "start") {
-      leftToSet = Math.max(
-        Math.min(
-          elementDimensions.left - popoverPadding,
-          window.innerWidth - popoverDimensions!.realWidth - popoverArrowDimensions.width
-        ),
-        popoverArrowDimensions.width
-      );
-    } else if (requiredAlignment === "end") {
-      leftToSet = Math.max(
-        Math.min(
-          elementDimensions.left - popoverDimensions?.realWidth + elementDimensions.width + popoverPadding,
-          window.innerWidth - popoverDimensions?.realWidth - popoverArrowDimensions.width
-        ),
-        popoverArrowDimensions.width
-      );
-    }
-
+    const topToSet = Math.min(topValue, window.innerHeight - popoverDimensions!.height - popoverArrowDimensions.width);
+    let leftToSet = calculateLeftForTopBottom(requiredAlignment, {
+      elementDimensions,
+      popoverDimensions,
+      popoverPadding,
+      popoverArrowDimensions,
+    });
 
     popover.wrapper.style.top = `${topToSet}px`;
     popover.wrapper.style.left = `${leftToSet}px`;
     popover.wrapper.style.bottom = `auto`;
     popover.wrapper.style.right = "auto";
   } else if (isBottomOptimal) {
-    // @todo - handle bottom rendering
+    const bottomToSet = Math.min(
+      bottomValue,
+      window.innerHeight - popoverDimensions?.realHeight - popoverArrowDimensions.width
+    );
+
+    let leftToSet = calculateLeftForTopBottom(requiredAlignment, {
+      elementDimensions,
+      popoverDimensions,
+      popoverPadding,
+      popoverArrowDimensions,
+    });
+
+    popover.wrapper.style.left = `${leftToSet}px`;
+    popover.wrapper.style.bottom = `${bottomToSet}px`;
+    popover.wrapper.style.top = `auto`;
+    popover.wrapper.style.right = "auto";
   }
 
   // We need to check which position we end up rendering the popover at
