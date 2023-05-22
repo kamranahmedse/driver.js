@@ -147,7 +147,7 @@ export function repositionPopover(element: Element) {
 
     popover.arrow.classList.add("driver-popover-arrow-none");
   } else if (isTopOptimal) {
-    const topToSet = Math.min(topValue, window.innerHeight - popoverDimensions!.height - popoverArrowDimensions.width);
+    const topToSet = Math.min(topValue, window.innerHeight - popoverDimensions!.realHeight - popoverArrowDimensions.width);
     let leftToSet = calculateLeftForTopBottom(requiredAlignment, {
       elementDimensions,
       popoverDimensions,
