@@ -30,6 +30,7 @@ export function refreshActiveHighlight() {
 
   trackActiveElement(activeHighlight);
   refreshStage();
+  repositionPopover(activeHighlight);
 }
 
 function transferHighlight(from: Element, to: Element) {

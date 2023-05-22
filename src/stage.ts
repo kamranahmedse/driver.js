@@ -89,6 +89,7 @@ function mountStage(stagePosition: StageDefinition) {
 }
 
 function renderStage(stagePosition: StageDefinition) {
+  // TODO: cancel rendering if element is not visible
   if (!stageSvg) {
     mountStage(stagePosition);
 
