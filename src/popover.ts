@@ -65,7 +65,7 @@ function getPopoverDimensions() {
   };
 }
 
-function calculatePopoverPositionForLeftRight(
+function calculateTopForLeftRight(
   alignment: Alignment,
   config: {
     elementDimensions: DOMRect;
@@ -161,6 +161,7 @@ export function repositionPopover(element: Element) {
 
   // Configure the popover positioning
   const requiredAlignment: Alignment = "start";
+  const requiredSide: Side = "left";
   const popoverPadding = STAGE_PADDING;
 
   const popoverDimensions = getPopoverDimensions();
@@ -168,19 +169,29 @@ export function repositionPopover(element: Element) {
   const elementDimensions = element.getBoundingClientRect();
 
   const topValue = elementDimensions.top - popoverDimensions!.height;
-  const isTopOptimal = topValue >= 0;
+  let isTopOptimal = topValue >= 0;
 
   const bottomValue = window.innerHeight - (elementDimensions.bottom + popoverDimensions!.height);
-  const isBottomOptimal = bottomValue >= 0;
+  let isBottomOptimal = bottomValue >= 0;
 
   const leftValue = elementDimensions.left - popoverDimensions!.width;
-  const isLeftOptimal = leftValue >= 0;
+  let isLeftOptimal = leftValue >= 0;
 
   const rightValue = window.innerWidth - (elementDimensions.right + popoverDimensions!.width);
-  const isRightOptimal = rightValue >= 0;
+  let isRightOptimal = rightValue >= 0;
 
   const noneOptimal = !isTopOptimal && !isBottomOptimal && !isLeftOptimal && !isRightOptimal;
   let popoverRenderedSide: Side;
+
+  if (requiredSide === "top" && isTopOptimal) {
+    isRightOptimal = isLeftOptimal = isBottomOptimal = false;
+  } else if (requiredSide === "bottom" && isBottomOptimal) {
+    isRightOptimal = isLeftOptimal = isTopOptimal = false;
+  } else if (requiredSide === "left" && isLeftOptimal) {
+    isRightOptimal = isTopOptimal = isBottomOptimal = false;
+  } else if (requiredSide === "right" && isRightOptimal) {
+    isLeftOptimal = isTopOptimal = isBottomOptimal = false;
+  }
 
   if (noneOptimal) {
     const leftValue = window.innerWidth / 2 - popoverDimensions?.realWidth! / 2;
@@ -196,7 +207,7 @@ export function repositionPopover(element: Element) {
       window.innerWidth - popoverDimensions?.realWidth - popoverArrowDimensions.width
     );
 
-    const topToSet = calculatePopoverPositionForLeftRight(requiredAlignment, {
+    const topToSet = calculateTopForLeftRight(requiredAlignment, {
       elementDimensions,
       popoverDimensions,
       popoverPadding,
@@ -214,7 +225,7 @@ export function repositionPopover(element: Element) {
       rightValue,
       window.innerWidth - popoverDimensions?.realWidth - popoverArrowDimensions.width
     );
-    const topToSet = calculatePopoverPositionForLeftRight(requiredAlignment, {
+    const topToSet = calculateTopForLeftRight(requiredAlignment, {
       elementDimensions,
       popoverDimensions,
       popoverPadding,
