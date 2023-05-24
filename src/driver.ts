@@ -26,7 +26,6 @@ export function driver(options: Config = {}) {
   }
 
   function init() {
-    // Avoid multiple initialization
     if (isInitialized) {
       return;
     }
@@ -58,6 +57,7 @@ export function driver(options: Config = {}) {
     destroyEmitter();
   }
 
+  // @todo make popover selectable
   return {
     drive: (steps: DriveStep[]) => console.log(steps),
     highlight: (step: DriveStep) => {
