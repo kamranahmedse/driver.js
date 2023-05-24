@@ -1,5 +1,6 @@
 import { bringInView } from "./utils";
 import { STAGE_PADDING } from "./stage";
+import { getConfig } from "./config";
 
 export type Side = "top" | "right" | "bottom" | "left";
 export type Alignment = "start" | "center" | "end";
@@ -26,6 +27,14 @@ type PopoverDOM = {
 };
 
 let popover: PopoverDOM | undefined;
+
+export function hidePopover() {
+  if (!popover) {
+    return;
+  }
+
+  popover.wrapper.style.display = "none";
+}
 
 export function renderPopover(element: Element) {
   if (!popover) {

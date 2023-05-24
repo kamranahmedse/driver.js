@@ -25,6 +25,10 @@
   animation: animate-fade-in 100ms ease-in-out;
 }
 
+.driver-fade .driver-popover {
+  animation: animate-fade-in 100ms;
+}
+
 /* Popover styles */
 .driver-popover {
   color: #2d2d2d;

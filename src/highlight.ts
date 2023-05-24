@@ -1,7 +1,7 @@
 import { DriveStep } from "./driver";
 import { refreshStage, trackActiveElement, transitionStage } from "./stage";
 import { getConfig } from "./config";
-import { repositionPopover, renderPopover } from "./popover";
+import { repositionPopover, renderPopover, hidePopover } from "./popover";
 import { bringInView } from "./utils";
 
 let previousHighlight: Element | undefined;
@@ -37,6 +37,13 @@ function transferHighlight(from: Element, to: Element) {
   const duration = 400;
   const start = Date.now();
 
+  // If it's the first time we're highlighting an element, we show
+  // the popover immediately. Otherwise, we wait for the animation
+  // to finish before showing the popover.
+  const hasDelayedPopover = !from || from !== to;
+
+  hidePopover();
+
   const animate = () => {
     // This makes sure that the repeated calls to transferHighlight
     // don't interfere with each other. Only the last call will be
@@ -52,11 +59,13 @@ function transferHighlight(from: Element, to: Element) {
     } else {
       trackActiveElement(to);
 
+      if (hasDelayedPopover) {
+        renderPopover(to);
+      }
+
       currentTransitionCallback = undefined;
     }
 
-    // refreshStage();
-    // refreshPopover();
     window.requestAnimationFrame(animate);
   };
 
@@ -64,7 +73,9 @@ function transferHighlight(from: Element, to: Element) {
   window.requestAnimationFrame(animate);
 
   bringInView(to);
-  renderPopover(to);
+  if (!hasDelayedPopover) {
+    renderPopover(to);
+  }
 
   from.classList.remove("driver-active-element");
   to.classList.add("driver-active-element");
