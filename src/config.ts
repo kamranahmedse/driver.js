@@ -3,6 +3,8 @@ export type Config = {
   smoothScroll?: boolean;
   allowClose?: boolean;
   opacity?: number;
+  stagePadding?: number;
+  stageRadius?: number;
 };
 
 let currentConfig: Config = {};
@@ -13,6 +15,8 @@ export function configure(config: Config = {}) {
     allowClose: true,
     opacity: 0.7,
     smoothScroll: false,
+    stagePadding: 10,
+    stageRadius: 5,
     ...config,
   };
 }

@@ -8,13 +8,34 @@ let previousHighlight: Element | undefined;
 let activeHighlight: Element | undefined;
 let currentTransitionCallback: undefined | (() => void);
 
+function mountDummyElement(): Element {
+  const existingDummy = document.getElementById("driver-dummy-element");
+  if (existingDummy) {
+    return existingDummy;
+  }
+
+  let element = document.createElement("div");
+
+  element.id = "driver-dummy-element";
+  element.style.width = "0";
+  element.style.height = "0";
+  element.style.pointerEvents = "none";
+  element.style.opacity = "0";
+  element.style.position = "fixed";
+  element.style.top = "50%";
+  element.style.left = "50%";
+
+  document.body.appendChild(element);
+
+  return element;
+}
+
 export function highlight(step: DriveStep) {
   const { element } = step;
-  const elemObj =
-    typeof element === "string" ? document.querySelector(element) : element;
+  let elemObj = typeof element === "string" ? document.querySelector(element) : element;
 
   if (!elemObj) {
-    return;
+    elemObj = mountDummyElement();
   }
 
   previousHighlight = activeHighlight;
@@ -86,6 +107,7 @@ export function destroyHighlight() {
   currentTransitionCallback = undefined;
   previousHighlight = undefined;
   activeHighlight = undefined;
+  document.getElementById("driver-dummy-element")?.remove();
 
   document.querySelectorAll(".driver-active-element").forEach(element => {
     element.classList.remove("driver-active-element");

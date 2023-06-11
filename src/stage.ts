@@ -3,9 +3,6 @@ import { onDriverClick } from "./events";
 import { emit } from "./emitter";
 import { getConfig } from "./config";
 
-export const STAGE_PADDING = 10;
-export const STAGE_RADIUS = 5;
-
 export type StageDefinition = {
   x: number;
   y: number;
@@ -24,11 +21,8 @@ export function transitionStage(elapsed: number, duration: number, from: Element
   const toDefinition = to.getBoundingClientRect();
 
   const x = easeInOutQuad(elapsed, fromDefinition.x, toDefinition.x - fromDefinition.x, duration);
-
   const y = easeInOutQuad(elapsed, fromDefinition.y, toDefinition.y - fromDefinition.y, duration);
-
   const width = easeInOutQuad(elapsed, fromDefinition.width, toDefinition.width - fromDefinition.width, duration);
-
   const height = easeInOutQuad(elapsed, fromDefinition.height, toDefinition.height - fromDefinition.height, duration);
 
   activeStagePosition = {
@@ -146,17 +140,20 @@ function generateSvgCutoutPathString(stage: StageDefinition) {
   const windowX = window.innerWidth;
   const windowY = window.innerHeight;
 
-  const stageWidth = stage.width + STAGE_PADDING * 2;
-  const stageHeight = stage.height + STAGE_PADDING * 2;
+  const stagePadding = getConfig('stagePadding') || 0;
+  const stageRadius = getConfig('stageRadius') || 0;
+
+  const stageWidth = stage.width + stagePadding * 2;
+  const stageHeight = stage.height + stagePadding * 2;
 
   // prevent glitches when stage is too small for radius
-  const limitedRadius = Math.min(STAGE_RADIUS, stageWidth / 2, stageHeight / 2);
+  const limitedRadius = Math.min(stageRadius, stageWidth / 2, stageHeight / 2);
 
   // no value below 0 allowed + round down
   const normalizedRadius = Math.floor(Math.max(limitedRadius, 0));
 
-  const highlightBoxX = stage.x - STAGE_PADDING + normalizedRadius;
-  const highlightBoxY = stage.y - STAGE_PADDING;
+  const highlightBoxX = stage.x - stagePadding + normalizedRadius;
+  const highlightBoxY = stage.y - stagePadding;
   const highlightBoxWidth = stageWidth - normalizedRadius * 2;
   const highlightBoxHeight = stageHeight - normalizedRadius * 2;
 

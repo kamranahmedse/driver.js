@@ -1,5 +1,5 @@
 import { bringInView } from "./utils";
-import { STAGE_PADDING } from "./stage";
+import { getConfig } from "./config";
 
 export type Side = "top" | "right" | "bottom" | "left";
 export type Alignment = "start" | "center" | "end";
@@ -62,7 +62,7 @@ type PopoverDimensions = {
   height: number;
   realWidth: number;
   realHeight: number;
-}
+};
 
 function getPopoverDimensions(): PopoverDimensions | undefined {
   if (!popover?.wrapper) {
@@ -70,10 +70,11 @@ function getPopoverDimensions(): PopoverDimensions | undefined {
   }
 
   const boundingClientRect = popover.wrapper.getBoundingClientRect();
+  const stagePadding = getConfig("stagePadding") || 0;
 
   return {
-    width: boundingClientRect.width + STAGE_PADDING + POPOVER_OFFSET,
-    height: boundingClientRect.height + STAGE_PADDING + POPOVER_OFFSET,
+    width: boundingClientRect.width + stagePadding + POPOVER_OFFSET,
+    height: boundingClientRect.height + stagePadding + POPOVER_OFFSET,
 
     realWidth: boundingClientRect.width,
     realHeight: boundingClientRect.height,
@@ -178,7 +179,7 @@ export function repositionPopover(element: Element) {
   // Configure the popover positioning
   const requiredAlignment: Alignment = "start";
   const requiredSide: Side = "left" as Side;
-  const popoverPadding = STAGE_PADDING;
+  const popoverPadding = getConfig('stagePadding') || 0;
 
   const popoverDimensions = getPopoverDimensions()!;
   const popoverArrowDimensions = popover.arrow.getBoundingClientRect();

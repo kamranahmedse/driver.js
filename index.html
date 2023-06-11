@@ -12,8 +12,8 @@
       }
 
       body {
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-          Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans",
+          "Helvetica Neue", sans-serif;
         font-size: 14px;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
@@ -121,7 +121,7 @@
         <button id="dim-highlight-btn">Super Dim Highlight</button>
         <button id="scrollable-area-btn">Scrollable Area</button>
         <button id="inner-scroll-area-btn">Inner Scroll Area</button>
-        <button id="tour-btn">Start Tour</button>
+        <button id="without-element-btn">No Element</button>
         <button id="destroy-btn">Destroy</button>
       </div>
 
@@ -134,19 +134,15 @@
 
       <h2>Yet another Tour Library?</h2>
       <p>
-        No, it is not. Tours are just one of the many use-cases. Driver.js can
-        be used wherever you need some sort of overlay for the page; some common
-        usecases could be: e.g. dimming the background when user is interacting
-        with some component, using it as a focus shifter to bring user's
-        attention to some component on page, or using it to simulate those "Turn
-        off the Lights" widgets that you might have seen on video players
-        online, etc.
+        No, it is not. Tours are just one of the many use-cases. Driver.js can be used wherever you need some sort of
+        overlay for the page; some common usecases could be: e.g. dimming the background when user is interacting with
+        some component, using it as a focus shifter to bring user's attention to some component on page, or using it to
+        simulate those "Turn off the Lights" widgets that you might have seen on video players online, etc.
       </p>
       <p class="second-para">
-        Driver.js is written in Vanilla JS, has zero dependencies and is highly
-        customizable. It has several options allowing you to manipulate how it
-        behaves and also provides you the hooks to manipulate the elements as
-        they are highlighted, about to be highlighted, or deselected.
+        Driver.js is written in Vanilla JS, has zero dependencies and is highly customizable. It has several options
+        allowing you to manipulate how it behaves and also provides you the hooks to manipulate the elements as they are
+        highlighted, about to be highlighted, or deselected.
       </p>
 
       <h2 id="installation-head">Installation</h2>
@@ -157,120 +153,100 @@ yarn add driver.js
 npm install driver.js</pre
       >
 
-      <p>
-        Or include it using CDN — put the version as driver.js@0.5 in the name
-      </p>
+      <p>Or include it using CDN — put the version as driver.js@0.5 in the name</p>
 
       <pre>https://unpkg.com/driver.js/dist/driver.min.js</pre>
 
       <h2>Usage and Demo</h2>
 
       <p id="large-paragraph-text">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi
-        blanditiis consectetur ea eligendi id in inventore ipsa iure laudantium
-        libero, minus molestias necessitatibus nesciunt non omnis, quasi
-        recusandae tempore voluptates! Lorem ipsum dolor sit amet, consectetur
-        adipisicing elit. Animi blanditiis consectetur ea eligendi id in
-        inventore ipsa iure laudantium libero, minus molestias necessitatibus
-        nesciunt non omnis, quasi recusandae tempore voluptates!
-      </p>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi
-        blanditiis consectetur ea eligendi id in inventore ipsa iure laudantium
-        libero, minus molestias necessitatibus nesciunt non omnis, quasi
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi blanditiis consectetur ea eligendi id in
+        inventore ipsa iure laudantium libero, minus molestias necessitatibus nesciunt non omnis, quasi recusandae
+        tempore voluptates! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi blanditiis consectetur ea
+        eligendi id in inventore ipsa iure laudantium libero, minus molestias necessitatibus nesciunt non omnis, quasi
         recusandae tempore voluptates!
       </p>
       <p>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi
-        blanditiis consectetur ea eligendi id in inventore ipsa iure laudantium
-        libero, minus molestias necessitatibus nesciunt non omnis, quasi
-        recusandae tempore voluptates!
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi blanditiis consectetur ea eligendi id in
+        inventore ipsa iure laudantium libero, minus molestias necessitatibus nesciunt non omnis, quasi recusandae
+        tempore voluptates!
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi blanditiis consectetur ea eligendi id in
+        inventore ipsa iure laudantium libero, minus molestias necessitatibus nesciunt non omnis, quasi recusandae
+        tempore voluptates!
       </p>
       <div id="scrollable-area">
         <p>
-          First -> Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-          Consequuntur dicta ipsum labore quod tempora ullam? Alias consequatur
-          doloremque laborum maxime necessitatibus nostrum odio, officiis
-          quibusdam veniam! Doloribus eos id quaerat.
+          First -> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur dicta ipsum labore quod
+          tempora ullam? Alias consequatur doloremque laborum maxime necessitatibus nostrum odio, officiis quibusdam
+          veniam! Doloribus eos id quaerat.
         </p>
         <p>
-          Second -> Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-          Consequuntur dicta ipsum labore quod tempora ullam? Alias consequatur
-          doloremque laborum maxime necessitatibus nostrum odio, officiis
-          quibusdam veniam! Doloribus eos id quaerat.
+          Second -> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur dicta ipsum labore quod
+          tempora ullam? Alias consequatur doloremque laborum maxime necessitatibus nostrum odio, officiis quibusdam
+          veniam! Doloribus eos id quaerat.
         </p>
         <p id="third-scroll-paragraph">
-          Third -> Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-          Consequuntur dicta ipsum labore quod tempora ullam? Alias consequatur
-          doloremque laborum maxime necessitatibus nostrum odio, officiis
-          quibusdam veniam! Doloribus eos id quaerat.
+          Third -> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur dicta ipsum labore quod
+          tempora ullam? Alias consequatur doloremque laborum maxime necessitatibus nostrum odio, officiis quibusdam
+          veniam! Doloribus eos id quaerat.
         </p>
         <p>
-          Fourth -> Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-          Consequuntur dicta ipsum labore quod tempora ullam? Alias consequatur
-          doloremque laborum maxime necessitatibus nostrum odio, officiis
-          quibusdam veniam! Doloribus eos id quaerat.
+          Fourth -> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur dicta ipsum labore quod
+          tempora ullam? Alias consequatur doloremque laborum maxime necessitatibus nostrum odio, officiis quibusdam
+          veniam! Doloribus eos id quaerat.
         </p>
         <p>
-          Fifth -> Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-          Consequuntur dicta ipsum labore quod tempora ullam? Alias consequatur
-          doloremque laborum maxime necessitatibus nostrum odio, officiis
-          quibusdam veniam! Doloribus eos id quaerat.
+          Fifth -> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur dicta ipsum labore quod
+          tempora ullam? Alias consequatur doloremque laborum maxime necessitatibus nostrum odio, officiis quibusdam
+          veniam! Doloribus eos id quaerat.
         </p>
         <p>
-          Sixth -> Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-          Consequuntur dicta ipsum labore quod tempora ullam? Alias consequatur
-          doloremque laborum maxime necessitatibus nostrum odio, officiis
-          quibusdam veniam! Doloribus eos id quaerat.
+          Sixth -> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur dicta ipsum labore quod
+          tempora ullam? Alias consequatur doloremque laborum maxime necessitatibus nostrum odio, officiis quibusdam
+          veniam! Doloribus eos id quaerat.
         </p>
         <p>
-          Seventh -> Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-          Consequuntur dicta ipsum labore quod tempora ullam? Alias consequatur
-          doloremque laborum maxime necessitatibus nostrum odio, officiis
-          quibusdam veniam! Doloribus eos id quaerat.
+          Seventh -> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur dicta ipsum labore quod
+          tempora ullam? Alias consequatur doloremque laborum maxime necessitatibus nostrum odio, officiis quibusdam
+          veniam! Doloribus eos id quaerat.
         </p>
         <p>
-          Eighth -> Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-          Consequuntur dicta ipsum labore quod tempora ullam? Alias consequatur
-          doloremque laborum maxime necessitatibus nostrum odio, officiis
-          quibusdam veniam! Doloribus eos id quaerat.
+          Eighth -> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur dicta ipsum labore quod
+          tempora ullam? Alias consequatur doloremque laborum maxime necessitatibus nostrum odio, officiis quibusdam
+          veniam! Doloribus eos id quaerat.
         </p>
         <p>
-          Ninth -> Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-          Consequuntur dicta ipsum labore quod tempora ullam? Alias consequatur
-          doloremque laborum maxime necessitatibus nostrum odio, officiis
-          quibusdam veniam! Doloribus eos id quaerat.
+          Ninth -> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur dicta ipsum labore quod
+          tempora ullam? Alias consequatur doloremque laborum maxime necessitatibus nostrum odio, officiis quibusdam
+          veniam! Doloribus eos id quaerat.
         </p>
       </div>
       <p>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi
-        blanditiis consectetur ea eligendi id in inventore ipsa iure laudantium
-        libero, minus molestias necessitatibus nesciunt non omnis, quasi
-        recusandae tempore voluptates!
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi blanditiis consectetur ea eligendi id in
+        inventore ipsa iure laudantium libero, minus molestias necessitatibus nesciunt non omnis, quasi recusandae
+        tempore voluptates!
       </p>
       <p>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi
-        blanditiis consectetur ea eligendi id in inventore ipsa iure laudantium
-        libero, minus molestias necessitatibus nesciunt non omnis, quasi
-        recusandae tempore voluptates!
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi blanditiis consectetur ea eligendi id in
+        inventore ipsa iure laudantium libero, minus molestias necessitatibus nesciunt non omnis, quasi recusandae
+        tempore voluptates!
       </p>
       <p>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi
-        blanditiis consectetur ea eligendi id in inventore ipsa iure laudantium
-        libero, minus molestias necessitatibus nesciunt non omnis, quasi
-        recusandae tempore voluptates!
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi blanditiis consectetur ea eligendi id in
+        inventore ipsa iure laudantium libero, minus molestias necessitatibus nesciunt non omnis, quasi recusandae
+        tempore voluptates!
       </p>
       <p>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi
-        blanditiis consectetur ea eligendi id in inventore ipsa iure laudantium
-        libero, minus molestias necessitatibus nesciunt non omnis, quasi
-        recusandae tempore voluptates!
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi blanditiis consectetur ea eligendi id in
+        inventore ipsa iure laudantium libero, minus molestias necessitatibus nesciunt non omnis, quasi recusandae
+        tempore voluptates!
       </p>
       <p>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi
-        blanditiis consectetur ea eligendi id in inventore ipsa iure laudantium
-        libero, minus molestias necessitatibus nesciunt non omnis, quasi
-        recusandae tempore voluptates!
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi blanditiis consectetur ea eligendi id in
+        inventore ipsa iure laudantium libero, minus molestias necessitatibus nesciunt non omnis, quasi recusandae
+        tempore voluptates!
       </p>
     </div>
     <script type="module">
@@ -280,84 +256,80 @@ npm install driver.js</pre
         driver({ animate: true }).highlight({ element: "h1" });
       });
 
-      document
-        .getElementById("simple-highlight-btn")
-        .addEventListener("click", () => {
-          driver({ animate: false }).highlight({
-            element: "#large-paragraph-text",
-            popover: {
-              title: "driver.js",
-              description: "Highlight anything, anywhere on the page",
-              align: "end",
-              side: "top",
-            },
-          });
+      document.getElementById("simple-highlight-btn").addEventListener("click", () => {
+        driver({ animate: false }).highlight({
+          element: "#large-paragraph-text",
+          popover: {
+            title: "driver.js",
+            description: "Highlight anything, anywhere on the page",
+            align: "end",
+            side: "top",
+          },
+        });
+      });
+
+      document.getElementById("dark-highlight-btn").addEventListener("click", () => {
+        driver({
+          animate: true,
+          opacity: 0.9,
+        }).highlight({ element: "ul" });
+      });
+
+      document.getElementById("dim-highlight-btn").addEventListener("click", () => {
+        driver({
+          animate: true,
+          opacity: 0.2,
+        }).highlight({ element: ".buttons" });
+      });
+
+      document.getElementById("transition-highlight-btn").addEventListener("click", () => {
+        const driverObj = driver({ animate: true });
+
+        driverObj.highlight({ element: "h1" });
+
+        window.setTimeout(() => {
+          driverObj.highlight({ element: ".buttons button:first-child" });
+        }, 2000);
+
+        window.setTimeout(() => {
+          driverObj.highlight({ element: ".buttons button:nth-child(5)" });
+        }, 4000);
+
+        window.setTimeout(() => {
+          driverObj.highlight({ element: "h2" });
+        }, 6000);
+      });
+
+      document.getElementById("scrollable-area-btn").addEventListener("click", () => {
+        const driverObj = driver({ animate: true });
+        driverObj.highlight({ element: "#scrollable-area" });
+      });
+
+      document.getElementById("without-element-btn").addEventListener("click", () => {
+        const driverObj = driver({ animate: true });
+        driverObj.highlight({
+          popover: {
+            title: "driver.js",
+            description: "Highlight anything, anywhere on the page",
+          }
+        });
+      });
+
+      document.getElementById("inner-scroll-area-btn").addEventListener("click", () => {
+        const driverObj = driver({ animate: true });
+        driverObj.highlight({ element: "#third-scroll-paragraph" });
+      });
+
+      document.getElementById("disallow-close").addEventListener("click", () => {
+        const driverObj = driver({
+          animate: true,
+          allowClose: false,
         });
 
-      document
-        .getElementById("dark-highlight-btn")
-        .addEventListener("click", () => {
-          driver({
-            animate: true,
-            opacity: 0.9,
-          }).highlight({ element: "ul" });
+        driverObj.highlight({
+          element: ".buttons",
         });
-
-      document
-        .getElementById("dim-highlight-btn")
-        .addEventListener("click", () => {
-          driver({
-            animate: true,
-            opacity: 0.2,
-          }).highlight({ element: ".buttons" });
-        });
-
-      document
-        .getElementById("transition-highlight-btn")
-        .addEventListener("click", () => {
-          const driverObj = driver({ animate: true });
-
-          driverObj.highlight({ element: "h1" });
-
-          window.setTimeout(() => {
-            driverObj.highlight({ element: ".buttons button:first-child" });
-          }, 2000);
-
-          window.setTimeout(() => {
-            driverObj.highlight({ element: ".buttons button:nth-child(5)" });
-          }, 4000);
-
-          window.setTimeout(() => {
-            driverObj.highlight({ element: "h2" });
-          }, 6000);
-        });
-
-      document
-        .getElementById("scrollable-area-btn")
-        .addEventListener("click", () => {
-          const driverObj = driver({ animate: true });
-          driverObj.highlight({ element: "#scrollable-area" });
-        });
-
-      document
-        .getElementById("inner-scroll-area-btn")
-        .addEventListener("click", () => {
-          const driverObj = driver({ animate: true });
-          driverObj.highlight({ element: "#third-scroll-paragraph" });
-        });
-
-      document
-        .getElementById("disallow-close")
-        .addEventListener("click", () => {
-          const driverObj = driver({
-            animate: true,
-            allowClose: false,
-          });
-
-          driverObj.highlight({
-            element: ".buttons",
-          });
-        });
+      });
 
       document.getElementById("destroy-btn").addEventListener("click", () => {
         driver().destroy();
