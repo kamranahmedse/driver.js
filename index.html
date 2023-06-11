@@ -253,7 +253,13 @@ npm install driver.js</pre
       import { driver } from "./src/driver.ts";
 
       document.getElementById("highlight-btn").addEventListener("click", () => {
-        driver({ animate: true }).highlight({ element: "h1" });
+        driver({ animate: true }).highlight({
+          element: "h2",
+          popover: {
+            title: "driver.js",
+            description: "A lightweight, no-dependency JavaScript engine to drive user's focus across the page",
+          },
+        });
       });
 
       document.getElementById("simple-highlight-btn").addEventListener("click", () => {
@@ -285,18 +291,39 @@ npm install driver.js</pre
       document.getElementById("transition-highlight-btn").addEventListener("click", () => {
         const driverObj = driver({ animate: true });
 
-        driverObj.highlight({ element: "h1" });
+        driverObj.highlight({
+          popover: {
+            title: "driver.js",
+            description: "Highlight anything, anywhere on the page",
+          },
+        });
 
         window.setTimeout(() => {
-          driverObj.highlight({ element: ".buttons button:first-child" });
+          driverObj.highlight({
+            element: ".buttons button:first-child",
+            popover: {
+              title: "driver.js",
+              description: "Highlight anything, anywhere on the page",
+            },
+          });
         }, 2000);
 
         window.setTimeout(() => {
-          driverObj.highlight({});
+          driverObj.highlight({
+            popover: {
+              title: "driver.js",
+              description: "Highlight anything, anywhere on the page",
+            },
+          });
         }, 4000);
 
         window.setTimeout(() => {
-          driverObj.highlight({ element: "h2" });
+          driverObj.highlight({
+            element: "h2",
+            popover: {
+              description: "driver.js",
+            },
+          });
         }, 6000);
       });
 
@@ -311,7 +338,7 @@ npm install driver.js</pre
           popover: {
             title: "driver.js",
             description: "Highlight anything, anywhere on the page",
-          }
+          },
         });
       });
 

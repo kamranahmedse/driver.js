@@ -478,5 +478,4 @@ export function destroyPopover() {
   }
 
   popover.wrapper.parentElement?.removeChild(popover.wrapper);
-  setState("popover", undefined);
 }

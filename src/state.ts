@@ -1,5 +1,6 @@
 import { StageDefinition } from "./stage";
 import { PopoverDOM } from "./popover";
+import { DriveStep } from "./driver";
 
 export type State = {
   // Whether driver is initialized or not
@@ -9,9 +10,12 @@ export type State = {
   resizeTimeout?: number;
 
   // Used while transitioning between stages
-  previousHighlight?: Element;
-  activeHighlight?: Element;
+  previousElement?: Element;
+  activeElement?: Element;
   transitionCallback?: () => void;
+
+  activeStep?: DriveStep;
+  previousStep?: DriveStep;
 
   activeStagePosition?: StageDefinition;
   stageSvg?: SVGSVGElement;
@@ -29,4 +33,8 @@ export function getState(): State;
 export function getState<K extends keyof State>(key: K): State[K];
 export function getState<K extends keyof State>(key?: K) {
   return key ? currentState[key] : currentState;
+}
+
+export function resetState() {
+  currentState = {};
 }

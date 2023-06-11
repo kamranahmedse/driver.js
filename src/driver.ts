@@ -6,7 +6,7 @@ import { destroyHighlight, highlight } from "./highlight";
 import { destroyEmitter, listen } from "./emitter";
 
 import "./style.css";
-import { getState, setState } from "./state";
+import { getState, resetState, setState } from "./state";
 
 export type DriveStep = {
   element?: string | Element;
@@ -39,8 +39,6 @@ export function driver(options: Config = {}) {
   }
 
   function destroy() {
-    setState("isInitialized", false);
-
     document.body.classList.remove("driver-active", "driver-fade", "driver-simple");
 
     destroyEvents();
@@ -48,6 +46,8 @@ export function driver(options: Config = {}) {
     destroyHighlight();
     destroyStage();
     destroyEmitter();
+
+    resetState();
   }
 
   return {

@@ -174,8 +174,5 @@ export function destroyStage() {
   const stageSvg = getState("stageSvg");
   if (stageSvg) {
     stageSvg.remove();
-    setState("stageSvg", undefined);
   }
-
-  setState("activeStagePosition", undefined);
 }
