@@ -6,13 +6,12 @@ import { destroyHighlight, highlight } from "./highlight";
 import { destroyEmitter, listen } from "./emitter";
 
 import "./style.css";
+import { getState, setState } from "./state";
 
 export type DriveStep = {
   element?: string | Element;
   popover?: Popover;
 };
-
-let isInitialized = false;
 
 export function driver(options: Config = {}) {
   configure(options);
@@ -26,15 +25,12 @@ export function driver(options: Config = {}) {
   }
 
   function init() {
-    if (isInitialized) {
+    if (getState("isInitialized")) {
       return;
     }
 
-    isInitialized = true;
-    document.body.classList.add(
-      "driver-active",
-      getConfig("animate") ? "driver-fade" : "driver-simple"
-    );
+    setState("isInitialized", true);
+    document.body.classList.add("driver-active", getConfig("animate") ? "driver-fade" : "driver-simple");
 
     initEvents();
 
@@ -44,11 +40,9 @@ export function driver(options: Config = {}) {
   }
 
   function destroy() {
-    isInitialized = false;
-    document.body.classList.remove(
-      "driver-active",
-      getConfig("animate") ? "driver-fade" : "driver-simple"
-    );
+    setState("isInitialized", false);
+
+    document.body.classList.remove("driver-active", "driver-fade", "driver-simple");
 
     destroyEvents();
     destroyPopover();
@@ -57,7 +51,6 @@ export function driver(options: Config = {}) {
     destroyEmitter();
   }
 
-  // @todo make popover selectable
   return {
     drive: (steps: DriveStep[]) => console.log(steps),
     highlight: (step: DriveStep) => {

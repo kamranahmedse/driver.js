@@ -1,14 +1,14 @@
 import { refreshActiveHighlight } from "./highlight";
 import { emit } from "./emitter";
-
-let resizeTimeout: number;
+import { getState, setState } from "./state";
 
 function requireRefresh() {
+  const resizeTimeout = getState("resizeTimeout");
   if (resizeTimeout) {
     window.cancelAnimationFrame(resizeTimeout);
   }
 
-  resizeTimeout = window.requestAnimationFrame(refreshActiveHighlight);
+  setState("resizeTimeout", window.requestAnimationFrame(refreshActiveHighlight));
 }
 
 function onKeyup(e: KeyboardEvent) {
@@ -32,10 +32,7 @@ export function onDriverClick(
   listener: (pointer: MouseEvent | PointerEvent) => void,
   shouldPreventDefault?: (target: HTMLElement) => boolean
 ) {
-  const listenerWrapper = (
-    e: MouseEvent | PointerEvent,
-    listener?: (pointer: MouseEvent | PointerEvent) => void
-  ) => {
+  const listenerWrapper = (e: MouseEvent | PointerEvent, listener?: (pointer: MouseEvent | PointerEvent) => void) => {
     const target = e.target as HTMLElement;
     if (!element.contains(target)) {
       return;

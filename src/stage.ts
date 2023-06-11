@@ -2,6 +2,7 @@ import { easeInOutQuad } from "./utils";
 import { onDriverClick } from "./events";
 import { emit } from "./emitter";
 import { getConfig } from "./config";
+import { getState, setState } from "./state";
 
 export type StageDefinition = {
   x: number;
@@ -10,14 +11,12 @@ export type StageDefinition = {
   height: number;
 };
 
-let activeStagePosition: StageDefinition | undefined;
-let stageSvg: SVGSVGElement | undefined;
-
 // This method calculates the animated new position of the
 // stage (called for each frame by requestAnimationFrame)
 export function transitionStage(elapsed: number, duration: number, from: Element, to: Element) {
-  const fromDefinition = activeStagePosition ? activeStagePosition : from.getBoundingClientRect();
+  let activeStagePosition = getState("activeStagePosition");
 
+  const fromDefinition = activeStagePosition ? activeStagePosition : from.getBoundingClientRect();
   const toDefinition = to.getBoundingClientRect();
 
   const x = easeInOutQuad(elapsed, fromDefinition.x, toDefinition.x - fromDefinition.x, duration);
@@ -33,6 +32,7 @@ export function transitionStage(elapsed: number, duration: number, from: Element
   };
 
   renderStage(activeStagePosition);
+  setState("activeStagePosition", activeStagePosition);
 }
 
 export function trackActiveElement(element: Element) {
@@ -42,17 +42,22 @@ export function trackActiveElement(element: Element) {
 
   const definition = element.getBoundingClientRect();
 
-  activeStagePosition = {
+  const activeStagePosition: StageDefinition = {
     x: definition.x,
     y: definition.y,
     width: definition.width,
     height: definition.height,
   };
 
+  setState("activeStagePosition", activeStagePosition);
+
   renderStage(activeStagePosition);
 }
 
 export function refreshStage() {
+  const activeStagePosition = getState("activeStagePosition");
+  const stageSvg = getState("stageSvg");
+
   if (!activeStagePosition) {
     return;
   }
@@ -69,7 +74,7 @@ export function refreshStage() {
 }
 
 function mountStage(stagePosition: StageDefinition) {
-  stageSvg = createStageSvg(stagePosition);
+  const stageSvg = createStageSvg(stagePosition);
   document.body.appendChild(stageSvg);
 
   onDriverClick(stageSvg, e => {
@@ -80,9 +85,13 @@ function mountStage(stagePosition: StageDefinition) {
 
     emit("overlayClick");
   });
+
+  setState("stageSvg", stageSvg);
 }
 
 function renderStage(stagePosition: StageDefinition) {
+  const stageSvg = getState("stageSvg");
+
   // TODO: cancel rendering if element is not visible
   if (!stageSvg) {
     mountStage(stagePosition);
@@ -95,7 +104,7 @@ function renderStage(stagePosition: StageDefinition) {
     throw new Error("no path element found in stage svg");
   }
 
-  pathElement.setAttribute("d", generateSvgCutoutPathString(stagePosition));
+  pathElement.setAttribute("d", generateStageSvgPathString(stagePosition));
 }
 
 function createStageSvg(stage: StageDefinition): SVGSVGElement {
@@ -122,26 +131,26 @@ function createStageSvg(stage: StageDefinition): SVGSVGElement {
   svg.style.width = "100%";
   svg.style.height = "100%";
 
-  const cutoutPath = document.createElementNS("http://www.w3.org/2000/svg", "path");
+  const stagePath = document.createElementNS("http://www.w3.org/2000/svg", "path");
 
-  cutoutPath.setAttribute("d", generateSvgCutoutPathString(stage));
+  stagePath.setAttribute("d", generateStageSvgPathString(stage));
 
-  cutoutPath.style.fill = "rgb(0,0,0)";
-  cutoutPath.style.opacity = `${getConfig("opacity")}`;
-  cutoutPath.style.pointerEvents = "auto";
-  cutoutPath.style.cursor = "auto";
+  stagePath.style.fill = "rgb(0,0,0)";
+  stagePath.style.opacity = `${getConfig("opacity")}`;
+  stagePath.style.pointerEvents = "auto";
+  stagePath.style.cursor = "auto";
 
-  svg.appendChild(cutoutPath);
+  svg.appendChild(stagePath);
 
   return svg;
 }
 
-function generateSvgCutoutPathString(stage: StageDefinition) {
+function generateStageSvgPathString(stage: StageDefinition) {
   const windowX = window.innerWidth;
   const windowY = window.innerHeight;
 
-  const stagePadding = getConfig('stagePadding') || 0;
-  const stageRadius = getConfig('stageRadius') || 0;
+  const stagePadding = getConfig("stagePadding") || 0;
+  const stageRadius = getConfig("stageRadius") || 0;
 
   const stageWidth = stage.width + stagePadding * 2;
   const stageHeight = stage.height + stagePadding * 2;
@@ -162,10 +171,11 @@ function generateSvgCutoutPathString(stage: StageDefinition) {
 }
 
 export function destroyStage() {
+  const stageSvg = getState("stageSvg");
   if (stageSvg) {
     stageSvg.remove();
-    stageSvg = undefined;
+    setState("stageSvg", undefined);
   }
 
-  activeStagePosition = undefined;
+  setState("activeStagePosition", undefined);
 }

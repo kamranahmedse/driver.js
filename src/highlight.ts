@@ -3,10 +3,7 @@ import { refreshStage, trackActiveElement, transitionStage } from "./stage";
 import { getConfig } from "./config";
 import { repositionPopover, renderPopover, hidePopover } from "./popover";
 import { bringInView } from "./utils";
-
-let previousHighlight: Element | undefined;
-let activeHighlight: Element | undefined;
-let currentTransitionCallback: undefined | (() => void);
+import { getState, setState } from "./state";
 
 function mountDummyElement(): Element {
   const existingDummy = document.getElementById("driver-dummy-element");
@@ -38,13 +35,19 @@ export function highlight(step: DriveStep) {
     elemObj = mountDummyElement();
   }
 
-  previousHighlight = activeHighlight;
-  activeHighlight = elemObj;
+  const previousHighlight = getState("activeHighlight");
 
-  transferHighlight(previousHighlight || elemObj, elemObj);
+  const transferHighlightFrom = previousHighlight || elemObj;
+  const transferHighlightTo = elemObj;
+
+  transferHighlight(transferHighlightFrom, transferHighlightTo);
+
+  setState("previousHighlight", transferHighlightFrom);
+  setState("activeHighlight", transferHighlightTo);
 }
 
 export function refreshActiveHighlight() {
+  const activeHighlight = getState("activeHighlight");
   if (!activeHighlight) {
     return;
   }
@@ -61,15 +64,17 @@ function transferHighlight(from: Element, to: Element) {
   // If it's the first time we're highlighting an element, we show
   // the popover immediately. Otherwise, we wait for the animation
   // to finish before showing the popover.
-  const hasDelayedPopover = !from || from !== to;
+  const hasDelayedPopover = to && (!from || from !== to);
 
   hidePopover();
 
   const animate = () => {
+    const transitionCallback = getState("transitionCallback");
+
     // This makes sure that the repeated calls to transferHighlight
     // don't interfere with each other. Only the last call will be
     // executed.
-    if (currentTransitionCallback !== animate) {
+    if (transitionCallback !== animate) {
       return;
     }
 
@@ -84,13 +89,13 @@ function transferHighlight(from: Element, to: Element) {
         renderPopover(to);
       }
 
-      currentTransitionCallback = undefined;
+      setState("transitionCallback", undefined);
     }
 
     window.requestAnimationFrame(animate);
   };
 
-  currentTransitionCallback = animate;
+  setState("transitionCallback", animate);
   window.requestAnimationFrame(animate);
 
   bringInView(to);
@@ -103,10 +108,11 @@ function transferHighlight(from: Element, to: Element) {
 }
 
 export function destroyHighlight() {
-  activeHighlight = undefined;
-  currentTransitionCallback = undefined;
-  previousHighlight = undefined;
-  activeHighlight = undefined;
+  setState("activeHighlight", undefined);
+  setState("previousHighlight", undefined);
+
+  setState("transitionCallback", undefined);
+
   document.getElementById("driver-dummy-element")?.remove();
 
   document.querySelectorAll(".driver-active-element").forEach(element => {

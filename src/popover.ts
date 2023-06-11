@@ -1,10 +1,9 @@
 import { bringInView } from "./utils";
 import { getConfig } from "./config";
+import { getState, setState } from "./state";
 
-export type Side = "top" | "right" | "bottom" | "left";
+export type Side = "top" | "right" | "bottom" | "left" | "over";
 export type Alignment = "start" | "center" | "end";
-
-const POPOVER_OFFSET = 10;
 
 export type Popover = {
   title?: string;
@@ -13,7 +12,7 @@ export type Popover = {
   align?: Alignment;
 };
 
-type PopoverDOM = {
+export type PopoverDOM = {
   wrapper: HTMLElement;
   arrow: HTMLElement;
   title: HTMLElement;
@@ -25,9 +24,8 @@ type PopoverDOM = {
   footerButtons: HTMLElement;
 };
 
-let popover: PopoverDOM | undefined;
-
 export function hidePopover() {
+  const popover = getState("popover");
   if (!popover) {
     return;
   }
@@ -36,6 +34,7 @@ export function hidePopover() {
 }
 
 export function renderPopover(element: Element) {
+  let popover = getState("popover");
   if (!popover) {
     popover = createPopover();
     document.body.appendChild(popover.wrapper);
@@ -53,6 +52,8 @@ export function renderPopover(element: Element) {
   const popoverArrow = popover.arrow;
   popoverArrow.className = "driver-popover-arrow";
 
+  setState("popover", popover);
+
   repositionPopover(element);
   bringInView(popoverWrapper);
 }
@@ -65,16 +66,19 @@ type PopoverDimensions = {
 };
 
 function getPopoverDimensions(): PopoverDimensions | undefined {
+  const popover = getState("popover");
   if (!popover?.wrapper) {
     return;
   }
 
   const boundingClientRect = popover.wrapper.getBoundingClientRect();
+
   const stagePadding = getConfig("stagePadding") || 0;
+  const popoverOffset = getConfig("popoverOffset") || 0;
 
   return {
-    width: boundingClientRect.width + stagePadding + POPOVER_OFFSET,
-    height: boundingClientRect.height + stagePadding + POPOVER_OFFSET,
+    width: boundingClientRect.width + stagePadding + popoverOffset,
+    height: boundingClientRect.height + stagePadding + popoverOffset,
 
     realWidth: boundingClientRect.width,
     realHeight: boundingClientRect.height,
@@ -171,6 +175,7 @@ function calculateLeftForTopBottom(
 }
 
 export function repositionPopover(element: Element) {
+  const popover = getState("popover");
   if (!popover) {
     return;
   }
@@ -178,7 +183,7 @@ export function repositionPopover(element: Element) {
   // @TODO These values will come from the config
   // Configure the popover positioning
   const requiredAlignment: Alignment = "start";
-  const requiredSide: Side = "left" as Side;
+  const requiredSide: Side = element.id === "driver-dummy-element" ? "over" : "left" as Side;
   const popoverPadding = getConfig('stagePadding') || 0;
 
   const popoverDimensions = getPopoverDimensions()!;
@@ -210,7 +215,15 @@ export function repositionPopover(element: Element) {
     isLeftOptimal = isTopOptimal = isBottomOptimal = false;
   }
 
-  if (noneOptimal) {
+  if (requiredSide === "over") {
+    const leftToSet = window.innerWidth / 2 - popoverDimensions!.realWidth / 2;
+    const topToSet = window.innerHeight / 2 - popoverDimensions!.realHeight / 2;
+
+    popover.wrapper.style.left = `${leftToSet}px`;
+    popover.wrapper.style.right = `auto`;
+    popover.wrapper.style.top = `${topToSet}px`;
+    popover.wrapper.style.bottom = `auto`;
+  } else if (noneOptimal) {
     const leftValue = window.innerWidth / 2 - popoverDimensions?.realWidth! / 2;
     const bottomValue = 10;
 
@@ -303,6 +316,7 @@ export function repositionPopover(element: Element) {
 }
 
 function renderPopoverArrow(alignment: Alignment, side: Side, element: Element) {
+  const popover = getState("popover");
   if (!popover) {
     return;
   }
@@ -458,10 +472,11 @@ function createPopover(): PopoverDOM {
 }
 
 export function destroyPopover() {
+  const popover = getState("popover");
   if (!popover) {
     return;
   }
 
   popover.wrapper.parentElement?.removeChild(popover.wrapper);
-  popover = undefined;
+  setState("popover", undefined);
 }

@@ -8,7 +8,8 @@
 
 .driver-active .driver-active-element,
 .driver-active .driver-active-element *,
-.driver-popover, .driver-popover *{
+.driver-popover,
+.driver-popover * {
   pointer-events: auto;
 }
 
@@ -49,6 +50,10 @@
   content: "";
   position: absolute;
   border: 5px solid #fff;
+}
+
+.driver-popover-arrow-side-over {
+  display: none;
 }
 
 /** Popover Arrow Sides **/

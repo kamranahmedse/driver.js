@@ -5,6 +5,7 @@ export type Config = {
   opacity?: number;
   stagePadding?: number;
   stageRadius?: number;
+  popoverOffset?: number;
 };
 
 let currentConfig: Config = {};
@@ -17,6 +18,7 @@ export function configure(config: Config = {}) {
     smoothScroll: false,
     stagePadding: 10,
     stageRadius: 5,
+    popoverOffset: 10,
     ...config,
   };
 }
