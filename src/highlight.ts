@@ -80,14 +80,7 @@ function transferHighlight(from: Element, to: Element, toStep: DriveStep) {
   const isNextOrPrevDummyElement = to.id === "driver-dummy-element" || from.id === "driver-dummy-element";
 
   const hasDelayedPopover = !isFirstHighlight && (hasNoPreviousPopover || isNextOrPrevDummyElement);
-
-  console.log("--------------------");
-  console.log("from", from);
-  console.log("to", to);
-  console.log("hasDelayedPopover", hasDelayedPopover);
-  console.log("isFirstHighlight", isFirstHighlight);
-  console.log("hasNoPreviousPopover", hasNoPreviousPopover);
-  console.log("isNextOrPrevDummyElement", isNextOrPrevDummyElement);
+  let isPopoverRendered = false;
 
   hidePopover();
 
@@ -102,15 +95,18 @@ function transferHighlight(from: Element, to: Element, toStep: DriveStep) {
     }
 
     const elapsed = Date.now() - start;
+    const timeRemaining = duration - elapsed;
+    const isHalfwayThrough = timeRemaining <= duration / 2;
+
+    if (toStep.popover && isHalfwayThrough && !isPopoverRendered && hasDelayedPopover) {
+      renderPopover(to);
+      isPopoverRendered = true;
+    }
 
     if (getConfig("animate") && elapsed < duration) {
       transitionStage(elapsed, duration, from, to);
     } else {
       trackActiveElement(to);
-
-      if (hasDelayedPopover && toStep.popover) {
-        renderPopover(to);
-      }
 
       setState("transitionCallback", undefined);
     }
