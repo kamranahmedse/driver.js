@@ -2,9 +2,13 @@ import { StageDefinition } from "./stage";
 import { PopoverDOM } from "./popover";
 
 export type State = {
+  // Whether driver is initialized or not
   isInitialized?: boolean;
+
+  // Used to bounce the resize event
   resizeTimeout?: number;
 
+  // Used while transitioning between stages
   previousHighlight?: Element;
   activeHighlight?: Element;
   transitionCallback?: () => void;

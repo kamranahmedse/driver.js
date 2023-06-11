@@ -34,7 +34,6 @@ export function driver(options: Config = {}) {
 
     initEvents();
 
-    // Register hooks
     listen("overlayClick", handleClose);
     listen("escape", handleClose);
   }

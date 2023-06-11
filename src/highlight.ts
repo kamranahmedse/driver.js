@@ -64,7 +64,7 @@ function transferHighlight(from: Element, to: Element) {
   // If it's the first time we're highlighting an element, we show
   // the popover immediately. Otherwise, we wait for the animation
   // to finish before showing the popover.
-  const hasDelayedPopover = to && (!from || from !== to);
+  const hasDelayedPopover = !from || from !== to;
 
   hidePopover();
 
