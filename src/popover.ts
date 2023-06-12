@@ -11,7 +11,13 @@ export type Popover = {
   description: string;
   side?: Side;
   align?: Alignment;
+
   showButtons?: boolean;
+
+  doneBtnText?: string;
+  closeBtnText?: string;
+  nextBtnText?: string;
+  prevBtnText?: string;
 };
 
 export type PopoverDOM = {
@@ -42,7 +48,19 @@ export function renderPopover(element: Element, step: DriveStep) {
     document.body.appendChild(popover.wrapper);
   }
 
-  const { title, description, showButtons = undefined } = step.popover || {};
+  const {
+    title,
+    description,
+    showButtons = undefined,
+    doneBtnText = 'Done',
+    closeBtnText= 'Close',
+    nextBtnText= 'Next &rarr;',
+    prevBtnText = '&larr; Previous',
+  } = step.popover || {};
+
+  popover.nextButton.innerHTML = nextBtnText;
+  popover.previousButton.innerHTML = prevBtnText;
+  popover.closeButton.innerHTML = closeBtnText;
 
   if (title) {
     popover.title.innerText = title;

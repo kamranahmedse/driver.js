@@ -51,12 +51,16 @@
 
 .driver-popover-title {
   font: 19px / normal sans-serif;
-  margin: 0 0 5px;
   font-weight: 700;
   display: block;
   position: relative;
   line-height: 1.5;
   zoom: 1;
+  margin: 0;
+}
+
+.driver-popover-title + .driver-popover-description {
+  margin-top: 5px;
 }
 
 .driver-popover-description {
@@ -80,7 +84,7 @@
   all: unset;
   display: inline-block;
   box-sizing: border-box;
-  padding: 5px 10px;
+  padding: 3px 7px;
   text-decoration: none;
   text-shadow: 1px 1px 0 #fff;
   color: #2d2d2d;
@@ -90,11 +94,11 @@
   zoom: 1;
   line-height: 1.3;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 3px;
 }
 
 .driver-popover-footer-btns button + button {
-  margin-left: 5px;
+  margin-left: 4px;
 }
 
 .driver-popover-arrow {
