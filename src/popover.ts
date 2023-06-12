@@ -84,7 +84,7 @@ export function renderPopover(element: Element, step: DriveStep) {
 
   setState("popover", popover);
 
-  repositionPopover(element);
+  repositionPopover(element, step);
   bringInView(popoverWrapper);
 }
 
@@ -204,16 +204,17 @@ function calculateLeftForTopBottom(
   return 0;
 }
 
-export function repositionPopover(element: Element) {
+export function repositionPopover(element: Element, step: DriveStep) {
   const popover = getState("popover");
   if (!popover) {
     return;
   }
 
-  // @TODO These values will come from the config
+  const { align = "start", side = "left" } = step?.popover || {};
+
   // Configure the popover positioning
-  const requiredAlignment: Alignment = "start";
-  const requiredSide: Side = element.id === "driver-dummy-element" ? "over" : ("left" as Side);
+  const requiredAlignment: Alignment = align;
+  const requiredSide: Side = element.id === "driver-dummy-element" ? "over" : side;
   const popoverPadding = getConfig("stagePadding") || 0;
 
   const popoverDimensions = getPopoverDimensions()!;

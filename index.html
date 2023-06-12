@@ -1,57 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Vite App</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite App</title>
 
-  <style>
+    <style>
       * {
-          margin: 0;
-          padding: 0;
+        margin: 0;
+        padding: 0;
       }
 
       body {
-          font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans",
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans",
           "Helvetica Neue", sans-serif;
-          font-size: 14px;
-          -webkit-font-smoothing: antialiased;
-          -moz-osx-font-smoothing: grayscale;
+        font-size: 14px;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
       }
 
       .gif-popover {
-          display: flex;
-          flex-direction: column;
-          text-align: center;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
       }
 
       .gif-popover img {
-          width: 100%;
-          height: auto;
-          margin-bottom: 10px;
+        width: 100%;
+        height: auto;
+        margin-bottom: 10px;
       }
 
       .gif-popover p {
-          font-weight: 500;
-          margin-bottom: 0;
+        font-weight: 500;
+        margin-bottom: 0;
       }
 
       p {
-          line-height: 1.5;
-          margin-bottom: 15px;
+        line-height: 1.5;
+        margin-bottom: 15px;
       }
 
       .page-header {
-          text-align: center;
-          margin-bottom: 10px;
+        text-align: center;
+        margin-bottom: 10px;
       }
 
       .container {
-          display: flex;
-          flex-direction: column;
-          max-width: 500px;
-          margin: 0 auto;
-          text-align: left;
+        display: flex;
+        flex-direction: column;
+        max-width: 500px;
+        margin: 0 auto;
+        text-align: left;
       }
 
       h1,
@@ -60,328 +60,330 @@
       h4,
       h5,
       h6 {
-          margin: 30px 0 10px;
+        margin: 30px 0 10px;
       }
 
       h1 {
-          font-size: 48px;
-          font-weight: 600;
-          text-align: center;
+        font-size: 48px;
+        font-weight: 600;
+        text-align: center;
       }
 
       h1 sup {
-          font-size: 18px;
-          font-weight: 400;
+        font-size: 18px;
+        font-weight: 400;
       }
 
       ul {
-          list-style: none;
-          padding: 0;
-          margin: 20px 10px 0;
-          line-height: 1.5;
+        list-style: none;
+        padding: 0;
+        margin: 20px 10px 0;
+        line-height: 1.5;
       }
 
       ul li:before {
-          content: "•";
-          margin-right: 10px;
+        content: "•";
+        margin-right: 10px;
       }
 
       .buttons {
-          display: flex;
-          margin-top: 20px;
-          gap: 10px;
-          max-width: 500px;
-          flex-wrap: wrap;
+        display: flex;
+        margin-top: 20px;
+        gap: 10px;
+        max-width: 500px;
+        flex-wrap: wrap;
       }
 
       button {
-          all: unset;
-          border: 1px solid #ccc;
-          padding: 5px 15px;
-          border-radius: 5px;
-          display: block;
-          cursor: pointer;
+        all: unset;
+        border: 1px solid #ccc;
+        padding: 5px 15px;
+        border-radius: 5px;
+        display: block;
+        cursor: pointer;
       }
 
       pre {
-          margin-bottom: 20px;
-          border: 1px solid #ccc;
-          background: whitesmoke;
-          border-radius: 5px;
-          padding: 10px;
-          line-height: 1.75;
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        background: whitesmoke;
+        border-radius: 5px;
+        padding: 10px;
+        line-height: 1.75;
       }
 
       #scrollable-area {
-          height: 300px;
-          overflow: auto;
-          border: 1px solid #ccc;
-          padding: 10px;
-          border-radius: 5px;
-          margin: 50px 0;
+        height: 300px;
+        overflow: auto;
+        border: 1px solid #ccc;
+        padding: 10px;
+        border-radius: 5px;
+        margin: 50px 0;
       }
-  </style>
-</head>
-<body>
-<div class="container">
-  <div class="page-header">
-    <h1>driver.js <sup>next</sup></h1>
-    <p>Rewritten and enhanced version of driver.js</p>
-  </div>
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="page-header">
+        <h1>driver.js <sup>next</sup></h1>
+        <p>Rewritten and enhanced version of driver.js</p>
+      </div>
 
-  <div class="buttons">
-    <button id="highlight-btn">Animated Highlight</button>
-    <button id="simple-highlight-btn">Simple Highlight</button>
-    <button id="transition-highlight-btn">Transition Highlight</button>
-    <button id="disallow-close">Disallow Close</button>
-    <button id="dark-highlight-btn">Super Dark Highlight</button>
-    <button id="dim-highlight-btn">Super Dim Highlight</button>
-    <button id="scrollable-area-btn">Scrollable Area</button>
-    <button id="inner-scroll-area-btn">Inner Scroll Area</button>
-    <button id="without-element-btn">No Element</button>
-    <button id="destroy-btn">Destroy</button>
-  </div>
+      <div class="buttons">
+        <button id="highlight-btn">Animated Highlight</button>
+        <button id="simple-highlight-btn">Simple Highlight</button>
+        <button id="transition-highlight-btn">Transition Highlight</button>
+        <button id="disallow-close">Disallow Close</button>
+        <button id="dark-highlight-btn">Super Dark Highlight</button>
+        <button id="dim-highlight-btn">Super Dim Highlight</button>
+        <button id="scrollable-area-btn">Scrollable Area</button>
+        <button id="inner-scroll-area-btn">Inner Scroll Area</button>
+        <button id="without-element-btn">No Element</button>
+        <button id="destroy-btn">Destroy</button>
+      </div>
 
-  <ul>
-    <li>Written in TypeScript</li>
-    <li>Lightweight — only 5kb gzipped</li>
-    <li>No dependencies</li>
-    <li>MIT Licensed</li>
-  </ul>
+      <ul>
+        <li>Written in TypeScript</li>
+        <li>Lightweight — only 5kb gzipped</li>
+        <li>No dependencies</li>
+        <li>MIT Licensed</li>
+      </ul>
 
-  <h2>Yet another Tour Library?</h2>
-  <p>
-    No, it is not. Tours are just one of the many use-cases. Driver.js can be used wherever you need some sort of
-    overlay for the page; some common usecases could be: e.g. dimming the background when user is interacting with
-    some component, using it as a focus shifter to bring user's attention to some component on page, or using it to
-    simulate those "Turn off the Lights" widgets that you might have seen on video players online, etc.
-  </p>
-  <p class="second-para">
-    Driver.js is written in Vanilla JS, has zero dependencies and is highly customizable. It has several options
-    allowing you to manipulate how it behaves and also provides you the hooks to manipulate the elements as they are
-    highlighted, about to be highlighted, or deselected.
-  </p>
+      <h2>Yet another Tour Library?</h2>
+      <p>
+        No, it is not. Tours are just one of the many use-cases. Driver.js can be used wherever you need some sort of
+        overlay for the page; some common usecases could be: e.g. dimming the background when user is interacting with
+        some component, using it as a focus shifter to bring user's attention to some component on page, or using it to
+        simulate those "Turn off the Lights" widgets that you might have seen on video players online, etc.
+      </p>
+      <p class="second-para">
+        Driver.js is written in Vanilla JS, has zero dependencies and is highly customizable. It has several options
+        allowing you to manipulate how it behaves and also provides you the hooks to manipulate the elements as they are
+        highlighted, about to be highlighted, or deselected.
+      </p>
 
-  <h2 id="installation-head">Installation</h2>
-  <p>You can install it using yarn or npm, whatever you prefer.</p>
+      <h2 id="installation-head">Installation</h2>
+      <p>You can install it using yarn or npm, whatever you prefer.</p>
 
-  <pre>
+      <pre>
 yarn add driver.js
 npm install driver.js</pre
-  >
+      >
 
-  <p>Or include it using CDN — put the version as driver.js@0.5 in the name</p>
+      <p>Or include it using CDN — put the version as driver.js@0.5 in the name</p>
 
-  <pre>https://unpkg.com/driver.js/dist/driver.min.js</pre>
+      <pre>https://unpkg.com/driver.js/dist/driver.min.js</pre>
 
-  <h2>Usage and Demo</h2>
+      <h2>Usage and Demo</h2>
 
-  <p id="large-paragraph-text">
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi blanditiis consectetur ea eligendi id in
-    inventore ipsa iure laudantium libero, minus molestias necessitatibus nesciunt non omnis, quasi recusandae
-    tempore voluptates! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi blanditiis consectetur ea
-    eligendi id in inventore ipsa iure laudantium libero, minus molestias necessitatibus nesciunt non omnis, quasi
-    recusandae tempore voluptates!
-  </p>
-  <p>
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi blanditiis consectetur ea eligendi id in
-    inventore ipsa iure laudantium libero, minus molestias necessitatibus nesciunt non omnis, quasi recusandae
-    tempore voluptates!
-  </p>
-  <p>
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi blanditiis consectetur ea eligendi id in
-    inventore ipsa iure laudantium libero, minus molestias necessitatibus nesciunt non omnis, quasi recusandae
-    tempore voluptates!
-  </p>
-  <div id="scrollable-area">
-    <p>
-      First -> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur dicta ipsum labore quod
-      tempora ullam? Alias consequatur doloremque laborum maxime necessitatibus nostrum odio, officiis quibusdam
-      veniam! Doloribus eos id quaerat.
-    </p>
-    <p>
-      Second -> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur dicta ipsum labore quod
-      tempora ullam? Alias consequatur doloremque laborum maxime necessitatibus nostrum odio, officiis quibusdam
-      veniam! Doloribus eos id quaerat.
-    </p>
-    <p id="third-scroll-paragraph">
-      Third -> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur dicta ipsum labore quod
-      tempora ullam? Alias consequatur doloremque laborum maxime necessitatibus nostrum odio, officiis quibusdam
-      veniam! Doloribus eos id quaerat.
-    </p>
-    <p>
-      Fourth -> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur dicta ipsum labore quod
-      tempora ullam? Alias consequatur doloremque laborum maxime necessitatibus nostrum odio, officiis quibusdam
-      veniam! Doloribus eos id quaerat.
-    </p>
-    <p>
-      Fifth -> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur dicta ipsum labore quod
-      tempora ullam? Alias consequatur doloremque laborum maxime necessitatibus nostrum odio, officiis quibusdam
-      veniam! Doloribus eos id quaerat.
-    </p>
-    <p>
-      Sixth -> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur dicta ipsum labore quod
-      tempora ullam? Alias consequatur doloremque laborum maxime necessitatibus nostrum odio, officiis quibusdam
-      veniam! Doloribus eos id quaerat.
-    </p>
-    <p>
-      Seventh -> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur dicta ipsum labore quod
-      tempora ullam? Alias consequatur doloremque laborum maxime necessitatibus nostrum odio, officiis quibusdam
-      veniam! Doloribus eos id quaerat.
-    </p>
-    <p>
-      Eighth -> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur dicta ipsum labore quod
-      tempora ullam? Alias consequatur doloremque laborum maxime necessitatibus nostrum odio, officiis quibusdam
-      veniam! Doloribus eos id quaerat.
-    </p>
-    <p>
-      Ninth -> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur dicta ipsum labore quod
-      tempora ullam? Alias consequatur doloremque laborum maxime necessitatibus nostrum odio, officiis quibusdam
-      veniam! Doloribus eos id quaerat.
-    </p>
-  </div>
-  <p>
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi blanditiis consectetur ea eligendi id in
-    inventore ipsa iure laudantium libero, minus molestias necessitatibus nesciunt non omnis, quasi recusandae
-    tempore voluptates!
-  </p>
-  <p>
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi blanditiis consectetur ea eligendi id in
-    inventore ipsa iure laudantium libero, minus molestias necessitatibus nesciunt non omnis, quasi recusandae
-    tempore voluptates!
-  </p>
-  <p>
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi blanditiis consectetur ea eligendi id in
-    inventore ipsa iure laudantium libero, minus molestias necessitatibus nesciunt non omnis, quasi recusandae
-    tempore voluptates!
-  </p>
-  <p>
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi blanditiis consectetur ea eligendi id in
-    inventore ipsa iure laudantium libero, minus molestias necessitatibus nesciunt non omnis, quasi recusandae
-    tempore voluptates!
-  </p>
-  <p>
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi blanditiis consectetur ea eligendi id in
-    inventore ipsa iure laudantium libero, minus molestias necessitatibus nesciunt non omnis, quasi recusandae
-    tempore voluptates!
-  </p>
-</div>
-<script type="module">
-  import { driver } from "./src/driver.ts";
+      <p id="large-paragraph-text">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi blanditiis consectetur ea eligendi id in
+        inventore ipsa iure laudantium libero, minus molestias necessitatibus nesciunt non omnis, quasi recusandae
+        tempore voluptates! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi blanditiis consectetur ea
+        eligendi id in inventore ipsa iure laudantium libero, minus molestias necessitatibus nesciunt non omnis, quasi
+        recusandae tempore voluptates!
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi blanditiis consectetur ea eligendi id in
+        inventore ipsa iure laudantium libero, minus molestias necessitatibus nesciunt non omnis, quasi recusandae
+        tempore voluptates!
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi blanditiis consectetur ea eligendi id in
+        inventore ipsa iure laudantium libero, minus molestias necessitatibus nesciunt non omnis, quasi recusandae
+        tempore voluptates!
+      </p>
+      <div id="scrollable-area">
+        <p>
+          First -> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur dicta ipsum labore quod
+          tempora ullam? Alias consequatur doloremque laborum maxime necessitatibus nostrum odio, officiis quibusdam
+          veniam! Doloribus eos id quaerat.
+        </p>
+        <p>
+          Second -> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur dicta ipsum labore quod
+          tempora ullam? Alias consequatur doloremque laborum maxime necessitatibus nostrum odio, officiis quibusdam
+          veniam! Doloribus eos id quaerat.
+        </p>
+        <p id="third-scroll-paragraph">
+          Third -> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur dicta ipsum labore quod
+          tempora ullam? Alias consequatur doloremque laborum maxime necessitatibus nostrum odio, officiis quibusdam
+          veniam! Doloribus eos id quaerat.
+        </p>
+        <p>
+          Fourth -> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur dicta ipsum labore quod
+          tempora ullam? Alias consequatur doloremque laborum maxime necessitatibus nostrum odio, officiis quibusdam
+          veniam! Doloribus eos id quaerat.
+        </p>
+        <p>
+          Fifth -> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur dicta ipsum labore quod
+          tempora ullam? Alias consequatur doloremque laborum maxime necessitatibus nostrum odio, officiis quibusdam
+          veniam! Doloribus eos id quaerat.
+        </p>
+        <p>
+          Sixth -> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur dicta ipsum labore quod
+          tempora ullam? Alias consequatur doloremque laborum maxime necessitatibus nostrum odio, officiis quibusdam
+          veniam! Doloribus eos id quaerat.
+        </p>
+        <p>
+          Seventh -> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur dicta ipsum labore quod
+          tempora ullam? Alias consequatur doloremque laborum maxime necessitatibus nostrum odio, officiis quibusdam
+          veniam! Doloribus eos id quaerat.
+        </p>
+        <p>
+          Eighth -> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur dicta ipsum labore quod
+          tempora ullam? Alias consequatur doloremque laborum maxime necessitatibus nostrum odio, officiis quibusdam
+          veniam! Doloribus eos id quaerat.
+        </p>
+        <p>
+          Ninth -> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur dicta ipsum labore quod
+          tempora ullam? Alias consequatur doloremque laborum maxime necessitatibus nostrum odio, officiis quibusdam
+          veniam! Doloribus eos id quaerat.
+        </p>
+      </div>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi blanditiis consectetur ea eligendi id in
+        inventore ipsa iure laudantium libero, minus molestias necessitatibus nesciunt non omnis, quasi recusandae
+        tempore voluptates!
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi blanditiis consectetur ea eligendi id in
+        inventore ipsa iure laudantium libero, minus molestias necessitatibus nesciunt non omnis, quasi recusandae
+        tempore voluptates!
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi blanditiis consectetur ea eligendi id in
+        inventore ipsa iure laudantium libero, minus molestias necessitatibus nesciunt non omnis, quasi recusandae
+        tempore voluptates!
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi blanditiis consectetur ea eligendi id in
+        inventore ipsa iure laudantium libero, minus molestias necessitatibus nesciunt non omnis, quasi recusandae
+        tempore voluptates!
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi blanditiis consectetur ea eligendi id in
+        inventore ipsa iure laudantium libero, minus molestias necessitatibus nesciunt non omnis, quasi recusandae
+        tempore voluptates!
+      </p>
+    </div>
+    <script type="module">
+      import { driver } from "./src/driver.ts";
 
-  document.getElementById("highlight-btn").addEventListener("click", () => {
-    driver({ animate: true }).highlight({
-      element: "h2",
-      popover: {
-        title: "MIT License",
-        description: "A <strong>lightweight, no-dependency</strong> JavaScript engine to drive user's focus.",
-      },
-    });
-  });
-
-  document.getElementById("simple-highlight-btn").addEventListener("click", () => {
-    driver({ animate: false }).highlight({
-      element: "#large-paragraph-text",
-      popover: {
-        title: "driver.js",
-        description:
-          "Highlight anything, anywhere on the page. Yes, literally anything including SVG portions, scrollable items etc.",
-        align: "end",
-        side: "top",
-      },
-    });
-  });
-
-  document.getElementById("dark-highlight-btn").addEventListener("click", () => {
-    driver({
-      animate: true,
-      opacity: 0.9,
-    }).highlight({ element: "ul" });
-  });
-
-  document.getElementById("dim-highlight-btn").addEventListener("click", () => {
-    driver({
-      animate: true,
-      opacity: 0.2,
-    }).highlight({ element: ".buttons" });
-  });
-
-  document.getElementById("transition-highlight-btn").addEventListener("click", () => {
-    const driverObj = driver({ animate: true });
-
-    driverObj.highlight({
-      popover: {
-        title: "driver.js",
-        description: "Highlight anything, anywhere on the page",
-      },
-    });
-
-    window.setTimeout(() => {
-      driverObj.highlight({
-        element: ".buttons button:first-child",
-        popover: {
-          title: "driver.js",
-          description: "Highlight anything, anywhere on the page",
-        },
+      document.getElementById("highlight-btn").addEventListener("click", () => {
+        driver({ animate: true, showButtons: false }).highlight({
+          element: "h2",
+          popover: {
+            title: "MIT License",
+            description: "A lightweight, no-dependency JavaScript engine to drive user's focus.",
+            side: "bottom",
+            align: "start",
+          },
+        });
       });
-    }, 2000);
 
-    window.setTimeout(() => {
-      driverObj.highlight({
-        popover: {
-          title: "driver.js",
-          description: "Highlight anything, anywhere on the page",
-        },
+      document.getElementById("simple-highlight-btn").addEventListener("click", () => {
+        driver({ animate: false }).highlight({
+          element: "#large-paragraph-text",
+          popover: {
+            title: "driver.js",
+            description:
+              "Highlight anything, anywhere on the page. Yes, literally anything including SVG portions, scrollable items etc.",
+            align: "start",
+            side: "top",
+          },
+        });
       });
-    }, 4000);
 
-    window.setTimeout(() => {
-      driverObj.highlight({
-        element: "h2",
-        popover: {
-          description: "driver.js",
-        },
+      document.getElementById("dark-highlight-btn").addEventListener("click", () => {
+        driver({
+          animate: true,
+          opacity: 0.9,
+        }).highlight({ element: "ul" });
       });
-    }, 6000);
-  });
 
-  document.getElementById("scrollable-area-btn").addEventListener("click", () => {
-    const driverObj = driver({ animate: true });
-    driverObj.highlight({ element: "#scrollable-area" });
-  });
+      document.getElementById("dim-highlight-btn").addEventListener("click", () => {
+        driver({
+          animate: true,
+          opacity: 0.2,
+        }).highlight({ element: ".buttons" });
+      });
 
-  document.getElementById("without-element-btn").addEventListener("click", () => {
-    const driverObj = driver({
-      animate: true,
-    });
-    driverObj.highlight({
-      popover: {
-        showButtons: false,
-        description:
-          "<div class='gif-popover'><img style='max-width: 100%' src='https://i.imgur.com/EAQhHu5.gif' /><p>Go and build something cool!</p></div>",
-      },
-    });
-  });
+      document.getElementById("transition-highlight-btn").addEventListener("click", () => {
+        const driverObj = driver({ animate: true });
 
-  document.getElementById("inner-scroll-area-btn").addEventListener("click", () => {
-    const driverObj = driver({ animate: true });
-    driverObj.highlight({ element: "#third-scroll-paragraph" });
-  });
+        driverObj.highlight({
+          popover: {
+            title: "driver.js",
+            description: "Highlight anything, anywhere on the page",
+          },
+        });
 
-  document.getElementById("disallow-close").addEventListener("click", () => {
-    const driverObj = driver({
-      animate: true,
-      allowClose: false,
-    });
+        window.setTimeout(() => {
+          driverObj.highlight({
+            element: ".buttons button:first-child",
+            popover: {
+              title: "driver.js",
+              description: "Highlight anything, anywhere on the page",
+            },
+          });
+        }, 2000);
 
-    driverObj.highlight({
-      element: ".buttons",
-    });
-  });
+        window.setTimeout(() => {
+          driverObj.highlight({
+            popover: {
+              title: "driver.js",
+              description: "Highlight anything, anywhere on the page",
+            },
+          });
+        }, 4000);
 
-  document.getElementById("destroy-btn").addEventListener("click", () => {
-    driver().destroy();
-  });
-</script>
-</body>
+        window.setTimeout(() => {
+          driverObj.highlight({
+            element: "h2",
+            popover: {
+              description: "driver.js",
+            },
+          });
+        }, 6000);
+      });
+
+      document.getElementById("scrollable-area-btn").addEventListener("click", () => {
+        const driverObj = driver({ animate: true });
+        driverObj.highlight({ element: "#scrollable-area" });
+      });
+
+      document.getElementById("without-element-btn").addEventListener("click", () => {
+        const driverObj = driver({
+          animate: true,
+        });
+        driverObj.highlight({
+          popover: {
+            showButtons: false,
+            description:
+              "<div class='gif-popover'><img style='max-width: 100%' src='https://i.imgur.com/EAQhHu5.gif' /><p>Go and build something cool!</p></div>",
+          },
+        });
+      });
+
+      document.getElementById("inner-scroll-area-btn").addEventListener("click", () => {
+        const driverObj = driver({ animate: true });
+        driverObj.highlight({ element: "#third-scroll-paragraph" });
+      });
+
+      document.getElementById("disallow-close").addEventListener("click", () => {
+        const driverObj = driver({
+          animate: true,
+          allowClose: false,
+        });
+
+        driverObj.highlight({
+          element: ".buttons",
+        });
+      });
+
+      document.getElementById("destroy-btn").addEventListener("click", () => {
+        driver().destroy();
+      });
+    </script>
+  </body>
 </html>

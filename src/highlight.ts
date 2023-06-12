@@ -57,13 +57,15 @@ export function highlight(step: DriveStep) {
 
 export function refreshActiveHighlight() {
   const activeHighlight = getState("activeElement");
+  const activeStep = getState("activeStep")!;
+
   if (!activeHighlight) {
     return;
   }
 
   trackActiveElement(activeHighlight);
   refreshStage();
-  repositionPopover(activeHighlight);
+  repositionPopover(activeHighlight, activeStep);
 }
 
 function transferHighlight(from: Element, to: Element, toStep: DriveStep) {
