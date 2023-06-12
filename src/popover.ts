@@ -11,6 +11,7 @@ export type Popover = {
   description: string;
   side?: Side;
   align?: Alignment;
+  showButtons?: boolean;
 };
 
 export type PopoverDOM = {
@@ -41,7 +42,7 @@ export function renderPopover(element: Element, step: DriveStep) {
     document.body.appendChild(popover.wrapper);
   }
 
-  const { title, description } = step.popover || {};
+  const { title, description, showButtons = undefined } = step.popover || {};
 
   if (title) {
     popover.title.innerText = title;
@@ -55,6 +56,18 @@ export function renderPopover(element: Element, step: DriveStep) {
     popover.description.style.display = "block";
   } else {
     popover.description.style.display = "none";
+  }
+
+  if (getConfig("showButtons") === true) {
+    popover.footer.style.display = "flex";
+  } else {
+    popover.footer.style.display = "none";
+  }
+
+  if (showButtons === true) {
+    popover.footer.style.display = "flex";
+  } else if (showButtons === false) {
+    popover.footer.style.display = "none";
   }
 
   // Reset the popover position

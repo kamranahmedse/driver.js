@@ -6,6 +6,7 @@ export type Config = {
   stagePadding?: number;
   stageRadius?: number;
   popoverOffset?: number;
+  showButtons?: boolean;
 };
 
 let currentConfig: Config = {};
@@ -19,6 +20,7 @@ export function configure(config: Config = {}) {
     stagePadding: 10,
     stageRadius: 5,
     popoverOffset: 10,
+    showButtons: true,
     ...config,
   };
 }
