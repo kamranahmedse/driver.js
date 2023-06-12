@@ -1,6 +1,7 @@
 import { bringInView } from "./utils";
 import { getConfig } from "./config";
 import { getState, setState } from "./state";
+import { DriveStep } from "./driver";
 
 export type Side = "top" | "right" | "bottom" | "left" | "over";
 export type Alignment = "start" | "center" | "end";
@@ -33,11 +34,27 @@ export function hidePopover() {
   popover.wrapper.style.display = "none";
 }
 
-export function renderPopover(element: Element) {
+export function renderPopover(element: Element, step: DriveStep) {
   let popover = getState("popover");
   if (!popover) {
     popover = createPopover();
     document.body.appendChild(popover.wrapper);
+  }
+
+  const { title, description } = step.popover || {};
+
+  if (title) {
+    popover.title.innerText = title;
+    popover.title.style.display = "block";
+  } else {
+    popover.title.style.display = "none";
+  }
+
+  if (description) {
+    popover.description.innerHTML = description;
+    popover.description.style.display = "block";
+  } else {
+    popover.description.style.display = "none";
   }
 
   // Reset the popover position
@@ -183,8 +200,8 @@ export function repositionPopover(element: Element) {
   // @TODO These values will come from the config
   // Configure the popover positioning
   const requiredAlignment: Alignment = "start";
-  const requiredSide: Side = element.id === "driver-dummy-element" ? "over" : "left" as Side;
-  const popoverPadding = getConfig('stagePadding') || 0;
+  const requiredSide: Side = element.id === "driver-dummy-element" ? "over" : ("left" as Side);
+  const popoverPadding = getConfig("stagePadding") || 0;
 
   const popoverDimensions = getPopoverDimensions()!;
   const popoverArrowDimensions = popover.arrow.getBoundingClientRect();
@@ -423,10 +440,12 @@ function createPopover(): PopoverDOM {
 
   const title = document.createElement("div");
   title.classList.add("driver-popover-title");
+  title.style.display = "none";
   title.innerText = "Popover Title";
 
   const description = document.createElement("div");
   description.classList.add("driver-popover-description");
+  description.style.display = "none";
   description.innerText = "Popover description is here";
 
   const footer = document.createElement("div");

@@ -99,7 +99,7 @@ function transferHighlight(from: Element, to: Element, toStep: DriveStep) {
     const isHalfwayThrough = timeRemaining <= duration / 2;
 
     if (toStep.popover && isHalfwayThrough && !isPopoverRendered && hasDelayedPopover) {
-      renderPopover(to);
+      renderPopover(to, toStep);
       isPopoverRendered = true;
     }
 
@@ -119,7 +119,7 @@ function transferHighlight(from: Element, to: Element, toStep: DriveStep) {
 
   bringInView(to);
   if (!hasDelayedPopover && toStep.popover) {
-    renderPopover(to);
+    renderPopover(to, toStep);
   }
 
   from.classList.remove("driver-active-element");
