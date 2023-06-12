@@ -2,7 +2,7 @@ import { destroyPopover, Popover } from "./popover";
 import { destroyStage } from "./stage";
 import { destroyEvents, initEvents } from "./events";
 import { Config, configure, getConfig } from "./config";
-import { destroyHighlight, highlight } from "./highlight";
+import { destroyHighlight, highlight, refreshActiveHighlight } from "./highlight";
 import { destroyEmitter, listen } from "./emitter";
 
 import "./style.css";
@@ -52,10 +52,19 @@ export function driver(options: Config = {}) {
 
   return {
     isActive: () => getState("isInitialized") || false,
+    refresh: () => {
+      refreshActiveHighlight();
+    },
     drive: (steps: DriveStep[]) => console.log(steps),
     highlight: (step: DriveStep) => {
       init();
-      highlight(step);
+      highlight({
+        ...step,
+        popover: step.popover ? {
+          showButtons: false,
+          ...step.popover!,
+        } : undefined,
+      });
     },
     destroy,
   };

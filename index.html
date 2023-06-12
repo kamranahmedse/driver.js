@@ -141,6 +141,7 @@
     <button id="without-element-btn">No Element</button>
     <button id="is-active-btn">Is Active?</button>
     <button id="activate-check-btn">Activate and Check</button>
+    <button id="modify-refresh">Modify Active + Refresh</button>
     <button id="destroy-btn">Destroy</button>
   </div>
 
@@ -302,7 +303,6 @@ npm install driver.js</pre
   document.getElementById("highlight-btn").addEventListener("click", () => {
     driver({
       animate: true,
-      showButtons: false,
       popoverOffset: 10,
     }).highlight({
       element: "h2",
@@ -311,6 +311,7 @@ npm install driver.js</pre
         description: "A lightweight, no-dependency JavaScript engine to drive user's focus.",
         side: "bottom",
         align: "start",
+        showButtons: true,
       },
     });
   });
