@@ -51,6 +51,7 @@ export function driver(options: Config = {}) {
   }
 
   return {
+    isActive: () => getState("isInitialized") || false,
     drive: (steps: DriveStep[]) => console.log(steps),
     highlight: (step: DriveStep) => {
       init();

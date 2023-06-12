@@ -52,7 +52,7 @@ export function renderPopover(element: Element, step: DriveStep) {
     title,
     description,
     showButtons = undefined,
-    doneBtnText = 'Done',
+    // doneBtnText = 'Done',
     closeBtnText= 'Close',
     nextBtnText= 'Next &rarr;',
     prevBtnText = '&larr; Previous',
