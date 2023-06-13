@@ -66,10 +66,18 @@ function transferHighlight(toElement: Element, toStep: DriveStep) {
   // the popover immediately. Otherwise, we wait for the animation
   // to finish before showing the popover.
   const isFirstHighlight = !fromElement || fromElement === toElement;
+  const isToDummyElement = toElement.id === "driver-dummy-element";
+  const isFromDummyElement = fromElement.id === "driver-dummy-element";
   const hasNoPreviousPopover = fromStep && !fromStep.popover;
-  const isNextOrPrevDummyElement = toElement.id === "driver-dummy-element" || fromElement.id === "driver-dummy-element";
 
-  const hasDelayedPopover = !isFirstHighlight && (hasNoPreviousPopover || isNextOrPrevDummyElement);
+  const highlightStartedHook = getConfig("onHighlightStarted");
+  const highlightedHook = getConfig("onHighlighted");
+
+  if (!isToDummyElement && highlightStartedHook) {
+    highlightStartedHook(toElement, toStep);
+  }
+
+  const hasDelayedPopover = !isFirstHighlight && (hasNoPreviousPopover || isFromDummyElement || isToDummyElement);
   let isPopoverRendered = false;
 
   hidePopover();
@@ -98,7 +106,15 @@ function transferHighlight(toElement: Element, toStep: DriveStep) {
     } else {
       trackActiveElement(toElement);
 
+      if (!isToDummyElement && highlightedHook) {
+        highlightedHook(toElement, toStep);
+      }
+
       setState("transitionCallback", undefined);
+      setState("previousStep", fromStep);
+      setState("previousElement", fromElement);
+      setState("activeStep", toStep);
+      setState("activeElement", toElement);
     }
 
     window.requestAnimationFrame(animate);
@@ -114,16 +130,6 @@ function transferHighlight(toElement: Element, toStep: DriveStep) {
 
   fromElement.classList.remove("driver-active-element");
   toElement.classList.add("driver-active-element");
-
-  // Keep track of the previous step so that we can
-  // animate the transition between the two steps.
-  setState("previousStep", fromStep);
-  setState("activeStep", toStep);
-
-  // Keep track of the previous element so that we can
-  // animate the transition between the two elements.
-  setState("previousElement", fromElement);
-  setState("activeElement", toElement);
 }
 
 export function destroyHighlight() {
