@@ -39,20 +39,7 @@ export function highlight(step: DriveStep) {
     elemObj = mountDummyElement();
   }
 
-  // Keep track of the previous step so that we can
-  // animate the transition between the two steps.
-  setState("previousStep", getState("activeStep"));
-  setState("activeStep", step);
-
-  const transferHighlightFrom = getState("activeElement") || elemObj;
-  const transferHighlightTo = elemObj;
-
-  transferHighlight(transferHighlightFrom, transferHighlightTo, step);
-
-  // Keep track of the previous element so that we can
-  // animate the transition between the two elements.
-  setState("previousElement", transferHighlightFrom);
-  setState("activeElement", transferHighlightTo);
+  transferHighlight(elemObj, step);
 }
 
 export function refreshActiveHighlight() {
@@ -68,18 +55,19 @@ export function refreshActiveHighlight() {
   repositionPopover(activeHighlight, activeStep);
 }
 
-function transferHighlight(from: Element, to: Element, toStep: DriveStep) {
+function transferHighlight(toElement: Element, toStep: DriveStep) {
   const duration = 400;
   const start = Date.now();
 
-  const previousStep = getState("previousStep");
+  const fromStep = getState("activeStep");
+  const fromElement = getState("activeElement") || toElement;
 
   // If it's the first time we're highlighting an element, we show
   // the popover immediately. Otherwise, we wait for the animation
   // to finish before showing the popover.
-  const isFirstHighlight = !from || from === to;
-  const hasNoPreviousPopover = previousStep && !previousStep.popover;
-  const isNextOrPrevDummyElement = to.id === "driver-dummy-element" || from.id === "driver-dummy-element";
+  const isFirstHighlight = !fromElement || fromElement === toElement;
+  const hasNoPreviousPopover = fromStep && !fromStep.popover;
+  const isNextOrPrevDummyElement = toElement.id === "driver-dummy-element" || fromElement.id === "driver-dummy-element";
 
   const hasDelayedPopover = !isFirstHighlight && (hasNoPreviousPopover || isNextOrPrevDummyElement);
   let isPopoverRendered = false;
@@ -101,14 +89,14 @@ function transferHighlight(from: Element, to: Element, toStep: DriveStep) {
     const isHalfwayThrough = timeRemaining <= duration / 2;
 
     if (toStep.popover && isHalfwayThrough && !isPopoverRendered && hasDelayedPopover) {
-      renderPopover(to, toStep);
+      renderPopover(toElement, toStep);
       isPopoverRendered = true;
     }
 
     if (getConfig("animate") && elapsed < duration) {
-      transitionStage(elapsed, duration, from, to);
+      transitionStage(elapsed, duration, fromElement, toElement);
     } else {
-      trackActiveElement(to);
+      trackActiveElement(toElement);
 
       setState("transitionCallback", undefined);
     }
@@ -119,13 +107,23 @@ function transferHighlight(from: Element, to: Element, toStep: DriveStep) {
   setState("transitionCallback", animate);
   window.requestAnimationFrame(animate);
 
-  bringInView(to);
+  bringInView(toElement);
   if (!hasDelayedPopover && toStep.popover) {
-    renderPopover(to, toStep);
+    renderPopover(toElement, toStep);
   }
 
-  from.classList.remove("driver-active-element");
-  to.classList.add("driver-active-element");
+  fromElement.classList.remove("driver-active-element");
+  toElement.classList.add("driver-active-element");
+
+  // Keep track of the previous step so that we can
+  // animate the transition between the two steps.
+  setState("previousStep", fromStep);
+  setState("activeStep", toStep);
+
+  // Keep track of the previous element so that we can
+  // animate the transition between the two elements.
+  setState("previousElement", fromElement);
+  setState("activeElement", toElement);
 }
 
 export function destroyHighlight() {

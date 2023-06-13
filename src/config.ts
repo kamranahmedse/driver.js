@@ -1,3 +1,5 @@
+import { DriveStep } from "./driver";
+
 export type Config = {
   animate?: boolean;
   smoothScroll?: boolean;
@@ -7,6 +9,9 @@ export type Config = {
   stageRadius?: number;
   popoverOffset?: number;
   showButtons?: boolean;
+
+  onHighlightStarted?: (element: Element, step: DriveStep) => void;
+  onHighlighted?: (element: Element, step: DriveStep) => void;
 };
 
 let currentConfig: Config = {};
