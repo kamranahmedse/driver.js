@@ -141,7 +141,7 @@
         <button id="without-element-btn">No Element</button>
         <button id="is-active-btn">Is Active?</button>
         <button id="activate-check-btn">Activate and Check</button>
-        <button id="modify-refresh">Modify Active + Refresh</button>
+        <button id="backdrop-color-btn">Backdrop Color</button>
         <button id="destroy-btn">Destroy</button>
       </div>
 
@@ -274,6 +274,15 @@ npm install driver.js</pre
 
       document.getElementById("is-active-btn").addEventListener("click", () => {
         alert(driver().isActive());
+      });
+
+      document.getElementById("backdrop-color-btn").addEventListener("click", () => {
+        driver({
+          backdropColor: "blue",
+          opacity: 0.3,
+        }).highlight({
+          element: "#backdrop-color-btn",
+        });
       });
 
       document.getElementById("activate-check-btn").addEventListener("click", () => {

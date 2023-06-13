@@ -135,7 +135,7 @@ function createStageSvg(stage: StageDefinition): SVGSVGElement {
 
   stagePath.setAttribute("d", generateStageSvgPathString(stage));
 
-  stagePath.style.fill = "rgb(0,0,0)";
+  stagePath.style.fill = getConfig("backdropColor") || "rgb(0,0,0)";
   stagePath.style.opacity = `${getConfig("opacity")}`;
   stagePath.style.pointerEvents = "auto";
   stagePath.style.cursor = "auto";

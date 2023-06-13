@@ -2,6 +2,7 @@ import { DriveStep } from "./driver";
 
 export type Config = {
   animate?: boolean;
+  backdropColor?: string;
   smoothScroll?: boolean;
   allowClose?: boolean;
   opacity?: number;
@@ -26,6 +27,7 @@ export function configure(config: Config = {}) {
     stageRadius: 5,
     popoverOffset: 10,
     showButtons: true,
+    backdropColor: "#000",
     ...config,
   };
 }
