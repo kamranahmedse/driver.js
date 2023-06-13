@@ -419,6 +419,9 @@ npm install driver.js</pre
       document.getElementById("without-element-btn").addEventListener("click", () => {
         const driverObj = driver({
           animate: true,
+          onClose: (element, step) => {
+            console.log("Close modal", element, step);
+          },
           onDeselected: (element, step) => {
             console.log("Deselected element", element, step);
           },

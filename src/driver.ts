@@ -46,6 +46,9 @@ export function driver(options: Config = {}) {
   }
 
   function destroy() {
+    const activeElement = getState("activeElement");
+    const activeStep = getState("activeStep");
+
     document.body.classList.remove("driver-active", "driver-fade", "driver-simple");
 
     destroyEvents();
@@ -55,6 +58,13 @@ export function driver(options: Config = {}) {
     destroyEmitter();
 
     resetState();
+
+    const onClose = getConfig("onClose");
+    if (onClose && activeElement && activeStep) {
+      const isActiveDummyElement = activeElement.id === "driver-dummy-element";
+
+      onClose(isActiveDummyElement ? undefined : activeElement, activeStep);
+    }
   }
 
   return {

@@ -15,6 +15,8 @@ export type Config = {
   onHighlighted?: (element: Element | undefined, step: DriveStep) => void;
 
   onDeselected?: (element: Element | undefined, step: DriveStep) => void;
+
+  onClose?: (element: Element | undefined, step: DriveStep) => void;
 };
 
 let currentConfig: Config = {};
