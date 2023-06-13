@@ -74,12 +74,12 @@ function transferHighlight(toElement: Element, toStep: DriveStep) {
   const highlightedHook = getConfig("onHighlighted");
   const deselectedHook = getConfig("onDeselected");
 
-  if (!isFirstHighlight && !isFromDummyElement && deselectedHook) {
-    deselectedHook(fromElement, fromStep!);
+  if (!isFirstHighlight && deselectedHook) {
+    deselectedHook(isFromDummyElement ? undefined : fromElement, fromStep!);
   }
 
-  if (!isToDummyElement && highlightStartedHook) {
-    highlightStartedHook(toElement, toStep);
+  if (highlightStartedHook) {
+    highlightStartedHook(isToDummyElement ? undefined : toElement, toStep);
   }
 
   const hasDelayedPopover = !isFirstHighlight && (hasNoPreviousPopover || isFromDummyElement || isToDummyElement);
@@ -111,8 +111,8 @@ function transferHighlight(toElement: Element, toStep: DriveStep) {
     } else {
       trackActiveElement(toElement);
 
-      if (!isToDummyElement && highlightedHook) {
-        highlightedHook(toElement, toStep);
+      if (highlightedHook) {
+        highlightedHook(isToDummyElement ? undefined : toElement, toStep);
       }
 
       setState("transitionCallback", undefined);

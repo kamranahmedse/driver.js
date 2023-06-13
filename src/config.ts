@@ -11,10 +11,10 @@ export type Config = {
   popoverOffset?: number;
   showButtons?: boolean;
 
-  onHighlightStarted?: (element: Element, step: DriveStep) => void;
-  onHighlighted?: (element: Element, step: DriveStep) => void;
+  onHighlightStarted?: (element: Element | undefined, step: DriveStep) => void;
+  onHighlighted?: (element: Element | undefined, step: DriveStep) => void;
 
-  onDeselected?: (element: Element, step: DriveStep) => void;
+  onDeselected?: (element: Element | undefined, step: DriveStep) => void;
 };
 
 let currentConfig: Config = {};

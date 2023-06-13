@@ -419,6 +419,15 @@ npm install driver.js</pre
       document.getElementById("without-element-btn").addEventListener("click", () => {
         const driverObj = driver({
           animate: true,
+          onDeselected: (element, step) => {
+            console.log("Deselected element", element, step);
+          },
+          onHighlightStarted: (element, step) => {
+            console.log("Started highlighting element", element, step);
+          },
+          onHighlighted: (element, step) => {
+            console.log("Highlighted element", element, step);
+          },
         });
         driverObj.highlight({
           popover: {

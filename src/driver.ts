@@ -25,7 +25,7 @@ export function driver(options: Config = {}) {
     const activeElement = getState("activeElement");
     const onDeselected = getConfig("onDeselected");
     if (activeStep && activeElement && onDeselected) {
-      onDeselected(activeElement, activeStep);
+      onDeselected(activeElement.id === "driver-dummy-element" ? undefined : activeElement, activeStep);
     }
 
     destroy();
