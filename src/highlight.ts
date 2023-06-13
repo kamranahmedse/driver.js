@@ -72,6 +72,11 @@ function transferHighlight(toElement: Element, toStep: DriveStep) {
 
   const highlightStartedHook = getConfig("onHighlightStarted");
   const highlightedHook = getConfig("onHighlighted");
+  const deselectedHook = getConfig("onDeselected");
+
+  if (!isFirstHighlight && !isFromDummyElement && deselectedHook) {
+    deselectedHook(fromElement, fromStep!);
+  }
 
   if (!isToDummyElement && highlightStartedHook) {
     highlightStartedHook(toElement, toStep);

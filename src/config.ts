@@ -13,6 +13,8 @@ export type Config = {
 
   onHighlightStarted?: (element: Element, step: DriveStep) => void;
   onHighlighted?: (element: Element, step: DriveStep) => void;
+
+  onDeselected?: (element: Element, step: DriveStep) => void;
 };
 
 let currentConfig: Config = {};

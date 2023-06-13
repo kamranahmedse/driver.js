@@ -21,6 +21,13 @@ export function driver(options: Config = {}) {
       return;
     }
 
+    const activeStep = getState("activeStep");
+    const activeElement = getState("activeElement");
+    const onDeselected = getConfig("onDeselected");
+    if (activeStep && activeElement && onDeselected) {
+      onDeselected(activeElement, activeStep);
+    }
+
     destroy();
   }
 
@@ -60,10 +67,12 @@ export function driver(options: Config = {}) {
       init();
       highlight({
         ...step,
-        popover: step.popover ? {
-          showButtons: false,
-          ...step.popover!,
-        } : undefined,
+        popover: step.popover
+          ? {
+              showButtons: false,
+              ...step.popover!,
+            }
+          : undefined,
       });
     },
     destroy,

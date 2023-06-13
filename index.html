@@ -314,6 +314,9 @@ npm install driver.js</pre
           animate: true,
           popoverOffset: 10,
           stagePadding: 10,
+          onDeselected: (element, step) => {
+            console.log("Deselected element", element, step);
+          },
           onHighlightStarted: (element, step) => {
             console.log("Started highlighting element", element, step);
           },
@@ -359,7 +362,18 @@ npm install driver.js</pre
       });
 
       document.getElementById("transition-highlight-btn").addEventListener("click", () => {
-        const driverObj = driver({ animate: true });
+        const driverObj = driver({
+          animate: true,
+          onDeselected: (element, step) => {
+            console.log("Deselected element", element, step);
+          },
+          onHighlightStarted: (element, step) => {
+            console.log("Started highlighting element", element, step);
+          },
+          onHighlighted: (element, step) => {
+            console.log("Highlighted element", element, step);
+          },
+        });
 
         driverObj.highlight({
           popover: {
