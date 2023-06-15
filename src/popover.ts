@@ -5,7 +5,7 @@ import { DriveStep } from "./driver";
 
 export type Side = "top" | "right" | "bottom" | "left" | "over";
 export type Alignment = "start" | "center" | "end";
-export type AllowedButtons = "next" | "previous" | "done";
+export type AllowedButtons = "next" | "previous" | "close";
 
 export type Popover = {
   title?: string;
@@ -79,7 +79,7 @@ export function renderPopover(element: Element, step: DriveStep) {
 
   const showButtonsConfig: AllowedButtons[] = popoverShowButtons !== undefined ? popoverShowButtons : getConfig("showButtons")!;
 
-  console.log(showButtonsConfig);
+  console.log(popoverShowButtons);
   if (showButtonsConfig?.length! > 0) {
     popover.footer.style.display = "flex";
 
@@ -91,7 +91,7 @@ export function renderPopover(element: Element, step: DriveStep) {
       popover.previousButton.style.display = "none";
     }
 
-    if (!showButtonsConfig.includes('done')) {
+    if (!showButtonsConfig.includes('close')) {
       popover.closeButton.style.display = "none";
     }
   } else {

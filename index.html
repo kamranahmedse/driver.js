@@ -88,7 +88,6 @@
 
       .buttons {
         display: flex;
-        margin-top: 20px;
         gap: 10px;
         max-width: 500px;
         flex-wrap: wrap;
@@ -129,6 +128,8 @@
         <p>Rewritten and enhanced version of driver.js</p>
       </div>
 
+      <h2>Highlight Feature</h2>
+      <p>given below are the examples of simple `highlight`</p>
       <div class="buttons">
         <button id="highlight-btn">Animated Highlight</button>
         <button id="simple-highlight-btn">Simple Highlight</button>
@@ -143,15 +144,23 @@
         <button id="activate-check-btn">Activate and Check</button>
         <button id="backdrop-color-btn">Backdrop Color</button>
         <button id="hooks">Hooks</button>
-
+        <button id="destroy-btn" style="border-color: red; background: red; color: white">Destroy</button>
+      </div>
+      <br>
+      <p>given below are the examples of simple `highlight`</p>
+      <div class="buttons">
         <button id="no-buttons">No Buttons</button>
-        <button id="all-buttons">All Buttons</button>
-        <button id="next-button">Next Buttons</button>
-        <button id="prev-button">Previous Buttons</button>
+        <button id="buttons-from-popover">Selected Buttons</button>
+        <button id="next-button">Next Button</button>
+        <button id="previous-button">Previous Buttons</button>
         <button id="next-prev-button">Next Previous Buttons</button>
         <button id="close-button">Close Buttons</button>
+      </div>
 
-        <button id="destroy-btn">Destroy</button>
+      <br>
+      <p>You can Attach events to buttons.</p>
+      <div class="buttons">
+        <button id="button-config-events">Global Button Listeners</button>
       </div>
 
       <ul>
@@ -298,19 +307,68 @@ npm install driver.js</pre
         });
       });
 
-
-      document.getElementById("all-buttons").addEventListener("click", () => {
-        const driverObj = driver({
-          showButtons: ['next', 'previous', 'done']
-        });
+      document.getElementById("buttons-from-popover").addEventListener("click", () => {
+        const driverObj = driver();
 
         driverObj.highlight({
-          element: "#no-buttons",
+          element: "#buttons-from-popover",
           popover: {
             title: "No Buttons",
-            showButtons: ['done', 'previous', 'next'],
+            showButtons: ["close"],
             description:
               "No buttons are shown by default for highlight. You can pass in the option to show the buttons you want.",
+          },
+        });
+      });
+
+      document.getElementById("next-button").addEventListener("click", () => {
+        const driverObj = driver();
+
+        driverObj.highlight({
+          element: "#next-button",
+          popover: {
+            title: "Next and Close",
+            showButtons: ["close", "next"],
+            description: "This one only has next and close buttons, nothing else.",
+          },
+        });
+      });
+
+      document.getElementById("previous-button").addEventListener("click", () => {
+        const driverObj = driver();
+
+        driverObj.highlight({
+          element: "#previous-button",
+          popover: {
+            title: "Previous and Close",
+            showButtons: ["close", "previous"],
+            description: "This one only has previous and close buttons, nothing else.",
+          },
+        });
+      });
+
+      document.getElementById("next-prev-button").addEventListener("click", () => {
+        const driverObj = driver();
+
+        driverObj.highlight({
+          element: "#next-prev-button",
+          popover: {
+            title: "Next and Previous Only",
+            showButtons: ["next", "previous"],
+            description: "This one only has next and previous buttons.",
+          },
+        });
+      });
+
+      document.getElementById("close-button").addEventListener("click", () => {
+        const driverObj = driver();
+
+        driverObj.highlight({
+          element: "#close-button",
+          popover: {
+            title: "Close Only",
+            showButtons: ["close"],
+            description: "This one only has close button.",
           },
         });
       });
@@ -456,31 +514,32 @@ npm install driver.js</pre
 
       document.getElementById("hooks").addEventListener("click", () => {
         const hooksEl = document.getElementById("hooks-list");
+        hooksEl.innerHTML = '';
 
         const driverObj = driver({
           animate: true,
           onDeselected: (element, step) => {
             const li = document.createElement("li");
             // prettier-ignore
-            li.innerHTML = `Deselected: ${element.textContent?.slice(0, 10)}..<br> ${JSON.stringify(step)}..`;
+            li.innerHTML = `Deselected: ${element?.textContent?.slice(0, 10)}..<br> ${JSON.stringify(step)}..`;
             hooksEl.append(li);
           },
           onHighlightStarted: (element, step) => {
             const li = document.createElement("li");
             // prettier-ignore
-            li.innerHTML = `Highlight Started: ${element.textContent?.slice(0, 10)}..<br> ${JSON.stringify(step)}..`;
+            li.innerHTML = `Highlight Started: ${element?.textContent?.slice(0, 10) || 'None'}..<br> ${JSON.stringify(step)}..`;
             hooksEl.append(li);
           },
           onHighlighted: (element, step) => {
             const li = document.createElement("li");
             // prettier-ignore
-            li.innerHTML = `Highlighted: ${element.textContent?.slice(0, 10)}..<br> ${JSON.stringify(step)}..`;
+            li.innerHTML = `Highlighted: ${element?.textContent?.slice(0, 10) || 'None'}..<br> ${JSON.stringify(step)}..`;
             hooksEl.append(li);
           },
           onClose: (element, step) => {
             const li = document.createElement("li");
             // prettier-ignore
-            li.innerHTML = `Closed: ${element.textContent?.slice(0, 10)}..<br> ${JSON.stringify(step)}..`;
+            li.innerHTML = `Closed: ${element?.textContent?.slice(0, 10) || 'None'}..<br> ${JSON.stringify(step)}..`;
             hooksEl.append(li);
           },
         });
@@ -495,12 +554,21 @@ npm install driver.js</pre
 
         window.setTimeout(() => {
           driverObj.highlight({
+            popover: {
+              title: "Popup Hook",
+              description: "There is no element below this popover",
+            },
+          });
+        }, 1000);
+
+        window.setTimeout(() => {
+          driverObj.highlight({
             element: "#hooks-list",
             popover: {
               description: "Here are all the hooks",
             },
           });
-        }, 1000);
+        }, 2000);
       });
 
       document.getElementById("scrollable-area-btn").addEventListener("click", () => {

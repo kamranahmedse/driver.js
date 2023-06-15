@@ -12,12 +12,16 @@ export type Config = {
   popoverOffset?: number;
   showButtons?: AllowedButtons[];
 
+  // State based callbacks, called upon state changes
   onHighlightStarted?: (element: Element | undefined, step: DriveStep) => void;
   onHighlighted?: (element: Element | undefined, step: DriveStep) => void;
-
   onDeselected?: (element: Element | undefined, step: DriveStep) => void;
-
   onClose?: (element: Element | undefined, step: DriveStep) => void;
+
+  // Event based callbacks, called upon events
+  onNextClick?: (element: Element | undefined, step: DriveStep) => void;
+  onPreviousClick?: (element: Element | undefined, step: DriveStep) => void;
+  onCloseClick?: (element: Element | undefined, step: DriveStep) => void;
 };
 
 let currentConfig: Config = {};
@@ -31,7 +35,7 @@ export function configure(config: Config = {}) {
     stagePadding: 10,
     stageRadius: 5,
     popoverOffset: 10,
-    showButtons: ["next", "previous", "done"],
+    showButtons: ["next", "previous", "close"],
     backdropColor: "#000",
     ...config,
   };
