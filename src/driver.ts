@@ -59,11 +59,11 @@ export function driver(options: Config = {}) {
 
     resetState();
 
-    const onClose = getConfig("onClose");
-    if (onClose && activeElement && activeStep) {
+    const onDestroyed = getConfig("onDestroyed");
+    if (onDestroyed && activeElement && activeStep) {
       const isActiveDummyElement = activeElement.id === "driver-dummy-element";
 
-      onClose(isActiveDummyElement ? undefined : activeElement, activeStep);
+      onDestroyed(isActiveDummyElement ? undefined : activeElement, activeStep);
     }
   }
 

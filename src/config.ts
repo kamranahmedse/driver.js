@@ -18,10 +18,11 @@ export type Config = {
   closeBtnText?: string;
 
   // State based callbacks, called upon state changes
+  onOverlayClick?: (element: Element | undefined, step: DriveStep) => void;
   onHighlightStarted?: (element: Element | undefined, step: DriveStep) => void;
   onHighlighted?: (element: Element | undefined, step: DriveStep) => void;
   onDeselected?: (element: Element | undefined, step: DriveStep) => void;
-  onClose?: (element: Element | undefined, step: DriveStep) => void;
+  onDestroyed?: (element: Element | undefined, step: DriveStep) => void;
 
   // Event based callbacks, called upon events
   onNextClick?: (element: Element | undefined, step: DriveStep) => void;

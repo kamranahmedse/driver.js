@@ -558,7 +558,7 @@ npm install driver.js</pre
             li.innerHTML = `Highlighted: ${element?.textContent?.slice(0, 10) || 'None'}..<br> ${JSON.stringify(step)}..`;
             hooksEl.append(li);
           },
-          onClose: (element, step) => {
+          onDestroyed: (element, step) => {
             const li = document.createElement("li");
             // prettier-ignore
             li.innerHTML = `Closed: ${element?.textContent?.slice(0, 10) || 'None'}..<br> ${JSON.stringify(step)}..`;
@@ -601,7 +601,7 @@ npm install driver.js</pre
       document.getElementById("without-element-btn").addEventListener("click", () => {
         const driverObj = driver({
           animate: true,
-          onClose: (element, step) => {
+          onDestroyed: (element, step) => {
             console.log("Close modal", element, step);
           },
           onDeselected: (element, step) => {
