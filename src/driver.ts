@@ -1,8 +1,8 @@
 import { destroyPopover, Popover } from "./popover";
 import { destroyStage } from "./stage";
-import { destroyEvents, initEvents } from "./events";
+import { destroyEvents, initEvents, requireRefresh } from "./events";
 import { Config, configure, getConfig } from "./config";
-import { destroyHighlight, highlight, refreshActiveHighlight } from "./highlight";
+import { destroyHighlight, highlight } from "./highlight";
 import { destroyEmitter, listen } from "./emitter";
 
 import "./style.css";
@@ -70,7 +70,7 @@ export function driver(options: Config = {}) {
   return {
     isActive: () => getState("isInitialized") || false,
     refresh: () => {
-      refreshActiveHighlight();
+      requireRefresh();
     },
     drive: (steps: DriveStep[]) => console.log(steps),
     highlight: (step: DriveStep) => {

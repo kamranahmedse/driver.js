@@ -68,7 +68,6 @@ function transferHighlight(toElement: Element, toStep: DriveStep) {
   const isFirstHighlight = !fromElement || fromElement === toElement;
   const isToDummyElement = toElement.id === "driver-dummy-element";
   const isFromDummyElement = fromElement.id === "driver-dummy-element";
-  const hasNoPreviousPopover = fromStep && !fromStep.popover;
 
   const highlightStartedHook = getConfig("onHighlightStarted");
   const highlightedHook = getConfig("onHighlighted");
@@ -82,7 +81,7 @@ function transferHighlight(toElement: Element, toStep: DriveStep) {
     highlightStartedHook(isToDummyElement ? undefined : toElement, toStep);
   }
 
-  const hasDelayedPopover = !isFirstHighlight && (hasNoPreviousPopover || isFromDummyElement || isToDummyElement);
+  const hasDelayedPopover = !isFirstHighlight;
   let isPopoverRendered = false;
 
   hidePopover();

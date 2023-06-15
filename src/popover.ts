@@ -53,9 +53,9 @@ export function renderPopover(element: Element, step: DriveStep) {
     description,
     showButtons = undefined,
     // doneBtnText = 'Done',
-    closeBtnText= 'Close',
-    nextBtnText= 'Next &rarr;',
-    prevBtnText = '&larr; Previous',
+    closeBtnText = "Close",
+    nextBtnText = "Next &rarr;",
+    prevBtnText = "&larr; Previous",
   } = step.popover || {};
 
   popover.nextButton.innerHTML = nextBtnText;
@@ -361,7 +361,11 @@ export function repositionPopover(element: Element, step: DriveStep) {
   // e.g. if element scrolled out of the screen to the top, the arrow should be rendered
   // pointing to the top. If the element scrolled out of the screen to the bottom,
   // the arrow should be rendered pointing to the bottom.
-  renderPopoverArrow(requiredAlignment, popoverRenderedSide, element);
+  if (!noneOptimal) {
+    renderPopoverArrow(requiredAlignment, popoverRenderedSide, element);
+  } else {
+    popover.arrow.classList.add("driver-popover-arrow-none");
+  }
 }
 
 function renderPopoverArrow(alignment: Alignment, side: Side, element: Element) {

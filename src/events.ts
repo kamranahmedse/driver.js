@@ -2,7 +2,7 @@ import { refreshActiveHighlight } from "./highlight";
 import { emit } from "./emitter";
 import { getState, setState } from "./state";
 
-function requireRefresh() {
+export function requireRefresh() {
   const resizeTimeout = getState("resizeTimeout");
   if (resizeTimeout) {
     window.cancelAnimationFrame(resizeTimeout);
