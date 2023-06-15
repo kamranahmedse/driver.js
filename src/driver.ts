@@ -79,7 +79,7 @@ export function driver(options: Config = {}) {
         ...step,
         popover: step.popover
           ? {
-              showButtons: false,
+              showButtons: [],
               ...step.popover!,
             }
           : undefined,

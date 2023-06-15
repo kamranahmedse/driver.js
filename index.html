@@ -143,6 +143,14 @@
         <button id="activate-check-btn">Activate and Check</button>
         <button id="backdrop-color-btn">Backdrop Color</button>
         <button id="hooks">Hooks</button>
+
+        <button id="no-buttons">No Buttons</button>
+        <button id="all-buttons">All Buttons</button>
+        <button id="next-button">Next Buttons</button>
+        <button id="prev-button">Previous Buttons</button>
+        <button id="next-prev-button">Next Previous Buttons</button>
+        <button id="close-button">Close Buttons</button>
+
         <button id="destroy-btn">Destroy</button>
       </div>
 
@@ -276,6 +284,36 @@ npm install driver.js</pre
     </div>
     <script type="module">
       import { driver } from "./src/driver.ts";
+
+      document.getElementById("no-buttons").addEventListener("click", () => {
+        const driverObj = driver({});
+
+        driverObj.highlight({
+          element: "#no-buttons",
+          popover: {
+            title: "No Buttons",
+            description:
+              "No buttons are shown by default for highlight. You can pass in the option to show the buttons you want.",
+          },
+        });
+      });
+
+
+      document.getElementById("all-buttons").addEventListener("click", () => {
+        const driverObj = driver({
+          showButtons: ['next', 'previous', 'done']
+        });
+
+        driverObj.highlight({
+          element: "#no-buttons",
+          popover: {
+            title: "No Buttons",
+            showButtons: ['done', 'previous', 'next'],
+            description:
+              "No buttons are shown by default for highlight. You can pass in the option to show the buttons you want.",
+          },
+        });
+      });
 
       document.getElementById("is-active-btn").addEventListener("click", () => {
         alert(driver().isActive());
@@ -488,7 +526,7 @@ npm install driver.js</pre
         });
         driverObj.highlight({
           popover: {
-            showButtons: false,
+            showButtons: [],
             description:
               "<div class='gif-popover'><img style='max-width: 100%' src='https://i.imgur.com/EAQhHu5.gif' /><p>Go and build something cool!</p></div>",
           },

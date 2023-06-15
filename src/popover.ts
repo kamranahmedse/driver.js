@@ -5,6 +5,7 @@ import { DriveStep } from "./driver";
 
 export type Side = "top" | "right" | "bottom" | "left" | "over";
 export type Alignment = "start" | "center" | "end";
+export type AllowedButtons = "next" | "previous" | "done";
 
 export type Popover = {
   title?: string;
@@ -12,7 +13,7 @@ export type Popover = {
   side?: Side;
   align?: Alignment;
 
-  showButtons?: boolean;
+  showButtons?: AllowedButtons[];
 
   doneBtnText?: string;
   closeBtnText?: string;
@@ -51,7 +52,7 @@ export function renderPopover(element: Element, step: DriveStep) {
   const {
     title,
     description,
-    showButtons = undefined,
+    showButtons: popoverShowButtons = undefined,
     // doneBtnText = 'Done',
     closeBtnText = "Close",
     nextBtnText = "Next &rarr;",
@@ -76,15 +77,24 @@ export function renderPopover(element: Element, step: DriveStep) {
     popover.description.style.display = "none";
   }
 
-  if (getConfig("showButtons") === true) {
-    popover.footer.style.display = "flex";
-  } else {
-    popover.footer.style.display = "none";
-  }
+  const showButtonsConfig: AllowedButtons[] = popoverShowButtons !== undefined ? popoverShowButtons : getConfig("showButtons")!;
 
-  if (showButtons === true) {
+  console.log(showButtonsConfig);
+  if (showButtonsConfig?.length! > 0) {
     popover.footer.style.display = "flex";
-  } else if (showButtons === false) {
+
+    if (!showButtonsConfig.includes('next')) {
+      popover.nextButton.style.display = "none";
+    }
+
+    if (!showButtonsConfig.includes('previous')) {
+      popover.previousButton.style.display = "none";
+    }
+
+    if (!showButtonsConfig.includes('done')) {
+      popover.closeButton.style.display = "none";
+    }
+  } else {
     popover.footer.style.display = "none";
   }
 

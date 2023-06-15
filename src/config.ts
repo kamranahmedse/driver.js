@@ -1,4 +1,5 @@
 import { DriveStep } from "./driver";
+import { AllowedButtons } from "./popover";
 
 export type Config = {
   animate?: boolean;
@@ -9,7 +10,7 @@ export type Config = {
   stagePadding?: number;
   stageRadius?: number;
   popoverOffset?: number;
-  showButtons?: boolean;
+  showButtons?: AllowedButtons[];
 
   onHighlightStarted?: (element: Element | undefined, step: DriveStep) => void;
   onHighlighted?: (element: Element | undefined, step: DriveStep) => void;
@@ -30,7 +31,7 @@ export function configure(config: Config = {}) {
     stagePadding: 10,
     stageRadius: 5,
     popoverOffset: 10,
-    showButtons: true,
+    showButtons: ["next", "previous", "done"],
     backdropColor: "#000",
     ...config,
   };
