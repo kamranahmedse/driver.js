@@ -54,9 +54,9 @@ export function renderPopover(element: Element, step: DriveStep) {
     description,
     showButtons: popoverShowButtons = undefined,
     // doneBtnText = 'Done',
-    closeBtnText = "Close",
-    nextBtnText = "Next &rarr;",
-    prevBtnText = "&larr; Previous",
+    closeBtnText = getConfig("closeBtnText") || "Close",
+    nextBtnText = getConfig("nextBtnText") || "Next &rarr;",
+    prevBtnText = getConfig("prevBtnText") || "&larr; Previous",
   } = step.popover || {};
 
   popover.nextButton.innerHTML = nextBtnText;
@@ -77,21 +77,22 @@ export function renderPopover(element: Element, step: DriveStep) {
     popover.description.style.display = "none";
   }
 
-  const showButtonsConfig: AllowedButtons[] = popoverShowButtons !== undefined ? popoverShowButtons : getConfig("showButtons")!;
+  const showButtonsConfig: AllowedButtons[] =
+    popoverShowButtons !== undefined ? popoverShowButtons : getConfig("showButtons")!;
 
   console.log(popoverShowButtons);
   if (showButtonsConfig?.length! > 0) {
     popover.footer.style.display = "flex";
 
-    if (!showButtonsConfig.includes('next')) {
+    if (!showButtonsConfig.includes("next")) {
       popover.nextButton.style.display = "none";
     }
 
-    if (!showButtonsConfig.includes('previous')) {
+    if (!showButtonsConfig.includes("previous")) {
       popover.previousButton.style.display = "none";
     }
 
-    if (!showButtonsConfig.includes('close')) {
+    if (!showButtonsConfig.includes("close")) {
       popover.closeButton.style.display = "none";
     }
   } else {

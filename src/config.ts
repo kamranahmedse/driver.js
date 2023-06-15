@@ -12,6 +12,11 @@ export type Config = {
   popoverOffset?: number;
   showButtons?: AllowedButtons[];
 
+  // Button texts
+  nextBtnText?: string;
+  prevBtnText?: string;
+  closeBtnText?: string;
+
   // State based callbacks, called upon state changes
   onHighlightStarted?: (element: Element | undefined, step: DriveStep) => void;
   onHighlighted?: (element: Element | undefined, step: DriveStep) => void;

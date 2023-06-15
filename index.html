@@ -146,7 +146,7 @@
         <button id="hooks">Hooks</button>
         <button id="destroy-btn" style="border-color: red; background: red; color: white">Destroy</button>
       </div>
-      <br>
+      <br />
       <p>given below are the examples of simple `highlight`</p>
       <div class="buttons">
         <button id="no-buttons">No Buttons</button>
@@ -155,9 +155,10 @@
         <button id="previous-button">Previous Buttons</button>
         <button id="next-prev-button">Next Previous Buttons</button>
         <button id="close-button">Close Buttons</button>
+        <button id="button-texts">Button Texts</button>
       </div>
 
-      <br>
+      <br />
       <p>You can Attach events to buttons.</p>
       <div class="buttons">
         <button id="button-config-events">Global Button Listeners</button>
@@ -373,6 +374,27 @@ npm install driver.js</pre
         });
       });
 
+      document.getElementById("button-texts").addEventListener("click", () => {
+        const driverObj = driver({
+          prevBtnText: "<——",
+          nextBtnText: "——>",
+          closeBtnText: "X",
+        });
+
+        driverObj.highlight({
+          element: "#button-texts",
+          popover: {
+            side: "left",
+            title: "Button from Config",
+            showButtons: ["close", "next", "previous"],
+            closeBtnText: "xx",
+            nextBtnText: "==>",
+            prevBtnText: "<==",
+            description: "These buttons are configured using driver config.",
+          },
+        });
+      });
+
       document.getElementById("is-active-btn").addEventListener("click", () => {
         alert(driver().isActive());
       });
@@ -514,7 +536,7 @@ npm install driver.js</pre
 
       document.getElementById("hooks").addEventListener("click", () => {
         const hooksEl = document.getElementById("hooks-list");
-        hooksEl.innerHTML = '';
+        hooksEl.innerHTML = "";
 
         const driverObj = driver({
           animate: true,
