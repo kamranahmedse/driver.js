@@ -142,6 +142,7 @@
         <button id="is-active-btn">Is Active?</button>
         <button id="activate-check-btn">Activate and Check</button>
         <button id="backdrop-color-btn">Backdrop Color</button>
+        <button id="hooks">Hooks</button>
         <button id="destroy-btn">Destroy</button>
       </div>
 
@@ -150,6 +151,10 @@
         <li>Lightweight — only 5kb gzipped</li>
         <li>No dependencies</li>
         <li>MIT Licensed</li>
+      </ul>
+
+      <ul id="hooks-list">
+        <li><strong>Hooks Button Demo — </strong>List of hooks fired</li>
       </ul>
 
       <h2>Yet another Tour Library?</h2>
@@ -409,6 +414,51 @@ npm install driver.js</pre
             },
           });
         }, 6000);
+      });
+
+      document.getElementById("hooks").addEventListener("click", () => {
+        const hooksEl = document.getElementById("hooks-list");
+
+        const driverObj = driver({
+          animate: true,
+          onDeselected: (element, step) => {
+            const li = document.createElement("li");
+            // prettier-ignore
+            li.innerHTML = `Deselected: ${element.textContent?.slice(0, 10)}..<br> ${JSON.stringify(step)}..`;
+            hooksEl.append(li);
+          },
+          onHighlightStarted: (element, step) => {
+            const li = document.createElement("li");
+            // prettier-ignore
+            li.innerHTML = `Highlight Started: ${element.textContent?.slice(0, 10)}..<br> ${JSON.stringify(step)}..`;
+            hooksEl.append(li);
+          },
+          onHighlighted: (element, step) => {
+            const li = document.createElement("li");
+            // prettier-ignore
+            li.innerHTML = `Highlighted: ${element.textContent?.slice(0, 10)}..<br> ${JSON.stringify(step)}..`;
+            hooksEl.append(li);
+          },
+          onClose: (element, step) => {
+            const li = document.createElement("li");
+            // prettier-ignore
+            li.innerHTML = `Closed: ${element.textContent?.slice(0, 10)}..<br> ${JSON.stringify(step)}..`;
+            hooksEl.append(li);
+          },
+        });
+
+        driverObj.highlight({
+          element: "#hooks",
+        });
+
+        window.setTimeout(() => {
+          driverObj.highlight({
+            element: "#hooks-list",
+            popover: {
+              description: "Here are all the hooks",
+            },
+          });
+        }, 1000);
       });
 
       document.getElementById("scrollable-area-btn").addEventListener("click", () => {
