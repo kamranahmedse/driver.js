@@ -1,6 +1,7 @@
 import { refreshActiveHighlight } from "./highlight";
 import { emit } from "./emitter";
 import { getState, setState } from "./state";
+import { getConfig } from "./config";
 
 export function requireRefresh() {
   const resizeTimeout = getState("resizeTimeout");
@@ -12,6 +13,11 @@ export function requireRefresh() {
 }
 
 function onKeyup(e: KeyboardEvent) {
+  const allowKeyboardControl = getConfig("allowKeyboardControl") || true;
+  if (!allowKeyboardControl) {
+    return;
+  }
+
   if (e.key === "Escape") {
     emit("escapePress");
   }

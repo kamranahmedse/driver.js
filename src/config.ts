@@ -9,6 +9,8 @@ export type Config = {
   opacity?: number;
   stagePadding?: number;
   stageRadius?: number;
+  allowKeyboardControl?: boolean;
+
   popoverOffset?: number;
   showButtons?: AllowedButtons[];
 

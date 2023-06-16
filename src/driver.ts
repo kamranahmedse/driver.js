@@ -21,13 +21,6 @@ export function driver(options: Config = {}) {
       return;
     }
 
-    const activeStep = getState("activeStep");
-    const activeElement = getState("activeElement");
-    const onDeselected = getConfig("onDeselected");
-    if (activeStep && activeElement && onDeselected) {
-      onDeselected(activeElement.id === "driver-dummy-element" ? undefined : activeElement, activeStep);
-    }
-
     destroy();
   }
 
@@ -49,6 +42,9 @@ export function driver(options: Config = {}) {
     const activeElement = getState("activeElement");
     const activeStep = getState("activeStep");
 
+    const onDeselected = getConfig("onDeselected");
+    const onDestroyed = getConfig("onDestroyed");
+
     document.body.classList.remove("driver-active", "driver-fade", "driver-simple");
 
     destroyEvents();
@@ -59,11 +55,15 @@ export function driver(options: Config = {}) {
 
     resetState();
 
-    const onDestroyed = getConfig("onDestroyed");
-    if (onDestroyed && activeElement && activeStep) {
+    if (activeElement && activeStep) {
       const isActiveDummyElement = activeElement.id === "driver-dummy-element";
+      if (onDeselected) {
+        onDeselected(isActiveDummyElement ? undefined : activeElement, activeStep);
+      }
 
-      onDestroyed(isActiveDummyElement ? undefined : activeElement, activeStep);
+      if (onDestroyed) {
+        onDestroyed(isActiveDummyElement ? undefined : activeElement, activeStep);
+      }
     }
   }
 
