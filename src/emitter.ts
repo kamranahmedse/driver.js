@@ -1,4 +1,4 @@
-type allowedEvents = "overlayClick" | "escape";
+type allowedEvents = "overlayClick" | "escapePress" | "nextClick" | "prevClick" | "closeClick";
 
 let registeredListeners: Partial<{ [key in allowedEvents]: () => void }> = {};
 

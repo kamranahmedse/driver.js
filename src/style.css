@@ -97,6 +97,10 @@
   border-radius: 3px;
 }
 
+.driver-popover-footer button:hover {
+  background-color: #f7f7f7;
+}
+
 .driver-popover-navigation-btns {
   display: flex;
   flex-grow: 1;

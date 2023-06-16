@@ -26,7 +26,7 @@ export type Config = {
 
   // Event based callbacks, called upon events
   onNextClick?: (element: Element | undefined, step: DriveStep) => void;
-  onPreviousClick?: (element: Element | undefined, step: DriveStep) => void;
+  onPrevClick?: (element: Element | undefined, step: DriveStep) => void;
   onCloseClick?: (element: Element | undefined, step: DriveStep) => void;
 };
 

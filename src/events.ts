@@ -13,7 +13,7 @@ export function requireRefresh() {
 
 function onKeyup(e: KeyboardEvent) {
   if (e.key === "Escape") {
-    emit("escape");
+    emit("escapePress");
   }
 }
 

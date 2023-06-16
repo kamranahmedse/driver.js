@@ -2,6 +2,8 @@ import { bringInView } from "./utils";
 import { getConfig } from "./config";
 import { getState, setState } from "./state";
 import { DriveStep } from "./driver";
+import { onDriverClick } from "./events";
+import { emit } from "./emitter";
 
 export type Side = "top" | "right" | "bottom" | "left" | "over";
 export type Alignment = "start" | "center" | "end";
@@ -15,10 +17,16 @@ export type Popover = {
 
   showButtons?: AllowedButtons[];
 
+  // Button texts
   doneBtnText?: string;
   closeBtnText?: string;
   nextBtnText?: string;
   prevBtnText?: string;
+
+  // Button callbacks
+  onNextClick?: (element: Element | undefined, step: DriveStep) => void;
+  onPrevClick?: (element: Element | undefined, step: DriveStep) => void;
+  onCloseClick?: (element: Element | undefined, step: DriveStep) => void;
 };
 
 export type PopoverDOM = {
@@ -80,7 +88,6 @@ export function renderPopover(element: Element, step: DriveStep) {
   const showButtonsConfig: AllowedButtons[] =
     popoverShowButtons !== undefined ? popoverShowButtons : getConfig("showButtons")!;
 
-  console.log(popoverShowButtons);
   if (showButtonsConfig?.length! > 0) {
     popover.footer.style.display = "flex";
 
@@ -110,6 +117,51 @@ export function renderPopover(element: Element, step: DriveStep) {
   // Reset the classes responsible for the arrow position
   const popoverArrow = popover.arrow;
   popoverArrow.className = "driver-popover-arrow";
+
+  // Handles the popover button clicks
+  onDriverClick(
+    popover.wrapper,
+    e => {
+      const target = e.target as HTMLElement;
+
+      const onNextClick = step.popover?.onNextClick || getConfig("onNextClick");
+      const onPrevClick = step.popover?.onPrevClick || getConfig("onPrevClick");
+      const onCloseClick = step.popover?.onCloseClick || getConfig("onCloseClick");
+
+      if (target.classList.contains("driver-popover-next-btn")) {
+        // If the user has provided a custom callback, call it
+        // otherwise, emit the event.
+        if (onNextClick) {
+          return onNextClick(element, step);
+        } else {
+          return emit("nextClick");
+        }
+      }
+
+      if (target.classList.contains("driver-popover-prev-btn")) {
+        if (onPrevClick) {
+          return onPrevClick(element, step);
+        } else {
+          return emit("prevClick");
+        }
+      }
+
+      if (target.classList.contains("driver-popover-close-btn")) {
+        if (onCloseClick) {
+          return onCloseClick(element, step);
+        } else {
+          return emit("closeClick");
+        }
+      }
+
+      return undefined;
+    },
+    target => {
+      // Only prevent the default action if we're clicking on a button
+      // This allows us to have links inside the popover title and description
+      return !popover?.description.contains(target) && !popover?.title.contains(target);
+    }
+  );
 
   setState("popover", popover);
 

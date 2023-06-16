@@ -42,7 +42,7 @@ export function driver(options: Config = {}) {
     initEvents();
 
     listen("overlayClick", handleClose);
-    listen("escape", handleClose);
+    listen("escapePress", handleClose);
   }
 
   function destroy() {
@@ -74,7 +74,6 @@ export function driver(options: Config = {}) {
     },
     drive: (steps: DriveStep[]) => console.log(steps),
     highlight: (step: DriveStep) => {
-      console.log(step.popover?.showButtons);
       init();
       highlight({
         ...step,
