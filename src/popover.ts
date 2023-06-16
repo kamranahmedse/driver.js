@@ -503,7 +503,7 @@ function createPopover(): PopoverDOM {
   closeButton.innerText = "Close";
 
   const footerButtons = document.createElement("span");
-  footerButtons.classList.add("driver-popover-footer-btns");
+  footerButtons.classList.add("driver-popover-navigation-btns");
 
   const previousButton = document.createElement("button");
   previousButton.classList.add("driver-popover-prev-btn");

@@ -97,7 +97,13 @@
   border-radius: 3px;
 }
 
-.driver-popover-footer-btns button + button {
+.driver-popover-navigation-btns {
+  display: flex;
+  flex-grow: 1;
+  justify-content: flex-end;
+}
+
+.driver-popover-navigation-btns button + button {
   margin-left: 4px;
 }
 
