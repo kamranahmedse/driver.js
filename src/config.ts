@@ -11,6 +11,8 @@ export type Config = {
   stageRadius?: number;
   allowKeyboardControl?: boolean;
 
+  // Popover specific configuration
+  popoverClass?: string;
   popoverOffset?: number;
   showButtons?: AllowedButtons[];
 

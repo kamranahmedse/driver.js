@@ -17,6 +17,8 @@ export type Popover = {
 
   showButtons?: AllowedButtons[];
 
+  popoverClass?: string;
+
   // Button texts
   doneBtnText?: string;
   closeBtnText?: string;
@@ -117,6 +119,10 @@ export function renderPopover(element: Element, step: DriveStep) {
   // Reset the classes responsible for the arrow position
   const popoverArrow = popover.arrow;
   popoverArrow.className = "driver-popover-arrow";
+
+  // Reset any custom classes on the popover
+  const customPopoverClass = step.popover?.popoverClass || getConfig("popoverClass") || "";
+  popoverWrapper.className = `driver-popover ${customPopoverClass}`.trim();
 
   // Handles the popover button clicks
   onDriverClick(
