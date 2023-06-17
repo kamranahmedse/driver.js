@@ -67,7 +67,6 @@
   margin-bottom: 0;
   font: 14px / normal sans-serif;
   line-height: 1.5;
-  color: #2d2d2d;
   font-weight: 400;
   zoom: 1;
 }
@@ -87,6 +86,7 @@
   padding: 3px 7px;
   text-decoration: none;
   text-shadow: 1px 1px 0 #fff;
+  background-color: #ffffff;
   color: #2d2d2d;
   font: 12px / normal sans-serif;
   cursor: pointer;

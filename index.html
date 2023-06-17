@@ -19,6 +19,33 @@
         -moz-osx-font-smoothing: grayscale;
       }
 
+      .driver-popover.custom-driver-popover {
+        min-width: 450px;
+        background: #2d2d2d;
+        color: white;
+      }
+
+      .driver-popover.custom-driver-popover .driver-popover-title {
+        font-size: 26px;
+      }
+
+      .driver-popover.custom-driver-popover .driver-popover-description {
+        font-size: 14px;
+      }
+
+      .driver-popover.custom-driver-popover button {
+        background: #454545;
+        border-color: #454545;
+        text-shadow: none;
+        color: white;
+        font-size: 13px;
+        padding: 7px 10px;
+      }
+
+      .driver-popover.custom-driver-popover button:hover {
+        background: #575757;
+      }
+
       .gif-popover {
         display: flex;
         flex-direction: column;
@@ -156,12 +183,13 @@
         <button id="next-prev-button">Next Previous Buttons</button>
         <button id="close-button">Close Buttons</button>
         <button id="button-texts">Button Texts</button>
+        <button id="button-config-events">Button Listeners</button>
       </div>
 
       <br />
-      <p>You can Attach events to buttons.</p>
+      <p>You can assign custom classes to popover.</p>
       <div class="buttons">
-        <button id="button-config-events">Button Listeners</button>
+        <button id="custom-classes">Custom Classes</button>
       </div>
 
       <ul>
@@ -393,6 +421,21 @@ npm install driver.js</pre
             description: "These buttons are configured using driver config.",
           },
         });
+      });
+
+      document.getElementById("custom-classes").addEventListener("click", () => {
+        const driverObj = driver({
+          popoverClass: "custom-driver-popover"
+        })
+
+        driverObj.highlight({
+          popover: {
+            popoverClass: "custom-driver-popover",
+            title: "Custom Classes",
+            description: "Popover and buttons have custom classes",
+            showButtons: ["close", "next", "previous"]
+          }
+        })
       });
 
       document.getElementById("button-config-events").addEventListener("click", () => {
