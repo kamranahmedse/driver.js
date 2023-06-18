@@ -1,5 +1,5 @@
 import { DriveStep } from "./driver";
-import { AllowedButtons } from "./popover";
+import {AllowedButtons, PopoverDOM} from "./popover";
 
 export type Config = {
   animate?: boolean;
@@ -20,6 +20,9 @@ export type Config = {
   nextBtnText?: string;
   prevBtnText?: string;
   closeBtnText?: string;
+
+  // Called after the popover is rendered
+  onPopoverRendered?: (popover: PopoverDOM) => void;
 
   // State based callbacks, called upon state changes
   onOverlayClick?: (element: Element | undefined, step: DriveStep) => void;

@@ -25,6 +25,9 @@ export type Popover = {
   nextBtnText?: string;
   prevBtnText?: string;
 
+  // Called after the popover is rendered
+  onPopoverRendered?: (popover: PopoverDOM) => void;
+
   // Button callbacks
   onNextClick?: (element: Element | undefined, step: DriveStep) => void;
   onPrevClick?: (element: Element | undefined, step: DriveStep) => void;
@@ -173,6 +176,11 @@ export function renderPopover(element: Element, step: DriveStep) {
 
   repositionPopover(element, step);
   bringInView(popoverWrapper);
+
+  const onPopoverRendered = step.popover?.onPopoverRendered || getConfig('onPopoverRendered');
+  if (onPopoverRendered) {
+    onPopoverRendered(popover);
+  }
 }
 
 type PopoverDimensions = {

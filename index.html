@@ -187,9 +187,10 @@
       </div>
 
       <br />
-      <p>You can assign custom classes to popover.</p>
+      <p>You can modify the popover as well with custom CSS and JS.</p>
       <div class="buttons">
         <button id="custom-classes">Custom Classes</button>
+        <button id="popover-hook">Popover Hook</button>
       </div>
 
       <ul>
@@ -423,6 +424,26 @@ npm install driver.js</pre
         });
       });
 
+      document.getElementById("popover-hook").addEventListener("click", () => {
+        const driverObj = driver({
+          onPopoverRendered: (popover) => {
+            popover.title.innerText = 'Modified Parent';
+          }
+        });
+        driverObj.highlight({
+          element: '.page-header',
+          popover: {
+            title: 'Page Title',
+            description: 'Body of the popover',
+            side: 'bottom',
+            align: 'start',
+            onPopoverRendered: (popover) => {
+              popover.title.innerText = 'Modified';
+            }
+          }
+        })
+      });
+
       document.getElementById("custom-classes").addEventListener("click", () => {
         const driverObj = driver({
           popoverClass: "custom-driver-popover"
@@ -597,34 +618,25 @@ npm install driver.js</pre
       });
 
       document.getElementById("hooks").addEventListener("click", () => {
-        const hooksEl = document.getElementById("hooks-list");
-        hooksEl.innerHTML = "";
+        const pageHeader = document.getElementById(".page-header");
 
         const driverObj = driver({
           animate: true,
           onDeselected: (element, step) => {
-            const li = document.createElement("li");
-            // prettier-ignore
-            li.innerHTML = `Deselected: ${element?.textContent?.slice(0, 10)}..<br> ${JSON.stringify(step)}..`;
-            hooksEl.append(li);
+            const elementText = element?.textContent?.slice(0, 10) || ' - N/A -';
+            console.log(`Deselected: ${elementText}\n${JSON.stringify(step)}`);
           },
           onHighlightStarted: (element, step) => {
-            const li = document.createElement("li");
-            // prettier-ignore
-            li.innerHTML = `Highlight Started: ${element?.textContent?.slice(0, 10) || 'None'}..<br> ${JSON.stringify(step)}..`;
-            hooksEl.append(li);
+            const elementText = element?.textContent?.slice(0, 10) || ' - N/A -';
+            console.log(`Highlight Started: ${elementText}\n${JSON.stringify(step)}`);
           },
           onHighlighted: (element, step) => {
-            const li = document.createElement("li");
-            // prettier-ignore
-            li.innerHTML = `Highlighted: ${element?.textContent?.slice(0, 10) || 'None'}..<br> ${JSON.stringify(step)}..`;
-            hooksEl.append(li);
+            const elementText = element?.textContent?.slice(0, 10) || ' - N/A -';
+            console.log(`Highlighted: ${elementText}\n${JSON.stringify(step)}`);
           },
           onDestroyed: (element, step) => {
-            const li = document.createElement("li");
-            // prettier-ignore
-            li.innerHTML = `Closed: ${element?.textContent?.slice(0, 10) || 'None'}..<br> ${JSON.stringify(step)}..`;
-            hooksEl.append(li);
+            const elementText = element?.textContent?.slice(0, 10) || ' - N/A -';
+            console.log(`Destroyed: ${elementText}\n${JSON.stringify(step)}`);
           },
         });
 
