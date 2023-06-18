@@ -72,7 +72,7 @@ function transferHighlight(toElement: Element, toStep: DriveStep) {
   const isAnimatedTour = getConfig("animate");
   const highlightStartedHook = getConfig("onHighlightStarted");
   const highlightedHook = getConfig("onHighlighted");
-  const deselectedHook = getConfig("onDeselected");
+  const deselectedHook = fromStep?.popover?.onDeselected || getConfig("onDeselected");
 
   if (!isFirstHighlight && deselectedHook) {
     deselectedHook(isFromDummyElement ? undefined : fromElement, fromStep!);

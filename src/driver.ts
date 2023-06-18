@@ -149,7 +149,7 @@ export function driver(options: Config = {}) {
     const activeElement = getState("activeElement");
     const activeStep = getState("activeStep");
 
-    const onDeselected = getConfig("onDeselected");
+    const onDeselected = activeStep?.popover?.onDeselected || getConfig("onDeselected");
     const onDestroyed = getConfig("onDestroyed");
 
     document.body.classList.remove("driver-active", "driver-fade", "driver-simple");

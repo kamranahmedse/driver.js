@@ -28,6 +28,7 @@ export type Popover = {
 
   // Called after the popover is rendered
   onPopoverRendered?: (popover: PopoverDOM) => void;
+  onDeselected?: (element: Element | undefined, step: DriveStep) => void;
 
   // Button callbacks
   onNextClick?: (element: Element | undefined, step: DriveStep) => void;
