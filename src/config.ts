@@ -33,6 +33,7 @@ export type Config = {
   onHighlightStarted?: (element: Element | undefined, step: DriveStep) => void;
   onHighlighted?: (element: Element | undefined, step: DriveStep) => void;
   onDeselected?: (element: Element | undefined, step: DriveStep) => void;
+  onDestroyStarted?: (element: Element | undefined, step: DriveStep) => void;
   onDestroyed?: (element: Element | undefined, step: DriveStep) => void;
 
   // Event based callbacks, called upon events

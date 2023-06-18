@@ -25,9 +25,9 @@ export function driver(options: Config = {}) {
   }
 
   function moveNext() {
-    const activeIndex = getState('activeIndex');
-    const steps = getConfig('steps') || [];
-    if (typeof  activeIndex === 'undefined') {
+    const activeIndex = getState("activeIndex");
+    const steps = getConfig("steps") || [];
+    if (typeof activeIndex === "undefined") {
       return;
     }
 
@@ -40,9 +40,9 @@ export function driver(options: Config = {}) {
   }
 
   function movePrevious() {
-    const activeIndex = getState('activeIndex');
-    const steps = getConfig('steps') || [];
-    if (typeof  activeIndex === 'undefined') {
+    const activeIndex = getState("activeIndex");
+    const steps = getConfig("steps") || [];
+    if (typeof activeIndex === "undefined") {
       return;
     }
 
@@ -145,9 +145,19 @@ export function driver(options: Config = {}) {
     });
   }
 
-  function destroy() {
+  function destroy(withStartHook = true) {
     const activeElement = getState("activeElement");
     const activeStep = getState("activeStep");
+
+    const onDestroyStarted = getConfig("onDestroyStarted");
+
+    // `onDestroyStarted` is used to confirm the exit of tour. If we trigger
+    // the hook for when user calls `destroy`, driver will get into infinite loop
+    // not causing tour to be destroyed.
+    if (withStartHook && onDestroyStarted) {
+      onDestroyStarted(activeElement, activeStep!);
+      return;
+    }
 
     const onDeselected = activeStep?.popover?.onDeselected || getConfig("onDeselected");
     const onDestroyed = getConfig("onDestroyed");
@@ -197,6 +207,8 @@ export function driver(options: Config = {}) {
           : undefined,
       });
     },
-    destroy,
+    destroy: () => {
+      destroy(false);
+    },
   };
 }

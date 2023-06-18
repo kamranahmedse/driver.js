@@ -402,6 +402,11 @@ npm install driver.js</pre
         const driverObj = driver({
           animate: true,
           opacity: 0.3,
+          onDestroyStarted: (element, step) => {
+            if (confirm('Are you sure?')) {
+              driverObj.destroy();
+            }
+          },
           steps: [
             {
               element: ".page-header",
