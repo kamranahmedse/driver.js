@@ -88,11 +88,12 @@ export function driver(options: Config = {}) {
     const hasPreviousStep = steps[stepIndex - 1];
 
     const doneBtnText = currentStep.popover?.doneBtnText || getConfig("doneBtnText") || "Done";
+    const allowsClosing = getConfig("allowClose");
 
     highlight({
       ...currentStep,
       popover: {
-        showButtons: ["next", "previous", "close"],
+        showButtons: ["next", "previous", ...(allowsClosing ? ["close" as AllowedButtons] : [])],
         nextBtnText: !hasNextStep ? doneBtnText : undefined,
         disableButtons: [...(!hasPreviousStep ? ["previous" as AllowedButtons] : [])],
         onNextClick: () => {

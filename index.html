@@ -197,7 +197,8 @@
       <h2>Tour Feature</h2>
       <p>Examples below show the tour usage of driver.js.</p>
       <div class="buttons">
-        <button id="basic-tour">Basic Tour</button>
+        <button id="basic-tour">Animated Tour</button>
+        <button id="non-animated-tour">Non-Animated Tour</button>
       </div>
 
       <ul>
@@ -331,61 +332,73 @@ npm install driver.js</pre
     <script type="module">
       import { driver } from "./src/driver.ts";
 
+      const basicTourSteps = [
+        {
+          element: ".page-header",
+          popover: {
+            title: "New and Improved Driver.js",
+            description:
+              "Driver.js has been written from the ground up. The new version is more powerful, has less surprises, more customizable and tons of new features.",
+            side: "bottom",
+            align: "start",
+          },
+        },
+        {
+          element: ".page-header h1",
+          popover: {
+            title: "No Stacking Issues",
+            description:
+              "Unlike the older version, new version doesn't work with z-indexes so no more positional issues.",
+            side: "left",
+            align: "start",
+          },
+        },
+        {
+          element: ".page-header sup",
+          popover: {
+            title: "Improved Hooks",
+            description:
+              "Unlike the older version, new version doesn't work with z-indexes so no more positional issues.",
+            side: "bottom",
+            align: "start",
+          },
+        },
+        {
+          popover: {
+            title: "No Element",
+            description: "You can now have popovers without elements as well",
+          },
+        },
+        {
+          element: "#scrollable-area",
+          popover: {
+            title: "Scrollable Areas",
+            description: "There are no issues with scrollable element tours as well.",
+          },
+        },
+        {
+          element: "#third-scroll-paragraph",
+          popover: {
+            title: "Nested Scrolls",
+            description: "Even the nested scrollable elements work now.",
+          },
+        },
+      ];
+
+      document.getElementById("non-animated-tour").addEventListener("click", () => {
+        const driverObj = driver({
+          animate: false,
+          backdropColor: "blue",
+          opacity: 0.3,
+          steps: basicTourSteps,
+        });
+
+        driverObj.drive();
+      });
+
       document.getElementById("basic-tour").addEventListener("click", () => {
         const driverObj = driver({
-          animate: true,
-          steps: [
-            {
-              element: ".page-header",
-              popover: {
-                title: "New and Improved Driver.js",
-                description:
-                  "Driver.js has been written from the ground up. The new version is more powerful, has less surprises, more customizable and tons of new features.",
-                side: "bottom",
-                align: "start",
-              },
-            },
-            {
-              element: ".page-header h1",
-              popover: {
-                title: "No Stacking Issues",
-                description:
-                  "Unlike the older version, new version doesn't work with z-indexes so no more positional issues.",
-                side: "left",
-                align: "start",
-              },
-            },
-            {
-              element: ".page-header sup",
-              popover: {
-                title: "Improved Hooks",
-                description:
-                  "Unlike the older version, new version doesn't work with z-indexes so no more positional issues.",
-                side: "bottom",
-                align: "start",
-              },
-            },
-            {
-              popover: {
-                title: "No Element",
-                description: "You can now have popovers without elements as well",
-              },
-            },
-            {
-              element: "#scrollable-area",
-              popover: {
-                title: "Scrollable Areas",
-                description: "There are no issues with scrollable element tours as well."
-              }
-            },
-            {
-              element: "#third-scroll-paragraph",
-              popover: {
-                title: "Nested Scrolls",
-                description: "Even the nested scrollable elements work now."
-              }
-            }
-          ],
+          steps: basicTourSteps,
         });
 
         driverObj.drive();
