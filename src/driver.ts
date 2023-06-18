@@ -24,9 +24,39 @@ export function driver(options: Config = {}) {
     destroy();
   }
 
+  function moveNext() {
+    const activeIndex = getState('activeIndex');
+    const steps = getConfig('steps') || [];
+    if (typeof  activeIndex === 'undefined') {
+      return;
+    }
+
+    const nextStepIndex = activeIndex + 1;
+    if (steps[nextStepIndex]) {
+      drive(nextStepIndex);
+    } else {
+      destroy();
+    }
+  }
+
+  function movePrevious() {
+    const activeIndex = getState('activeIndex');
+    const steps = getConfig('steps') || [];
+    if (typeof  activeIndex === 'undefined') {
+      return;
+    }
+
+    const previousStepIndex = activeIndex - 1;
+    if (steps[previousStepIndex]) {
+      drive(previousStepIndex);
+    } else {
+      destroy();
+    }
+  }
+
   function handleArrowLeft() {
     const steps = getConfig("steps") || [];
-    const currentStepIndex = getState("currentStepIndex");
+    const currentStepIndex = getState("activeIndex");
     if (typeof currentStepIndex === "undefined") {
       return;
     }
@@ -38,18 +68,19 @@ export function driver(options: Config = {}) {
   }
 
   function handleArrowRight() {
-    const steps = getConfig("steps") || [];
-    const currentStepIndex = getState("currentStepIndex");
-    if (typeof currentStepIndex === "undefined") {
+    const activeIndex = getState("activeIndex");
+    const activeStep = getState("activeStep");
+    const activeElement = getState("activeElement");
+    if (typeof activeIndex === "undefined" || typeof activeStep === "undefined") {
       return;
     }
 
-    const nextStepIndex = currentStepIndex + 1;
-    if (steps[nextStepIndex]) {
-      drive(nextStepIndex);
-    } else {
-      destroy();
+    const onNextClick = activeStep.popover?.onNextClick || getConfig("onNextClick");
+    if (onNextClick) {
+      return onNextClick(activeElement, activeStep);
     }
+
+    moveNext();
   }
 
   function init() {
@@ -81,7 +112,7 @@ export function driver(options: Config = {}) {
       destroy();
     }
 
-    setState("currentStepIndex", stepIndex);
+    setState("activeIndex", stepIndex);
 
     const currentStep = steps[stepIndex];
     const hasNextStep = steps[stepIndex + 1];
@@ -152,6 +183,8 @@ export function driver(options: Config = {}) {
       init();
       drive(stepIndex);
     },
+    moveNext,
+    movePrevious,
     highlight: (step: DriveStep) => {
       init();
       highlight({

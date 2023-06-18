@@ -192,6 +192,7 @@
       <div class="buttons">
         <button id="custom-classes">Custom Classes</button>
         <button id="popover-hook">Popover Hook</button>
+        <button id="padding-change">Padding Change</button>
       </div>
 
       <h2>Tour Feature</h2>
@@ -199,6 +200,7 @@
       <div class="buttons">
         <button id="basic-tour">Animated Tour</button>
         <button id="non-animated-tour">Non-Animated Tour</button>
+        <button id="async-tour">Asynchronous Tour</button>
       </div>
 
       <ul>
@@ -396,6 +398,97 @@ npm install driver.js</pre
         driverObj.drive();
       });
 
+      document.getElementById("async-tour").addEventListener("click", () => {
+        const driverObj = driver({
+          animate: true,
+          backdropColor: "blue",
+          opacity: 0.3,
+          onDeselected: (element => {
+            if (element?.classList?.contains('dynamic-el')) {
+              element?.parentElement?.removeChild(element);
+            }
+          }),
+          steps: [
+            {
+              element: ".page-header",
+              popover: {
+                title: "Async Driver.js",
+                description:
+                        "Driver.js has been written from the ground up. The new version is more powerful, has less surprises, more customizable and tons of new features.",
+                side: "bottom",
+                align: "start",
+              },
+            },
+            {
+              element: ".page-header h1",
+              popover: {
+                title: "Async Test",
+                description: "By overriding `onNextClick` you get control over the tour.",
+                side: "left",
+                align: "start",
+                onNextClick: () => {
+                  const newDiv = document.querySelector('.dynamic-el') || document.createElement('div');
+
+                  newDiv.innerHTML = 'This is a new Element';
+                  newDiv.style.display = 'block';
+                  newDiv.style.padding = '20px';
+                  newDiv.style.backgroundColor = 'black';
+                  newDiv.style.color = 'white';
+                  newDiv.style.fontSize = '14px';
+                  newDiv.style.position = 'fixed';
+                  newDiv.style.top = `${Math.random() * (500 - 30) + 30}px`;
+                  newDiv.style.left = `${Math.random() * (500 - 30) + 30}px`;
+                  newDiv.className = 'dynamic-el';
+
+                  document.body.appendChild(newDiv);
+
+                  driverObj.moveNext();
+                }
+              },
+            },
+            {
+              element: '.dynamic-el',
+              popover: {
+                title: "Dynamic Elements",
+                description: "This was created before we moved here"
+              }
+            },
+            {
+              element: ".page-header sup",
+              popover: {
+                title: "Improved Hooks",
+                description:
+                        "Unlike the older version, new version doesn't work with z-indexes so no more positional issues.",
+                side: "bottom",
+                align: "start",
+              },
+            },
+            {
+              popover: {
+                title: "No Element",
+                description: "You can now have popovers without elements as well",
+              },
+            },
+            {
+              element: "#scrollable-area",
+              popover: {
+                title: "Scrollable Areas",
+                description: "There are no issues with scrollable element tours as well.",
+              },
+            },
+            {
+              element: "#third-scroll-paragraph",
+              popover: {
+                title: "Nested Scrolls",
+                description: "Even the nested scrollable elements work now.",
+              },
+            },
+          ],
+        });
+
+        driverObj.drive();
+      });
+
       document.getElementById("basic-tour").addEventListener("click", () => {
         const driverObj = driver({
           steps: basicTourSteps,
@@ -512,6 +605,27 @@ npm install driver.js</pre
         });
         driverObj.highlight({
           element: ".page-header",
+          popover: {
+            title: "Page Title",
+            description: "Body of the popover",
+            side: "bottom",
+            align: "start",
+            onPopoverRendered: popover => {
+              popover.title.innerText = "Modified";
+            },
+          },
+        });
+      });
+
+      document.getElementById("padding-change").addEventListener("click", () => {
+        const driverObj = driver({
+          stagePadding: 0,
+          popoverOffset: 20,
+          stageRadius: 10
+        });
+
+        driverObj.highlight({
+          element: "#padding-change",
           popover: {
             title: "Page Title",
             description: "Body of the popover",
