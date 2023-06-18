@@ -11,11 +11,12 @@ export type AllowedButtons = "next" | "previous" | "close";
 
 export type Popover = {
   title?: string;
-  description: string;
+  description?: string;
   side?: Side;
   align?: Alignment;
 
   showButtons?: AllowedButtons[];
+  disableButtons?: AllowedButtons[];
 
   popoverClass?: string;
 
@@ -57,15 +58,19 @@ export function hidePopover() {
 
 export function renderPopover(element: Element, step: DriveStep) {
   let popover = getState("popover");
-  if (!popover) {
-    popover = createPopover();
-    document.body.appendChild(popover.wrapper);
+  if (popover) {
+    document.body.removeChild(popover.wrapper);
   }
+
+  popover = createPopover();
+  document.body.appendChild(popover.wrapper);
 
   const {
     title,
     description,
-    showButtons: popoverShowButtons = undefined,
+    showButtons,
+    disableButtons,
+
     // doneBtnText = 'Done',
     closeBtnText = getConfig("closeBtnText") || "Close",
     nextBtnText = getConfig("nextBtnText") || "Next &rarr;",
@@ -90,25 +95,29 @@ export function renderPopover(element: Element, step: DriveStep) {
     popover.description.style.display = "none";
   }
 
-  const showButtonsConfig: AllowedButtons[] =
-    popoverShowButtons !== undefined ? popoverShowButtons : getConfig("showButtons")!;
+  const showButtonsConfig: AllowedButtons[] = showButtons || getConfig("showButtons")!;
 
   if (showButtonsConfig?.length! > 0) {
     popover.footer.style.display = "flex";
 
-    if (!showButtonsConfig.includes("next")) {
-      popover.nextButton.style.display = "none";
-    }
-
-    if (!showButtonsConfig.includes("previous")) {
-      popover.previousButton.style.display = "none";
-    }
-
-    if (!showButtonsConfig.includes("close")) {
-      popover.closeButton.style.display = "none";
-    }
+    popover.nextButton.style.display = showButtonsConfig.includes("next") ? 'block' : 'none';
+    popover.previousButton.style.display = showButtonsConfig.includes("previous") ? 'block' : 'none';
+    popover.closeButton.style.display = showButtonsConfig.includes("close") ? 'block' : 'none';
   } else {
     popover.footer.style.display = "none";
+  }
+
+  const disabledButtonsConfig: AllowedButtons[] = disableButtons || getConfig('disableButtons')! || [];
+  if (disabledButtonsConfig?.includes('next')) {
+      popover.nextButton.classList.add("driver-popover-btn-disabled")
+  }
+
+  if (disabledButtonsConfig?.includes('previous')) {
+      popover.previousButton.classList.add("driver-popover-btn-disabled")
+  }
+
+  if (disabledButtonsConfig?.includes('close')) {
+      popover.closeButton.classList.add("driver-popover-btn-disabled")
   }
 
   // Reset the popover position

@@ -2,6 +2,8 @@ import { DriveStep } from "./driver";
 import {AllowedButtons, PopoverDOM} from "./popover";
 
 export type Config = {
+  steps?: DriveStep[];
+
   animate?: boolean;
   backdropColor?: string;
   smoothScroll?: boolean;
@@ -15,11 +17,13 @@ export type Config = {
   popoverClass?: string;
   popoverOffset?: number;
   showButtons?: AllowedButtons[];
+  disableButtons?: AllowedButtons[];
 
   // Button texts
   nextBtnText?: string;
   prevBtnText?: string;
   closeBtnText?: string;
+  doneBtnText?: string;
 
   // Called after the popover is rendered
   onPopoverRendered?: (popover: PopoverDOM) => void;
@@ -49,6 +53,7 @@ export function configure(config: Config = {}) {
     stageRadius: 5,
     popoverOffset: 10,
     showButtons: ["next", "previous", "close"],
+    disableButtons: [],
     backdropColor: "#000",
     ...config,
   };

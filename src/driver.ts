@@ -1,4 +1,4 @@
-import { destroyPopover, Popover } from "./popover";
+import { AllowedButtons, destroyPopover, Popover } from "./popover";
 import { destroyStage } from "./stage";
 import { destroyEvents, initEvents, requireRefresh } from "./events";
 import { Config, configure, getConfig } from "./config";
@@ -38,6 +38,49 @@ export function driver(options: Config = {}) {
     listen("escapePress", handleClose);
   }
 
+  function drive(stepIndex: number = 0) {
+    const steps = getConfig("steps");
+    if (!steps) {
+      console.error("No steps to drive through");
+      destroy();
+      return;
+    }
+
+    if (!steps[stepIndex]) {
+      console.warn(`Step not found at index: ${stepIndex}`);
+      destroy();
+    }
+
+    const currentStep = steps[stepIndex];
+    const hasNextStep = steps[stepIndex + 1];
+    const hasPreviousStep = steps[stepIndex - 1];
+
+    const doneBtnText = currentStep.popover?.doneBtnText || getConfig("doneBtnText") || "Done";
+
+    highlight({
+      ...currentStep,
+      popover: {
+        showButtons: ["next", "previous", "close"],
+        nextBtnText: !hasNextStep ? doneBtnText : undefined,
+        disableButtons: [...(!hasPreviousStep ? ["previous" as AllowedButtons] : [])],
+        onNextClick: () => {
+          if (!hasNextStep) {
+            destroy();
+          } else {
+            drive(stepIndex + 1);
+          }
+        },
+        onPrevClick: () => {
+          drive(stepIndex - 1);
+        },
+        onCloseClick: () => {
+          destroy();
+        },
+        ...(currentStep?.popover || {}),
+      },
+    });
+  }
+
   function destroy() {
     const activeElement = getState("activeElement");
     const activeStep = getState("activeStep");
@@ -72,7 +115,10 @@ export function driver(options: Config = {}) {
     refresh: () => {
       requireRefresh();
     },
-    drive: (steps: DriveStep[]) => console.log(steps),
+    drive: (stepIndex: number = 0) => {
+      init();
+      drive(stepIndex);
+    },
     highlight: (step: DriveStep) => {
       init();
       highlight({
