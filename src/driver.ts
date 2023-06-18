@@ -24,6 +24,34 @@ export function driver(options: Config = {}) {
     destroy();
   }
 
+  function handleArrowLeft() {
+    const steps = getConfig("steps") || [];
+    const currentStepIndex = getState("currentStepIndex");
+    if (typeof currentStepIndex === "undefined") {
+      return;
+    }
+
+    const previousStepIndex = currentStepIndex - 1;
+    if (steps[previousStepIndex]) {
+      drive(previousStepIndex);
+    }
+  }
+
+  function handleArrowRight() {
+    const steps = getConfig("steps") || [];
+    const currentStepIndex = getState("currentStepIndex");
+    if (typeof currentStepIndex === "undefined") {
+      return;
+    }
+
+    const nextStepIndex = currentStepIndex + 1;
+    if (steps[nextStepIndex]) {
+      drive(nextStepIndex);
+    } else {
+      destroy();
+    }
+  }
+
   function init() {
     if (getState("isInitialized")) {
       return;
@@ -36,6 +64,8 @@ export function driver(options: Config = {}) {
 
     listen("overlayClick", handleClose);
     listen("escapePress", handleClose);
+    listen("arrowLeftPress", handleArrowLeft);
+    listen("arrowRightPress", handleArrowRight);
   }
 
   function drive(stepIndex: number = 0) {
@@ -50,6 +80,8 @@ export function driver(options: Config = {}) {
       console.warn(`Step not found at index: ${stepIndex}`);
       destroy();
     }
+
+    setState("currentStepIndex", stepIndex);
 
     const currentStep = steps[stepIndex];
     const hasNextStep = steps[stepIndex + 1];

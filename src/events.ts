@@ -20,6 +20,10 @@ function onKeyup(e: KeyboardEvent) {
 
   if (e.key === "Escape") {
     emit("escapePress");
+  } else if (e.key === "ArrowRight") {
+    emit("arrowRightPress");
+  } else if (e.key === "ArrowLeft") {
+    emit("arrowLeftPress");
   }
 }
 
