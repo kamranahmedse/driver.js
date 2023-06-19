@@ -201,6 +201,7 @@
         <button id="basic-tour">Animated Tour</button>
         <button id="non-animated-tour">Non-Animated Tour</button>
         <button id="async-tour">Asynchronous Tour</button>
+        <button id="confirm-exit-tour">Confirm on Exit</button>
       </div>
 
       <ul>
@@ -398,15 +399,28 @@ npm install driver.js</pre
         driverObj.drive();
       });
 
+      document.getElementById("confirm-exit-tour").addEventListener("click", () => {
+        const driverObj = driver({
+          animate: true,
+          backdropColor: "green",
+          opacity: 0.3,
+          steps: basicTourSteps,
+          onDestroyStarted: () => {
+            if (driverObj.hasNextStep() && confirm("Are you sure?")) {
+              driverObj.destroy();
+            } else {
+              driverObj.destroy();
+            }
+          },
+        });
+
+        driverObj.drive();
+      });
+
       document.getElementById("async-tour").addEventListener("click", () => {
         const driverObj = driver({
           animate: true,
           opacity: 0.3,
-          onDestroyStarted: (element, step) => {
-            if (confirm('Are you sure?')) {
-              driverObj.destroy();
-            }
-          },
           steps: [
             {
               element: ".page-header",

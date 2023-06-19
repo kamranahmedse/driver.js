@@ -145,16 +145,15 @@ export function driver(options: Config = {}) {
     });
   }
 
-  function destroy(withStartHook = true) {
+  function destroy(withOnDestroyStartedHook = true) {
     const activeElement = getState("activeElement");
     const activeStep = getState("activeStep");
 
     const onDestroyStarted = getConfig("onDestroyStarted");
-
     // `onDestroyStarted` is used to confirm the exit of tour. If we trigger
     // the hook for when user calls `destroy`, driver will get into infinite loop
     // not causing tour to be destroyed.
-    if (withStartHook && onDestroyStarted) {
+    if (withOnDestroyStartedHook && onDestroyStarted) {
       onDestroyStarted(activeElement, activeStep!);
       return;
     }
@@ -186,15 +185,25 @@ export function driver(options: Config = {}) {
 
   return {
     isActive: () => getState("isInitialized") || false,
-    refresh: () => {
-      requireRefresh();
-    },
+    refresh: requireRefresh,
     drive: (stepIndex: number = 0) => {
       init();
       drive(stepIndex);
     },
     moveNext,
     movePrevious,
+    hasNextStep: () => {
+      const steps = getConfig("steps") || [];
+      const activeIndex = getState("activeIndex");
+
+      return activeIndex !== undefined && steps[activeIndex + 1];
+    },
+    hasPreviousStep: () => {
+      const steps = getConfig("steps") || [];
+      const activeIndex = getState("activeIndex");
+
+      return activeIndex !== undefined && steps[activeIndex - 1];
+    },
     highlight: (step: DriveStep) => {
       init();
       highlight({

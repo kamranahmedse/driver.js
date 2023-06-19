@@ -5,19 +5,17 @@ import { DriveStep } from "./driver";
 export type State = {
   // Whether driver is initialized or not
   isInitialized?: boolean;
-  // Index of the currently active step in driver tour
-  activeIndex?: number;
-
   // Used to bounce the resize event
   resizeTimeout?: number;
 
-  // Used while transitioning between stages
+  activeIndex?: number;
   activeElement?: Element;
   activeStep?: DriveStep;
+
   previousElement?: Element;
   previousStep?: DriveStep;
-  transitionCallback?: () => void;
 
+  transitionCallback?: () => void;
 
   activeStagePosition?: StageDefinition;
   stageSvg?: SVGSVGElement;
