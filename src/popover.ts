@@ -22,7 +22,6 @@ export type Popover = {
 
   // Button texts
   doneBtnText?: string;
-  closeBtnText?: string;
   nextBtnText?: string;
   prevBtnText?: string;
 
@@ -72,15 +71,12 @@ export function renderPopover(element: Element, step: DriveStep) {
     showButtons,
     disableButtons,
 
-    // doneBtnText = 'Done',
-    closeBtnText = getConfig("closeBtnText") || "Close",
     nextBtnText = getConfig("nextBtnText") || "Next &rarr;",
     prevBtnText = getConfig("prevBtnText") || "&larr; Previous",
   } = step.popover || {};
 
   popover.nextButton.innerHTML = nextBtnText;
   popover.previousButton.innerHTML = prevBtnText;
-  popover.closeButton.innerHTML = closeBtnText;
 
   if (title) {
     popover.title.innerText = title;
@@ -98,12 +94,11 @@ export function renderPopover(element: Element, step: DriveStep) {
 
   const showButtonsConfig: AllowedButtons[] = showButtons || getConfig("showButtons")!;
 
-  if (showButtonsConfig?.length! > 0) {
+  popover.closeButton.style.display = showButtonsConfig.includes("close") ? 'block' : 'none';
+  if (showButtonsConfig?.includes("next") || showButtonsConfig?.includes("previous")) {
     popover.footer.style.display = "flex";
-
     popover.nextButton.style.display = showButtonsConfig.includes("next") ? 'block' : 'none';
     popover.previousButton.style.display = showButtonsConfig.includes("previous") ? 'block' : 'none';
-    popover.closeButton.style.display = showButtonsConfig.includes("close") ? 'block' : 'none';
   } else {
     popover.footer.style.display = "none";
   }
@@ -576,7 +571,7 @@ function createPopover(): PopoverDOM {
 
   const closeButton = document.createElement("button");
   closeButton.classList.add("driver-popover-close-btn");
-  closeButton.innerText = "Close";
+  closeButton.innerHTML = "&times;";
 
   const footerButtons = document.createElement("span");
   footerButtons.classList.add("driver-popover-navigation-btns");
@@ -591,10 +586,9 @@ function createPopover(): PopoverDOM {
 
   footerButtons.appendChild(previousButton);
   footerButtons.appendChild(nextButton);
-
-  footer.appendChild(closeButton);
   footer.appendChild(footerButtons);
 
+  wrapper.appendChild(closeButton);
   wrapper.appendChild(arrow);
   wrapper.appendChild(title);
   wrapper.appendChild(description);

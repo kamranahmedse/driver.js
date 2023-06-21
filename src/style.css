@@ -49,6 +49,10 @@
   background-color: #fff;
 }
 
+.driver-popover * {
+  font-family: "Helvetica Neue", Inter, ui-sans-serif, "Apple Color Emoji", Helvetica, Arial, sans-serif;
+}
+
 .driver-popover-title {
   font: 19px / normal sans-serif;
   font-weight: 700;
@@ -57,6 +61,27 @@
   line-height: 1.5;
   zoom: 1;
   margin: 0;
+}
+
+.driver-popover-close-btn {
+  all: unset;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 32px;
+  height: 28px;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: 500;
+  color: #d2d2d2;
+  z-index: 1;
+  text-align: center;
+  transition: color;
+  transition-duration: 200ms;
+}
+
+.driver-popover-close-btn:hover {
+  color: #2d2d2d;
 }
 
 .driver-popover-title[style*="block"] + .driver-popover-description {

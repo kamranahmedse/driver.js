@@ -22,7 +22,6 @@ export type Config = {
   // Button texts
   nextBtnText?: string;
   prevBtnText?: string;
-  closeBtnText?: string;
   doneBtnText?: string;
 
   // Called after the popover is rendered

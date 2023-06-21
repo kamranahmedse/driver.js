@@ -335,6 +335,23 @@ npm install driver.js</pre
     <script type="module">
       import { driver } from "./src/driver.ts";
 
+      const driverObj = driver({
+        animate: false,
+      });
+
+      driverObj.highlight({
+        element: "h1",
+        popover: {
+          title: "A popover",
+          side: 'bottom',
+          description: "Working on the close functionality right now. Turning it into a small cross button on top right corner.",
+          showButtons: ["close", "next", "previous"],
+          onCloseClick: () => {
+            driverObj.destroy();
+          }
+        }
+      });
+
       const basicTourSteps = [
         {
           element: ".page-header",
@@ -596,7 +613,6 @@ npm install driver.js</pre
         const driverObj = driver({
           prevBtnText: "<——",
           nextBtnText: "——>",
-          closeBtnText: "X",
         });
 
         driverObj.highlight({
@@ -605,7 +621,6 @@ npm install driver.js</pre
             side: "left",
             title: "Button from Config",
             showButtons: ["close", "next", "previous"],
-            closeBtnText: "xx",
             nextBtnText: "==>",
             prevBtnText: "<==",
             description: "These buttons are configured using driver config.",
