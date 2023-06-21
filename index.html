@@ -204,6 +204,8 @@
         <button id="non-animated-tour">Non-Animated Tour</button>
         <button id="async-tour">Asynchronous Tour</button>
         <button id="confirm-exit-tour">Confirm on Exit</button>
+        <button id="progress-tour">Progress Text</button>
+        <button id="progress-tour-template">Progress Text Template</button>
       </div>
 
       <ul>
@@ -337,25 +339,6 @@ npm install driver.js</pre
     <script type="module">
       import { driver } from "./src/driver.ts";
 
-      const driverObj = driver({
-        animate: false,
-      });
-
-      driverObj.highlight({
-        element: "h1",
-        popover: {
-          title: "A popover",
-          side: 'bottom',
-          description: "Working on the close functionality right now. Turning it into a small cross button on top right corner.",
-          showProgress: true,
-          progressText: "Some <strong>HTML</strong>",
-          showButtons: ["close", "next", "previous"],
-          onCloseClick: () => {
-            driverObj.destroy();
-          }
-        }
-      });
-
       const basicTourSteps = [
         {
           element: ".page-header",
@@ -434,6 +417,27 @@ npm install driver.js</pre
               driverObj.destroy();
             }
           },
+        });
+
+        driverObj.drive();
+      });
+
+      document.getElementById("progress-tour").addEventListener("click", () => {
+        const driverObj = driver({
+          animate: true,
+          steps: basicTourSteps,
+          showProgress: true,
+        });
+
+        driverObj.drive();
+      });
+
+      document.getElementById("progress-tour-template").addEventListener("click", () => {
+        const driverObj = driver({
+          animate: true,
+          steps: basicTourSteps,
+          showProgress: true,
+          progressText: "{{current}} of {{total}} done",
         });
 
         driverObj.drive();
