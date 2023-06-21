@@ -24,11 +24,11 @@
 }
 
 .driver-fade .driver-stage {
-  animation: animate-fade-in 300ms ease-in-out;
+  animation: animate-fade-in 200ms ease-in-out;
 }
 
 .driver-fade .driver-popover {
-  animation: animate-fade-in 300ms;
+  animation: animate-fade-in 200ms;
 }
 
 /* Popover styles */
