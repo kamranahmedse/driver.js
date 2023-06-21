@@ -16,11 +16,13 @@ export type Popover = {
   align?: Alignment;
 
   showButtons?: AllowedButtons[];
+  showProgress?: boolean;
   disableButtons?: AllowedButtons[];
 
   popoverClass?: string;
 
   // Button texts
+  progressText?: string;
   doneBtnText?: string;
   nextBtnText?: string;
   prevBtnText?: string;
@@ -41,6 +43,7 @@ export type PopoverDOM = {
   title: HTMLElement;
   description: HTMLElement;
   footer: HTMLElement;
+  progress: HTMLElement;
   previousButton: HTMLElement;
   nextButton: HTMLElement;
   closeButton: HTMLElement;
@@ -70,13 +73,16 @@ export function renderPopover(element: Element, step: DriveStep) {
     description,
     showButtons,
     disableButtons,
+    showProgress,
 
     nextBtnText = getConfig("nextBtnText") || "Next &rarr;",
     prevBtnText = getConfig("prevBtnText") || "&larr; Previous",
+    progressText = getConfig("progressText") || "{current} of {total}",
   } = step.popover || {};
 
   popover.nextButton.innerHTML = nextBtnText;
   popover.previousButton.innerHTML = prevBtnText;
+  popover.progress.innerHTML = progressText;
 
   if (title) {
     popover.title.innerText = title;
@@ -93,27 +99,36 @@ export function renderPopover(element: Element, step: DriveStep) {
   }
 
   const showButtonsConfig: AllowedButtons[] = showButtons || getConfig("showButtons")!;
+  const showProgressConfig = showProgress || getConfig("showProgress") || false;
+  const showFooter =
+    showButtonsConfig?.includes("next") ||
+    showButtonsConfig?.includes("previous") ||
+    showButtonsConfig?.includes("close") ||
+    showProgressConfig;
 
-  popover.closeButton.style.display = showButtonsConfig.includes("close") ? 'block' : 'none';
-  if (showButtonsConfig?.includes("next") || showButtonsConfig?.includes("previous")) {
+  popover.closeButton.style.display = showButtonsConfig.includes("close") ? "block" : "none";
+
+  if (showFooter) {
     popover.footer.style.display = "flex";
-    popover.nextButton.style.display = showButtonsConfig.includes("next") ? 'block' : 'none';
-    popover.previousButton.style.display = showButtonsConfig.includes("previous") ? 'block' : 'none';
+
+    popover.progress.style.display = showProgressConfig ? "block" : "none";
+    popover.nextButton.style.display = showButtonsConfig.includes("next") ? "block" : "none";
+    popover.previousButton.style.display = showButtonsConfig.includes("previous") ? "block" : "none";
   } else {
     popover.footer.style.display = "none";
   }
 
-  const disabledButtonsConfig: AllowedButtons[] = disableButtons || getConfig('disableButtons')! || [];
-  if (disabledButtonsConfig?.includes('next')) {
-      popover.nextButton.classList.add("driver-popover-btn-disabled")
+  const disabledButtonsConfig: AllowedButtons[] = disableButtons || getConfig("disableButtons")! || [];
+  if (disabledButtonsConfig?.includes("next")) {
+    popover.nextButton.classList.add("driver-popover-btn-disabled");
   }
 
-  if (disabledButtonsConfig?.includes('previous')) {
-      popover.previousButton.classList.add("driver-popover-btn-disabled")
+  if (disabledButtonsConfig?.includes("previous")) {
+    popover.previousButton.classList.add("driver-popover-btn-disabled");
   }
 
-  if (disabledButtonsConfig?.includes('close')) {
-      popover.closeButton.classList.add("driver-popover-btn-disabled")
+  if (disabledButtonsConfig?.includes("close")) {
+    popover.closeButton.classList.add("driver-popover-btn-disabled");
   }
 
   // Reset the popover position
@@ -182,7 +197,7 @@ export function renderPopover(element: Element, step: DriveStep) {
   repositionPopover(element, step);
   bringInView(popoverWrapper);
 
-  const onPopoverRendered = step.popover?.onPopoverRendered || getConfig('onPopoverRendered');
+  const onPopoverRendered = step.popover?.onPopoverRendered || getConfig("onPopoverRendered");
   if (onPopoverRendered) {
     onPopoverRendered(popover);
   }
@@ -566,12 +581,16 @@ function createPopover(): PopoverDOM {
   description.style.display = "none";
   description.innerText = "Popover description is here";
 
-  const footer = document.createElement("div");
-  footer.classList.add("driver-popover-footer");
-
   const closeButton = document.createElement("button");
   closeButton.classList.add("driver-popover-close-btn");
   closeButton.innerHTML = "&times;";
+
+  const footer = document.createElement("div");
+  footer.classList.add("driver-popover-footer");
+
+  const progress = document.createElement("span");
+  progress.classList.add("driver-popover-progress-text");
+  progress.innerText = "";
 
   const footerButtons = document.createElement("span");
   footerButtons.classList.add("driver-popover-navigation-btns");
@@ -586,6 +605,7 @@ function createPopover(): PopoverDOM {
 
   footerButtons.appendChild(previousButton);
   footerButtons.appendChild(nextButton);
+  footer.appendChild(progress);
   footer.appendChild(footerButtons);
 
   wrapper.appendChild(closeButton);
@@ -604,6 +624,7 @@ function createPopover(): PopoverDOM {
     nextButton,
     closeButton,
     footerButtons,
+    progress,
   };
 }
 

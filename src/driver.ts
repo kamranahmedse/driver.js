@@ -120,13 +120,19 @@ export function driver(options: Config = {}) {
 
     const doneBtnText = currentStep.popover?.doneBtnText || getConfig("doneBtnText") || "Done";
     const allowsClosing = getConfig("allowClose");
+    const showProgress = typeof currentStep.popover?.showProgress !== "undefined" ? currentStep.popover?.showProgress : getConfig("showProgress")
+    const progressText = currentStep.popover?.progressText || getConfig("progressText") || "{{current}} of {{total}}";
+    const progressTextReplaced = progressText.replace("{{current}}", `${stepIndex + 1}`).replace("{{total}}", `${steps.length}`);
 
+    console.log(showProgress);
     highlight({
       ...currentStep,
       popover: {
         showButtons: ["next", "previous", ...(allowsClosing ? ["close" as AllowedButtons] : [])],
         nextBtnText: !hasNextStep ? doneBtnText : undefined,
         disableButtons: [...(!hasPreviousStep ? ["previous" as AllowedButtons] : [])],
+        showProgress: showProgress,
+        progressText: progressTextReplaced,
         onNextClick: () => {
           if (!hasNextStep) {
             destroy();
@@ -211,6 +217,8 @@ export function driver(options: Config = {}) {
         popover: step.popover
           ? {
               showButtons: [],
+              showProgress: false,
+              progressText: "",
               ...step.popover!,
             }
           : undefined,

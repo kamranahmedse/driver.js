@@ -3,6 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- prefetch image -->
+    <link rel="preconnect" href="https://i.imgur.com/" />
     <title>Vite App</title>
 
     <style>
@@ -410,6 +412,7 @@ npm install driver.js</pre
           animate: false,
           backdropColor: "blue",
           opacity: 0.3,
+          showProgress: true,
           steps: basicTourSteps,
         });
 
@@ -438,6 +441,8 @@ npm install driver.js</pre
         const driverObj = driver({
           animate: true,
           opacity: 0.3,
+          showProgress: true,
+          progressText: "{{current}} / {{total}}",
           steps: [
             {
               element: ".page-header",
@@ -524,6 +529,7 @@ npm install driver.js</pre
 
       document.getElementById("basic-tour").addEventListener("click", () => {
         const driverObj = driver({
+          showProgress: true,
           steps: basicTourSteps,
         });
 

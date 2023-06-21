@@ -1,5 +1,5 @@
 import { DriveStep } from "./driver";
-import {AllowedButtons, PopoverDOM} from "./popover";
+import { AllowedButtons, PopoverDOM } from "./popover";
 
 export type Config = {
   steps?: DriveStep[];
@@ -17,9 +17,11 @@ export type Config = {
   popoverClass?: string;
   popoverOffset?: number;
   showButtons?: AllowedButtons[];
+  showProgress?: boolean;
   disableButtons?: AllowedButtons[];
 
   // Button texts
+  progressText?: string;
   nextBtnText?: string;
   prevBtnText?: string;
   doneBtnText?: string;
@@ -49,6 +51,7 @@ export function configure(config: Config = {}) {
     allowClose: true,
     opacity: 0.7,
     smoothScroll: false,
+    showProgress: false,
     stagePadding: 10,
     stageRadius: 5,
     popoverOffset: 10,
