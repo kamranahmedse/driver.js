@@ -489,12 +489,12 @@ npm install driver.js</pre
             },
             {
               element: ".dynamic-el",
+              onDeselected: element => {
+                element?.parentElement?.removeChild(element);
+              },
               popover: {
                 title: "Dynamic Elements",
                 description: "This was created before we moved here",
-                onDeselected: element => {
-                  element?.parentElement?.removeChild(element);
-                },
               },
             },
             {

@@ -11,14 +11,15 @@ export type Config = {
   opacity?: number;
   stagePadding?: number;
   stageRadius?: number;
+
   allowKeyboardControl?: boolean;
 
   // Popover specific configuration
   popoverClass?: string;
   popoverOffset?: number;
   showButtons?: AllowedButtons[];
-  showProgress?: boolean;
   disableButtons?: AllowedButtons[];
+  showProgress?: boolean;
 
   // Button texts
   progressText?: string;
