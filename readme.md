@@ -307,12 +307,7 @@ And this is how it would look when creating a step by step guide:
 
 ```javascript
 const driver = new Driver(driverOptions);
-driver.defineSteps([
-  stepDefinition1,
-  stepDefinition2,
-  stepDefinition3,
-  stepDefinition4,
-]);
+driver.defineSteps([stepDefinition1, stepDefinition2, stepDefinition3, stepDefinition4]);
 ```
 
 ### API Methods

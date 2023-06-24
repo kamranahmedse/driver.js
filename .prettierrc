@@ -9,7 +9,6 @@
   "endOfLine": "auto",
   "singleAttributePerLine": false,
   "bracketSameLine": false,
-  "jsxBracketSameLine": false,
   "jsxSingleQuote": false,
   "quoteProps": "as-needed",
   "semi": true

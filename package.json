@@ -14,7 +14,6 @@
     "dev": "vite --host",
     "build": "tsc && vite build && dts-bundle-generator --config ./dts-bundle-generator.config.ts",
     "test": "vitest",
-    "test:coverage": "vitest --coverage",
     "format": "prettier . --write"
   },
   "devDependencies": {
