@@ -1,7 +1,7 @@
 {
   "name": "driver.js",
-  "private": true,
-  "version": "0.0.2",
+  "private": false,
+  "version": "1.0.0-next.0",
   "main": "./dist/driver.js.cjs",
   "module": "./dist/driver.js.mjs",
   "exports": {
@@ -16,6 +16,11 @@
     "test": "vitest",
     "format": "prettier . --write"
   },
+  "files": [
+    "!tests/**/*",
+    "dist/**/*",
+    "!dist/**/*.js.map"
+  ],
   "devDependencies": {
     "@types/jsdom": "^21.1.1",
     "@types/node": "^20.3.0",
