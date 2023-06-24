@@ -3,10 +3,7 @@ import { PopoverDOM } from "./popover";
 import { DriveStep } from "./driver";
 
 export type State = {
-  // Whether driver is initialized or not
   isInitialized?: boolean;
-  // Used to bounce the resize event
-  resizeTimeout?: number;
 
   activeIndex?: number;
   activeElement?: Element;
@@ -15,12 +12,12 @@ export type State = {
   previousElement?: Element;
   previousStep?: DriveStep;
 
-  transitionCallback?: () => void;
-
-  activeStagePosition?: StageDefinition;
-  stageSvg?: SVGSVGElement;
-
   popover?: PopoverDOM;
+
+  __resizeTimeout?: number;
+  __transitionCallback?: () => void;
+  __activeStagePosition?: StageDefinition;
+  __stageSvg?: SVGSVGElement;
 };
 
 let currentState: State = {};

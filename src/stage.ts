@@ -14,7 +14,7 @@ export type StageDefinition = {
 // This method calculates the animated new position of the
 // stage (called for each frame by requestAnimationFrame)
 export function transitionStage(elapsed: number, duration: number, from: Element, to: Element) {
-  let activeStagePosition = getState("activeStagePosition");
+  let activeStagePosition = getState("__activeStagePosition");
 
   const fromDefinition = activeStagePosition ? activeStagePosition : from.getBoundingClientRect();
   const toDefinition = to.getBoundingClientRect();
@@ -32,7 +32,7 @@ export function transitionStage(elapsed: number, duration: number, from: Element
   };
 
   renderStage(activeStagePosition);
-  setState("activeStagePosition", activeStagePosition);
+  setState("__activeStagePosition", activeStagePosition);
 }
 
 export function trackActiveElement(element: Element) {
@@ -49,14 +49,14 @@ export function trackActiveElement(element: Element) {
     height: definition.height,
   };
 
-  setState("activeStagePosition", activeStagePosition);
+  setState("__activeStagePosition", activeStagePosition);
 
   renderStage(activeStagePosition);
 }
 
 export function refreshStage() {
-  const activeStagePosition = getState("activeStagePosition");
-  const stageSvg = getState("stageSvg");
+  const activeStagePosition = getState("__activeStagePosition");
+  const stageSvg = getState("__stageSvg");
 
   if (!activeStagePosition) {
     return;
@@ -86,11 +86,11 @@ function mountStage(stagePosition: StageDefinition) {
     emit("overlayClick");
   });
 
-  setState("stageSvg", stageSvg);
+  setState("__stageSvg", stageSvg);
 }
 
 function renderStage(stagePosition: StageDefinition) {
-  const stageSvg = getState("stageSvg");
+  const stageSvg = getState("__stageSvg");
 
   // TODO: cancel rendering if element is not visible
   if (!stageSvg) {
@@ -171,7 +171,7 @@ function generateStageSvgPathString(stage: StageDefinition) {
 }
 
 export function destroyStage() {
-  const stageSvg = getState("stageSvg");
+  const stageSvg = getState("__stageSvg");
   if (stageSvg) {
     stageSvg.remove();
   }

@@ -1,5 +1,8 @@
 import { DriveStep } from "./driver";
 import { AllowedButtons, PopoverDOM } from "./popover";
+import { State } from "./state";
+
+type DriverHook = (element: Element | undefined, step: DriveStep, opts: { config: Config; state: State }) => void;
 
 export type Config = {
   steps?: DriveStep[];
@@ -31,17 +34,16 @@ export type Config = {
   onPopoverRendered?: (popover: PopoverDOM) => void;
 
   // State based callbacks, called upon state changes
-  onOverlayClick?: (element: Element | undefined, step: DriveStep) => void;
-  onHighlightStarted?: (element: Element | undefined, step: DriveStep) => void;
-  onHighlighted?: (element: Element | undefined, step: DriveStep) => void;
-  onDeselected?: (element: Element | undefined, step: DriveStep) => void;
-  onDestroyStarted?: (element: Element | undefined, step: DriveStep) => void;
-  onDestroyed?: (element: Element | undefined, step: DriveStep) => void;
+  onHighlightStarted?: DriverHook;
+  onHighlighted?: DriverHook;
+  onDeselected?: DriverHook;
+  onDestroyStarted?: DriverHook;
+  onDestroyed?: DriverHook;
 
   // Event based callbacks, called upon events
-  onNextClick?: (element: Element | undefined, step: DriveStep) => void;
-  onPrevClick?: (element: Element | undefined, step: DriveStep) => void;
-  onCloseClick?: (element: Element | undefined, step: DriveStep) => void;
+  onNextClick?: DriverHook;
+  onPrevClick?: DriverHook;
+  onCloseClick?: DriverHook;
 };
 
 let currentConfig: Config = {};

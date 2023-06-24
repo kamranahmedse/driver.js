@@ -74,12 +74,21 @@ function transferHighlight(toElement: Element, toStep: DriveStep) {
   const highlightedHook = getConfig("onHighlighted");
   const deselectedHook = fromStep?.onDeselected || getConfig("onDeselected");
 
+  const config = getConfig();
+  const state = getState();
+
   if (!isFirstHighlight && deselectedHook) {
-    deselectedHook(isFromDummyElement ? undefined : fromElement, fromStep!);
+    deselectedHook(isFromDummyElement ? undefined : fromElement, fromStep!, {
+      config,
+      state,
+    });
   }
 
   if (highlightStartedHook) {
-    highlightStartedHook(isToDummyElement ? undefined : toElement, toStep);
+    highlightStartedHook(isToDummyElement ? undefined : toElement, toStep, {
+      config,
+      state,
+    });
   }
 
   const hasDelayedPopover = !isFirstHighlight && isAnimatedTour;
@@ -88,7 +97,7 @@ function transferHighlight(toElement: Element, toStep: DriveStep) {
   hidePopover();
 
   const animate = () => {
-    const transitionCallback = getState("transitionCallback");
+    const transitionCallback = getState("__transitionCallback");
 
     // This makes sure that the repeated calls to transferHighlight
     // don't interfere with each other. Only the last call will be
@@ -112,10 +121,13 @@ function transferHighlight(toElement: Element, toStep: DriveStep) {
       trackActiveElement(toElement);
 
       if (highlightedHook) {
-        highlightedHook(isToDummyElement ? undefined : toElement, toStep);
+        highlightedHook(isToDummyElement ? undefined : toElement, toStep, {
+          config: getConfig(),
+          state: getState(),
+        });
       }
 
-      setState("transitionCallback", undefined);
+      setState("__transitionCallback", undefined);
       setState("previousStep", fromStep);
       setState("previousElement", fromElement);
       setState("activeStep", toStep);
@@ -125,7 +137,7 @@ function transferHighlight(toElement: Element, toStep: DriveStep) {
     window.requestAnimationFrame(animate);
   };
 
-  setState("transitionCallback", animate);
+  setState("__transitionCallback", animate);
   window.requestAnimationFrame(animate);
 
   bringInView(toElement);

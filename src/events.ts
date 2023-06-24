@@ -4,12 +4,12 @@ import { getState, setState } from "./state";
 import { getConfig } from "./config";
 
 export function requireRefresh() {
-  const resizeTimeout = getState("resizeTimeout");
+  const resizeTimeout = getState("__resizeTimeout");
   if (resizeTimeout) {
     window.cancelAnimationFrame(resizeTimeout);
   }
 
-  setState("resizeTimeout", window.requestAnimationFrame(refreshActiveHighlight));
+  setState("__resizeTimeout", window.requestAnimationFrame(refreshActiveHighlight));
 }
 
 function onKeyup(e: KeyboardEvent) {

@@ -931,7 +931,7 @@ npm install driver.js</pre
           onDeselected: (element, step) => {
             console.log("Deselected element", element, step);
           },
-          onHighlightStarted: (element, step) => {
+          onHighlightStarted: (element, step, { config, state }) => {
             console.log("Started highlighting element", element, step);
           },
           onHighlighted: (element, step) => {

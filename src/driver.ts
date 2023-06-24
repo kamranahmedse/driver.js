@@ -78,7 +78,10 @@ export function driver(options: Config = {}) {
 
     const onNextClick = activeStep.popover?.onNextClick || getConfig("onNextClick");
     if (onNextClick) {
-      return onNextClick(activeElement, activeStep);
+      return onNextClick(activeElement, activeStep, {
+        config: getConfig(),
+        state: getState(),
+      });
     }
 
     moveNext();
@@ -166,7 +169,10 @@ export function driver(options: Config = {}) {
     // the hook for when user calls `destroy`, driver will get into infinite loop
     // not causing tour to be destroyed.
     if (withOnDestroyStartedHook && onDestroyStarted) {
-      onDestroyStarted(activeElement, activeStep!);
+      onDestroyStarted(activeElement, activeStep!, {
+        config: getConfig(),
+        state: getState(),
+      });
       return;
     }
 
@@ -186,11 +192,17 @@ export function driver(options: Config = {}) {
     if (activeElement && activeStep) {
       const isActiveDummyElement = activeElement.id === "driver-dummy-element";
       if (onDeselected) {
-        onDeselected(isActiveDummyElement ? undefined : activeElement, activeStep);
+        onDeselected(isActiveDummyElement ? undefined : activeElement, activeStep, {
+          config: getConfig(),
+          state: getState(),
+        });
       }
 
       if (onDestroyed) {
-        onDestroyed(isActiveDummyElement ? undefined : activeElement, activeStep);
+        onDestroyed(isActiveDummyElement ? undefined : activeElement, activeStep, {
+          config: getConfig(),
+          state: getState(),
+        });
       }
     }
   }
