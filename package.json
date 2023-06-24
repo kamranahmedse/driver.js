@@ -18,6 +18,7 @@
   },
   "files": [
     "!tests/**/*",
+    "!docs/**/*",
     "dist/**/*",
     "!dist/**/*.js.map"
   ],

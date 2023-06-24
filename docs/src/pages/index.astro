@@ -1,0 +1,72 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { FeatureMarquee } from "../components/FeatureMarquee";
+import Container from "../components/Container.astro";
+---
+<BaseLayout>
+  <div class="bg-yellow-300">
+    <Container>
+      <div class="py-24 flex justify-start items-center gap-4">
+        <div class="flex-grow">
+          <h1 class="text-9xl mb-4 font-bold">driver.js</h1>
+          <p class="text-3xl">Product tours, highlight features, contextual help and more.</p>
+          <div class="mt-12 mb-2 flex gap-2 items-stretch">
+            <button class="bg-black rounded-xl py-4 px-5 font-medium text-white text-xl">Show Demo Tour</button>
+            <a href="#" class="flex items-center font-bold text-xl border-4 border-black rounded-xl px-5 bg-white">
+              Get Started
+            </a>
+          </div>
+        </div>
+        <div class="flex-shrink-0">
+          <img src="/driver.svg" alt="Hero Image" class="h-72" />
+        </div>
+      </div>
+    </Container>
+  </div>
+  <div class="bg-white overflow-x-hidden relative h-[64px]">
+    <FeatureMarquee client:load />
+  </div>
+
+  <div class="py-24 bg-black text-white">
+    <Container>
+      <h2 class="text-5xl font-bold mb-4">Usecases</h2>
+      <p class="text-2xl mb-16 text-gray-300">Due to it's extensive API, driver.js can be used for a wide range of use cases.</p>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+        <div class="flex flex-col gap-4">
+          <span class="border-b border-b-yellow-300 block w-[50px]"></span>
+          <h3 class="text-3xl font-bold text-yellow-300">Onboard Users</h3>
+          <p class="text-xl text-gray-300">
+            Onboard your users by explaining how to use your product and answer common
+            questions.
+          </p>
+        </div>
+
+        <div class="flex flex-col gap-4">
+          <span class="border-b border-b-yellow-300 block w-[50px]"></span>
+          <h3 class="text-3xl font-bold text-yellow-300">
+            Remove Distractions
+          </h3>
+          <p class="text-xl text-gray-300">
+            With highlight feature, you can remove distractions and focus your users attention on what matters.
+          </p>
+        </div>
+
+        <div class="flex flex-col gap-4">
+          <span class="border-b border-b-yellow-300 block w-[50px]"></span>
+          <h3 class="text-3xl font-bold text-yellow-300">Contextual Help</h3>
+          <p class="text-xl text-gray-300">
+            Provide contextual help for your users, explain how to use your product and answer common questions.
+          </p>
+        </div>
+
+        <div class="flex flex-col gap-4">
+          <span class="border-b border-b-yellow-300 block w-[50px]"></span>
+          <h3 class="text-3xl font-bold text-yellow-300">Feature Adoption</h3>
+          <p class="text-xl text-gray-300">
+            Highlight new features, explain how to use them and make sure your users don't miss them.
+          </p>
+        </div>
+      </div>
+    </Container>
+  </div>
+</BaseLayout>
