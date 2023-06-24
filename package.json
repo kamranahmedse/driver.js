@@ -1,7 +1,7 @@
 {
   "name": "driver.js",
   "private": true,
-  "version": "0.0.2",
+  "version": "1.0.0",
   "main": "./dist/driver.js.cjs",
   "module": "./dist/driver.js.mjs",
   "exports": {
