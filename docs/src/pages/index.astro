@@ -2,6 +2,8 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { FeatureMarquee } from "../components/FeatureMarquee";
 import Container from "../components/Container.astro";
+import UsecaseItem from "../components/UsecaseItem.astro";
+import { ExampleButton } from "../components/examples/ExampleButton";
 ---
 <BaseLayout>
   <div class="bg-yellow-300">
@@ -27,46 +29,52 @@ import Container from "../components/Container.astro";
     <FeatureMarquee client:load />
   </div>
 
-  <div class="py-24 bg-black text-white">
+  <div class="py-32 bg-black text-white">
     <Container>
-      <h2 class="text-5xl font-bold mb-4">Usecases</h2>
-      <p class="text-2xl mb-16 text-gray-300">Due to it's extensive API, driver.js can be used for a wide range of use cases.</p>
+      <h2 class="text-6xl font-bold mb-6">Examples</h2>
+      <p class="text-2xl text-gray-300 mb-12">Here are just a few examples; find more <a
+        class="text-yellow-300 underline underline-offset-4" href="#">in the documentation</a>.</p>
+
+      <div class="flex flex-wrap gap-3">
+        <ExampleButton text="Animated Tour" />
+        <ExampleButton text="Non-Animated Tour" />
+        <ExampleButton text="Asynchronous Tour" />
+        <ExampleButton text="Confirm on Exit" />
+        <ExampleButton text="Show Progress" />
+        <ExampleButton text="Simple Element Highlight" />
+        <ExampleButton text="Prevent Tour from Closing" />
+        <ExampleButton text="Selective Popover Buttons" />
+        <ExampleButton text="Overlay Color" />
+        <ExampleButton text="Popover Positioning" />
+        <ExampleButton text="Customizing Popover" />
+        <ExampleButton text="Hooks for Everything" />
+        <a href="/"
+           class="items-center flex text-lg text-gray-900 bg-yellow-300 rounded-xl px-5 hover:bg-yellow-500 hover:text-black">
+          and much more ...
+        </a>
+      </div>
+
+      <p class="text-2xl my-14 text-gray-300">Due to it's extensive API, driver.js can be used for a wide range of use
+        cases.</p>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
-        <div class="flex flex-col gap-4">
-          <span class="border-b border-b-yellow-300 block w-[50px]"></span>
-          <h3 class="text-3xl font-bold text-yellow-300">Onboard Users</h3>
-          <p class="text-xl text-gray-300">
-            Onboard your users by explaining how to use your product and answer common
-            questions.
-          </p>
-        </div>
-
-        <div class="flex flex-col gap-4">
-          <span class="border-b border-b-yellow-300 block w-[50px]"></span>
-          <h3 class="text-3xl font-bold text-yellow-300">
-            Remove Distractions
-          </h3>
-          <p class="text-xl text-gray-300">
-            With highlight feature, you can remove distractions and focus your users attention on what matters.
-          </p>
-        </div>
-
-        <div class="flex flex-col gap-4">
-          <span class="border-b border-b-yellow-300 block w-[50px]"></span>
-          <h3 class="text-3xl font-bold text-yellow-300">Contextual Help</h3>
-          <p class="text-xl text-gray-300">
-            Provide contextual help for your users, explain how to use your product and answer common questions.
-          </p>
-        </div>
-
-        <div class="flex flex-col gap-4">
-          <span class="border-b border-b-yellow-300 block w-[50px]"></span>
-          <h3 class="text-3xl font-bold text-yellow-300">Feature Adoption</h3>
-          <p class="text-xl text-gray-300">
-            Highlight new features, explain how to use them and make sure your users don't miss them.
-          </p>
-        </div>
+        <UsecaseItem
+          title="Onboard Users"
+          description="Onboard your users by explaining how to use your product and answer common questions."
+        />
+        <UsecaseItem
+          title="Remove Distractions"
+          description="With highlight feature, you can remove distractions and focus your users attention on what matters."
+        />
+        <UsecaseItem
+          title="Contextual Help"
+          description="Provide contextual help for your users, explain how to use your product and answer common questions."
+        />
+        <UsecaseItem
+          title="Feature Adoption"
+          description="Highlight new features, explain how to use them and make sure your users don't miss them."
+        />
       </div>
     </Container>
   </div>
+
 </BaseLayout>

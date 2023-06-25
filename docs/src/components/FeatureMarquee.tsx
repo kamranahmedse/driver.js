@@ -9,6 +9,7 @@ const featureList = [
   "Light-weight",
   "Feature Rich",
   "Highly Customizable",
+  "Supports all Major Browsers",
   "Easy to use",
   "Accessible",
   "Frameworks Ready",
@@ -21,7 +22,7 @@ export function FeatureMarquee() {
       <p className="py-4 text-2xl whitespace-nowrap">
         { featureList.map((featureItem, index) => (
           <React.Fragment key={index}>
-            { featureItem } <span className="mx-3">&middot;</span>
+            { featureItem }<span className="mx-3">&middot;</span>
           </React.Fragment>
         ))}
       </p>

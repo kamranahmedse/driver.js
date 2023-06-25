@@ -102,7 +102,6 @@ export function renderPopover(element: Element, step: DriveStep) {
   const showFooter =
     showButtonsConfig?.includes("next") ||
     showButtonsConfig?.includes("previous") ||
-    showButtonsConfig?.includes("close") ||
     showProgressConfig;
 
   popover.closeButton.style.display = showButtonsConfig.includes("close") ? "block" : "none";
@@ -160,7 +159,10 @@ export function renderPopover(element: Element, step: DriveStep) {
         // If the user has provided a custom callback, call it
         // otherwise, emit the event.
         if (onNextClick) {
-          return onNextClick(element, step);
+          return onNextClick(element, step, {
+            config: getConfig(),
+            state: getState(),
+          });
         } else {
           return emit("nextClick");
         }
@@ -168,7 +170,10 @@ export function renderPopover(element: Element, step: DriveStep) {
 
       if (target.classList.contains("driver-popover-prev-btn")) {
         if (onPrevClick) {
-          return onPrevClick(element, step);
+          return onPrevClick(element, step, {
+            config: getConfig(),
+            state: getState(),
+          });
         } else {
           return emit("prevClick");
         }
@@ -176,7 +181,10 @@ export function renderPopover(element: Element, step: DriveStep) {
 
       if (target.classList.contains("driver-popover-close-btn")) {
         if (onCloseClick) {
-          return onCloseClick(element, step);
+          return onCloseClick(element, step, {
+            config: getConfig(),
+            state: getState(),
+          });
         } else {
           return emit("closeClick");
         }
