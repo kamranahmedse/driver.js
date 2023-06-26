@@ -6,33 +6,9 @@ sort: 2
 
 import { CodeSample } from "../../components/CodeSample.tsx";
 
-Once installed, you can import and start using the library. Given below is a simple example of how to highlight a single element.
+Once installed, you can import and start using the library. There are several different configuration options available to customize the library. You can find more details about the options in the [configuration section](/docs/configuration). Given below are the basic steps to get started.
 
-<CodeSample heading='Highlighting a simple Element' id={"some-element"} highlight={{
-  element: '#some-element',
-  popover: {
-    title: 'Title for the Popover',
-    description: 'Description for it',
-  },
-}} client:load>
-```js
-import { driver } from "driver.js";
-import "driver.js/dist/driver.css";
-
-const driverObj = driver();
-driverObj.highlight({
-  element: '#some-element',
-  popover: {
-    title: 'Title for the Popover',
-    description: 'Description for it',
-  },
-});
-```
-</CodeSample>
-
-There are many different options to customize the highlight e.g. change position, change overlay color, control interactions, change buttons etc. You can find more details about the options in the [API Reference](/api-reference).
-
-The same configuration passed to the `highlight` method can be used to create a tour. Given below is a simple example of how to create a tour with a single step.
+Here is a simple example of how to create a tour with multiple steps.
 
 <CodeSample
   heading={'Basic Tour Example'}
@@ -66,3 +42,31 @@ const driverObj = driver({
 driver.drive();
 ```
 </CodeSample>
+
+You can pass a single step configuration to the `highlight` method to highlight a single element. Given below is a simple example of how to highlight a single element.
+
+<CodeSample heading='Highlighting a simple Element' id={"some-element"} highlight={{
+  element: '#some-element',
+  popover: {
+    title: 'Title for the Popover',
+    description: 'Description for it',
+  },
+}} client:load>
+```js
+import { driver } from "driver.js";
+import "driver.js/dist/driver.css";
+
+const driverObj = driver();
+driverObj.highlight({
+  element: '#some-element',
+  popover: {
+    title: 'Title for the Popover',
+    description: 'Description for it',
+  },
+});
+```
+</CodeSample>
+
+The same configuration passed to the `highlight` method can be used to create a tour. Given below is a simple example of how to create a tour with a single step.
+
+Examples above show the basic usage of the library. Find more details about the configuration options in the [configuration section](/docs/configuration) and the examples in the [examples section](/docs/examples).
