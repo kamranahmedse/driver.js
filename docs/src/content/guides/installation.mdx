@@ -4,6 +4,8 @@ groupTitle: "Introduction"
 sort: 1
 ---
 
+import { SimpleHighlight } from "../../components/examples/SimpleHighlight.js";
+
 Run one of the following commands to install the package:
 
 ```bash
@@ -20,10 +22,9 @@ yarn add driver.js
 Alternatively, you can use CDN and include the script in your HTML file:
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/driver.js@1.0.0-next.0/dist/driver.js.iife.js"></script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/driver.js@1.0.0-next.0/dist/style.css"/>
+<script src="https://cdn.jsdelivr.net/npm/driver.js@1.1.1-next.0/dist/driver.js.iife.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/driver.js@1.1.1-next.0/dist/style.css"/>
 ```
-
 
 ## Start Using
 Once installed, you can import the package in your project. The following example shows how to highlight an element:
@@ -31,6 +32,23 @@ Once installed, you can import the package in your project. The following exampl
 ```js
 import Driver from "driver.js";
 import "driver.js/dist/driver.css";
+
+const driver = new Driver();
+driver.highlight({
+  element: "#some-element",
+  popover: {
+    title: "Title",
+    description: "Description"
+  }
+});
+```
+
+### Note on CDN
+
+If you are using the CDN, you will have to use the package from the `window` object:
+
+```js
+const Driver = window.driver.js.driver;
 
 const driver = new Driver();
 driver.highlight({

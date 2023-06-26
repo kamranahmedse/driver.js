@@ -4,8 +4,11 @@ groupTitle: "Introduction"
 sort: 2
 ---
 
+import { SimpleHighlight } from "../../components/examples/SimpleHighlight.tsx";
+
 Once installed, you can import and start using the library. Given below is a simple example of how to highlight a single element.
 
+<div>
 ```js
 import Driver from 'driver.js';
 import 'driver.js/dist/driver.min.css';
@@ -19,6 +22,5 @@ driver.highlight({
   },
 });
 ```
-
-<script src="https://cdn.jsdelivr.net/npm/driver.js@1.1.0-next.0/dist/driver.iife.js"></script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/driver.js@1.1.0-next.0/dist/style.css"/>
+<SimpleHighlight client:load />
+</div>

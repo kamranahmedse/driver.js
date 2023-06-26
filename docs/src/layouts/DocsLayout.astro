@@ -22,7 +22,7 @@ const { groupTitle, sort, title } = guide.data;
     <Sidebar activePath={`/docs/${guide.slug}`} />
     <div class="flex-1 px-2 py-6">
       <Container>
-        <div class="prose lg:proxe-xl mb-24">
+        <div class="prose lg:proxe-xl mb-24 prose-blockquote:font-normal prose-blockquote:not-italic prose-blockquote:text-gray-500 prose-p:before:content-['']">
           <slot />
         </div>
       </Container>
