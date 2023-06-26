@@ -1,7 +1,7 @@
 import { AllowedButtons, destroyPopover, Popover } from "./popover";
 import { destroyStage } from "./stage";
 import { destroyEvents, initEvents, requireRefresh } from "./events";
-import { Config, configure, getConfig } from "./config";
+import { Config, configure, DriverHook, getConfig } from "./config";
 import { destroyHighlight, highlight } from "./highlight";
 import { destroyEmitter, listen } from "./emitter";
 import { getState, resetState, setState } from "./state";
@@ -9,7 +9,7 @@ import "./driver.css";
 
 export type DriveStep = {
   element?: string | Element;
-  onDeselected?: (element: Element | undefined, step: DriveStep) => void;
+  onDeselected?: DriverHook;
   popover?: Popover;
 };
 

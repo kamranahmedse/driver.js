@@ -2,18 +2,18 @@ import React from "react";
 import Marquee from "react-fast-marquee";
 
 const featureList = [
-  "Open Source",
-  "Written in TypeScript",
-  "No dependencies",
-  "Vanilla JavaScript",
-  "Light-weight",
-  "Feature Rich",
-  "Highly Customizable",
   "Supports all Major Browsers",
+  "Works on Mobile Devices",
+  "Highly Customizable",
+  "Light-weight",
+  "No dependencies",
+  "Feature Rich",
+  "MIT Licensed",
+  "Written in TypeScript",
+  "Vanilla JavaScript",
   "Easy to use",
   "Accessible",
   "Frameworks Ready",
-  "MIT Licensed",
 ];
 
 export function FeatureMarquee() {

@@ -1,5 +1,5 @@
 import { bringInView } from "./utils";
-import { getConfig } from "./config";
+import { DriverHook, getConfig } from "./config";
 import { getState, setState } from "./state";
 import { DriveStep } from "./driver";
 import { onDriverClick } from "./events";
@@ -31,9 +31,9 @@ export type Popover = {
   onPopoverRendered?: (popover: PopoverDOM) => void;
 
   // Button callbacks
-  onNextClick?: (element: Element | undefined, step: DriveStep) => void;
-  onPrevClick?: (element: Element | undefined, step: DriveStep) => void;
-  onCloseClick?: (element: Element | undefined, step: DriveStep) => void;
+  onNextClick?: DriverHook;
+  onPrevClick?: DriverHook;
+  onCloseClick?: DriverHook;
 };
 
 export type PopoverDOM = {

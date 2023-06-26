@@ -1,0 +1,79 @@
+---
+title: "Configuration"
+groupTitle: "Introduction"
+sort: 3
+---
+
+import { CodeSample } from "../../components/CodeSample.tsx";
+
+Driver.js is built to be highly configurable. You can configure the driver globally, or per step. You can also configure the driver on the fly, while it's running.
+
+> Driver.js is written in TypeScript. Configuration options are mostly self-explanatory. Also, if you're using an IDE like WebStorm or VSCode, you'll get autocomplete and documentation for all the configuration options.
+
+## Popover Configuration
+
+The popover is the main UI element of Driver.js. It's the element that highlights the target element, and shows the step content. You can configure the popover globally, or per step. Given below are some of the available configuration options.
+
+```typescript
+type Popover = {
+  // Title and descriptions shown in the popover.
+  // You can use HTML in these. Also, you can
+  // omit one of these to show only the other.
+  title?: string;
+  description?: string;
+
+  // The position and alignment of the popover
+  // relative to the target element.
+  side?: "top" | "right" | "bottom" | "left";
+  align?: "start" | "center" | "end";
+
+  // Array of buttons to show in the popover.
+  // When highlighting a single element, there
+  // are no buttons by default. When showing
+  // a tour, the default buttons are "next",
+  // "previous" and "close".
+  showButtons?: ("next" | "previous" | "close")[];
+  // An array of buttons to disable. This is
+  // useful when you want to show some of the
+  // buttons, but disable some of them.
+  disableButtons?: ("next" | "previous" | "close")[];
+
+  // Text to show in the buttons. `doneBtnText`
+  // is used on the last step of a tour.
+  nextBtnText?: string;
+  prevBtnText?: string;
+  doneBtnText?: string;
+
+  // Whether to show the progress text in popover.
+  showProgress?: boolean;
+  // Template for the progress text. You can use
+  // the following placeholders in the template:
+  //   - {{current}}: The current step number
+  //   - {{total}}: Total number of steps
+  // Defaults to following if `showProgress` is true:
+  //   - "{{current}} of {{total}}"
+  progressText?: string;
+
+  // Custom class to add to the popover element.
+  // This can be used to style the popover.
+  popoverClass?: string;
+
+  // Hook to run after the popover is rendered.
+  // You can modify the popover element here.
+  // Parameter is an object with references to
+  // the popover DOM elements such as buttons
+  // title, descriptions, body, etc.
+  onPopoverRendered?: (popover: PopoverDOM) => void;
+
+  // Callbacks for button clicks. You can use
+  // these to add custom behavior to the buttons.
+  // Each callback receives the following parameters:
+  //   - element: The target DOM element of the step
+  //   - step: The step object configured for the step
+  //   - options.config: The current configuration options
+  //   - options.state: The current state of the driver
+  onNextClick?: (element?: Element, step: DriveStep, options: { config: Config; state: State }) => void
+  onPrevClick?: (element?: Element, step: DriveStep, options: { config: Config; state: State }) => void
+  onCloseClick?: (element?: Element, step: DriveStep, options: { config: Config; state: State }) => void
+}
+```

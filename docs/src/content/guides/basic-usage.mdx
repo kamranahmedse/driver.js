@@ -4,29 +4,65 @@ groupTitle: "Introduction"
 sort: 2
 ---
 
-import { SimpleHighlight } from "../../components/examples/SimpleHighlight.tsx";
+import { CodeSample } from "../../components/CodeSample.tsx";
 
 Once installed, you can import and start using the library. Given below is a simple example of how to highlight a single element.
 
-<div id="simple-example">
-  ```js
-  import Driver from 'driver.js';
-  import 'driver.js/dist/driver.js.css';
+<CodeSample heading='Highlighting a simple Element' id={"some-element"} highlight={{
+  element: '#some-element',
+  popover: {
+    title: 'Title for the Popover',
+    description: 'Description for it',
+  },
+}} client:load>
+```js
+import { driver } from "driver.js";
+import "driver.js/dist/driver.css";
 
-  const driver = new Driver();
-  driver.highlight({
-    element: '#some-element',
-    popover: {
-      title: 'Title for the Popover',
-      description: 'Description for it',
-    },
+const driverObj = driver();
+driverObj.highlight({
+  element: '#some-element',
+  popover: {
+    title: 'Title for the Popover',
+    description: 'Description for it',
+  },
 });
-  ```
-  <SimpleHighlight step={{
-    element: "#simple-example",
-    popover: {
-      title: "Title for the Popover",
-      description: "Description for it",
-    },
-  }} client:load />
-</div>
+```
+</CodeSample>
+
+There are many different options to customize the highlight e.g. change position, change overlay color, control interactions, change buttons etc. You can find more details about the options in the [API Reference](/api-reference).
+
+The same configuration passed to the `highlight` method can be used to create a tour. Given below is a simple example of how to create a tour with a single step.
+
+<CodeSample
+  heading={'Basic Tour Example'}
+  config={{
+    showProgress: true,
+  }}
+  tour={[
+    { element: '#tour-example', popover: { title: 'Highlight Anything', description: 'You can highlight anything on the page.' }},
+    { element: '#tour-example pre', popover: { title: 'Control with Keyboard', description: 'You can use your keyboard to highlight elements.' }},
+    { popover: { title: 'Control with Keyboard', description: 'You can use your keyboard to highlight elements.' }},
+    { element: '#tour-example code .line:first-child', popover: { title: 'Control with Code', description: 'You can use the code to highlight elements.' }},
+    { element: '#tour-example code .line:nth-child(2)', popover: { title: 'Control with Code', description: 'You can use the code to highlight elements.', side: "bottom", align: 'start' }},
+  ]}
+  id={"tour-example"}
+  client:load
+>
+```js
+import { driver } from "driver.js";
+import "driver.js/dist/driver.css";
+
+const driverObj = driver({
+  showProgress: true,
+  steps: [
+    { elment: '.page-header', popover: { title: 'Title', description: 'Description' } },
+    { element: '.top-nav', popover: { title: 'Title', description: 'Description' } },
+    { element: '.sidebar', popover: { title: 'Title', description: 'Description' } },
+    { element: '.footer', popover: { title: 'Title', description: 'Description' } },
+  ]
+});
+
+driver.drive();
+```
+</CodeSample>
