@@ -1,5 +1,24 @@
 ---
 title: "Basic Usage"
 groupTitle: "Introduction"
-sort: 3
+sort: 2
 ---
+
+Once installed, you can import and start using the library. Given below is a simple example of how to highlight a single element.
+
+```js
+import Driver from 'driver.js';
+import 'driver.js/dist/driver.min.css';
+
+const driver = new Driver();
+driver.highlight({
+  element: '#some-element',
+  popover: {
+    title: 'Title for the Popover',
+    description: 'Description for it',
+  },
+});
+```
+
+<script src="https://cdn.jsdelivr.net/npm/driver.js@1.0.0-next.0/dist/driver.js.cjs"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/driver.js@1.0.0-next.0/dist/style.css"/>

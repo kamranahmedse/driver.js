@@ -3,3 +3,43 @@ title: "Installation"
 groupTitle: "Introduction"
 sort: 1
 ---
+
+Run one of the following commands to install the package:
+
+```bash
+# Using npm
+npm install driver.js
+
+# Using pnpm
+pnpm install driver.js
+
+# Using yarn
+yarn add driver.js
+```
+
+Alternatively, you can use CDN and include the script in your HTML file:
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/driver.js@1.0.0-next.0/dist/driver.js.iife.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/driver.js@1.0.0-next.0/dist/style.css"/>
+```
+
+
+## Start Using
+Once installed, you can import the package in your project. The following example shows how to highlight an element:
+
+```js
+import Driver from "driver.js";
+import "driver.js/dist/driver.css";
+
+const driver = new Driver();
+driver.highlight({
+  element: "#some-element",
+  popover: {
+    title: "Title",
+    description: "Description"
+  }
+});
+```
+
+Continue reading the [Getting Started](/docs/basic-usage) guide to learn more about the package.

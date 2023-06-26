@@ -1,6 +1,10 @@
 ---
 import { getCollection, getEntry } from "astro:content";
 
+export interface Props {
+  activePath: string;
+}
+
 const allGuides = await getCollection("guides");
 const sortedGuides = allGuides.sort((a, b) => a.data.sort - b.data.sort);
 const groupedGuides = sortedGuides.reduce((acc, curr) => {
@@ -10,9 +14,10 @@ const groupedGuides = sortedGuides.reduce((acc, curr) => {
 
   return acc;
 }, {});
----
-<div class="w-[300px] border-r border-gray-200 text-right min-h-screen py-5">
 
+const { activePath } = Astro.props;
+---
+<div class="w-[300px] border-r border-gray-200 text-right min-h-screen py-5 flex-shrink-0">
   {Object.keys(groupedGuides).map(groupTitle => {
     const guides = groupedGuides[groupTitle];
 
@@ -20,11 +25,14 @@ const groupedGuides = sortedGuides.reduce((acc, curr) => {
       <>
         <h2 class="text-xl font-bold mb-2 pr-5 relative">{ groupTitle }</h2>
         <ul class="text-gray-400 mb-5">
-          {guides.map(guide => (
-            <li class="mb-2">
-              <a href={`/docs/${guide.slug}`} class="hover:text-black pr-5 py-2">{guide.data.title}</a>
-            </li>
-          ))}
+          {guides.map(guide => {
+            const guidePath = `/docs/${guide.slug}`;
+            return (
+              <li class="mb-2">
+                <a href={guidePath} class:list={["hover:text-black pr-5 py-2", { "text-black": activePath === guidePath}]}>{guide.data.title}</a>
+              </li>
+            );
+          })}
         </ul>
       </>
     );

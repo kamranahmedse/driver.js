@@ -2,7 +2,7 @@
 import path from "path";
 import { defineConfig } from "vite";
 
-const packageName = "driver.js";
+const packageName = "driver";
 
 const fileName = {
   es: `${packageName}.mjs`,
