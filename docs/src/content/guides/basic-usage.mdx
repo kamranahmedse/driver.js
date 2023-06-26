@@ -11,15 +11,15 @@ Once installed, you can import and start using the library. Given below is a sim
 <div id="simple-example">
   ```js
   import Driver from 'driver.js';
-  import 'driver.js/dist/driver.min.css';
+  import 'driver.js/dist/driver.js.css';
 
   const driver = new Driver();
   driver.highlight({
-  element: '#some-element',
-  popover: {
-  title: 'Title for the Popover',
-  description: 'Description for it',
-},
+    element: '#some-element',
+    popover: {
+      title: 'Title for the Popover',
+      description: 'Description for it',
+    },
 });
   ```
   <SimpleHighlight step={{

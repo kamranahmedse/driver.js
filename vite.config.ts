@@ -24,7 +24,7 @@ module.exports = defineConfig({
     rollupOptions: {
       output: {
         assetFileNames: assetInfo => {
-          return assetInfo.name === "style.css" ? `${packageName}.css` : assetInfo.name;
+          return assetInfo.name === "style.css" ? `driver.css` : assetInfo.name;
         },
       },
     },
