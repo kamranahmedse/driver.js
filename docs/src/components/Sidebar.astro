@@ -1,0 +1,32 @@
+---
+import { getCollection, getEntry } from "astro:content";
+
+const allGuides = await getCollection("guides");
+const sortedGuides = allGuides.sort((a, b) => a.data.sort - b.data.sort);
+const groupedGuides = sortedGuides.reduce((acc, curr) => {
+  const { groupTitle } = curr.data;
+  acc[groupTitle] = acc[groupTitle] || [];
+  acc[groupTitle].push(curr);
+
+  return acc;
+}, {});
+---
+<div class="w-[300px] border-r border-gray-200 text-right min-h-screen py-5">
+
+  {Object.keys(groupedGuides).map(groupTitle => {
+    const guides = groupedGuides[groupTitle];
+
+    return (
+      <>
+        <h2 class="text-xl font-bold mb-2 pr-5 relative">{ groupTitle }</h2>
+        <ul class="text-gray-400 mb-5">
+          {guides.map(guide => (
+            <li class="mb-2">
+              <a href={`/docs/${guide.slug}`} class="hover:text-black pr-5 py-2">{guide.data.title}</a>
+            </li>
+          ))}
+        </ul>
+      </>
+    );
+  })}
+</div>
