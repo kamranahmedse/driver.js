@@ -1,15 +1,25 @@
 import { useEffect } from "react";
+import { Config, driver } from "driver.js";
+import "driver.js/dist/style.css";
+
 import type { DriveStep } from "driver.js";
 
 type SimpleHighlightProps = {
-  popover: DriveStep.Popover;
-}
+  config: Config;
+  step: DriveStep;
+};
 
-export function SimpleHighlight() {
-  useEffect(() => {
-    console.log('in browser');
-  }, []);
+export function SimpleHighlight(props: SimpleHighlightProps) {
+  const { config, step } = props;
+
+  function onClick() {
+    const driverObj = driver(config);
+    driverObj.highlight(step);
+  }
+
   return (
-    <button onClick={() => alert('sup')} className='w-full rounded-md bg-black p-2 text-white'>Highlight Something</button>
+    <button onClick={onClick} className="w-full rounded-md bg-black p-2 text-white">
+      Highlight Something
+    </button>
   );
 }

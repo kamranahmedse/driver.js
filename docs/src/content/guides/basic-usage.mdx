@@ -8,19 +8,25 @@ import { SimpleHighlight } from "../../components/examples/SimpleHighlight.tsx";
 
 Once installed, you can import and start using the library. Given below is a simple example of how to highlight a single element.
 
-<div>
-```js
-import Driver from 'driver.js';
-import 'driver.js/dist/driver.min.css';
+<div id="simple-example">
+  ```js
+  import Driver from 'driver.js';
+  import 'driver.js/dist/driver.min.css';
 
-const driver = new Driver();
-driver.highlight({
+  const driver = new Driver();
+  driver.highlight({
   element: '#some-element',
   popover: {
-    title: 'Title for the Popover',
-    description: 'Description for it',
-  },
+  title: 'Title for the Popover',
+  description: 'Description for it',
+},
 });
-```
-<SimpleHighlight client:load />
+  ```
+  <SimpleHighlight step={{
+    element: "#simple-example",
+    popover: {
+      title: "Title for the Popover",
+      description: "Description for it",
+    },
+  }} client:load />
 </div>

@@ -9,6 +9,10 @@
     ".": {
       "require": "./dist/driver.js.cjs",
       "import": "./dist/driver.js.mjs"
+    },
+    "./dist/*.css": {
+      "import": "./dist/*.css",
+      "require": "./dist/*.css"
     }
   },
   "scripts": {

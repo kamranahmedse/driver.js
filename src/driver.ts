@@ -4,8 +4,6 @@ import { destroyEvents, initEvents, requireRefresh } from "./events";
 import { Config, configure, getConfig } from "./config";
 import { destroyHighlight, highlight } from "./highlight";
 import { destroyEmitter, listen } from "./emitter";
-
-import "./style.css";
 import { getState, resetState, setState } from "./state";
 
 export type DriveStep = {
