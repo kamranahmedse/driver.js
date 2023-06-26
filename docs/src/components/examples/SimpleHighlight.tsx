@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { Config, driver } from "driver.js";
-import "driver.js/dist/style.css";
+import "driver.js/dist/driver.css";
 
 import type { DriveStep } from "driver.js";
 

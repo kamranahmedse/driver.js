@@ -5,6 +5,7 @@ import { Config, configure, getConfig } from "./config";
 import { destroyHighlight, highlight } from "./highlight";
 import { destroyEmitter, listen } from "./emitter";
 import { getState, resetState, setState } from "./state";
+import "./driver.css";
 
 export type DriveStep = {
   element?: string | Element;

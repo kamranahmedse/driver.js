@@ -24,8 +24,8 @@ dependencies:
     specifier: ^2.7.0
     version: 2.7.0
   driver.js:
-    specifier: 1.1.2-next.0
-    version: 1.1.2-next.0
+    specifier: 1.1.3-next.0
+    version: 1.1.3-next.0
   react:
     specifier: ^18.0.0
     version: 18.2.0
@@ -1376,8 +1376,8 @@ packages:
   /dlv@1.1.3:
     resolution: {integrity: sha512-+HlytyjlPKnIG8XuRG8WvmBP8xs8P71y+SKKS6ZXWoEgLuePxtDoUEiH7WkdePWrQ5JBpE6aoVqfZfJUQkjXwA==}
 
-  /driver.js@1.1.2-next.0:
-    resolution: {integrity: sha512-2VrKUesC5Cs0OTSze2fhpkiHF4+wNxEwwOuD9AtCWiLDhtwc5En3ktHeP057yhSfEvaUQihffchylQ001zEPSQ==}
+  /driver.js@1.1.3-next.0:
+    resolution: {integrity: sha512-O2Lsz+f2TZ6Twp349MkFXd+2JVH8b2dQhlNUDIxkagFsJ6oxgTOnWdAqtYmv8cjSEgmu+IzWHfgkJukp7GcPUQ==}
     dev: false
 
   /dset@3.1.2:

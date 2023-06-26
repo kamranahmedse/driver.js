@@ -21,6 +21,13 @@ module.exports = defineConfig({
       formats,
       fileName: format => fileName[format],
     },
+    rollupOptions: {
+      output: {
+        assetFileNames: assetInfo => {
+          return assetInfo.name === "style.css" ? `${packageName}.css` : assetInfo.name;
+        },
+      },
+    },
   },
   test: {},
 });
