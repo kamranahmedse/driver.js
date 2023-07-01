@@ -4,6 +4,9 @@ import { FeatureMarquee } from "../components/FeatureMarquee";
 import Container from "../components/Container.astro";
 import UsecaseItem from "../components/UsecaseItem.astro";
 import { ExampleButton } from "../components/examples/ExampleButton";
+import { getFormattedStars } from "../lib/github";
+
+const starCount = getFormattedStars('kamranahmedse/driver.js');
 ---
 <BaseLayout>
   <div class="bg-yellow-300">
@@ -92,7 +95,7 @@ import { ExampleButton } from "../components/examples/ExampleButton";
             <a href="https://github.com/kamranahmedse/driver.js"
                target="_blank"
                class="flex items-center font-bold text-2xl rounded-xl py-3 px-5 bg-yellow-300 border-black hover:bg-yellow-400">
-              <span class="mr-3 inline-flex items-center"><img src="/star.svg" alt="Hero Image" class="h-7 mr-2" /> 14.7k</span>
+              <span class="mr-3 inline-flex items-center"><img src="/star.svg" alt="Hero Image" class="h-7 mr-2" /> { starCount }</span>
               GitHub Stars
             </a>
             <a href="/docs/installation"

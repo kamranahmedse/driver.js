@@ -19,7 +19,9 @@ export function CodeSample(props: CodeSampleProps) {
 
   function onClick() {
     if (highlight) {
-      const driverObj = driver();
+      const driverObj = driver({
+        ...config
+      });
       driverObj.highlight(highlight);
     } else if (tour) {
       const driverObj = driver({
