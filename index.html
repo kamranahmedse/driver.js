@@ -536,6 +536,7 @@ npm install driver.js</pre
       document.getElementById("basic-tour").addEventListener("click", () => {
         const driverObj = driver({
           showProgress: true,
+          showButtons: ["next", 'previous', 'close'],
           steps: basicTourSteps,
         });
 
