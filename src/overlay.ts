@@ -31,7 +31,7 @@ export function transitionStage(elapsed: number, duration: number, from: Element
     height,
   };
 
-  renderStage(activeStagePosition);
+  renderOverlay(activeStagePosition);
   setState("__activeStagePosition", activeStagePosition);
 }
 
@@ -51,18 +51,18 @@ export function trackActiveElement(element: Element) {
 
   setState("__activeStagePosition", activeStagePosition);
 
-  renderStage(activeStagePosition);
+  renderOverlay(activeStagePosition);
 }
 
-export function refreshStage() {
+export function refreshOverlay() {
   const activeStagePosition = getState("__activeStagePosition");
-  const stageSvg = getState("__stageSvg");
+  const overlaySvg = getState("__overlaySvg");
 
   if (!activeStagePosition) {
     return;
   }
 
-  if (!stageSvg) {
+  if (!overlaySvg) {
     console.warn("No stage svg found.");
     return;
   }
@@ -70,14 +70,14 @@ export function refreshStage() {
   const windowX = window.innerWidth;
   const windowY = window.innerHeight;
 
-  stageSvg.setAttribute("viewBox", `0 0 ${windowX} ${windowY}`);
+  overlaySvg.setAttribute("viewBox", `0 0 ${windowX} ${windowY}`);
 }
 
-function mountStage(stagePosition: StageDefinition) {
-  const stageSvg = createStageSvg(stagePosition);
-  document.body.appendChild(stageSvg);
+function mountOverlay(stagePosition: StageDefinition) {
+  const overlaySvg = createOverlaySvg(stagePosition);
+  document.body.appendChild(overlaySvg);
 
-  onDriverClick(stageSvg, e => {
+  onDriverClick(overlaySvg, e => {
     const target = e.target as SVGElement;
     if (target.tagName !== "path") {
       return;
@@ -86,20 +86,20 @@ function mountStage(stagePosition: StageDefinition) {
     emit("overlayClick");
   });
 
-  setState("__stageSvg", stageSvg);
+  setState("__overlaySvg", overlaySvg);
 }
 
-function renderStage(stagePosition: StageDefinition) {
-  const stageSvg = getState("__stageSvg");
+function renderOverlay(stagePosition: StageDefinition) {
+  const overlaySvg = getState("__overlaySvg");
 
   // TODO: cancel rendering if element is not visible
-  if (!stageSvg) {
-    mountStage(stagePosition);
+  if (!overlaySvg) {
+    mountOverlay(stagePosition);
 
     return;
   }
 
-  const pathElement = stageSvg.firstElementChild as SVGPathElement | null;
+  const pathElement = overlaySvg.firstElementChild as SVGPathElement | null;
   if (pathElement?.tagName !== "path") {
     throw new Error("no path element found in stage svg");
   }
@@ -107,7 +107,7 @@ function renderStage(stagePosition: StageDefinition) {
   pathElement.setAttribute("d", generateStageSvgPathString(stagePosition));
 }
 
-function createStageSvg(stage: StageDefinition): SVGSVGElement {
+function createOverlaySvg(stage: StageDefinition): SVGSVGElement {
   const windowX = window.innerWidth;
   const windowY = window.innerHeight;
 
@@ -170,9 +170,9 @@ function generateStageSvgPathString(stage: StageDefinition) {
     M${highlightBoxX},${highlightBoxY} h${highlightBoxWidth} a${normalizedRadius},${normalizedRadius} 0 0 1 ${normalizedRadius},${normalizedRadius} v${highlightBoxHeight} a${normalizedRadius},${normalizedRadius} 0 0 1 -${normalizedRadius},${normalizedRadius} h-${highlightBoxWidth} a${normalizedRadius},${normalizedRadius} 0 0 1 -${normalizedRadius},-${normalizedRadius} v-${highlightBoxHeight} a${normalizedRadius},${normalizedRadius} 0 0 1 ${normalizedRadius},-${normalizedRadius} z`;
 }
 
-export function destroyStage() {
-  const stageSvg = getState("__stageSvg");
-  if (stageSvg) {
-    stageSvg.remove();
+export function destroyOverlay() {
+  const overlaySvg = getState("__overlaySvg");
+  if (overlaySvg) {
+    overlaySvg.remove();
   }
 }

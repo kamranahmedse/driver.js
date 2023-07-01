@@ -1,4 +1,4 @@
-import { StageDefinition } from "./stage";
+import { StageDefinition } from "./overlay";
 import { PopoverDOM } from "./popover";
 import { DriveStep } from "./driver";
 
@@ -17,7 +17,7 @@ export type State = {
   __resizeTimeout?: number;
   __transitionCallback?: () => void;
   __activeStagePosition?: StageDefinition;
-  __stageSvg?: SVGSVGElement;
+  __overlaySvg?: SVGSVGElement;
 };
 
 let currentState: State = {};

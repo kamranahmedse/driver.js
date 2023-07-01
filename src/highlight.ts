@@ -1,5 +1,5 @@
 import { DriveStep } from "./driver";
-import { refreshStage, trackActiveElement, transitionStage } from "./stage";
+import { refreshOverlay, trackActiveElement, transitionStage } from "./overlay";
 import { getConfig } from "./config";
 import { repositionPopover, renderPopover, hidePopover } from "./popover";
 import { bringInView } from "./utils";
@@ -51,7 +51,7 @@ export function refreshActiveHighlight() {
   }
 
   trackActiveElement(activeHighlight);
-  refreshStage();
+  refreshOverlay();
   repositionPopover(activeHighlight, activeStep);
 }
 

@@ -1,5 +1,5 @@
 import { AllowedButtons, destroyPopover, Popover } from "./popover";
-import { destroyStage } from "./stage";
+import { destroyOverlay } from "./overlay";
 import { destroyEvents, initEvents, requireRefresh } from "./events";
 import { Config, configure, DriverHook, getConfig } from "./config";
 import { destroyHighlight, highlight } from "./highlight";
@@ -57,19 +57,40 @@ export function driver(options: Config = {}) {
   }
 
   function handleArrowLeft() {
-    const steps = getConfig("steps") || [];
+    const isTransitioning = getState("__transitionCallback");
+    if (isTransitioning) {
+      return;
+    }
+
+    const activeIndex = getState("activeIndex");
+    const activeStep = getState("activeStep");
+    const activeElement = getState("activeElement");
+    if (typeof activeIndex === "undefined" || typeof activeStep === "undefined") {
+      return;
+    }
+
     const currentStepIndex = getState("activeIndex");
     if (typeof currentStepIndex === "undefined") {
       return;
     }
 
-    const previousStepIndex = currentStepIndex - 1;
-    if (steps[previousStepIndex]) {
-      drive(previousStepIndex);
+    const onPrevClick = activeStep.popover?.onPrevClick || getConfig("onPrevClick");
+    if (onPrevClick) {
+      return onPrevClick(activeElement, activeStep, {
+        config: getConfig(),
+        state: getState(),
+      });
     }
+
+    movePrevious();
   }
 
   function handleArrowRight() {
+    const isTransitioning = getState("__transitionCallback");
+    if (isTransitioning) {
+      return;
+    }
+
     const activeIndex = getState("activeIndex");
     const activeStep = getState("activeStep");
     const activeElement = getState("activeElement");
@@ -113,8 +134,9 @@ export function driver(options: Config = {}) {
     }
 
     if (!steps[stepIndex]) {
-      console.warn(`Step not found at index: ${stepIndex}`);
       destroy();
+
+      return;
     }
 
     setState("activeIndex", stepIndex);
@@ -185,7 +207,7 @@ export function driver(options: Config = {}) {
     destroyEvents();
     destroyPopover();
     destroyHighlight();
-    destroyStage();
+    destroyOverlay();
     destroyEmitter();
 
     resetState();
