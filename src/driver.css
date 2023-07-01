@@ -1,4 +1,4 @@
-.driver-active .driver-stage {
+.driver-active .driver-overlay {
   pointer-events: none;
 }
 
@@ -23,7 +23,7 @@
   }
 }
 
-.driver-fade .driver-stage {
+.driver-fade .driver-overlay {
   animation: animate-fade-in 200ms ease-in-out;
 }
 

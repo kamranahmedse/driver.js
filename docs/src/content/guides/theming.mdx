@@ -4,7 +4,77 @@ groupTitle: "Introduction"
 sort: 3
 ---
 
-You can customize the look and feel of the driver by applying CSS to following classes.
+You can customize the look and feel of the driver by adding custom class to popover or applying CSS to different classes used by driver.js.
+
+## Styling Popover
+
+You can set the `popoverClass` option globally in the driver configuration or at the step level to apply custom class to the popover and then use CSS to apply styles.
+
+```js
+const driverObj = driver({
+  popoverClass: 'my-custom-popover-class'
+});
+
+// or you can also have different classes for different steps
+const driverObj2 = driver({
+  steps: [
+    {
+      element: '#some-element',
+      popover: {
+        title: 'Title',
+        description: 'Description',
+        popoverClass: 'my-custom-popover-class'
+      }
+    }
+  ],
+})
+```
+
+Here is the list of classes applied to the popover which you can use in conjunction with `popoverClass` option to apply custom styles on the popover.
+
+```css
+/* Class assigned to popover wrapper */
+.driver-popover {}
+
+/* Arrow pointing towards the highlighted element */
+.driver-popover-arrow {}
+
+/* Title and description */
+.driver-popover-title {}
+.driver-popover-description {}
+
+/* Close button displayed on the top right corner */
+.driver-popover-close-btn {}
+
+/* Footer of the popover displaying progress and navigation buttons */
+.driver-popover-footer {}
+.driver-popover-progress-text {}
+.driver-popover-prev-btn {}
+.driver-popover-next-btn {}
+```
+
+Alternatively, you can also use the `onPopoverRendered` hook to modify the popover DOM before it is displayed. The hook is called with the popover DOM as the first argument.
+
+```typescript
+type PopoverDOM = {
+  wrapper: HTMLElement;
+  arrow: HTMLElement;
+  title: HTMLElement;
+  description: HTMLElement;
+  footer: HTMLElement;
+  progress: HTMLElement;
+  previousButton: HTMLElement;
+  nextButton: HTMLElement;
+  closeButton: HTMLElement;
+  footerButtons: HTMLElement;
+};
+
+onPopoverRendered?: (popover: PopoverDOM) => void;
+```
+
+## Styling Page
+
+Following classes are applied to the page when the driver is active.
 
 ```css
 /* Applied to the `body` when the driver: */
@@ -13,7 +83,16 @@ You can customize the look and feel of the driver by applying CSS to following c
 .driver-simple {}  /* is not animated */
 ```
 
-Following classes are applied to the overlay element (i.e. called stage.
+Following classes are applied to the overlay i.e. the lightbox displayed over the page.
 
 ```css
-.driver-stage {}
+.driver-overlay {}
+```
+
+## Styling Highlighted Element
+
+Following classes are applied to the highlighted element which can be used to apply custom styles depending on the state of the driver.
+
+```css
+.driver-active-element {}
+```
