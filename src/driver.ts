@@ -156,10 +156,15 @@ export function driver(options: Config = {}) {
       .replace("{{current}}", `${stepIndex + 1}`)
       .replace("{{total}}", `${steps.length}`);
 
+    const configuredButtons = currentStep.popover?.showButtons || getConfig("showButtons");
+    const calculatedButtons: AllowedButtons[] = ["next", "previous", ...(allowsClosing ? ["close" as AllowedButtons] : [])].filter((b) => {
+      return !configuredButtons?.length || configuredButtons.includes(b as AllowedButtons);
+    }) as AllowedButtons[];
+
     highlight({
       ...currentStep,
       popover: {
-        showButtons: ["next", "previous", ...(allowsClosing ? ["close" as AllowedButtons] : [])],
+        showButtons: calculatedButtons,
         nextBtnText: !hasNextStep ? doneBtnText : undefined,
         disableButtons: [...(!hasPreviousStep ? ["previous" as AllowedButtons] : [])],
         showProgress: showProgress,
