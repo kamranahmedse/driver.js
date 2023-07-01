@@ -11,19 +11,19 @@ const starCount = getFormattedStars('kamranahmedse/driver.js');
 <BaseLayout>
   <div class="bg-yellow-300">
     <Container>
-      <div class="py-24 flex justify-start items-center gap-4">
+      <div class="py-10 md:py-24 flex justify-start items-center gap-4">
         <div class="flex-grow">
-          <h1 class="text-9xl mb-4 font-bold">driver.js</h1>
-          <p class="text-3xl">Product tours, highlights, contextual help and more.</p>
-          <div class="mt-12 mb-2 flex gap-2 items-stretch">
-            <button class="bg-black rounded-xl py-4 px-5 font-medium text-white text-xl">Show Demo Tour</button>
+          <h1 class="text-5xl md:text-9xl mb-2 md:mb-4 font-bold">driver.js</h1>
+          <p class="text-md md:text-3xl">Product tours, highlights, contextual help and more.</p>
+          <div class="mt-4 md:mt-12 mb-2 flex gap-2 items-stretch">
+            <button class="bg-black rounded-lg md:rounded-xl py-2 md:py-4 px-5 font-medium text-white text-base md:text-xl">Show Demo Tour</button>
             <a href="/docs/installation"
                class="flex items-center font-bold text-xl border-4 border-black rounded-xl px-5 bg-white">
               Get Started
             </a>
           </div>
         </div>
-        <div class="flex-shrink-0">
+        <div class="flex-shrink-0 hidden md:flex">
           <img src="/driver.svg" alt="Hero Image" class="h-72" />
         </div>
       </div>

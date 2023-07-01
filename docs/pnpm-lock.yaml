@@ -36,7 +36,7 @@ dependencies:
     specifier: ^1.6.0
     version: 1.6.0(react-dom@18.2.0)(react@18.2.0)
   tailwindcss:
-    specifier: ^3.3.2
+    specifier: ^3.0.24
     version: 3.3.2
 
 devDependencies:
