@@ -70,8 +70,8 @@ function transferHighlight(toElement: Element, toStep: DriveStep) {
   const isFromDummyElement = fromElement.id === "driver-dummy-element";
 
   const isAnimatedTour = getConfig("animate");
-  const highlightStartedHook = getConfig("onHighlightStarted");
-  const highlightedHook = getConfig("onHighlighted");
+  const highlightStartedHook = toStep.onHighlightStarted || getConfig("onHighlightStarted");
+  const highlightedHook = toStep?.onHighlighted || getConfig("onHighlighted");
   const deselectedHook = fromStep?.onDeselected || getConfig("onDeselected");
 
   const config = getConfig();

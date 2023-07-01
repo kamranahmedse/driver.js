@@ -9,6 +9,8 @@ import "./driver.css";
 
 export type DriveStep = {
   element?: string | Element;
+  onHighlightStarted?: DriverHook;
+  onHighlighted?: DriverHook;
   onDeselected?: DriverHook;
   popover?: Popover;
 };
@@ -132,7 +134,6 @@ export function driver(options: Config = {}) {
       .replace("{{current}}", `${stepIndex + 1}`)
       .replace("{{total}}", `${steps.length}`);
 
-    console.log(showProgress);
     highlight({
       ...currentStep,
       popover: {
@@ -168,7 +169,8 @@ export function driver(options: Config = {}) {
     // the hook for when user calls `destroy`, driver will get into infinite loop
     // not causing tour to be destroyed.
     if (withOnDestroyStartedHook && onDestroyStarted) {
-      onDestroyStarted(activeElement, activeStep!, {
+      const isActiveDummyElement = !activeElement || activeElement?.id === "driver-dummy-element";
+      onDestroyStarted(isActiveDummyElement ? undefined : activeElement, activeStep!, {
         config: getConfig(),
         state: getState(),
       });
@@ -213,6 +215,9 @@ export function driver(options: Config = {}) {
       init();
       drive(stepIndex);
     },
+    setConfig: configure,
+    getConfig,
+    getState,
     moveNext,
     movePrevious,
     hasNextStep: () => {
