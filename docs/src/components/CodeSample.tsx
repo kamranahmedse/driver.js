@@ -4,7 +4,7 @@ import "driver.js/dist/driver.css";
 import { useState } from "react";
 
 type CodeSampleProps = {
-  heading: string;
+  heading?: string;
 
   config?: Config;
   highlight?: DriveStep;
@@ -12,7 +12,8 @@ type CodeSampleProps = {
 
   id?: string;
   className?: string;
-  children: any;
+  children?: any;
+  buttonText?: string;
 };
 
 function removeDummyElement() {
@@ -41,7 +42,7 @@ function mountDummyElement() {
 
 export function CodeSample(props: CodeSampleProps) {
   const [driverObj, setDriverObj] = useState<any>(null);
-  const { heading, id, children, className, config, highlight, tour } = props;
+  const { heading, id, children, buttonText = "Show me an Example", className, config, highlight, tour } = props;
 
   function onClick() {
     if (highlight) {
@@ -97,10 +98,11 @@ export function CodeSample(props: CodeSampleProps) {
 
   return (
     <div id={id} className={className}>
-      <p className="text-lg -mt-0 font-medium text-black -mb-3 rounded-md">{heading}</p>
-      <div className="-mb-4">{children}</div>
+      {heading && <p className="text-lg -mt-0 font-medium text-black -mb-3 rounded-md">{heading}</p>}
+      {children && <div className="-mb-4">{children}</div>}
+      {!children && <div className="mb-1"></div>}
       <button onClick={onClick} className="w-full rounded-md bg-black p-2 text-white">
-        Show me an Example
+        {buttonText}
       </button>
     </div>
   );
