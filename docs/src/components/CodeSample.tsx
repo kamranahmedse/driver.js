@@ -100,7 +100,6 @@ export function CodeSample(props: CodeSampleProps) {
     <div id={id} className={className}>
       {heading && <p className="text-lg -mt-0 font-medium text-black -mb-3 rounded-md">{heading}</p>}
       {children && <div className="-mb-4">{children}</div>}
-      {!children && <div className="mb-1"></div>}
       <button onClick={onClick} className="w-full rounded-md bg-black p-2 text-white">
         {buttonText}
       </button>
