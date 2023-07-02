@@ -23,16 +23,16 @@ You can also have async steps in your tour. This is useful when you want to load
       element: '.line:nth-child(14)',
       popover: {
         title: 'Manually Handle Next',
-        description: 'Here we are moving to the next step manually since driver.js does not know when the data is loaded from the server.',
+        description: 'Here we are moving to the next step manually since driver.js does not know when the data is loaded dynamically.',
       }
     },
     {
       popover: {
         title: 'Next Step is Async',
-        description: 'This is the first step. Next element will be loaded from the server.',
+        description: 'This is the first step. Next element will be loaded dynamically.',
       },
     },
-    { element: '.dynamic-el', popover: { title: 'Async Element', description: 'This element is loaded from the server and will be removed as soon as we move away from this step' } },
+    { element: '.dynamic-el', popover: { title: 'Async Element', description: 'This element is loaded dynamically and will be removed as soon as we move away from this step' } },
     { popover: { title: 'Last Step', description: 'This is the last step.' } }
   ]}
   id={"tour-example"}
@@ -47,15 +47,30 @@ You can also have async steps in your tour. This is useful when you want to load
       {
         popover: {
           title: 'First Step',
-          description: 'This is the first step. Next element will be loaded from the server.'
+          description: 'This is the first step. Next element will be loaded dynamically.'
+          // By passing onNextClick, you can override the default behavior of the next button.
+          // This will prevent the driver from moving to the next step automatically.
+          // You can then manually call driverObj.moveNext() to move to the next step.
           onNextClick: () => {
-            // .. load element from server
+            // .. load element dynamically
             // .. and then call
             driverObj.moveNext();
           },
         },
       },
-      { element: '.dynamic-el', popover: { title: 'Async Element', description: 'This element is loaded from the server.' } },
+      {
+        element: '.dynamic-el',
+        popover: {
+          title: 'Async Element',
+          description: 'This element is loaded dynamically.'
+        },
+        // onDeselected is called when the element is deselected.
+        // Here we are simply removing the element from the DOM.
+        onDeselected: () => {
+          // .. remove element
+          document.querySelector(".dynamic-el")?.remove();
+        }
+      },
       { popover: { title: 'Last Step', description: 'This is the last step.' } }
     ]
 
@@ -65,3 +80,9 @@ driver.drive();
 
 ```
 </CodeSample>
+
+> **Note**: By overriding `onNextClick`, and `onPrevClick` hooks you control the navigation of the driver. This means that user won't be able to navigate using the buttons and you will have to either call `driverObj.moveNext()` or `driverObj.movePrevious()` to navigate to the next/previous step.
+>
+> You can use this to implement custom logic for navigating between steps. This is also useful when you are dealing with dynamic content and want to highlight the next/previous element based on some logic.
+>
+> `onNextClick` and `onPrevClick` hooks can be configured at driver level as well as step level. When configured at the driver level, you control the navigation for all the steps. When configured at the step level, you control the navigation for that particular step only.
