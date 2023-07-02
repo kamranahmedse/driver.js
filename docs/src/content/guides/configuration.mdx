@@ -201,6 +201,12 @@ type Config = {
 };
 ```
 
+> **Note**: By overriding `onNextClick`, and `onPrevClick` hooks you control the navigation of the driver. This means that user won't be able to navigate using the buttons and you will have to either call `driverObj.moveNext()` or `driverObj.movePrevious()` to navigate to the next/previous step.
+>
+> You can use this to implement custom logic for navigating between steps. This is also useful when you are dealing with dynamic content and want to highlight the next/previous element based on some logic.
+>
+> `onNextClick` and `onPrevClick` hooks can be configured at the step level as well. When configured at the driver level, you control the navigation for all the steps. When configured at the step level, you control the navigation for that particular step only.
+
 ## State
 
 You can access the current state of the driver by calling the `getState` method. It's also passed to the hooks and callbacks.

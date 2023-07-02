@@ -1,0 +1,67 @@
+---
+title: "Async Tour"
+groupTitle: "Examples"
+sort: 3
+---
+
+import { CodeSample } from "../../components/CodeSample.tsx";
+export let driverObj = null;
+
+You can also have async steps in your tour. This is useful when you want to load some data from the server and then show the tour.
+
+<CodeSample
+  heading={'Asynchronous Tour'}
+  tour={[
+    {
+      element: '.line:nth-child(11)',
+      popover: {
+        title: 'First Step',
+        description: 'You can add a function to override the default behavior of the next button i.e. to fetch some data from the server and then call moveNext()',
+      }
+    },
+    {
+      element: '.line:nth-child(14)',
+      popover: {
+        title: 'Manually Handle Next',
+        description: 'Here we are moving to the next step manually since driver.js does not know when the data is loaded from the server.',
+      }
+    },
+    {
+      popover: {
+        title: 'Next Step is Async',
+        description: 'This is the first step. Next element will be loaded from the server.',
+      },
+    },
+    { element: '.dynamic-el', popover: { title: 'Async Element', description: 'This element is loaded from the server and will be removed as soon as we move away from this step' } },
+    { popover: { title: 'Last Step', description: 'This is the last step.' } }
+  ]}
+  id={"tour-example"}
+  client:load>
+  ```js
+  import { driver } from "driver.js";
+  import "driver.js/dist/driver.css";
+
+  const driverObj = driver({
+    showProgress: true,
+    steps: [
+      {
+        popover: {
+          title: 'First Step',
+          description: 'This is the first step. Next element will be loaded from the server.'
+          onNextClick: () => {
+            // .. load element from server
+            // .. and then call
+            driverObj.moveNext();
+          },
+        },
+      },
+      { element: '.dynamic-el', popover: { title: 'Async Element', description: 'This element is loaded from the server.' } },
+      { popover: { title: 'Last Step', description: 'This is the last step.' } }
+    ]
+
+});
+
+driver.drive();
+
+```
+</CodeSample>
