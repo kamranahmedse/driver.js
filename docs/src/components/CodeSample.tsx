@@ -52,6 +52,14 @@ export function CodeSample(props: CodeSampleProps) {
 
       setDriverObj(driverObj);
     } else if (tour) {
+      if (id === "confirm-destroy") {
+        config!.onDestroyStarted = () => {
+          if (!driverObj.hasNextStep() || confirm("Are you sure?")) {
+            driverObj.destroy();
+          }
+        };
+      }
+
       if (tour?.[2]?.popover?.title === "Next Step is Async") {
         tour[2].popover.onNextClick = () => {
           mountDummyElement();
@@ -67,7 +75,7 @@ export function CodeSample(props: CodeSampleProps) {
           tour[4].popover.onPrevClick = () => {
             mountDummyElement();
             driverObj.movePrevious();
-          }
+          };
 
           // @ts-ignore
           tour[3].popover.onPrevClick = () => {
