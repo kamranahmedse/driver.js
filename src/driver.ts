@@ -157,9 +157,17 @@ export function driver(options: Config = {}) {
       .replace("{{total}}", `${steps.length}`);
 
     const configuredButtons = currentStep.popover?.showButtons || getConfig("showButtons");
-    const calculatedButtons: AllowedButtons[] = ["next", "previous", ...(allowsClosing ? ["close" as AllowedButtons] : [])].filter((b) => {
+    const calculatedButtons: AllowedButtons[] = [
+      "next",
+      "previous",
+      ...(allowsClosing ? ["close" as AllowedButtons] : []),
+    ].filter(b => {
       return !configuredButtons?.length || configuredButtons.includes(b as AllowedButtons);
     }) as AllowedButtons[];
+
+    const onNextClick = currentStep.popover?.onNextClick || getConfig("onNextClick");
+    const onPrevClick = currentStep.popover?.onPrevClick || getConfig("onPrevClick");
+    const onCloseClick = currentStep.popover?.onCloseClick || getConfig("onCloseClick");
 
     highlight({
       ...currentStep,
@@ -169,17 +177,17 @@ export function driver(options: Config = {}) {
         disableButtons: [...(!hasPreviousStep ? ["previous" as AllowedButtons] : [])],
         showProgress: showProgress,
         progressText: progressTextReplaced,
-        onNextClick: () => {
+        onNextClick: onNextClick ? onNextClick : () => {
           if (!hasNextStep) {
             destroy();
           } else {
             drive(stepIndex + 1);
           }
         },
-        onPrevClick: () => {
+        onPrevClick: onPrevClick ? onPrevClick : () => {
           drive(stepIndex - 1);
         },
-        onCloseClick: () => {
+        onCloseClick: onCloseClick ? onCloseClick : () => {
           destroy();
         },
         ...(currentStep?.popover || {}),

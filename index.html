@@ -187,6 +187,7 @@
         <button id="button-texts">Button Texts</button>
         <button id="disabled-buttons">Disabled Buttons</button>
         <button id="button-config-events">Button Listeners</button>
+        <button id="button-tour-events">Tour Button Listeners</button>
       </div>
 
       <br />
@@ -712,8 +713,12 @@ npm install driver.js</pre
 
       document.getElementById("button-config-events").addEventListener("click", () => {
         const driverObj = driver({
-          onNextClick: () => alert("Next Clicked"),
-          onPrevClick: () => alert("Previous Clicked"),
+          onNextClick: () => {
+            alert("Next Clicked");
+          },
+          onPrevClick: () => {
+            alert("Previous Clicked");
+          },
           onCloseClick: () => {
             driverObj.destroy();
           },
@@ -727,6 +732,29 @@ npm install driver.js</pre
             onPrevClick: () => alert("Overriding — Previous Clicked"),
           },
         });
+      });
+
+      document.getElementById("button-tour-events").addEventListener("click", () => {
+        const driverObj = driver({
+          onNextClick: () => {
+            alert("Next Clicked");
+            driverObj.moveNext();
+          },
+          onPrevClick: () => {
+            alert("Previous Clicked");
+            driverObj.movePrevious();
+          },
+          onCloseClick: () => {
+            driverObj.destroy();
+          },
+          steps: [
+            { popover: { title: "Some title", description: "Some description" }},
+            { popover: { title: "Another title", description: "Some description" }},
+            { popover: { title: "Yet another title", description: "Some description" }},
+          ]
+        });
+
+        driverObj.drive();
       });
 
       document.getElementById("is-active-btn").addEventListener("click", () => {

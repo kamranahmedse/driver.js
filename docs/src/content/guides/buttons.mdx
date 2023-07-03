@@ -1,0 +1,244 @@
+---
+title: "Popover Buttons"
+groupTitle: "Examples"
+sort: 9
+---
+
+import { CodeSample } from "../../components/CodeSample.tsx";
+
+You can use the `showButtons` option to choose which buttons to show in the popover. The default value is `['next', 'previous', 'close']`.
+
+<div id="driver-note" className="mb-5">
+  > **Note:** When using the `highlight` method to highlight a single element, the only button shown is the `close`
+  button. However, you can use the `showButtons` option to show other buttons as well. But the buttons won't do
+  anything. You will have to use the `onNextClick` and `onPreviousClick` callbacks to implement the functionality.
+</div>
+
+<div className='flex flex-col gap-1'>
+  <CodeSample
+    buttonText={"Show All Buttons"}
+    config={{
+      showButtons: [
+        'next',
+        'previous',
+        'close'
+      ],
+    }}
+    tour={[
+      {
+        element: '#driver-note',
+        popover: {
+          title: 'Popover Title',
+          description: 'Popover Description'
+        }
+      },
+      {
+        element: '#driver-note p code:nth-child(4)',
+        popover: {
+          title: 'Popover Title',
+          description: 'Popover Description'
+        }
+      }
+    ]}
+    id={"code-sample"}
+    client:load>
+    ```js
+    import { driver } from "driver.js";
+    import "driver.js/dist/driver.css";
+
+    const driverObj = driver({
+      showButtons: [
+        'next',
+        'previous',
+        'close'
+      ],
+      steps: [
+        {
+          element: '#first-element',
+          popover: {
+            title: 'Popover Title',
+            description: 'Popover Description'
+          }
+        },
+        {
+          element: '#second-element',
+          popover: {
+            title: 'Popover Title',
+            description: 'Popover Description'
+          }
+        }
+      ]
+    });
+
+    driverObj.drive();
+    ```
+  </CodeSample>
+  <CodeSample
+    buttonText="No Close Button"
+    config={{
+      showButtons: [
+        'next',
+        'previous',
+      ],
+    }}
+    tour={[
+      {
+        element: '#driver-note',
+        popover: {
+          title: 'Popover Title',
+          description: 'Popover Description'
+        }
+      },
+      {
+        element: '#driver-note code:nth-child(2)',
+        popover: {
+          title: 'Popover Title',
+          description: 'Popover Description'
+        }
+      }
+    ]}
+    id={"code-sample"}
+    client:load />
+  <CodeSample
+    buttonText="No Buttons (Use Arrows)"
+    config={{
+      showButtons: [undefined],
+    }}
+    tour={[
+      {
+        element: '#driver-note',
+        popover: {
+          title: 'Popover Title',
+          description: 'Popover Description'
+        }
+      },
+      {
+        element: '#driver-note code:nth-child(2)',
+        popover: {
+          title: 'Popover Title',
+          description: 'Popover Description',
+          side: 'bottom',
+          align: 'start'
+        }
+      }
+    ]}
+    id={"code-sample"}
+    client:load />
+</div>
+
+## Change Button Text
+
+You can also change the text of buttons using `nextBtnText`, `prevBtnText` and `doneBtnText` options.
+
+<div className='flex flex-col gap-1'>
+  <CodeSample
+    heading="Change Button Text"
+    buttonText={"Change Button Text"}
+    config={{
+      showProgress: true,
+      nextBtnText: '—>',
+      prevBtnText: '<--',
+      doneBtnText: 'X',
+    }}
+    tour={[
+      {
+        element: '#code-sample-3',
+        popover: {
+          title: 'Popover Title',
+          description: 'Popover Description'
+        }
+      },
+      {
+        element: '#code-sample-3 code',
+        popover: {
+          title: 'Popover Title',
+          description: 'Popover Description'
+        }
+      }
+    ]}
+    id={"code-sample-3"}
+    client:load>
+    ```js
+    import { driver } from "driver.js";
+    import "driver.js/dist/driver.css";
+
+    const driverObj = driver({
+      nextBtnText: '—›',
+      prevBtnText: '‹—',
+      doneBtnText: '✕',
+      showProgress: true,
+      steps: [
+        // ...
+      ]
+    });
+
+    driverObj.drive();
+    ```
+  </CodeSample>
+</div>
+
+## Event Handlers
+
+You can use the `onNextClick`, `onPreviousClick` and `onCloseClick` callbacks to implement custom functionality when the user clicks on the next and previous buttons.
+
+> Please note that when you configure these callbacks, the default functionality of the buttons will be disabled. You will have to implement the functionality yourself.
+
+<CodeSample
+  buttonText={"Show Example"}
+  config={{
+    onNextClick:() => {
+      alert('Next Button Clicked');
+    },
+    onPrevClick:() => {
+      alert('Previous Button Clicked');
+    },
+    onCloseClick:() => {
+      alert('Close Button Clicked');
+    },
+  }}
+  tour={[
+    {
+      element: '#code-sample-4',
+      popover: {
+        title: 'Popover Title',
+        description: 'Popover Description'
+      }
+    },
+    {
+      element: '#code-sample-4 code',
+      popover: {
+        title: 'Popover Title',
+        description: 'Popover Description'
+      }
+    }
+  ]}
+  id={"code-sample-4"}
+  client:load>
+  ```js
+  import { driver } from "driver.js";
+  import "driver.js/dist/driver.css";
+
+  const driverObj = driver({
+    onNextClick:() => {
+      console.log('Next Button Clicked');
+      // Implement your own functionality here
+      driverObj.moveNext();
+    },
+    onPrevClick:() => {
+      console.log('Previous Button Clicked');
+      // Implement your own functionality here
+      driverObj.movePrevious();
+    },
+    onCloseClick:() => {
+      console.log('Close Button Clicked');
+      // Implement your own functionality here
+      driverObj.destroy();
+    },
+    steps: [
+      // ...
+    ]
+  });
+
+  driverObj.drive();
+  ```
+</CodeSample>
