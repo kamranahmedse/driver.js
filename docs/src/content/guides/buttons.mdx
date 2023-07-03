@@ -185,23 +185,13 @@ You can use the `onNextClick`, `onPreviousClick` and `onCloseClick` callbacks to
 
 <CodeSample
   buttonText={"Show Example"}
-  config={{
-    onNextClick: () => {
-      alert('Next Button Clicked');
-    },
-    onPrevClick:() => {
-      alert('Previous Button Clicked');
-    },
-    onCloseClick:() => {
-      alert('Close Button Clicked');
-    },
-  }}
+  config={{}}
   tour={[
     {
-      element: '#code-sample-4',
+      element: '#logger-events',
       popover: {
-        title: 'Popover Title',
-        description: 'Popover Description'
+        title: 'Events Logged',
+        description: 'Look at your console for the events logged'
       }
     },
     {
@@ -212,7 +202,7 @@ You can use the `onNextClick`, `onPreviousClick` and `onCloseClick` callbacks to
       }
     }
   ]}
-  id={"code-sample-4"}
+  id={"logger-events"}
   client:load>
   ```js
   import { driver } from "driver.js";

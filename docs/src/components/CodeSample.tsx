@@ -61,6 +61,28 @@ export function CodeSample(props: CodeSampleProps) {
         };
       }
 
+      if (id === "logger-events") {
+        config!.onNextClick = () => {
+          console.log("next clicked");
+        };
+
+        config!.onNextClick = () => {
+          console.log("Next Button Clicked");
+          // Implement your own functionality here
+          driverObj.moveNext();
+        };
+        config!.onPrevClick = () => {
+          console.log("Previous Button Clicked");
+          // Implement your own functionality here
+          driverObj.movePrevious();
+        };
+        config!.onCloseClick = () => {
+          console.log("Close Button Clicked");
+          // Implement your own functionality here
+          driverObj.destroy();
+        };
+      }
+
       if (tour?.[2]?.popover?.title === "Next Step is Async") {
         tour[2].popover.onNextClick = () => {
           mountDummyElement();
