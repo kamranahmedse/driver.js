@@ -119,17 +119,17 @@ type Config = {
 
   // Whether to animate the product tour. (default: true)
   animate?: boolean;
-  // Overlay color. (default: rgba(0, 0, 0, 0.5))
+  // Overlay color. (default: black)
   // This is useful when you have a dark background
   // and want to highlight elements with a light
   // background color.
-  backdropColor?: string;
+  overlayColor?: string;
   // Whether to smooth scroll to the highlighted element. (default: false)
   smoothScroll?: boolean;
   // Whether to allow closing the popover by clicking on the backdrop. (default: true)
   allowClose?: boolean;
   // Opacity of the backdrop. (default: 0.5)
-  opacity?: number;
+  overlayOpacity?: number;
   // Distance between the highlighted element and the cutout. (default: 10)
   stagePadding?: number;
   // Radius of the cutout around the highlighted element. (default: 5)

@@ -1,0 +1,43 @@
+---
+title: "Styling Overlay"
+groupTitle: "Examples"
+sort: 8
+---
+
+import { CodeSample } from "../../components/CodeSample.tsx";
+
+You can customize the overlay opacity and color using `overlayOpacity` and `overlayColor` options to change the look of the overlay.
+
+## Overlay Color
+
+Here are some driver.js examples with different overlay colors.
+
+```js
+import { driver } from "driver.js";
+import "driver.js/dist/driver.css";
+
+const driverObj = driver({
+  overlayColor: 'blue'
+});
+driverObj.highlight({
+  popover: {
+    title: 'Pass any RGB Color',
+    description: 'Here we have set the overlay color to be blue. You can pass any RGB color to overlayColor option.'
+  }
+});
+```
+
+<CodeSample
+  buttonText={"Blue Color"}
+  config={{
+    overlayColor: 'blue'
+  }}
+  highlight={{
+    popover: {
+      title: 'Pass any RGB Color',
+      description: 'Here we have set the overlay color to be blue. You can pass any RGB color to overlayColor option.',
+    }
+  }}
+  id={"left-start"}
+  client:load
+/>
