@@ -1,7 +1,7 @@
 {
   "name": "driver.js",
   "private": false,
-  "version": "1.1.7-next.0",
+  "version": "1.1.8-next.0",
   "main": "./dist/driver.js.cjs",
   "module": "./dist/driver.js.mjs",
   "types": "./dist/driver.js.d.ts",
