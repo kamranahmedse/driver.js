@@ -1,0 +1,46 @@
+---
+title: "Prevent Tour Exit"
+groupTitle: "Examples"
+sort: 3
+---
+
+import { CodeSample } from "../../components/CodeSample.tsx";
+
+You can also prevent the user from exiting the tour using `allowClose` option. This option is useful when you want to force the user to complete the tour before they can exit.
+
+In the example below, you won't be able to exit the tour until you reach the last step.
+
+<CodeSample
+  heading={'Prevent Exit'}
+  config={{
+    animate: true,
+    showProgress: true,
+    allowClose: false,
+    showButtons: ['next', 'previous'],
+  }}
+  tour={[
+    { element: '#prevent-exit', popover: { title: 'Animated Tour Example', description: 'Here is the code example showing animated tour. Let\'s walk you through it.', side: "left", align: 'start' }},
+    { element: '.line:nth-child(1)', popover: { title: 'Import the Library', description: 'It works the same in vanilla JavaScript as well as frameworks.', side: "bottom", align: 'start' }},
+    { element: '.line:nth-child(2)', popover: { title: 'Importing CSS', description: 'Import the CSS which gives you the default styling for popover and overlay.', side: "bottom", align: 'start' }},
+    { popover: { title: 'Happy Coding', description: 'And that is all, go ahead and start adding tours to your applications.' } }
+  ]}
+  id={"prevent-exit"}
+  client:load>
+  ```js
+  import { driver } from "driver.js";
+  import "driver.js/dist/driver.css";
+
+  const driverObj = driver({
+    showProgress: true,
+    allowClose: false,
+    steps: [
+      { element: '#prevent-exit', popover: { title: 'Animated Tour Example', description: 'Here is the code example showing animated tour. Let\'s walk you through it.', side: "left", align: 'start' }},
+      { element: 'code .line:nth-child(1)', popover: { title: 'Import the Library', description: 'It works the same in vanilla JavaScript as well as frameworks.', side: "bottom", align: 'start' }},
+      { element: 'code .line:nth-child(2)', popover: { title: 'Importing CSS', description: 'Import the CSS which gives you the default styling for popover and overlay.', side: "bottom", align: 'start' }},
+      { popover: { title: 'Happy Coding', description: 'And that is all, go ahead and start adding tours to your applications.' } }
+    ],
+  });
+
+  driverObj.drive();
+  ```
+</CodeSample>
