@@ -63,7 +63,7 @@ type Popover = {
   // Parameter is an object with references to
   // the popover DOM elements such as buttons
   // title, descriptions, body, etc.
-  onPopoverRendered?: (popover: PopoverDOM) => void;
+  onPopoverRendered?: (popover: PopoverDOM, options: { config: Config; state: State }) => void;
 
   // Callbacks for button clicks. You can use
   // these to add custom behavior to the buttons.
@@ -166,7 +166,7 @@ type Config = {
   // PopoverDOM is an object with references to
   // the popover DOM elements such as buttons
   // title, descriptions, body, container etc.
-  onPopoverRendered?: (popover: PopoverDOM) => void;
+  onPopoverRendered?: (popover: PopoverDOM, options: { config: Config; state: State }) => void;
 
   // Hooks to run before and after highlighting
   // each step. Each hook receives the following

@@ -1,6 +1,6 @@
 import { bringInView } from "./utils";
-import { DriverHook, getConfig } from "./config";
-import { getState, setState } from "./state";
+import { Config, DriverHook, getConfig } from "./config";
+import { getState, setState, State } from "./state";
 import { DriveStep } from "./driver";
 import { onDriverClick } from "./events";
 import { emit } from "./emitter";
@@ -28,7 +28,7 @@ export type Popover = {
   prevBtnText?: string;
 
   // Called after the popover is rendered
-  onPopoverRendered?: (popover: PopoverDOM) => void;
+  onPopoverRendered?: (popover: PopoverDOM, opts: { config: Config; state: State }) => void;
 
   // Button callbacks
   onNextClick?: DriverHook;
@@ -208,7 +208,10 @@ export function renderPopover(element: Element, step: DriveStep) {
 
   const onPopoverRendered = step.popover?.onPopoverRendered || getConfig("onPopoverRendered");
   if (onPopoverRendered) {
-    onPopoverRendered(popover);
+    onPopoverRendered(popover, {
+      config: getConfig(),
+      state: getState(),
+    });
   }
 }
 

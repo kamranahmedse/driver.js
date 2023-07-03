@@ -43,12 +43,11 @@ function mountDummyElement() {
 
 function attachFirstButton(popover: PopoverDOM) {
   const firstButton = document.createElement("button");
-  firstButton.innerText = "First";
+  firstButton.innerText = "Go to First";
   popover.footerButtons.appendChild(firstButton);
 
-  console.log(firstButton);
   firstButton.addEventListener("click", () => {
-    console.log('clicked');
+    window.driverObj.drive(0);
   });
 }
 

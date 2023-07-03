@@ -232,3 +232,74 @@ You can use the `onNextClick`, `onPreviousClick` and `onCloseClick` callbacks to
   driverObj.drive();
   ```
 </CodeSample>
+
+## Custom Buttons
+
+You can add custom buttons using `onPopoverRendered` callback. This callback is called every time a popover is rendered. In the following example, we are adding a custom button that takes the user to the first step.
+
+
+<CodeSample
+  buttonText={"Run Example"}
+  config={{
+    prevBtnText: '&larr; Previous',
+    nextBtnText: 'Next &rarr;',
+    doneBtnText: 'Done',
+    showButtons: ['next', 'previous'],
+  }}
+  tour={[
+    {
+      element: '#demo-hook-theme',
+      popover: {
+        align: 'start',
+        side: 'left',
+        title: 'More Control with Hooks',
+        description: 'You can use onPopoverRendered hook to modify the popover DOM. Here we are adding a custom button to the popover which takes the user to the first step.'
+      }
+    },
+    {
+      element: 'h1',
+      popover: {
+        align: 'start',
+        side: 'bottom',
+        title: 'Style However You Want',
+        description: 'You can use the default class names and override the styles or you can pass a custom class name to the popoverClass option either globally or per step.'
+      }
+    },
+    {
+      element: 'p a',
+      popover: {
+        align: 'start',
+        side: 'left',
+        title: 'Style However You Want',
+        description: 'You can use the default class names and override the styles or you can pass a custom class name to the popoverClass option either globally or per step.'
+      }
+    }
+  ]}
+  id={"demo-hook-theme"}
+  client:load
+>
+  ```js
+  import { driver } from "driver.js";
+  import "driver.js/dist/driver.css";
+
+  const driverObj = driver({
+    // Get full control over the popover rendering.
+    // Here we are adding a custom button that takes
+    // user to the first step.
+    onPopoverRendered: (popover, { config, state }) => {
+      const firstButton = document.createElement("button");
+      firstButton.innerText = "Go to First";
+      popover.footerButtons.appendChild(firstButton);
+
+      firstButton.addEventListener("click", () => {
+        driverObj.drive(0);
+      });
+    },
+    steps: [
+      // ..
+    ]
+  });
+
+  driverObj.drive();
+  ```
+</CodeSample>
