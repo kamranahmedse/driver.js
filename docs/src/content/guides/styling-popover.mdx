@@ -1,0 +1,49 @@
+---
+title: "Styling Popover"
+groupTitle: "Examples"
+sort: 10
+---
+
+import { CodeSample } from "../../components/CodeSample.tsx";
+
+You can either use the default class names and override the styles or you can pass a custom class name to the `popoverClass` option either globally or per step.
+
+Alternatively, if want to modify the Popover DOM, you can use the `onPopoverRendered` callback to get the popover DOM element and do whatever you want with it.
+
+We have added a few examples below but have a look at the [theming section](/docs/theming#styling-popover) for detailed guide including class names to target etc.
+
+## Using CSS
+
+Here are some driver.js examples with different overlay colors.
+
+```js
+import { driver } from "driver.js";
+import "driver.js/dist/driver.css";
+
+const driverObj = driver();
+
+driverObj.highlight({
+  popover: {
+    title: 'Pass any RGB Color',
+    description: 'Here we have set the overlay color to be blue. You can pass any RGB color to overlayColor option.'
+  }
+});
+```
+
+<div className='flex flex-col gap-1 -mt-5'>
+  <CodeSample
+    buttonText={"Red Color"}
+    config={{
+      overlayColor: 'red',
+      overlayOpacity: 0.3
+    }}
+    highlight={{
+      popover: {
+        title: 'Pass any RGB Color',
+        description: 'Here we have set the overlay color to be blue. You can pass any RGB color to overlayColor option.',
+      }
+    }}
+    id={"left-start"}
+    client:load
+  />
+</div>
