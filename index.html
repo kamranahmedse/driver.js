@@ -395,8 +395,8 @@ npm install driver.js</pre
       document.getElementById("non-animated-tour").addEventListener("click", () => {
         const driverObj = driver({
           animate: false,
-          backdropColor: "blue",
-          opacity: 0.3,
+          overlayColor: "blue",
+          overlayOpacity: 0.3,
           showProgress: true,
           steps: basicTourSteps,
         });
@@ -407,8 +407,8 @@ npm install driver.js</pre
       document.getElementById("confirm-exit-tour").addEventListener("click", () => {
         const driverObj = driver({
           animate: true,
-          backdropColor: "green",
-          opacity: 0.3,
+          overlayColor: "green",
+          overlayOpacity: 0.3,
           steps: basicTourSteps,
           onDestroyStarted: () => {
             if (driverObj.hasNextStep() && confirm("Are you sure?")) {
@@ -446,7 +446,7 @@ npm install driver.js</pre
       document.getElementById("async-tour").addEventListener("click", () => {
         const driverObj = driver({
           animate: true,
-          opacity: 0.3,
+          overlayOpacity: 0.3,
           showProgress: true,
           progressText: "{{current}} / {{total}}",
           steps: [
@@ -735,8 +735,8 @@ npm install driver.js</pre
 
       document.getElementById("backdrop-color-btn").addEventListener("click", () => {
         driver({
-          backdropColor: "blue",
-          opacity: 0.3,
+          overlayColor: "blue",
+          overlayOpacity: 0.3,
         }).highlight({
           element: "#backdrop-color-btn",
         });
@@ -807,14 +807,14 @@ npm install driver.js</pre
       document.getElementById("dark-highlight-btn").addEventListener("click", () => {
         driver({
           animate: true,
-          opacity: 0.9,
+          overlayOpacity: 0.9,
         }).highlight({ element: "ul" });
       });
 
       document.getElementById("dim-highlight-btn").addEventListener("click", () => {
         driver({
           animate: true,
-          opacity: 0.2,
+          overlayOpacity: 0.2,
         }).highlight({ element: ".buttons" });
       });
 

@@ -8,10 +8,10 @@ export type Config = {
   steps?: DriveStep[];
 
   animate?: boolean;
-  backdropColor?: string;
+  overlayColor?: string;
+  overlayOpacity?: number;
   smoothScroll?: boolean;
   allowClose?: boolean;
-  opacity?: number;
   stagePadding?: number;
   stageRadius?: number;
 
@@ -52,7 +52,7 @@ export function configure(config: Config = {}) {
   currentConfig = {
     animate: true,
     allowClose: true,
-    opacity: 0.7,
+    overlayOpacity: 0.7,
     smoothScroll: false,
     showProgress: false,
     stagePadding: 10,
@@ -60,7 +60,7 @@ export function configure(config: Config = {}) {
     popoverOffset: 10,
     showButtons: ["next", "previous", "close"],
     disableButtons: [],
-    backdropColor: "#000",
+    overlayColor: "#000",
     ...config,
   };
 }
