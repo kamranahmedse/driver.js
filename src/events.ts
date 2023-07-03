@@ -50,10 +50,9 @@ export function onDriverClick(
 
     if (!shouldPreventDefault || shouldPreventDefault(target)) {
       e.preventDefault();
+      e.stopPropagation();
+      e.stopImmediatePropagation();
     }
-
-    e.stopPropagation();
-    e.stopImmediatePropagation();
 
     listener?.(e);
   };
@@ -84,6 +83,7 @@ export function initEvents() {
 }
 
 export function destroyEvents() {
+  window.removeEventListener("keyup", onKeyup);
   window.removeEventListener("resize", requireRefresh);
   window.removeEventListener("scroll", requireRefresh);
 }

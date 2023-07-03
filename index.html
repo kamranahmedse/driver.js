@@ -188,6 +188,7 @@
         <button id="disabled-buttons">Disabled Buttons</button>
         <button id="button-config-events">Button Listeners</button>
         <button id="button-tour-events">Tour Button Listeners</button>
+        <button id="popover-hook-config">Popover Modified in Hook</button>
       </div>
 
       <br />
@@ -746,6 +747,27 @@ npm install driver.js</pre
           },
           onCloseClick: () => {
             driverObj.destroy();
+          },
+          steps: [
+            { popover: { title: "Some title", description: "Some description" }},
+            { popover: { title: "Another title", description: "Some description" }},
+            { popover: { title: "Yet another title", description: "Some description" }},
+          ]
+        });
+
+        driverObj.drive();
+      });
+
+      document.getElementById("popover-hook-config").addEventListener("click", () => {
+        const driverObj = driver({
+          onPopoverRendered: popover => {
+            const firstButton = document.createElement("button");
+            firstButton.innerText = "First";
+            popover.footerButtons.appendChild(firstButton);
+
+            firstButton.addEventListener("click", () => {
+              console.log("First Button Clicked");
+            });
           },
           steps: [
             { popover: { title: "Some title", description: "Some description" }},

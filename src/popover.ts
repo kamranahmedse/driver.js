@@ -193,9 +193,11 @@ export function renderPopover(element: Element, step: DriveStep) {
       return undefined;
     },
     target => {
-      // Only prevent the default action if we're clicking on a button
+      // Only prevent the default action if we're clicking on a driver button
       // This allows us to have links inside the popover title and description
-      return !popover?.description.contains(target) && !popover?.title.contains(target);
+      return !popover?.description.contains(target)
+        && !popover?.title.contains(target)
+        && target.className.includes("driver-popover");
     }
   );
 

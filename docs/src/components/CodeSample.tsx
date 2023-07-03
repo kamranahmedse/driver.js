@@ -1,7 +1,8 @@
-import type { Config, DriveStep } from "driver.js";
+import type { Config, DriveStep, PopoverDOM } from "driver.js";
 import { driver } from "driver.js";
 import "driver.js/dist/driver.css";
 import { useState } from "react";
+import { onDriverClick } from "../../../src/events";
 
 type CodeSampleProps = {
   heading?: string;
@@ -40,18 +41,32 @@ function mountDummyElement() {
   document.body.appendChild(newDiv);
 }
 
+function attachFirstButton(popover: PopoverDOM) {
+  const firstButton = document.createElement("button");
+  firstButton.innerText = "First";
+  popover.footerButtons.appendChild(firstButton);
+
+  console.log(firstButton);
+  firstButton.addEventListener("click", () => {
+    console.log('clicked');
+  });
+}
+
 export function CodeSample(props: CodeSampleProps) {
-  const [driverObj, setDriverObj] = useState<any>(null);
   const { heading, id, children, buttonText = "Show me an Example", className, config, highlight, tour } = props;
+
+  if (id === "demo-hook-theme") {
+    config!.onPopoverRendered = attachFirstButton;
+  }
 
   function onClick() {
     if (highlight) {
       const driverObj = driver({
         ...config,
       });
-      driverObj.highlight(highlight);
 
-      setDriverObj(driverObj);
+      window.driverObj = driverObj;
+      driverObj.highlight(highlight);
     } else if (tour) {
       if (id === "confirm-destroy") {
         config!.onDestroyStarted = () => {
@@ -113,8 +128,8 @@ export function CodeSample(props: CodeSampleProps) {
         steps: tour,
       });
 
+      window.driverObj = driverObj;
       driverObj.drive();
-      setDriverObj(driverObj);
     }
   }
 
