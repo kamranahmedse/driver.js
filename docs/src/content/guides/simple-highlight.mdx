@@ -1,0 +1,148 @@
+---
+title: "Simple Highlight"
+groupTitle: "Examples"
+sort: 11
+---
+
+import { FormHelp } from "../../components/FormHelp.tsx";
+import { CodeSample } from "../../components/CodeSample.tsx";
+
+Product tours is not the only usecase for Driver.js. You can use it to highlight any element on the page and show a popover with a description. This is useful for providing contextual help to the user e.g. help the user fill a form or explain a feature.
+
+Example below shows how to highlight an element and simply show a popover.
+
+<CodeSample
+  id={"highlight-me"}
+  buttonText={"Highlight Me"}
+  config={{
+    popoverClass: "driverjs-theme",
+    stagePadding: 4,
+  }}
+  highlight={{
+    element: "#highlight-me",
+    popover: {
+      side: "bottom",
+      title: "This is a title",
+      description: "This is a description",
+    },
+  }}
+  client:load
+/>
+
+Here is the code for above example:
+
+```js
+const driverObj = driver({
+  popoverClass: "driverjs-theme",
+  stagePadding: 4,
+});
+
+driverObj.highlight({
+  element: "#highlight-me",
+  popover: {
+    side: "bottom",
+    title: "This is a title",
+    description: "This is a description",
+  }
+})
+```
+
+You can also use it to show a simple modal without highlighting any element.
+
+<CodeSample
+  id={"highlight-me"}
+  buttonText={"Show Popover"}
+  highlight={{
+    popover: {
+      side: "bottom",
+      description: "<img src='https://i.imgur.com/EAQhHu5.gif' style='height: 202.5px; width: 270px;' /><span style='font-size: 15px; display: block; margin-top: 10px; text-align: center;'>Yet another highlight example.</span>",
+    },
+  }}
+  client:load
+/>
+
+Here is the code for above example:
+
+```js
+const driverObj = driver();
+
+driverObj.highlight({
+  popover: {
+    description: "<img src='https://i.imgur.com/EAQhHu5.gif' style='height: 202.5px; width: 270px;' /><span style='font-size: 15px; display: block; margin-top: 10px; text-align: center;'>Yet another highlight example.</span>",
+  }
+})
+```
+
+Focus on the input below and see how the popover is shown.
+
+<form action="#" className='flex flex-col gap-2'>
+  <input id="name" type="text" placeholder="Enter your Name" className='block w-full border rounded-md py-2 px-3 focus:outline-0' />
+  <input id="education" type="text" placeholder="Your Education" className='block w-full border rounded-md py-2 px-3 focus:outline-0' />
+  <input id="age" type="number" placeholder="Your Age" className='block w-full border rounded-md py-2 px-3 focus:outline-0' />
+  <textarea id="address" placeholder="Your Address" className='block w-full border rounded-md py-2 px-3 focus:outline-0' />
+  <button id="submit-btn" className='w-full rounded-md bg-black p-2 text-white'>Submit</button>
+</form>
+
+<FormHelp client:only />
+
+Here is the code for the above example.
+
+```js
+const driverObj = driver({
+  popoverClass: "driverjs-theme",
+  stagePadding: 0,
+  onDestroyed: () => {
+    document?.activeElement?.blur();
+  }
+});
+
+const nameEl = document.getElementById("name");
+const educationEl = document.getElementById("education");
+const ageEl = document.getElementById("age");
+const addressEl = document.getElementById("address");
+const formEl = document.querySelector("form");
+
+nameEl.addEventListener("focus", () => {
+  driverObj.highlight({
+    element: nameEl,
+    popover: {
+      title: "Name",
+      description: "Enter your name here",
+    },
+  });
+});
+
+educationEl.addEventListener("focus", () => {
+  driverObj.highlight({
+    element: educationEl,
+    popover: {
+      title: "Education",
+      description: "Enter your education here",
+    },
+  });
+});
+
+ageEl.addEventListener("focus", () => {
+  driverObj.highlight({
+    element: ageEl,
+    popover: {
+      title: "Age",
+      description: "Enter your age here",
+    },
+  });
+});
+
+addressEl.addEventListener("focus", () => {
+  driverObj.highlight({
+    element: addressEl,
+    popover: {
+      title: "Address",
+      description: "Enter your address here",
+    },
+  });
+});
+
+formEl.addEventListener("blur", () => {
+  driverObj.destroy();
+});
+```

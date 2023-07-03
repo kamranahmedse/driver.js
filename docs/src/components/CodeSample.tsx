@@ -1,8 +1,6 @@
 import type { Config, DriveStep, PopoverDOM } from "driver.js";
 import { driver } from "driver.js";
 import "driver.js/dist/driver.css";
-import { useState } from "react";
-import { onDriverClick } from "../../../src/events";
 
 type CodeSampleProps = {
   heading?: string;
