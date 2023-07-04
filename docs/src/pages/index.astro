@@ -39,7 +39,7 @@ const starCount = getFormattedStars('kamranahmedse/driver.js');
   <div class="py-24 bg-white text-black">
     <Container>
       <h2 class="text-6xl font-bold mb-6" data-examples-heading>Examples</h2>
-      <p class="text-2xl text-black mb-12" data-examples-tagline>Here are just a few examples; find more <a
+      <p class="text-2xl text-black mb-12" data-examples-tagline>Here are just a few examples; find more and implementation details <a
         class="text-black underline underline-offset-4" href="/docs/installation">in the documentation</a>.</p>
 
       <div class="flex flex-wrap gap-3" data-example-btns>
@@ -51,11 +51,11 @@ const starCount = getFormattedStars('kamranahmedse/driver.js');
         <ExampleButton id="simple-element-highlight" text="Simple Element Highlight" />
         <ExampleButton id="simple-element-highlight-popover" text="Simple Highlight with Popover" />
         <ExampleButton id="prevent-close" text="Prevent Tour from Closing" />
-        <ExampleButton text="Overlay Color" />
+        <ExampleButton id="overlay-color" text="Overlay Color" />
         <ExampleButton text="Popover Positioning" />
         <ExampleButton text="Customizing Popover" />
         <ExampleButton text="Hooks for Everything" />
-        <a href="/"
+        <a href="/docs/installation"
            class="items-center flex text-lg text-gray-900 bg-yellow-300 rounded-xl px-5 hover:bg-yellow-500 hover:text-black">
           and much more ...
         </a>
@@ -534,6 +534,26 @@ const starCount = getFormattedStars('kamranahmedse/driver.js');
       });
 
       driverObj.drive();
+    });
+
+    const overlayColorBtn = document.getElementById('overlay-color');
+    overlayColorBtn.addEventListener('click', () => {
+      const driverObj = driver({
+        overlayColor: 'red',
+        overlayOpacity: 0.5,
+        onDestroyed: () => {
+          markDone(overlayColorBtn);
+        }
+      });
+
+      driverObj.highlight({
+        element: '[data-example-btns]',
+        popover: {
+          title: "Popover Highlight",
+          description: "You can also highlight an element with a popover.",
+          side: 'top'
+        }
+      });
     });
   </script>
 </BaseLayout>
