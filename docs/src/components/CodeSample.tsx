@@ -15,14 +15,14 @@ type CodeSampleProps = {
   buttonText?: string;
 };
 
-function removeDummyElement() {
+export function removeDummyElement() {
   const el = document.querySelector(".dynamic-el");
   if (el) {
     el.remove();
   }
 }
 
-function mountDummyElement() {
+export function mountDummyElement() {
   const newDiv = (document.querySelector(".dynamic-el") || document.createElement("div")) as HTMLElement;
 
   newDiv.innerHTML = "This is a new Element";
