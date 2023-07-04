@@ -1,0 +1,34 @@
+---
+import Container from "./Container.astro";
+import { getFormattedStars } from "../lib/github";
+
+const starCount = getFormattedStars('kamranahmedse/driver.js');
+---
+<div class="py-10 md:py-12 lg:py-24 bg-white text-black border-t-2 border-t-black">
+  <Container>
+    <div class="flex items-center">
+      <div>
+        <h2 class="text-3xl md:text-4xl lg:text-6xl font-bold mb-4">Loved by Many</h2>
+        <p class="md:text-xl lg:text-2xl text-black mb-6 lg:mb-8">With millions of downloads, Driver.js is an <span class="font-bold">MIT licensed</span>
+          opensource
+          project and is used by
+          thousands of companies around the world.</p>
+
+        <div class="flex flex-col sm:flex-row gap-2 md:gap-3">
+          <a href="https://github.com/kamranahmedse/driver.js"
+             data-github-link
+             target="_blank"
+             class="flex justify-center items-center font-medium text-lg md:text-xl lg:text-2xl rounded-lg lg:rounded-xl py-2 lg:py-3 px-5 bg-yellow-300 border-black hover:bg-yellow-400">
+            <span class="mr-3 inline-flex items-center"><img src="/star.svg" alt="Hero Image" class="h-5 md:h-7 mr-1 md:mr-2" /> { starCount }</span>
+            GitHub Stars
+          </a>
+          <a href="/docs/installation"
+             class="bg-black justify-center text-white flex items-center font-medium text-lg md:text-xl lg:text-2xl border-4 border-black rounded-lg lg:rounded-xl py-2 lg:py-3 px-5 hover:bg-gray-800">
+            Start Using Driver.js
+          </a>
+        </div>
+      </div>
+      <img src="/thumbs.svg" alt="Hero Image" class="hidden lg:block h-36 ml-16" />
+    </div>
+  </Container>
+</div>

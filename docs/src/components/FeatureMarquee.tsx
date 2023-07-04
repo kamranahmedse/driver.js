@@ -19,10 +19,10 @@ const featureList = [
 export function FeatureMarquee() {
   return (
     <Marquee autoFill>
-      <p className="py-4 text-2xl whitespace-nowrap">
+      <p className="py-2.5 md:py-3.5 lg:py-4 text-lg md:text-xl lg:text-2xl whitespace-nowrap">
         { featureList.map((featureItem, index) => (
           <React.Fragment key={index}>
-            { featureItem }<span className="mx-3">&middot;</span>
+            { featureItem }<span className="mx-2 md:mx-3">&middot;</span>
           </React.Fragment>
         ))}
       </p>
