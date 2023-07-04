@@ -45,16 +45,17 @@ const starCount = getFormattedStars('kamranahmedse/driver.js');
       <div class="flex flex-wrap gap-3" data-example-btns>
         <ExampleButton id="animated-tour" text="Animated Tour" />
         <ExampleButton id="static-tour" text="Non-Animated Tour" />
-        <ExampleButton id="async-tour" text="Asynchronous Tour" />
+        <ExampleButton id="async-tour" text="Async Tour" />
+        <ExampleButton id="no-element" text="No Element" />
         <ExampleButton id="confirm-on-exit" text="Confirm on Exit" />
         <ExampleButton id="show-progress" text="Show Progress" />
-        <ExampleButton id="simple-element-highlight" text="Simple Element Highlight" />
-        <ExampleButton id="simple-element-highlight-popover" text="Simple Highlight with Popover" />
-        <ExampleButton id="prevent-close" text="Prevent Tour from Closing" />
+        <ExampleButton id="simple-element-highlight" text="Simple Highlight" />
+        <ExampleButton id="simple-element-highlight-popover" text="Highlight with Popover" />
+        <ExampleButton id="prevent-close" text="Prevent Closing" />
         <ExampleButton id="overlay-color" text="Overlay Color" />
-        <ExampleButton text="Popover Positioning" />
-        <ExampleButton text="Customizing Popover" />
-        <ExampleButton text="Hooks for Everything" />
+        <ExampleButton id="popover-position" text="Popover Positioning" />
+        <ExampleButton id="customizing-popover" text="Customizing Popover" />
+        <ExampleButton id="hooks-everything" text="Hooks for Everything" />
         <a href="/docs/installation"
            class="items-center flex text-lg text-gray-900 bg-yellow-300 rounded-xl px-5 hover:bg-yellow-500 hover:text-black">
           and much more ...
@@ -492,6 +493,23 @@ const starCount = getFormattedStars('kamranahmedse/driver.js');
       });
     });
 
+    const noElementbtn = document.getElementById('no-element');
+    noElementbtn.addEventListener('click', () => {
+      const driverObj = driver({
+        popoverClass: 'driverjs-theme',
+        onDestroyed: () => {
+          markDone(noElementbtn);
+        }
+      });
+
+      driverObj.highlight({
+        popover: {
+          title: "Without Element",
+          description: "You can also show a popover without highlighting an element. For example, this popover is shown without highlighting anything.",
+        }
+      });
+    });
+
     const preventCloseBtn = document.getElementById('prevent-close');
     preventCloseBtn.addEventListener('click', () => {
       const driverObj = driver({
@@ -552,6 +570,65 @@ const starCount = getFormattedStars('kamranahmedse/driver.js');
           title: "Popover Highlight",
           description: "You can also highlight an element with a popover.",
           side: 'top'
+        }
+      });
+    });
+
+    const popoverPositionBtn = document.getElementById('popover-position');
+    popoverPositionBtn.addEventListener('click', () => {
+      const driverObj = driver({
+        onDestroyed: () => {
+          markDone(popoverPositionBtn);
+        }
+      });
+
+      driverObj.highlight({
+        element: '#popover-position',
+        popover: {
+          title: "Popover Position",
+          description: "You can also change the position of the popover using `side` and `align` options.<br /> Allowed sides are `top`, `bottom`, `left` and `right`. Allowed aligns are `start`, `center` and `end`.",
+          side: 'top',
+          align: 'start'
+        }
+      });
+    });
+
+    const customizingBtn = document.getElementById('customizing-popover');
+    customizingBtn.addEventListener('click', () => {
+      const driverObj = driver({
+        popoverClass: 'driverjs-theme',
+        onDestroyed: () => {
+          markDone(customizingBtn);
+        }
+      });
+
+      driverObj.highlight({
+        element: '#customizing-popover',
+        popover: {
+          title: "Customizing Popover",
+          description: "Add your own class using `popoverClass` or use `onPopoverRendered` to get full control over the popover. <br /><br /> Visit these pages which cover <a class='font-medium underline' href='/docs/styling-popover'>styling</a> and <a class='font-medium underline' href='/docs/buttons'>customizing popovers</a> in detail.",
+          side: 'top',
+          align: 'start'
+        }
+      });
+    });
+
+    const hooksEverythingBtn = document.getElementById('hooks-everything');
+    hooksEverythingBtn.addEventListener('click', () => {
+      const driverObj = driver({
+        popoverClass: 'driverjs-theme',
+        onDestroyed: () => {
+          markDone(hooksEverythingBtn);
+        }
+      });
+
+      driverObj.highlight({
+        element: '#hooks-everything',
+        popover: {
+          title: "Hooks for Everything",
+          description: "Have a look at the <a class='font-medium underline' href='/docs/configuration'>configuration</a> page to see how you can use hooks to control the driver.",
+          side: 'top',
+          align: 'start'
         }
       });
     });
