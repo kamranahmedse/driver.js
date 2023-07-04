@@ -56,6 +56,16 @@ export function driver(options: Config = {}) {
     }
   }
 
+  function moveTo(index: number) {
+    const steps = getConfig("steps") || [];
+
+    if (steps[index]) {
+      drive(index);
+    } else {
+      destroy();
+    }
+  }
+
   function handleArrowLeft() {
     const isTransitioning = getState("__transitionCallback");
     if (isTransitioning) {
@@ -253,8 +263,14 @@ export function driver(options: Config = {}) {
     setConfig: configure,
     getConfig,
     getState,
+    getActiveIndex: () => getState("activeIndex"),
+    getActiveStep: () => getState("activeStep"),
+    getActiveElement: () => getState("activeElement"),
+    getPreviousElement: () => getState("previousElement"),
+    getPreviousStep: () => getState("previousStep"),
     moveNext,
     movePrevious,
+    moveTo,
     hasNextStep: () => {
       const steps = getConfig("steps") || [];
       const activeIndex = getState("activeIndex");
