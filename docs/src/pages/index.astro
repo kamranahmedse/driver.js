@@ -11,13 +11,16 @@ const starCount = getFormattedStars('kamranahmedse/driver.js');
 <BaseLayout>
   <div class="bg-yellow-300">
     <Container>
-      <div class="py-10 md:py-24 flex justify-start items-center gap-4">
-        <div class="flex-grow">
-          <h1 class="text-5xl md:text-9xl mb-2 md:mb-4 font-bold">driver.js</h1>
-          <p class="text-md md:text-3xl">Product tours, highlights, contextual help and more.</p>
+      <div class="py-10 md:py-20 flex justify-start items-center gap-4">
+        <div class="flex-grow" data-hero-text>
+          <h1 data-driver-name class="text-5xl md:text-9xl mb-2 md:mb-4 font-bold">driver.js</h1>
+          <p data-driver-tagline class="text-md md:text-3xl">Product tours, highlights, contextual help and more.</p>
           <div class="mt-4 md:mt-12 mb-2 flex gap-2 items-stretch">
-            <button class="bg-black rounded-lg md:rounded-xl py-2 md:py-4 px-5 font-medium text-white text-base md:text-xl">Show Demo Tour</button>
+            <button data-demo-tour class="bg-black rounded-lg md:rounded-xl py-2 md:py-4 px-5 font-medium text-white text-base md:text-xl focus:outline-0">
+              Show Demo Tour
+            </button>
             <a href="/docs/installation"
+               data-docs-link
                class="flex items-center font-bold text-xl border-4 border-black rounded-xl px-5 bg-white">
               Get Started
             </a>
@@ -29,7 +32,7 @@ const starCount = getFormattedStars('kamranahmedse/driver.js');
       </div>
     </Container>
   </div>
-  <div class="bg-white overflow-x-hidden relative h-[64px] border-b-2 border-b-black">
+  <div class="bg-white overflow-x-hidden overflow-y-hidden relative h-[64px] border-b-2 border-b-black" data-feat-marquee>
     <FeatureMarquee client:only />
   </div>
 
@@ -39,7 +42,7 @@ const starCount = getFormattedStars('kamranahmedse/driver.js');
       <p class="text-2xl text-black mb-12">Here are just a few examples; find more <a
         class="text-black underline underline-offset-4" href="/docs/installation">in the documentation</a>.</p>
 
-      <div class="flex flex-wrap gap-3">
+      <div class="flex flex-wrap gap-3" data-example-btns>
         <ExampleButton text="Animated Tour" />
         <ExampleButton text="Non-Animated Tour" />
         <ExampleButton text="Asynchronous Tour" />
@@ -93,6 +96,7 @@ const starCount = getFormattedStars('kamranahmedse/driver.js');
 
           <div class="flex gap-3">
             <a href="https://github.com/kamranahmedse/driver.js"
+               data-github-link
                target="_blank"
                class="flex items-center font-bold text-2xl rounded-xl py-3 px-5 bg-yellow-300 border-black hover:bg-yellow-400">
               <span class="mr-3 inline-flex items-center"><img src="/star.svg" alt="Hero Image" class="h-7 mr-2" /> { starCount }</span>
@@ -127,4 +131,94 @@ const starCount = getFormattedStars('kamranahmedse/driver.js');
       </p>
     </Container>
   </div>
+
+  <script>
+    import { driver } from "driver.js";
+    import "driver.js/dist/driver.css";
+
+    const driverObj = driver({
+      popoverClass: "driverjs-theme",
+      showButtons: ["next", "previous"],
+      steps: [
+        {
+          element: "[data-hero-text]",
+          popover: {
+            title: "Before we start",
+            description: "This is just one use-case, make sure to look at the docs for more use-cases and examples.",
+            nextBtnText: "Okay, start!",
+            side: "bottom",
+            align: "start"
+          }
+        },
+        {
+          element: "[data-driver-tagline]",
+          popover: {
+            title: "Focus Anything",
+            description: "You can use it to highlight literally anything, images, text, svg, div, span, li etc.",
+            side: "bottom",
+            align: "start"
+          }
+        },
+        {
+          element: "[data-driver-name]",
+          popover: {
+            title: "Why Driver.js",
+            description: "It's lightweight, has no dependencies, is MIT licensed, is highly customizable, and is super easy to use.",
+            side: "bottom",
+            align: "start"
+          }
+        },
+        {
+          element: "[data-docs-link]",
+          popover: {
+            title: "More Powerful than Ever",
+            description: "Driver.js has been completely rewritten from scratch and is now more powerful than ever.",
+            side: "bottom",
+            align: "start"
+          }
+        },
+        {
+          element: "[data-example-btns]",
+          popover: {
+            title: "Examples",
+            description: "Here are some examples to give you a rough idea.",
+            side: "bottom",
+            align: "start"
+          }
+        },
+        {
+          element: "[data-example-btns] a:last-child",
+          popover: {
+            title: "Visit Docs",
+            description: "Make sure to visit the docs for more examples and use-cases.",
+            side: "top",
+            align: "start"
+          }
+        },
+        {
+          element: "[data-github-link]",
+          popover: {
+            title: "MIT Licensed",
+            description: "Driver.js is MIT licensed and is used by thousands of companies around the world.",
+            side: "top",
+            align: "start"
+          }
+        },
+        {
+          popover: {
+            description: "<img style='width: 270px; height: 206.65px; margin-bottom: 10px; border-radius: 5px;' src='https://i.imgur.com/3WpTnyA.gif' />That's it for now, make sure to visit the docs for more examples and use-cases.",
+            side: "bottom",
+            align: "start",
+            showButtons: [],
+            popoverClass: "default-theme"
+          }
+        }
+      ]
+    });
+
+    const demoTourButton = document.querySelector("[data-demo-tour]");
+    demoTourButton.addEventListener("click", () => {
+      driverObj.drive();
+    });
+  </script>
 </BaseLayout>
