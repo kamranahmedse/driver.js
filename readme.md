@@ -14,12 +14,13 @@
 
 <p align="center">
   <b>Powerful, highly customizable vanilla JavaScript engine to drive the user's focus across the page</b></br>
-  <sub>No external dependencies, supports all major browsers and highly customizable <sub>
+  <sub>No external dependencies, light-weight, supports all major browsers and highly customizable </sub><br>
 </p>
 
 <br />
 
-- **Simple**: is simple to use and has no external dependency at all
+- **Simple**: is simple to use and has no external dependency at all.
+- **Light-weight**: is just 5kb gzipped as compared to other libraries which are +12kb gzipped.
 - **Highly customizable**: has a powerful API and can be used however you want
 - **Highlight anything**: highlight any (literally any) element on page
 - **Feature introductions**: create powerful feature introductions for your web applications
@@ -29,7 +30,13 @@
 - **Consistent behavior**: usable across all browsers
 - **MIT Licensed**: free for personal and commercial use
 
-For Usage and Examples, [have a look at demo](https://driverjs.com)
+<br />
+
+## Documentation
+
+For demos and documentation, visit [driverjs.com](https://driverjs.com)
+
+<br />
 
 ## So, yet another tour library?
 
@@ -39,9 +46,7 @@ Driver.js is written in Vanilla TypeScript, has zero dependencies and is highly 
 
 > Also, comparing the size of Driver.js with other libraries, since it doesn't have any dependencies, it is **just ~5kb gzipped** while others are 12kb+.
 
-## Demos and Usage
-
-For complete documentation, visit [driverjs.com](https://driverjs.com)
+<br>
 
 ## Contributions
 
