@@ -12,7 +12,7 @@ export function DocsHeader(props: DocsHeaderProps) {
 
   return (
     <>
-      <div className="border-b flex items-center justify-between" docs-header>
+      <div className="border-b flex items-center justify-between">
         <div className="text-right flex justify-end py-3 px-6">
           <a href="/" className="flex items-center justify-end text-xl font-bold">
             <img src="/driver-head.svg" alt="Astro" className="w-10 h-10 mr-2" />
