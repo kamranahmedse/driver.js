@@ -1,5 +1,6 @@
 ---
 import { getCollection, getEntry } from "astro:content";
+import { getFormattedStars } from "../lib/github";
 
 export interface Props {
   activePath: string;
@@ -16,9 +17,17 @@ const groupedGuides = sortedGuides.reduce((acc, curr) => {
 }, {});
 
 const { activePath } = Astro.props;
+
+const starCount = getFormattedStars("kamranahmedse/driver.js");
 ---
-<div class="w-[300px] border-r border-gray-200 text-right min-h-screen py-5 flex-shrink-0">
-  <div class="sticky top-[100px]">
+<div class="hidden md:block w-[200px] lg:w-[350px] border-r border-gray-200 text-right min-h-screen flex-shrink-0">
+  <div class="sticky top-0">
+    <div class="justify-end flex pt-10 pb-5 px-5">
+      <a href="/" class="block items-center justify-end mb-2">
+        <img src="/driver-head.svg" alt="Astro" class="w-16 h-16" />
+      </a>
+    </div>
+
     {Object.keys(groupedGuides).map(groupTitle => {
       const guides = groupedGuides[groupTitle];
 

@@ -17,15 +17,11 @@ const { groupTitle, sort, title } = guide.data;
 ---
 
 <BaseLayout title={title}>
-  <DocsHeader />
   <div class="flex">
-    <Sidebar activePath={`/docs/${guide.slug}`} />
-    <div class="flex-1 px-2 py-6">
-      <Container>
-        <div class="prose lg:proxe-xl mb-24 prose-blockquote:font-normal prose-blockquote:not-italic prose-blockquote:text-gray-500 prose-p:before:content-['']">
-          <slot />
-        </div>
-      </Container>
+    <Sidebar />
+    <div
+      class="min-w-0 max-w-[800px] py-10 lg:py-12 prose px-14 lg:proxe-xl mb-24 prose-blockquote:font-normal prose-blockquote:not-italic prose-blockquote:text-gray-500 prose-p:before:content-['']">
+      <slot />
     </div>
   </div>
 </BaseLayout>
