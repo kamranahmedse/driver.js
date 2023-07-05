@@ -36,6 +36,9 @@
 
 For demos and documentation, visit [driverjs.com](https://driverjs.com)
 
+> Please note that above documentation is for version `1.x` which is the complete rewrite of driver.js.<br>
+> For `0.x` documentation, please visit [kamranahmed.info/driver.js](https://kamranahmed.info/driver.js/)
+
 <br />
 
 ## So, yet another tour library?
