@@ -264,6 +264,13 @@ export function driver(options: Config = {}) {
     getConfig,
     getState,
     getActiveIndex: () => getState("activeIndex"),
+    isFirstStep: () => getState("activeIndex") === 0,
+    isLastStep: () => {
+      const steps = getConfig("steps") || [];
+      const activeIndex = getState("activeIndex");
+
+      return activeIndex !== undefined && activeIndex === steps.length - 1;
+    },
     getActiveStep: () => getState("activeStep"),
     getActiveElement: () => getState("activeElement"),
     getPreviousElement: () => getState("previousElement"),

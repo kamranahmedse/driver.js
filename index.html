@@ -208,6 +208,7 @@
         <button id="confirm-exit-tour">Confirm on Exit</button>
         <button id="progress-tour">Progress Text</button>
         <button id="progress-tour-template">Progress Text Template</button>
+        <button id="api-test">API Test</button>
       </div>
 
       <ul>
@@ -440,6 +441,22 @@ npm install driver.js</pre
           steps: basicTourSteps,
           showProgress: true,
           progressText: "{{current}} of {{total}} done",
+        });
+
+        driverObj.drive();
+      });
+
+      document.getElementById("api-test").addEventListener("click", () => {
+        const driverObj = driver({
+          animate: true,
+          steps: basicTourSteps,
+          showProgress: true,
+          progressText: "{{current}} of {{total}} done",
+          onPopoverRendered: (popover) => {
+            popover.title.innerHTML = `${driverObj.getActiveIndex()} ${driverObj.hasNextStep() ? 'Yes' : 'No'} ${driverObj.hasPreviousStep() ? 'Yes' : 'No'}`
+            popover.description.innerHTML = `${driverObj.isFirstStep() ? 'Yes' : 'No'} ${driverObj.isLastStep() ? 'Yes' : 'No'}`
+            driverObj.refresh();
+          }
         });
 
         driverObj.drive();
