@@ -16,7 +16,7 @@
     "@types/react": "^18.2.14",
     "@types/react-dom": "^18.2.6",
     "astro": "^2.7.4",
-    "driver.js": "1.0.1",
+    "driver.js": "1.0.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-fast-marquee": "^1.6.0",
