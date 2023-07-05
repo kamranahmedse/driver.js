@@ -3,10 +3,11 @@ import type { CollectionEntry } from "astro:content";
 
 type DocsHeaderProps = {
   groupedGuides: Record<string, CollectionEntry<"guides">[]>;
+  activeGuideTitle: string;
 };
 
 export function DocsHeader(props: DocsHeaderProps) {
-  const { groupedGuides } = props;
+  const { groupedGuides, activeGuideTitle } = props;
   const [isActive, setIsActive] = useState(false);
 
   return (
@@ -29,8 +30,8 @@ export function DocsHeader(props: DocsHeaderProps) {
           <div key={category} className="flex flex-col gap-2">
             <div className="font-bold text-gray-900 text-sm uppercase">{category}</div>
             <div className="flex flex-col">
-              {guides.map((guide) => (
-                <a key={guide.slug} href={`/docs/${guide.slug}`} className="text-gray-500 hover:text-gray-900 py-1">
+              {guides.map(guide => (
+                <a key={guide.slug} href={`/docs/${guide.slug}`} className={`${activeGuideTitle === guide.data.title ? 'text-black': 'text-gray-400'} hover:text-gray-900 py-1`}>
                   {guide.data.title}
                 </a>
               ))}

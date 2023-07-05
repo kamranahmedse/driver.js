@@ -7,9 +7,7 @@ export interface Props {
   activePath: string;
 }
 
-const groupedGuides = getAllGuides();
-
-const { activePath } = Astro.props;
+const { activePath, groupedGuides, activeGuideTitle } = Astro.props;
 ---
 <div class="hidden md:block w-[200px] lg:w-[350px] border-r border-gray-200 text-right min-h-screen flex-shrink-0">
   <div class="relative sh:sticky top-0">
@@ -31,7 +29,7 @@ const { activePath } = Astro.props;
               return (
                 <li class="mb-2">
                   <a href={guidePath}
-                     class:list={["hover:text-black pr-5 py-2", { "text-black": activePath === guidePath }]}>{guide.data.title}</a>
+                     class:list={["hover:text-black pr-5 py-2", { "text-black": activeGuideTitle === guide.data.title }]}>{guide.data.title}</a>
                 </li>
               );
             })}

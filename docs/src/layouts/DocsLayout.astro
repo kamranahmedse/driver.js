@@ -20,9 +20,11 @@ const { groupTitle, sort, title } = guide.data;
 ---
 
 <BaseLayout title={title}>
-  <DocsHeader groupedGuides={groupedGuides} client:load />
+  <div class="block md:hidden">
+    <DocsHeader activeGuideTitle={title} groupedGuides={groupedGuides} client:load />
+  </div>
   <div class="flex">
-    <Sidebar />
+    <Sidebar activeGuideTitle={title} groupedGuides={groupedGuides} />
     <div
       class="min-w-0 max-w-[800px] py-6 md:py-12 prose px-6 md:px-14 prose-base md:proxe-xl mb-24 prose-blockquote:font-normal prose-blockquote:not-italic prose-blockquote:text-gray-500 prose-p:before:content-['']">
       <slot />
