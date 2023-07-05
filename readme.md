@@ -47,7 +47,7 @@ For demos and documentation, visit [driverjs.com](https://driverjs.com)
 
 Driver.js is written in Vanilla TypeScript, has zero dependencies and is highly customizable. It has several options allowing you to change how it behaves and also **provides you the hooks** to manipulate the elements as they are highlighted, about to be highlighted, or deselected.
 
-> Also, comparing the size of Driver.js with other libraries, since it doesn't have any dependencies, it is **just ~5kb gzipped** while others are 12kb+.
+> Also, comparing the size of Driver.js with other libraries, it's the most light-weight, it is **just ~5kb gzipped** while others are 12kb+.
 
 <br>
 
