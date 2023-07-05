@@ -8,7 +8,7 @@ import { CodeSample } from "../../components/CodeSample.tsx";
 
 You can either use the default class names and override the styles or you can pass a custom class name to the `popoverClass` option either globally or per step.
 
-Alternatively, if want to modify the Popover DOM, you can use the `onPopoverRendered` callback to get the popover DOM element and do whatever you want with it.
+Alternatively, if want to modify the Popover DOM, you can use the `onPopoverRender` callback to get the popover DOM element and do whatever you want with it before popover is rendered.
 
 We have added a few examples below but have a look at the [theming section](/docs/theming#styling-popover) for detailed guide including class names to target etc.
 
@@ -155,7 +155,7 @@ Here is the CSS used for the above example:
         align: 'start',
         side: 'left',
         title: 'More Control with Hooks',
-        description: 'You can use onPopoverRendered hook to modify the popover DOM. Here we are adding a custom button to the popover which takes the user to the first step.'
+        description: 'You can use onPopoverRender hook to modify the popover DOM. Here we are adding a custom button to the popover which takes the user to the first step.'
       }
     },
     {
@@ -188,7 +188,7 @@ Here is the CSS used for the above example:
     // Get full control over the popover rendering.
     // Here we are adding a custom button that takes
     // the user to the first step.
-    onPopoverRendered: (popover, { config, state }) => {
+    onPopoverRender: (popover, { config, state }) => {
       const firstButton = document.createElement("button");
       firstButton.innerText = "Go to First";
       popover.footerButtons.appendChild(firstButton);

@@ -31,7 +31,7 @@ export type Config = {
   doneBtnText?: string;
 
   // Called after the popover is rendered
-  onPopoverRendered?: (popover: PopoverDOM) => void;
+  onPopoverRender?: (popover: PopoverDOM) => void;
 
   // State based callbacks, called upon state changes
   onHighlightStarted?: DriverHook;

@@ -235,7 +235,7 @@ You can use the `onNextClick`, `onPreviousClick` and `onCloseClick` callbacks to
 
 ## Custom Buttons
 
-You can add custom buttons using `onPopoverRendered` callback. This callback is called every time a popover is rendered. In the following example, we are adding a custom button that takes the user to the first step.
+You can add custom buttons using `onPopoverRender` callback. This callback is called before the popover is rendered. In the following example, we are adding a custom button that takes the user to the first step.
 
 
 <CodeSample
@@ -253,7 +253,7 @@ You can add custom buttons using `onPopoverRendered` callback. This callback is 
         align: 'start',
         side: 'left',
         title: 'More Control with Hooks',
-        description: 'You can use onPopoverRendered hook to modify the popover DOM. Here we are adding a custom button to the popover which takes the user to the first step.'
+        description: 'You can use onPopoverRender hook to modify the popover DOM. Here we are adding a custom button to the popover which takes the user to the first step.'
       }
     },
     {
@@ -286,7 +286,7 @@ You can add custom buttons using `onPopoverRendered` callback. This callback is 
     // Get full control over the popover rendering.
     // Here we are adding a custom button that takes
     // user to the first step.
-    onPopoverRendered: (popover, { config, state }) => {
+    onPopoverRender: (popover, { config, state }) => {
       const firstButton = document.createElement("button");
       firstButton.innerText = "Go to First";
       popover.footerButtons.appendChild(firstButton);

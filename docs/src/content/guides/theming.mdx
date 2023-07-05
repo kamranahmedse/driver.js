@@ -57,7 +57,7 @@ Visit the [example page](/docs/styling-popover) for an example that modifies the
 
 ## Modifying Popover DOM
 
-Alternatively, you can also use the `onPopoverRendered` hook to modify the popover DOM before it is displayed. The hook is called with the popover DOM as the first argument.
+Alternatively, you can also use the `onPopoverRender` hook to modify the popover DOM before it is displayed. The hook is called with the popover DOM as the first argument.
 
 ```typescript
 type PopoverDOM = {
@@ -73,7 +73,7 @@ type PopoverDOM = {
   footerButtons: HTMLElement;
 };
 
-onPopoverRendered?: (popover: PopoverDOM) => void;
+onPopoverRender?: (popover: PopoverDOM) => void;
 ```
 
 ## Styling Page

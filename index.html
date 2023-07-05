@@ -452,10 +452,9 @@ npm install driver.js</pre
           steps: basicTourSteps,
           showProgress: true,
           progressText: "{{current}} of {{total}} done",
-          onPopoverRendered: (popover) => {
+          onPopoverRender: (popover) => {
             popover.title.innerHTML = `${driverObj.getActiveIndex()} ${driverObj.hasNextStep() ? 'Yes' : 'No'} ${driverObj.hasPreviousStep() ? 'Yes' : 'No'}`
             popover.description.innerHTML = `${driverObj.isFirstStep() ? 'Yes' : 'No'} ${driverObj.isLastStep() ? 'Yes' : 'No'}`
-            driverObj.refresh();
           }
         });
 
@@ -662,7 +661,7 @@ npm install driver.js</pre
 
       document.getElementById("popover-hook").addEventListener("click", () => {
         const driverObj = driver({
-          onPopoverRendered: popover => {
+          onPopoverRender: popover => {
             popover.title.innerText = "Modified Parent";
           },
         });
@@ -673,7 +672,7 @@ npm install driver.js</pre
             description: "Body of the popover",
             side: "bottom",
             align: "start",
-            onPopoverRendered: popover => {
+            onPopoverRender: popover => {
               popover.title.innerText = "Modified";
             },
           },
@@ -694,7 +693,7 @@ npm install driver.js</pre
             description: "Body of the popover",
             side: "bottom",
             align: "start",
-            onPopoverRendered: popover => {
+            onPopoverRender: popover => {
               popover.title.innerText = "Modified";
             },
           },
@@ -777,7 +776,7 @@ npm install driver.js</pre
 
       document.getElementById("popover-hook-config").addEventListener("click", () => {
         const driverObj = driver({
-          onPopoverRendered: popover => {
+          onPopoverRender: popover => {
             const firstButton = document.createElement("button");
             firstButton.innerText = "First";
             popover.footerButtons.appendChild(firstButton);
