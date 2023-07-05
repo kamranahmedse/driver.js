@@ -13,11 +13,23 @@ const { title } = Astro.props;
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="description" itemprop="description"
-					content="A light-weight, no-dependency, vanilla JavaScript library to drive the user's focus across the page"/>
+					content="A light-weight, no-dependency, vanilla JavaScript library to drive user's focus across the page."/>
+
+		<meta content="Kamran Ahmed" name=author>
+		<meta content="summary_large_image" name="twitter:card">
+		<meta content="@kamrify" name="twitter:creator">
+		<meta content="1200" property="og:image:width">
+		<meta content="630" property="og:image:height">
+		<meta content="https://driverjs.com/og-img.png" property="og:image">
+		<meta content="driverjs.com" property="og:image:alt">
+		<meta content="driverjs.com" property="og:site_name">
+		<meta content="Driver.js" property="og:title">
+		<meta content="A light-weight, no-dependency, vanilla JavaScript library to drive user's focus across the page." property=og:description>
+		<meta content="website" property="og:type">
+		<meta content="https://driverjs.com/" property="og:url">
 
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
 		<title>Driver.js</title>
 
 		<style is:global>
