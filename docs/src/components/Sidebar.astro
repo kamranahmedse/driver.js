@@ -1,24 +1,15 @@
 ---
 import { getCollection, getEntry } from "astro:content";
 import { getFormattedStars } from "../lib/github";
+import { getAllGuides } from "../lib/guide";
 
 export interface Props {
   activePath: string;
 }
 
-const allGuides = await getCollection("guides");
-const sortedGuides = allGuides.sort((a, b) => a.data.sort - b.data.sort);
-const groupedGuides = sortedGuides.reduce((acc, curr) => {
-  const { groupTitle } = curr.data;
-  acc[groupTitle] = acc[groupTitle] || [];
-  acc[groupTitle].push(curr);
-
-  return acc;
-}, {});
+const groupedGuides = getAllGuides();
 
 const { activePath } = Astro.props;
-
-const starCount = getFormattedStars("kamranahmedse/driver.js");
 ---
 <div class="hidden md:block w-[200px] lg:w-[350px] border-r border-gray-200 text-right min-h-screen flex-shrink-0">
   <div class="relative sh:sticky top-0">

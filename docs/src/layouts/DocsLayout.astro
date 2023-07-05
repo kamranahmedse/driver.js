@@ -1,10 +1,11 @@
 ---
 import BaseLayout from "./BaseLayout.astro";
-import DocsHeader from "../components/DocsHeader.astro";
+import { DocsHeader } from "../components/DocsHeader";
 import Container from "../components/Container.astro";
 import { getFormattedStars } from "../lib/github";
 import Sidebar from "../components/Sidebar.astro";
 import type { CollectionEntry } from "astro:content";
+import { getAllGuides } from "../lib/guide";
 
 type GuideType = CollectionEntry<"guides">;
 
@@ -12,15 +13,18 @@ export interface Props {
   guide: GuideType;
 }
 
+const groupedGuides = await getAllGuides();
+
 const { guide } = Astro.props;
 const { groupTitle, sort, title } = guide.data;
 ---
 
 <BaseLayout title={title}>
+  <DocsHeader groupedGuides={groupedGuides} client:load />
   <div class="flex">
     <Sidebar />
     <div
-      class="min-w-0 max-w-[800px] py-10 lg:py-12 prose px-14 lg:proxe-xl mb-24 prose-blockquote:font-normal prose-blockquote:not-italic prose-blockquote:text-gray-500 prose-p:before:content-['']">
+      class="min-w-0 max-w-[800px] py-6 md:py-12 prose px-6 md:px-14 prose-base md:proxe-xl mb-24 prose-blockquote:font-normal prose-blockquote:not-italic prose-blockquote:text-gray-500 prose-p:before:content-['']">
       <slot />
     </div>
   </div>
