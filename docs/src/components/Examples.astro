@@ -32,6 +32,7 @@ import { ExampleButton } from "./ExampleButton";
 
   function markDone(btn) {
     btn.classList.add("bg-gray-300", "hover:bg-gray-200", "line-through");
+    btn.classList.remove("bg-transparent");
   }
 
   const demoTourButton = document.querySelector("[data-demo-tour]");
