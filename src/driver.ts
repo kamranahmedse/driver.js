@@ -187,19 +187,25 @@ export function driver(options: Config = {}) {
         disableButtons: [...(!hasPreviousStep ? ["previous" as AllowedButtons] : [])],
         showProgress: showProgress,
         progressText: progressTextReplaced,
-        onNextClick: onNextClick ? onNextClick : () => {
-          if (!hasNextStep) {
-            destroy();
-          } else {
-            drive(stepIndex + 1);
-          }
-        },
-        onPrevClick: onPrevClick ? onPrevClick : () => {
-          drive(stepIndex - 1);
-        },
-        onCloseClick: onCloseClick ? onCloseClick : () => {
-          destroy();
-        },
+        onNextClick: onNextClick
+          ? onNextClick
+          : () => {
+              if (!hasNextStep) {
+                destroy();
+              } else {
+                drive(stepIndex + 1);
+              }
+            },
+        onPrevClick: onPrevClick
+          ? onPrevClick
+          : () => {
+              drive(stepIndex - 1);
+            },
+        onCloseClick: onCloseClick
+          ? onCloseClick
+          : () => {
+              destroy();
+            },
         ...(currentStep?.popover || {}),
       },
     });
@@ -261,6 +267,13 @@ export function driver(options: Config = {}) {
       drive(stepIndex);
     },
     setConfig: configure,
+    setSteps: (steps: DriveStep[]) => {
+      resetState();
+      configure({
+        ...getConfig(),
+        steps,
+      });
+    },
     getConfig,
     getState,
     getActiveIndex: () => getState("activeIndex"),

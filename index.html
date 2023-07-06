@@ -209,6 +209,7 @@
         <button id="progress-tour">Progress Text</button>
         <button id="progress-tour-template">Progress Text Template</button>
         <button id="api-test">API Test</button>
+        <button id="reconfigure-steps">Re Configuring Steps</button>
       </div>
 
       <ul>
@@ -457,6 +458,31 @@ npm install driver.js</pre
             popover.description.innerHTML = `${driverObj.isFirstStep() ? 'Yes' : 'No'} ${driverObj.isLastStep() ? 'Yes' : 'No'}`
           }
         });
+
+        driverObj.drive();
+      });
+
+      document.getElementById("reconfigure-steps").addEventListener("click", () => {
+        const driverObj = driver({
+          animate: true,
+          steps: basicTourSteps,
+          showProgress: true,
+        });
+
+        driverObj.setSteps([
+          {
+            element: "h1",
+            popover: {
+              description: "This is a new description"
+            }
+          },
+          {
+            element: "p",
+            popover: {
+              description: "This is another new description"
+            }
+          }
+        ])
 
         driverObj.drive();
       });
