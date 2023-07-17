@@ -1,7 +1,7 @@
 {
   "name": "driver.js",
   "private": false,
-  "version": "1.0.4",
+  "version": "1.0.5",
   "main": "./dist/driver.js.cjs",
   "module": "./dist/driver.js.mjs",
   "types": "./dist/driver.js.d.ts",
@@ -16,9 +16,9 @@
       "require": "./dist/driver.js.cjs",
       "import": "./dist/driver.js.mjs"
     },
-    "./dist/*.css": {
-      "import": "./dist/*.css",
-      "require": "./dist/*.css"
+    "./dist/driver.css": {
+      "import": "./dist/driver.css",
+      "require": "./dist/driver.css"
     }
   },
   "scripts": {
