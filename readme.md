@@ -19,8 +19,8 @@
 
 <br />
 
-- **Simple**: is simple to use and has no external dependency at all.
-- **Light-weight**: is just 5kb gzipped as compared to other libraries which are +12kb gzipped.
+- **Simple**: is simple to use and has no external dependency at all
+- **Light-weight**: is just 5kb gzipped as compared to other libraries which are +12kb gzipped
 - **Highly customizable**: has a powerful API and can be used however you want
 - **Highlight anything**: highlight any (literally any) element on page
 - **Feature introductions**: create powerful feature introductions for your web applications
