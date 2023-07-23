@@ -138,6 +138,11 @@ export function renderPopover(element: Element, step: DriveStep) {
   popoverWrapper.style.bottom = "";
   popoverWrapper.style.right = "";
 
+  popoverWrapper.id = "driver-popover-content";
+  popoverWrapper.setAttribute("role", "dialog");
+  popoverWrapper.setAttribute("aria-labelledby", "driver-popover-title");
+  popoverWrapper.setAttribute("aria-describedby", "driver-popover-description");
+
   // Reset the classes responsible for the arrow position
   const popoverArrow = popover.arrow;
   popoverArrow.className = "driver-popover-arrow";
@@ -593,21 +598,25 @@ function createPopover(): PopoverDOM {
   const arrow = document.createElement("div");
   arrow.classList.add("driver-popover-arrow");
 
-  const title = document.createElement("div");
+  const title = document.createElement("header");
+  title.id = "driver-popover-title";
   title.classList.add("driver-popover-title");
   title.style.display = "none";
   title.innerText = "Popover Title";
 
   const description = document.createElement("div");
+  description.id = "driver-popover-description";
   description.classList.add("driver-popover-description");
   description.style.display = "none";
   description.innerText = "Popover description is here";
 
   const closeButton = document.createElement("button");
+  closeButton.type = "button";
   closeButton.classList.add("driver-popover-close-btn");
+  closeButton.setAttribute("aria-label", "Close");
   closeButton.innerHTML = "&times;";
 
-  const footer = document.createElement("div");
+  const footer = document.createElement("footer");
   footer.classList.add("driver-popover-footer");
 
   const progress = document.createElement("span");
@@ -618,10 +627,12 @@ function createPopover(): PopoverDOM {
   footerButtons.classList.add("driver-popover-navigation-btns");
 
   const previousButton = document.createElement("button");
+  previousButton.type = "button";
   previousButton.classList.add("driver-popover-prev-btn");
   previousButton.innerHTML = "&larr; Previous";
 
   const nextButton = document.createElement("button");
+  nextButton.type = "button";
   nextButton.classList.add("driver-popover-next-btn");
   nextButton.innerHTML = "Next &rarr;";
 

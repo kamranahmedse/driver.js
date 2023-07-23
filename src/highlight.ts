@@ -146,12 +146,22 @@ function transferHighlight(toElement: Element, toStep: DriveStep) {
   }
 
   fromElement.classList.remove("driver-active-element");
+  fromElement.removeAttribute("aria-haspopup");
+  fromElement.removeAttribute("aria-expanded");
+  fromElement.removeAttribute("aria-controls");
+
   toElement.classList.add("driver-active-element");
+  toElement.setAttribute("aria-haspopup", "dialog");
+  toElement.setAttribute("aria-expanded", "true");
+  toElement.setAttribute("aria-controls", "driver-popover-content");
 }
 
 export function destroyHighlight() {
   document.getElementById("driver-dummy-element")?.remove();
   document.querySelectorAll(".driver-active-element").forEach(element => {
     element.classList.remove("driver-active-element");
+    element.removeAttribute("aria-haspopup");
+    element.removeAttribute("aria-expanded");
+    element.removeAttribute("aria-controls");
   });
 }
