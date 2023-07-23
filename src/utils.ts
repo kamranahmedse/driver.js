@@ -7,6 +7,20 @@ export function easeInOutQuad(elapsed: number, initialValue: number, amountOfCha
   return (-amountOfChange / 2) * (--elapsed * (elapsed - 2) - 1) + initialValue;
 }
 
+export function getFocusableElements(parentEls: Element[] | HTMLElement[]) {
+  const focusableQuery =
+    'a[href]:not([disabled]), button:not([disabled]), textarea:not([disabled]), input[type="text"]:not([disabled]), input[type="radio"]:not([disabled]), input[type="checkbox"]:not([disabled]), select:not([disabled])';
+
+  return parentEls
+    .flatMap(parentEl => {
+      const isParentFocusable = parentEl.matches(focusableQuery);
+      const focusableEls: HTMLElement[] = Array.from(parentEl.querySelectorAll(focusableQuery));
+
+      return [...(isParentFocusable ? [parentEl as HTMLElement] : []), ...focusableEls];
+    })
+    .filter(el => isElementVisible(el));
+}
+
 export function bringInView(element: Element) {
   if (!element || isElementInView(element)) {
     return;
@@ -42,4 +56,8 @@ function isElementInView(element: Element) {
     rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
     rect.right <= (window.innerWidth || document.documentElement.clientWidth)
   );
+}
+
+export function isElementVisible(el: HTMLElement) {
+  return !!(el.offsetWidth || el.offsetHeight || el.getClientRects().length);
 }

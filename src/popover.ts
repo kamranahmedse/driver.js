@@ -1,4 +1,4 @@
-import { bringInView } from "./utils";
+import { bringInView, getFocusableElements } from "./utils";
 import { Config, DriverHook, getConfig } from "./config";
 import { getState, setState, State } from "./state";
 import { DriveStep } from "./driver";
@@ -43,9 +43,9 @@ export type PopoverDOM = {
   description: HTMLElement;
   footer: HTMLElement;
   progress: HTMLElement;
-  previousButton: HTMLElement;
-  nextButton: HTMLElement;
-  closeButton: HTMLElement;
+  previousButton: HTMLButtonElement;
+  nextButton: HTMLButtonElement;
+  closeButton: HTMLButtonElement;
   footerButtons: HTMLElement;
 };
 
@@ -100,9 +100,7 @@ export function renderPopover(element: Element, step: DriveStep) {
   const showButtonsConfig: AllowedButtons[] = showButtons || getConfig("showButtons")!;
   const showProgressConfig = showProgress || getConfig("showProgress") || false;
   const showFooter =
-    showButtonsConfig?.includes("next") ||
-    showButtonsConfig?.includes("previous") ||
-    showProgressConfig;
+    showButtonsConfig?.includes("next") || showButtonsConfig?.includes("previous") || showProgressConfig;
 
   popover.closeButton.style.display = showButtonsConfig.includes("close") ? "block" : "none";
 
@@ -118,14 +116,17 @@ export function renderPopover(element: Element, step: DriveStep) {
 
   const disabledButtonsConfig: AllowedButtons[] = disableButtons || getConfig("disableButtons")! || [];
   if (disabledButtonsConfig?.includes("next")) {
+    popover.nextButton.disabled = true;
     popover.nextButton.classList.add("driver-popover-btn-disabled");
   }
 
   if (disabledButtonsConfig?.includes("previous")) {
+    popover.previousButton.disabled = true;
     popover.previousButton.classList.add("driver-popover-btn-disabled");
   }
 
   if (disabledButtonsConfig?.includes("close")) {
+    popover.closeButton.disabled = true;
     popover.closeButton.classList.add("driver-popover-btn-disabled");
   }
 
@@ -195,9 +196,11 @@ export function renderPopover(element: Element, step: DriveStep) {
     target => {
       // Only prevent the default action if we're clicking on a driver button
       // This allows us to have links inside the popover title and description
-      return !popover?.description.contains(target)
-        && !popover?.title.contains(target)
-        && target.className.includes("driver-popover");
+      return (
+        !popover?.description.contains(target) &&
+        !popover?.title.contains(target) &&
+        target.className.includes("driver-popover")
+      );
     }
   );
 
@@ -213,6 +216,13 @@ export function renderPopover(element: Element, step: DriveStep) {
 
   repositionPopover(element, step);
   bringInView(popoverWrapper);
+
+  // Focus on the first focusable element in active element or popover
+  const isToDummyElement = element.classList.contains("driver-dummy-element");
+  const focusableElement = getFocusableElements([...(isToDummyElement ? [] : [element]), popoverWrapper]);
+  if (focusableElement.length > 0) {
+    focusableElement[0].focus();
+  }
 }
 
 type PopoverDimensions = {
