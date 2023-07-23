@@ -2,7 +2,7 @@ import { refreshActiveHighlight } from "./highlight";
 import { emit } from "./emitter";
 import { getState, setState } from "./state";
 import { getConfig } from "./config";
-import { getFocusableElements, isElementVisible } from "./utils";
+import { getFocusableElements } from "./utils";
 
 export function requireRefresh() {
   const resizeTimeout = getState("__resizeTimeout");
