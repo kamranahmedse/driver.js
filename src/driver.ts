@@ -149,6 +149,7 @@ export function driver(options: Config = {}) {
       return;
     }
 
+    setState("__activeOnDestroyed", document.activeElement as HTMLElement);
     setState("activeIndex", stepIndex);
 
     const currentStep = steps[stepIndex];
@@ -215,6 +216,8 @@ export function driver(options: Config = {}) {
     const activeElement = getState("activeElement");
     const activeStep = getState("activeStep");
 
+    const activeOnDestroyed = getState("__activeOnDestroyed");
+
     const onDestroyStarted = getConfig("onDestroyStarted");
     // `onDestroyStarted` is used to confirm the exit of tour. If we trigger
     // the hook for when user calls `destroy`, driver will get into infinite loop
@@ -256,6 +259,10 @@ export function driver(options: Config = {}) {
           state: getState(),
         });
       }
+    }
+
+    if (activeOnDestroyed) {
+      (activeOnDestroyed as HTMLElement).focus();
     }
   }
 

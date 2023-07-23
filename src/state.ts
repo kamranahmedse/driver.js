@@ -14,6 +14,7 @@ export type State = {
 
   popover?: PopoverDOM;
 
+  __activeOnDestroyed?: Element;
   __resizeTimeout?: number;
   __transitionCallback?: () => void;
   __activeStagePosition?: StageDefinition;

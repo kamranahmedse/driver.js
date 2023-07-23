@@ -2,6 +2,7 @@ import { refreshActiveHighlight } from "./highlight";
 import { emit } from "./emitter";
 import { getState, setState } from "./state";
 import { getConfig } from "./config";
+import { getFocusableElements, isElementVisible } from "./utils";
 
 export function requireRefresh() {
   const resizeTimeout = getState("__resizeTimeout");
@@ -10,6 +11,41 @@ export function requireRefresh() {
   }
 
   setState("__resizeTimeout", window.requestAnimationFrame(refreshActiveHighlight));
+}
+
+function trapFocus(e: KeyboardEvent) {
+  const isActivated = getState("isInitialized");
+  if (!isActivated) {
+    return;
+  }
+
+  const isTabKey = e.key === "Tab" || e.keyCode === 9;
+  if (!isTabKey) {
+    return;
+  }
+
+  const activeElement = getState("activeElement");
+  const popoverEl = getState("popover")?.wrapper;
+
+  const focusableEls = getFocusableElements([
+    ...(activeElement ? [activeElement] : []),
+    ...(popoverEl ? [popoverEl] : []),
+  ]);
+
+  const firstFocusableEl = focusableEls[0];
+  const lastFocusableEl = focusableEls[focusableEls.length - 1];
+
+  e.preventDefault();
+
+  if (e.shiftKey) {
+    const previousFocusableEl =
+      focusableEls[focusableEls.indexOf(document.activeElement as HTMLElement) - 1] || lastFocusableEl;
+    previousFocusableEl?.focus();
+  } else {
+    const nextFocusableEl =
+      focusableEls[focusableEls.indexOf(document.activeElement as HTMLElement) + 1] || firstFocusableEl;
+    nextFocusableEl?.focus();
+  }
 }
 
 function onKeyup(e: KeyboardEvent) {
@@ -78,6 +114,7 @@ export function onDriverClick(
 
 export function initEvents() {
   window.addEventListener("keyup", onKeyup, false);
+  window.addEventListener("keydown", trapFocus, false);
   window.addEventListener("resize", requireRefresh);
   window.addEventListener("scroll", requireRefresh);
 }

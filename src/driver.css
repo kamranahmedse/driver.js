@@ -80,7 +80,7 @@
   transition-duration: 200ms;
 }
 
-.driver-popover-close-btn:hover {
+.driver-popover-close-btn:hover, .driver-popover-close-btn:focus {
   color: #2d2d2d;
 }
 
@@ -140,7 +140,7 @@
   overflow: hidden !important;
 }
 
-.driver-popover-footer button:hover {
+.driver-popover-footer button:hover, .driver-popover-footer button:focus {
   background-color: #f7f7f7;
 }
 
