@@ -16,6 +16,7 @@
     "@types/react": "^18.2.14",
     "@types/react-dom": "^18.2.6",
     "astro": "^2.7.4",
+    "astro-compress": "^1.1.49",
     "driver.js": "1.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
