@@ -329,3 +329,5 @@ export function driver(options: Config = {}) {
     },
   };
 }
+
+export type Driver = ReturnType<typeof driver>
