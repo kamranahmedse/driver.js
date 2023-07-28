@@ -13,6 +13,7 @@
   },
   "exports": {
     ".": {
+      "types": "./dist/driver.js.d.ts",
       "require": "./dist/driver.js.cjs",
       "import": "./dist/driver.js.mjs"
     },
