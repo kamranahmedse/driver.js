@@ -204,6 +204,7 @@ export function renderPopover(element: Element, step: DriveStep) {
       return (
         !popover?.description.contains(target) &&
         !popover?.title.contains(target) &&
+        typeof target.className === 'string' &&
         target.className.includes("driver-popover")
       );
     }
