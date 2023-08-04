@@ -27,8 +27,8 @@ dependencies:
     specifier: ^1.1.49
     version: 1.1.49
   driver.js:
-    specifier: 1.2.0
-    version: 1.2.0
+    specifier: 1.2.1
+    version: 1.2.1
   react:
     specifier: ^18.2.0
     version: 18.2.0
@@ -1576,8 +1576,8 @@ packages:
       tslib: 2.6.0
     dev: false
 
-  /driver.js@1.2.0:
-    resolution: {integrity: sha512-kn9YCQqvMZovs82pYhEl7IKdvv5MmZ6R/OXy5aI7L0qCBK2ynRfm6oQ47pNSdOW731QtT5vySKwz8Nk5ai3LXw==}
+  /driver.js@1.2.1:
+    resolution: {integrity: sha512-6nDbVnZdjRgTsJOOmGRmMf/t6cHnMyyZK/wLSbdLZp33I7odPglw1cVlX3TMaPnMDYIJUq7h8a0buejOLqM7XQ==}
     dev: false
 
   /dset@3.1.2:

@@ -17,7 +17,7 @@
     "@types/react-dom": "^18.2.6",
     "astro": "^2.7.4",
     "astro-compress": "^1.1.49",
-    "driver.js": "1.2.0",
+    "driver.js": "1.2.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-fast-marquee": "^1.6.0",
