@@ -8,11 +8,18 @@ export type State = {
   activeIndex?: number;
   activeElement?: Element;
   activeStep?: DriveStep;
-
   previousElement?: Element;
   previousStep?: DriveStep;
 
   popover?: PopoverDOM;
+
+  // actual values considering the animation
+  // and delays. These are used to determine
+  // the positions etc.
+  __previousElement?: Element;
+  __activeElement?: Element;
+  __previousStep?: DriveStep;
+  __activeStep?: DriveStep;
 
   __activeOnDestroyed?: Element;
   __resizeTimeout?: number;

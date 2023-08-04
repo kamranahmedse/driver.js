@@ -24,7 +24,7 @@ function trapFocus(e: KeyboardEvent) {
     return;
   }
 
-  const activeElement = getState("activeElement");
+  const activeElement = getState("__activeElement");
   const popoverEl = getState("popover")?.wrapper;
 
   const focusableEls = getFocusableElements([

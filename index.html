@@ -471,11 +471,12 @@ npm install driver.js</pre
             popover.title.innerHTML = `${driverObj.getActiveIndex()} ${driverObj.hasNextStep() ? 'Yes' : 'No'} ${driverObj.hasPreviousStep() ? 'Yes' : 'No'}`
             popover.description.innerHTML = `${driverObj.isFirstStep() ? 'Yes' : 'No'} ${driverObj.isLastStep() ? 'Yes' : 'No'}`
 
+            console.log(driverObj.getActiveIndex());
             console.log(driverObj.getActiveStep());
           }
         });
 
-        driverObj.drive();
+        driverObj.drive(4);
       });
 
       document.getElementById("reconfigure-steps").addEventListener("click", () => {

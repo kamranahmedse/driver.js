@@ -73,8 +73,8 @@ export function driver(options: Config = {}) {
     }
 
     const activeIndex = getState("activeIndex");
-    const activeStep = getState("activeStep");
-    const activeElement = getState("activeElement");
+    const activeStep = getState("__activeStep");
+    const activeElement = getState("__activeElement");
     if (typeof activeIndex === "undefined" || typeof activeStep === "undefined") {
       return;
     }
@@ -102,8 +102,8 @@ export function driver(options: Config = {}) {
     }
 
     const activeIndex = getState("activeIndex");
-    const activeStep = getState("activeStep");
-    const activeElement = getState("activeElement");
+    const activeStep = getState("__activeStep");
+    const activeElement = getState("__activeElement");
     if (typeof activeIndex === "undefined" || typeof activeStep === "undefined") {
       return;
     }
@@ -213,8 +213,8 @@ export function driver(options: Config = {}) {
   }
 
   function destroy(withOnDestroyStartedHook = true) {
-    const activeElement = getState("activeElement");
-    const activeStep = getState("activeStep");
+    const activeElement = getState("__activeElement");
+    const activeStep = getState("__activeStep");
 
     const activeOnDestroyed = getState("__activeOnDestroyed");
 
@@ -330,4 +330,4 @@ export function driver(options: Config = {}) {
   };
 }
 
-export type Driver = ReturnType<typeof driver>
+export type Driver = ReturnType<typeof driver>;

@@ -43,8 +43,8 @@ export function highlight(step: DriveStep) {
 }
 
 export function refreshActiveHighlight() {
-  const activeHighlight = getState("activeElement");
-  const activeStep = getState("activeStep")!;
+  const activeHighlight = getState("__activeElement");
+  const activeStep = getState("__activeStep")!;
 
   if (!activeHighlight) {
     return;
@@ -55,12 +55,13 @@ export function refreshActiveHighlight() {
   repositionPopover(activeHighlight, activeStep);
 }
 
+
 function transferHighlight(toElement: Element, toStep: DriveStep) {
   const duration = 400;
   const start = Date.now();
 
-  const fromStep = getState("activeStep");
-  const fromElement = getState("activeElement") || toElement;
+  const fromStep = getState("__activeStep");
+  const fromElement = getState("__activeElement") || toElement;
 
   // If it's the first time we're highlighting an element, we show
   // the popover immediately. Otherwise, we wait for the animation
@@ -96,6 +97,11 @@ function transferHighlight(toElement: Element, toStep: DriveStep) {
 
   hidePopover();
 
+  setState("previousStep", fromStep);
+  setState("previousElement", fromElement);
+  setState("activeStep", toStep);
+  setState("activeElement", toElement);
+
   const animate = () => {
     const transitionCallback = getState("__transitionCallback");
 
@@ -128,16 +134,16 @@ function transferHighlight(toElement: Element, toStep: DriveStep) {
       }
 
       setState("__transitionCallback", undefined);
+      setState("__previousStep", fromStep);
+      setState("__previousElement", fromElement);
+      setState("__activeStep", toStep);
+      setState("__activeElement", toElement);
     }
 
     window.requestAnimationFrame(animate);
   };
 
   setState("__transitionCallback", animate);
-  setState("previousStep", fromStep);
-  setState("previousElement", fromElement);
-  setState("activeStep", toStep);
-  setState("activeElement", toElement);
 
   window.requestAnimationFrame(animate);
 
