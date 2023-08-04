@@ -15,6 +15,8 @@ export type Config = {
   stagePadding?: number;
   stageRadius?: number;
 
+  disableActiveInteraction?: boolean;
+
   allowKeyboardControl?: boolean;
 
   // Popover specific configuration
@@ -54,6 +56,7 @@ export function configure(config: Config = {}) {
     allowClose: true,
     overlayOpacity: 0.7,
     smoothScroll: false,
+    disableActiveInteraction: false,
     showProgress: false,
     stagePadding: 10,
     stageRadius: 5,

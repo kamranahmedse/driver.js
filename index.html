@@ -387,6 +387,13 @@ npm install driver.js</pre
           },
         },
         {
+          element: '.buttons',
+          popover: {
+            title: "Buttons",
+            description: "Here are some buttons",
+          },
+        },
+        {
           element: "#scrollable-area",
           popover: {
             title: "Scrollable Areas",
@@ -457,6 +464,7 @@ npm install driver.js</pre
         const driverObj = driver({
           animate: true,
           steps: basicTourSteps,
+          disableActiveInteraction: true,
           showProgress: true,
           progressText: "{{current}} of {{total}} done",
           onPopoverRender: (popover) => {

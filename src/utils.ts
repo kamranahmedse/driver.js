@@ -18,7 +18,9 @@ export function getFocusableElements(parentEls: Element[] | HTMLElement[]) {
 
       return [...(isParentFocusable ? [parentEl as HTMLElement] : []), ...focusableEls];
     })
-    .filter(el => isElementVisible(el));
+    .filter(el => {
+      return getComputedStyle(el).pointerEvents !== "none" && isElementVisible(el);
+    });
 }
 
 export function bringInView(element: Element) {
