@@ -128,16 +128,17 @@ function transferHighlight(toElement: Element, toStep: DriveStep) {
       }
 
       setState("__transitionCallback", undefined);
-      setState("previousStep", fromStep);
-      setState("previousElement", fromElement);
-      setState("activeStep", toStep);
-      setState("activeElement", toElement);
     }
 
     window.requestAnimationFrame(animate);
   };
 
   setState("__transitionCallback", animate);
+  setState("previousStep", fromStep);
+  setState("previousElement", fromElement);
+  setState("activeStep", toStep);
+  setState("activeElement", toElement);
+
   window.requestAnimationFrame(animate);
 
   bringInView(toElement);

@@ -462,6 +462,8 @@ npm install driver.js</pre
           onPopoverRender: (popover) => {
             popover.title.innerHTML = `${driverObj.getActiveIndex()} ${driverObj.hasNextStep() ? 'Yes' : 'No'} ${driverObj.hasPreviousStep() ? 'Yes' : 'No'}`
             popover.description.innerHTML = `${driverObj.isFirstStep() ? 'Yes' : 'No'} ${driverObj.isLastStep() ? 'Yes' : 'No'}`
+
+            console.log(driverObj.getActiveStep());
           }
         });
 
