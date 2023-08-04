@@ -215,6 +215,7 @@
         <button id="progress-tour-template">Progress Text Template</button>
         <button id="api-test">API Test</button>
         <button id="reconfigure-steps">Re Configuring Steps</button>
+        <button id="disable-keyboard-control">Disable Keyboard Control</button>
       </div>
 
       <ul>
@@ -472,6 +473,32 @@ npm install driver.js</pre
           animate: true,
           steps: basicTourSteps,
           showProgress: true,
+        });
+
+        driverObj.setSteps([
+          {
+            element: "h1",
+            popover: {
+              description: "This is a new description"
+            }
+          },
+          {
+            element: "p",
+            popover: {
+              description: "This is another new description"
+            }
+          }
+        ])
+
+        driverObj.drive();
+      });
+
+      document.getElementById("disable-keyboard-control").addEventListener("click", () => {
+        const driverObj = driver({
+          animate: true,
+          steps: basicTourSteps,
+          showProgress: true,
+          allowKeyboardControl: false,
         });
 
         driverObj.setSteps([

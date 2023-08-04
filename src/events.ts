@@ -49,7 +49,8 @@ function trapFocus(e: KeyboardEvent) {
 }
 
 function onKeyup(e: KeyboardEvent) {
-  const allowKeyboardControl = getConfig("allowKeyboardControl") || true;
+  const allowKeyboardControl = getConfig("allowKeyboardControl") ?? true;
+
   if (!allowKeyboardControl) {
     return;
   }
