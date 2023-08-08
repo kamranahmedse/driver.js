@@ -73,7 +73,7 @@ type PopoverDOM = {
   footerButtons: HTMLElement;
 };
 
-onPopoverRender?: (popover: PopoverDOM) => void;
+onPopoverRender?: (popover: PopoverDOM, opts: { config: Config; state: State }) => void;
 ```
 
 ## Styling Page
