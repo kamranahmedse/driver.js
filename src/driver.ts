@@ -242,7 +242,6 @@ export function driver(options: Config = {}) {
     destroyOverlay();
     destroyEmitter();
 
-    resetState();
 
     if (activeElement && activeStep) {
       const isActiveDummyElement = activeElement.id === "driver-dummy-element";
@@ -260,6 +259,8 @@ export function driver(options: Config = {}) {
         });
       }
     }
+
+    resetState();
 
     if (activeOnDestroyed) {
       (activeOnDestroyed as HTMLElement).focus();
