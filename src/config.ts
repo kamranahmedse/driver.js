@@ -10,6 +10,8 @@ export type Config = {
   animate?: boolean;
   overlayColor?: string;
   overlayOpacity?: number;
+  /**@default true */
+  overlayClosable?:boolean
   smoothScroll?: boolean;
   allowClose?: boolean;
   stagePadding?: number;
@@ -64,6 +66,7 @@ export function configure(config: Config = {}) {
     showButtons: ["next", "previous", "close"],
     disableButtons: [],
     overlayColor: "#000",
+    overlayClosable: true,
     ...config,
   };
 }

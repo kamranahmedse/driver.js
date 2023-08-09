@@ -129,7 +129,9 @@ export function driver(options: Config = {}) {
 
     initEvents();
 
-    listen("overlayClick", handleClose);
+    if(getConfig("overlayClosable")){
+      listen("overlayClick", handleClose);
+    }
     listen("escapePress", handleClose);
     listen("arrowLeftPress", handleArrowLeft);
     listen("arrowRightPress", handleArrowRight);
