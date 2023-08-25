@@ -15,6 +15,8 @@ const formats = Object.keys(fileName) as Array<keyof typeof fileName>;
 module.exports = defineConfig({
   base: "./",
   build: {
+    // fixed: High-level syntax is used under the src directory
+    target: ['es2019'],
     lib: {
       entry: path.resolve(__dirname, "src/driver.ts"),
       name: packageName,
@@ -24,7 +26,7 @@ module.exports = defineConfig({
     rollupOptions: {
       output: {
         assetFileNames: assetInfo => {
-          return assetInfo.name === "style.css" ? `driver.css` : assetInfo.name;
+          return assetInfo.name === "style.css" ? `driver.css` : assetInfo.name ?? '';
         },
       },
     },
