@@ -84,7 +84,7 @@ export function renderPopover(element: Element, step: DriveStep) {
   popover.progress.innerHTML = progressText;
 
   if (title) {
-    popover.title.innerText = title;
+    popover.title.innerHTML = title;
     popover.title.style.display = "block";
   } else {
     popover.title.style.display = "none";
