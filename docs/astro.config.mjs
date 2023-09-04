@@ -23,8 +23,8 @@ export default defineConfig({
     react(),
     mdx(),
     compress({
-      css: false,
-      js: false,
+      CSS: false,
+      JS: false,
     }),
   ],
 });
