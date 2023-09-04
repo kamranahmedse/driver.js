@@ -15,6 +15,7 @@ const formats = Object.keys(fileName) as Array<keyof typeof fileName>;
 module.exports = defineConfig({
   base: "./",
   build: {
+    target: "ES2019",
     lib: {
       entry: path.resolve(__dirname, "src/driver.ts"),
       name: packageName,

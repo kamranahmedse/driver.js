@@ -1,10 +1,10 @@
 {
   "compilerOptions": {
     "rootDir": "./src",
-    "target": "ESNext",
+    "target": "ES2019",
     "useDefineForClassFields": true,
-    "module": "ESNext",
-    "lib": ["ESNext", "DOM"],
+    "module": "CommonJS",
+    "lib": ["ES2019", "DOM"],
     "moduleResolution": "Node",
     "strict": true,
     "sourceMap": true,
