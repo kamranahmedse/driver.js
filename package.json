@@ -1,5 +1,6 @@
 {
   "name": "driver.js",
+  "license": "MIT",
   "private": false,
   "version": "1.3.0",
   "main": "./dist/driver.js.cjs",
