@@ -29,7 +29,23 @@ function mountDummyElement(): Element {
 
 export function highlight(step: DriveStep) {
   const { element } = step;
-  let elemObj = typeof element === "string" ? document.querySelector(element) : element;
+  let elemObj: Element | null = null;
+
+  if (typeof element === "string") {
+    elemObj = document.querySelector(element);
+    if (! elemObj || elemObj.getBoundingClientRect().width === 0) {
+      elemObj = null;
+      document.querySelectorAll(element).forEach(function (el) {
+        var rect = el.getBoundingClientRect();
+        if (!elemObj && rect.width > 0 && rect.height > 0) {
+          elemObj = el;
+          return;
+        }
+      });
+    }
+  } else if (element instanceof Element) {
+    elemObj = element;
+  }
 
   // If the element is not found, we mount a 1px div
   // at the center of the screen to highlight and show
