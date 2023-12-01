@@ -1,5 +1,5 @@
 import { easeInOutQuad } from "./utils";
-import { onDriverClick } from "./events";
+import { destroyDriverEvents, onDriverClick } from "./events";
 import { emit } from "./emitter";
 import { getConfig } from "./config";
 import { getState, setState } from "./state";
@@ -112,6 +112,7 @@ function createOverlaySvg(stage: StageDefinition): SVGSVGElement {
   const windowY = window.innerHeight;
 
   const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+  svg.id = "driver-overlay";
   svg.classList.add("driver-overlay", "driver-overlay-animated");
 
   svg.setAttribute("viewBox", `0 0 ${windowX} ${windowY}`);
@@ -172,7 +173,10 @@ function generateStageSvgPathString(stage: StageDefinition) {
 
 export function destroyOverlay() {
   const overlaySvg = getState("__overlaySvg");
+
   if (overlaySvg) {
+    // remove all events associated with the overlay
+    destroyDriverEvents(overlaySvg);
     overlaySvg.remove();
   }
 }
