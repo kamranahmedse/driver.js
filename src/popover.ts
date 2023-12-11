@@ -630,15 +630,23 @@ function createPopover(): PopoverDOM {
   const previousButton = document.createElement("button");
   previousButton.type = "button";
   previousButton.classList.add("driver-popover-prev-btn");
-  previousButton.innerHTML = "&larr; Previous";
+  previousButton.innerHTML = "&larr; Previouso";
+
+  const previousBtnSpan = document.createElement("span");
+  previousBtnSpan.setAttribute("aria-hidden", "true");
+  previousBtnSpan.appendChild(previousButton);
 
   const nextButton = document.createElement("button");
   nextButton.type = "button";
   nextButton.classList.add("driver-popover-next-btn");
-  nextButton.innerHTML = "Next &rarr;";
+  nextButton.innerHTML = "Nexto &rarr;";
+  
+  const nextBtnSpan = document.createElement("span");
+  nextBtnSpan.setAttribute("aria-hidden", "true");
+  nextBtnSpan.appendChild(nextButton);
 
-  footerButtons.appendChild(previousButton);
-  footerButtons.appendChild(nextButton);
+  footerButtons.appendChild(previousBtnSpan);
+  footerButtons.appendChild(nextBtnSpan);
   footer.appendChild(progress);
   footer.appendChild(footerButtons);
 

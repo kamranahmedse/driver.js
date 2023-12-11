@@ -156,7 +156,7 @@
   justify-content: flex-end;
 }
 
-.driver-popover-navigation-btns button + button {
+.driver-popover-navigation-btns span + span {
   margin-left: 4px;
 }
 
