@@ -630,7 +630,7 @@ function createPopover(): PopoverDOM {
   const previousButton = document.createElement("button");
   previousButton.type = "button";
   previousButton.classList.add("driver-popover-prev-btn");
-  previousButton.innerHTML = "&larr; Previouso";
+  previousButton.innerHTML = "&larr; Previous";
 
   const previousBtnSpan = document.createElement("span");
   previousBtnSpan.setAttribute("aria-hidden", "true");
@@ -639,7 +639,7 @@ function createPopover(): PopoverDOM {
   const nextButton = document.createElement("button");
   nextButton.type = "button";
   nextButton.classList.add("driver-popover-next-btn");
-  nextButton.innerHTML = "Nexto &rarr;";
+  nextButton.innerHTML = "Next &rarr;";
   
   const nextBtnSpan = document.createElement("span");
   nextBtnSpan.setAttribute("aria-hidden", "true");
