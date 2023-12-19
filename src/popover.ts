@@ -80,12 +80,12 @@ export function renderPopover(element: Element, step: DriveStep) {
   } = step.popover || {};
 
   const rightArrow = document.createElement("span");
-  rightArrow.setAttribute("aria-hidden", "true");
-  rightArrow.innerHTML = " &rarr;";
+  rightArrow.ariaHidden = "true"
+  rightArrow.textContent = " →";
 
   const leftArrow = document.createElement("span");
-  leftArrow.setAttribute("aria-hidden", "true");
-  leftArrow.innerHTML = "&larr; ";
+  leftArrow.ariaHidden = "true"
+  leftArrow.textContent = "← ";
 
   popover.nextButton.innerHTML = nextBtnText;
   popover.nextButton.appendChild(rightArrow);
