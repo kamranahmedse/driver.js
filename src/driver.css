@@ -245,3 +245,7 @@
 .driver-popover-arrow-none {
   display: none;
 }
+
+button.driver-popover-next-btn {
+  margin-left: 4px;
+}
