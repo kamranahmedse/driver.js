@@ -37,7 +37,7 @@
 For demos and documentation, visit [driverjs.com](https://driverjs.com)
 
 > Please note that above documentation is for version `1.x` which is the complete rewrite of driver.js.<br>
-> For `0.x` documentation, please visit [kamranahmed.info/driver.js](https://kamranahmed.info/driver.js/)
+> For `0.x` documentation, please visit [this page]([https://kamranahmed.info/driver.js/](https://github.com/kamranahmedse/driver.js/tree/4a0247ee25ba4f235bbf87434e9217c50619a1b8))
 
 <br />
 
