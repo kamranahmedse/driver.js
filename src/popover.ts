@@ -2,7 +2,7 @@ import { bringInView, getFocusableElements } from "./utils";
 import { Config, DriverHook, getConfig } from "./config";
 import { getState, setState, State } from "./state";
 import { DriveStep } from "./driver";
-import { onDriverClick } from "./events";
+import { destroyDriverEvents, onDriverClick } from "./events";
 import { emit } from "./emitter";
 
 export type Side = "top" | "right" | "bottom" | "left" | "over";
@@ -54,6 +54,9 @@ export function hidePopover() {
   if (!popover) {
     return;
   }
+
+  // remove all events associated with the popover
+  destroyDriverEvents(popover.wrapper)
 
   popover.wrapper.style.display = "none";
 }
@@ -667,6 +670,9 @@ export function destroyPopover() {
   if (!popover) {
     return;
   }
+
+  // remove all events associated with the popover
+  destroyDriverEvents(popover.wrapper)
 
   popover.wrapper.parentElement?.removeChild(popover.wrapper);
 }
