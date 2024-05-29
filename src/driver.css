@@ -73,7 +73,7 @@
   cursor: pointer;
   font-size: 18px;
   font-weight: 500;
-  color: #d2d2d2;
+  color: #5c5757;
   z-index: 1;
   text-align: center;
   transition: color;
@@ -244,4 +244,8 @@
 /* No arrow */
 .driver-popover-arrow-none {
   display: none;
+}
+
+button.driver-popover-next-btn {
+  margin-left: 4px;
 }
