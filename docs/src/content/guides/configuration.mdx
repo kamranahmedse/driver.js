@@ -81,9 +81,9 @@ type Config = {
   //   - step: The step object configured for the step
   //   - options.config: The current configuration options
   //   - options.state: The current state of the driver
-  onHighlightStarted?: (element?: Element, step: DriveStep, options: { config: Config; state: State }) => void;;
-  onHighlighted?: (element?: Element, step: DriveStep, options: { config: Config; state: State }) => void;;
-  onDeselected?: (element?: Element, step: DriveStep, options: { config: Config; state: State }) => void;;
+  onHighlightStarted?: (element?: Element, step: DriveStep, options: { config: Config; state: State }) => void;
+  onHighlighted?: (element?: Element, step: DriveStep, options: { config: Config; state: State }) => void;
+  onDeselected?: (element?: Element, step: DriveStep, options: { config: Config; state: State }) => void;
 
   // Hooks to run before and after the driver
   // is destroyed. Each hook receives
@@ -92,8 +92,8 @@ type Config = {
   //   - step: The step object configured for the currently active
   //   - options.config: The current configuration options
   //   - options.state: The current state of the driver
-  onDestroyStarted?: (element?: Element, step: DriveStep, options: { config: Config; state: State }) => void;;
-  onDestroyed?: (element?: Element, step: DriveStep, options: { config: Config; state: State }) => void;;
+  onDestroyStarted?: (element?: Element, step: DriveStep, options: { config: Config; state: State }) => void;
+  onDestroyed?: (element?: Element, step: DriveStep, options: { config: Config; state: State }) => void;
 
   // Hooks to run on button clicks. Each hook receives
   // the following parameters:
@@ -101,9 +101,9 @@ type Config = {
   //   - step: The step object configured for the step
   //   - options.config: The current configuration options
   //   - options.state: The current state of the driver
-  onNextClick?: (element?: Element, step: DriveStep, options: { config: Config; state: State }) => void;;
-  onPrevClick?: (element?: Element, step: DriveStep, options: { config: Config; state: State }) => void;;
-  onCloseClick?: (element?: Element, step: DriveStep, options: { config: Config; state: State }) => void;;
+  onNextClick?: (element?: Element, step: DriveStep, options: { config: Config; state: State }) => void;
+  onPrevClick?: (element?: Element, step: DriveStep, options: { config: Config; state: State }) => void;
+  onCloseClick?: (element?: Element, step: DriveStep, options: { config: Config; state: State }) => void;
 };
 ```
 
