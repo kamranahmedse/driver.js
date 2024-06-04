@@ -13,7 +13,7 @@
     "url": "https://github.com/kamranahmedse/driver.js/issues"
   },
   "publishConfig": {
-    "registry":"https://npm.pkg.github.com/"
+    "registry":"https://registry.npmjs.org"
   },
   "exports": {
     ".": {
