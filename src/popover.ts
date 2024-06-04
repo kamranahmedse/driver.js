@@ -523,14 +523,14 @@ function renderPopoverArrow(alignment: Alignment, side: Side, element: Element) 
     if (elementLeft + elementWidth <= 0) {
       arrowSide = "right";
       arrowAlignment = "end";
-    } else if (elementLeft + elementWidth - popoverWidth <= 0) {
+    } else if (elementLeft + elementWidth - popoverWidth / 2 <= 0) {
       arrowSide = "top";
       arrowAlignment = "start";
     }
     if (elementLeft >= windowWidth) {
       arrowSide = "left";
       arrowAlignment = "end";
-    } else if (elementLeft + popoverWidth >= windowWidth) {
+    } else if (elementLeft + popoverWidth / 2 >= windowWidth) {
       arrowSide = "top";
       arrowAlignment = "end";
     }
@@ -538,14 +538,14 @@ function renderPopoverArrow(alignment: Alignment, side: Side, element: Element) 
     if (elementLeft + elementWidth <= 0) {
       arrowSide = "right";
       arrowAlignment = "start";
-    } else if (elementLeft + elementWidth - popoverWidth <= 0) {
+    } else if (elementLeft + elementWidth - popoverWidth / 2 <= 0) {
       arrowSide = "bottom";
       arrowAlignment = "start";
     }
     if (elementLeft >= windowWidth) {
       arrowSide = "left";
       arrowAlignment = "start";
-    } else if (elementLeft + popoverWidth >= windowWidth) {
+    } else if (elementLeft + popoverWidth / 2 >= windowWidth) {
       arrowSide = "bottom";
       arrowAlignment = "end";
     }
@@ -553,7 +553,7 @@ function renderPopoverArrow(alignment: Alignment, side: Side, element: Element) 
     if (elementTop + elementHeight <= 0) {
       arrowSide = "bottom";
       arrowAlignment = "end";
-    } else if (elementTop + elementHeight - popoverHeight <= 0) {
+    } else if (elementTop + elementHeight - popoverHeight / 2 <= 0) {
       arrowSide = "left";
       arrowAlignment = "start";
     }
@@ -561,7 +561,7 @@ function renderPopoverArrow(alignment: Alignment, side: Side, element: Element) 
     if (elementTop >= windowHeight) {
       arrowSide = "top";
       arrowAlignment = "end";
-    } else if (elementTop + popoverHeight >= windowHeight) {
+    } else if (elementTop + popoverHeight / 2 >= windowHeight) {
       arrowSide = "left";
       arrowAlignment = "end";
     }
@@ -569,7 +569,7 @@ function renderPopoverArrow(alignment: Alignment, side: Side, element: Element) 
     if (elementTop + elementHeight <= 0) {
       arrowSide = "bottom";
       arrowAlignment = "start";
-    } else if (elementTop + elementHeight - popoverHeight <= 0) {
+    } else if (elementTop + elementHeight - popoverHeight / 2 <= 0) {
       arrowSide = "right";
       arrowAlignment = "start";
     }
@@ -577,7 +577,7 @@ function renderPopoverArrow(alignment: Alignment, side: Side, element: Element) 
     if (elementTop >= windowHeight) {
       arrowSide = "top";
       arrowAlignment = "start";
-    } else if (elementTop + popoverHeight >= windowHeight) {
+    } else if (elementTop + popoverHeight / 2 >= windowHeight) {
       arrowSide = "right";
       arrowAlignment = "end";
     }

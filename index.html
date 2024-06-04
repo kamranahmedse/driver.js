@@ -53,6 +53,22 @@
         background: #575757;
       }
 
+      .driver-popover-position {
+        width: 100%;
+        height: 80px;
+        margin-bottom: 10px;
+      }
+
+      .driver-popover-position .driver-popover-position-items {
+        position: absolute;
+        background-color: #e5e7eb;
+        border-radius: 4px;
+        text-align: center;
+        width: 100px;
+        height: 80px;
+        line-height: 80px;
+      }
+
       .gif-popover {
         display: flex;
         flex-direction: column;
@@ -195,6 +211,18 @@
         <button id="button-config-events">Button Listeners</button>
         <button id="button-tour-events">Tour Button Listeners</button>
         <button id="popover-hook-config">Popover Modified in Hook</button>
+      </div>
+      <br />
+      <p>given below are the examples of simple `highlight`</p>
+      <div class="driver-popover-position">
+        <div id="driver-popover-position-left" class="driver-popover-position-items rounded-md bg-gray-200 flex items-center justify-center" style="left: 50px">Boundary Left</div>
+        <div id="driver-popover-position-right" class="driver-popover-position-items" style="right: 50px">Boundary Right</div>
+      </div>
+      <div class="buttons">
+        <button id="left-center-top">Left Center(Boundary Top)</button>
+        <button id="right-center-top">Right Center(Boundary Top)</button>
+        <button id="bottom-center-left">Bottom Center(Boundary Left)</button>
+        <button id="bottom-center-right">Bottom Center(Boundary Right)</button>
       </div>
 
       <br />
@@ -863,6 +891,42 @@ npm install driver.js</pre
         });
 
         driverObj.drive();
+      });
+
+      document.getElementById("left-center-top").addEventListener("click", () => {
+        const driverObj = driver();
+
+        driverObj.highlight({
+          element: "#driver-popover-position-left",
+          popover: { title: "Some title", description: "Some description<br><br><br><br>Some description", align: 'center', side: 'right' }
+        });
+      });
+
+      document.getElementById("right-center-top").addEventListener("click", () => {
+        const driverObj = driver();
+
+        driverObj.highlight({
+          element: "#driver-popover-position-right",
+          popover: { title: "Some title", description: "Some description<br><br><br><br>Some description", align: 'center', side: 'right' }
+        });
+      });
+
+      document.getElementById("bottom-center-left").addEventListener("click", () => {
+        const driverObj = driver();
+
+        driverObj.highlight({
+          element: "#driver-popover-position-left",
+          popover: { title: "Some title", description: "Some description", align: 'center', side: 'bottom' }
+        });
+      });
+
+      document.getElementById("bottom-center-right").addEventListener("click", () => {
+        const driverObj = driver();
+
+        driverObj.highlight({
+          element: "#driver-popover-position-right",
+          popover: { title: "Some title", description: "Some description", align: 'center', side: 'bottom' }
+        });
       });
 
       document.getElementById("is-active-btn").addEventListener("click", () => {
