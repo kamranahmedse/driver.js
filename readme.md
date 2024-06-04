@@ -33,6 +33,17 @@
 <br />
 
 ## Documentation
+Installation
+```
+# Use npm
+npm install @skryu/driver.js
+
+# Use pnpm
+pnpm add @skryu/driver.js
+
+# Use yarn
+yarn add @skryu/driver.js
+```
 
 For demos and documentation, visit [driverjs.com](https://driverjs.com)
 
