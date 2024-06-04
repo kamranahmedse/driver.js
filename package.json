@@ -12,6 +12,9 @@
   "bugs": {
     "url": "https://github.com/kamranahmedse/driver.js/issues"
   },
+  "publishConfig": {
+    "registry":"https://npm.pkg.github.com/"
+  },
   "exports": {
     ".": {
       "types": "./dist/driver.js.d.ts",
