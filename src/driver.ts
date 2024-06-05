@@ -26,6 +26,19 @@ export function driver(options: Config = {}) {
     destroy();
   }
 
+  function handleOverlayClick() {
+    const overlayClickBehavior = getConfig("overlayClickBehavior");
+
+    if (getConfig("allowClose") && overlayClickBehavior === "close") {
+      destroy();
+      return;
+    }
+
+    if (overlayClickBehavior === "nextStep") {
+      moveNext();
+    }
+  }
+
   function moveNext() {
     const activeIndex = getState("activeIndex");
     const steps = getConfig("steps") || [];
@@ -129,7 +142,7 @@ export function driver(options: Config = {}) {
 
     initEvents();
 
-    listen("overlayClick", handleClose);
+    listen("overlayClick", handleOverlayClick);
     listen("escapePress", handleClose);
     listen("arrowLeftPress", handleArrowLeft);
     listen("arrowRightPress", handleArrowRight);
