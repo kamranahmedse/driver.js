@@ -27,14 +27,14 @@ export function driver(options: Config = {}) {
   }
 
   function handleOverlayClick() {
-    const clickMaskBehavior = getConfig("clickMaskBehavior");
+    const overlayClickBehavior = getConfig("overlayClickBehavior");
 
-    if (getConfig("allowClose") && clickMaskBehavior === "close") {
+    if (getConfig("allowClose") && overlayClickBehavior === "close") {
       destroy();
       return;
     }
 
-    if (clickMaskBehavior === "nextStep") {
+    if (overlayClickBehavior === "nextStep") {
       moveNext();
     }
   }

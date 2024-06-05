@@ -12,7 +12,7 @@ export type Config = {
   overlayOpacity?: number;
   smoothScroll?: boolean;
   allowClose?: boolean;
-  clickMaskBehavior?: 'close' | 'nextStep';
+  overlayClickBehavior?: 'close' | 'nextStep';
   stagePadding?: number;
   stageRadius?: number;
 
@@ -55,7 +55,7 @@ export function configure(config: Config = {}) {
   currentConfig = {
     animate: true,
     allowClose: true,
-    clickMaskBehavior: 'close',
+    overlayClickBehavior: 'close',
     overlayOpacity: 0.7,
     smoothScroll: false,
     disableActiveInteraction: false,

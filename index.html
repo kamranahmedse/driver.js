@@ -169,7 +169,7 @@
         <button id="simple-highlight-btn">Simple Highlight</button>
         <button id="transition-highlight-btn">Transition Highlight</button>
         <button id="disallow-close">Disallow Close</button>
-        <button id="click-mask-to-next">Click Mask to Next</button>
+        <button id="click-overlay-to-next">Click Overlay to Next</button>
         <button id="dark-highlight-btn">Super Dark Highlight</button>
         <button id="dim-highlight-btn">Super Dim Highlight</button>
         <button id="scrollable-area-btn">Scrollable Area</button>
@@ -1100,10 +1100,10 @@ npm install driver.js</pre
         });
       });
 
-      document.getElementById("click-mask-to-next").addEventListener("click", () => {
+      document.getElementById("click-overlay-to-next").addEventListener("click", () => {
         const driverObj = driver({
           animate: true,
-          clickMaskBehavior: 'nextStep',
+          overlayClickBehavior: 'nextStep',
           steps: basicTourSteps,
         });
 
