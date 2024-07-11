@@ -2,7 +2,7 @@
   pointer-events: none;
 }
 
-.driver-active * {
+.driver-active:not(.driver-no-overlay) * {
   pointer-events: none;
 }
 

@@ -8,6 +8,7 @@ export type Config = {
   steps?: DriveStep[];
 
   animate?: boolean;
+  overlayEnable?: boolean;
   overlayColor?: string;
   overlayOpacity?: number;
   smoothScroll?: boolean;
@@ -55,6 +56,7 @@ export function configure(config: Config = {}) {
     animate: true,
     allowClose: true,
     overlayOpacity: 0.7,
+    overlayEnable: true,
     smoothScroll: false,
     disableActiveInteraction: false,
     showProgress: false,
