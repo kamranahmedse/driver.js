@@ -4,6 +4,16 @@ import { getState, setState } from "./state";
 import { getConfig } from "./config";
 import { getFocusableElements } from "./utils";
 
+function onWindowClick(e: MouseEvent) {
+  const isPopoverContent = (e.target as HTMLElement)?.closest('#driver-popover-content')
+  const isActive = getState('activeStep')
+  const isTransitioning = getState("__transitionCallback")
+
+  if (isTransitioning || !isActive || isPopoverContent) return;
+
+  emit('windowClick')
+}
+
 export function requireRefresh() {
   const resizeTimeout = getState("__resizeTimeout");
   if (resizeTimeout) {
@@ -118,10 +128,14 @@ export function initEvents() {
   window.addEventListener("keydown", trapFocus, false);
   window.addEventListener("resize", requireRefresh);
   window.addEventListener("scroll", requireRefresh);
+  if (!getConfig('overlayEnable')) {
+    window.addEventListener('click', onWindowClick)
+  }
 }
 
 export function destroyEvents() {
   window.removeEventListener("keyup", onKeyup);
   window.removeEventListener("resize", requireRefresh);
   window.removeEventListener("scroll", requireRefresh);
+  window.removeEventListener("click", onWindowClick);
 }

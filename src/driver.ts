@@ -135,6 +135,7 @@ export function driver(options: Config = {}) {
 
     listen("overlayClick", handleClose);
     listen("escapePress", handleClose);
+    listen("windowClick", handleClose);
     listen("arrowLeftPress", handleArrowLeft);
     listen("arrowRightPress", handleArrowRight);
   }
