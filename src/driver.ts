@@ -127,8 +127,12 @@ export function driver(options: Config = {}) {
     setState("isInitialized", true);
     document.body.classList.add("driver-active", getConfig("animate") ? "driver-fade" : "driver-simple");
 
-    if(!getConfig("overlayEnable")){
+    if (!getConfig("overlayEnable")) {
       document.body.classList.add("driver-no-overlay");
+    }
+
+    if (!getConfig("allowScroll")) {
+      document.body.classList.add("driver-no-scroll");
     }
 
     initEvents();

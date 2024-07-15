@@ -179,6 +179,7 @@
         <button id="backdrop-color-btn">Backdrop Color</button>
         <button id="backdrop-disabled-btn">Disabled backdrop</button>
         <button id="disabled-stick-to-viewport">Disabled stick to viewport</button>
+        <button id="disabled-scroll">Disabled body scrolling</button>
         <button id="hooks">Hooks</button>
         <button id="destroy-btn" style="border-color: red; background: red; color: white">Destroy</button>
       </div>
@@ -896,8 +897,16 @@ npm install driver.js</pre
       document.getElementById("disabled-stick-to-viewport").addEventListener("click", () => {
         const driverObj = driver({
           popoverStickToViewport: false,
-          overlayEnable: false,
-          steps: basicTourSteps
+          steps: basicTourSteps,
+        });
+
+        driverObj.drive();
+      });
+
+      document.getElementById("disabled-scroll").addEventListener("click", () => {
+        const driverObj = driver({
+          allowScroll: false,
+          steps: basicTourSteps,
         });
 
         driverObj.drive();

@@ -13,6 +13,7 @@ export type Config = {
   overlayOpacity?: number;
   smoothScroll?: boolean;
   allowClose?: boolean;
+  allowScroll?: boolean;
   stagePadding?: number;
   stageRadius?: number;
 
@@ -56,6 +57,7 @@ export function configure(config: Config = {}) {
   currentConfig = {
     animate: true,
     allowClose: true,
+    allowScroll: true,
     overlayOpacity: 0.7,
     overlayEnable: true,
     smoothScroll: false,
