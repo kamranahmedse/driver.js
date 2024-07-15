@@ -55,6 +55,9 @@ export function trackActiveElement(element: Element) {
 }
 
 export function refreshOverlay() {
+  const isOverlayEnabled = getConfig('overlayEnable')
+  if (!isOverlayEnabled) return;
+
   const activeStagePosition = getState("__activeStagePosition");
   const overlaySvg = getState("__overlaySvg");
 
@@ -90,6 +93,9 @@ function mountOverlay(stagePosition: StageDefinition) {
 }
 
 function renderOverlay(stagePosition: StageDefinition) {
+  const isOverlayEnabled = getConfig('overlayEnable')
+  if (!isOverlayEnabled) return;
+
   const overlaySvg = getState("__overlaySvg");
 
   // TODO: cancel rendering if element is not visible

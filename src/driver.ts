@@ -8,7 +8,7 @@ import { getState, resetState, setState } from "./state";
 import "./driver.css";
 
 export type DriveStep = {
-  element?: string | Element;
+  element?: string | Element | (() => Element | null);
   onHighlightStarted?: DriverHook;
   onHighlighted?: DriverHook;
   onDeselected?: DriverHook;
@@ -131,6 +131,7 @@ export function driver(options: Config = {}) {
 
     listen("overlayClick", handleClose);
     listen("escapePress", handleClose);
+    listen("windowClick", handleClose);
     listen("arrowLeftPress", handleArrowLeft);
     listen("arrowRightPress", handleArrowRight);
   }
@@ -234,7 +235,7 @@ export function driver(options: Config = {}) {
     const onDeselected = activeStep?.onDeselected || getConfig("onDeselected");
     const onDestroyed = getConfig("onDestroyed");
 
-    document.body.classList.remove("driver-active", "driver-fade", "driver-simple");
+    document.body.classList.remove("driver-active", "driver-fade", "driver-simple", "driver-no-overlay", "driver-no-scroll");
 
     destroyEvents();
     destroyPopover();

@@ -8,10 +8,13 @@ export type Config = {
   steps?: DriveStep[];
 
   animate?: boolean;
+  animateBetweenSameElements?: boolean
+  overlayEnable?: boolean;
   overlayColor?: string;
   overlayOpacity?: number;
   smoothScroll?: boolean;
   allowClose?: boolean;
+  allowScroll?: boolean;
   stagePadding?: number;
   stageRadius?: number;
 
@@ -22,6 +25,7 @@ export type Config = {
   // Popover specific configuration
   popoverClass?: string;
   popoverOffset?: number;
+  popoverStickToViewport?: boolean;
   showButtons?: AllowedButtons[];
   disableButtons?: AllowedButtons[];
   showProgress?: boolean;
@@ -53,14 +57,18 @@ let currentConfig: Config = {};
 export function configure(config: Config = {}) {
   currentConfig = {
     animate: true,
+    animateBetweenSameElements: true,
     allowClose: true,
+    allowScroll: true,
     overlayOpacity: 0.7,
+    overlayEnable: true,
     smoothScroll: false,
     disableActiveInteraction: false,
     showProgress: false,
     stagePadding: 10,
     stageRadius: 5,
     popoverOffset: 10,
+    popoverStickToViewport: true,
     showButtons: ["next", "previous", "close"],
     disableButtons: [],
     overlayColor: "#000",

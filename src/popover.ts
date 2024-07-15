@@ -1,4 +1,4 @@
-import { bringInView, getFocusableElements } from "./utils";
+import { getFocusableElements } from "./utils";
 import { Config, DriverHook, getConfig } from "./config";
 import { getState, setState, State } from "./state";
 import { DriveStep } from "./driver";
@@ -58,7 +58,7 @@ export function hidePopover() {
   popover.wrapper.style.display = "none";
 }
 
-export function renderPopover(element: Element, step: DriveStep) {
+export function renderPopover(element: Element, step: DriveStep, isAnimationEnabled: boolean = true) {
   let popover = getState("popover");
   if (popover) {
     document.body.removeChild(popover.wrapper);
@@ -151,6 +151,10 @@ export function renderPopover(element: Element, step: DriveStep) {
   const customPopoverClass = step.popover?.popoverClass || getConfig("popoverClass") || "";
   popoverWrapper.className = `driver-popover ${customPopoverClass}`.trim();
 
+  if (!isAnimationEnabled) {
+    popoverWrapper.classList.add("driver-no-animation");
+  }
+
   // Handles the popover button clicks
   onDriverClick(
     popover.wrapper,
@@ -221,7 +225,6 @@ export function renderPopover(element: Element, step: DriveStep) {
   }
 
   repositionPopover(element, step);
-  bringInView(popoverWrapper);
 
   // Focus on the first focusable element in active element or popover
   const isToDummyElement = element.classList.contains("driver-dummy-element");
@@ -268,6 +271,8 @@ function calculateTopForLeftRight(
   }
 ): number {
   const { elementDimensions, popoverDimensions, popoverPadding, popoverArrowDimensions } = config;
+  const shouldStickToViewport = getConfig('popoverStickToViewport');
+  const safeZone = shouldStickToViewport ? popoverArrowDimensions.width : Number.MIN_SAFE_INTEGER 
 
   if (alignment === "start") {
     return Math.max(
@@ -275,7 +280,7 @@ function calculateTopForLeftRight(
         elementDimensions.top - popoverPadding,
         window.innerHeight - popoverDimensions!.realHeight - popoverArrowDimensions.width
       ),
-      popoverArrowDimensions.width
+      safeZone
     );
   }
 
@@ -285,7 +290,7 @@ function calculateTopForLeftRight(
         elementDimensions.top - popoverDimensions?.realHeight + elementDimensions.height + popoverPadding,
         window.innerHeight - popoverDimensions?.realHeight - popoverArrowDimensions.width
       ),
-      popoverArrowDimensions.width
+      safeZone
     );
   }
 
@@ -295,7 +300,7 @@ function calculateTopForLeftRight(
         elementDimensions.top + elementDimensions.height / 2 - popoverDimensions?.realHeight / 2,
         window.innerHeight - popoverDimensions?.realHeight - popoverArrowDimensions.width
       ),
-      popoverArrowDimensions.width
+      safeZone
     );
   }
 
@@ -313,6 +318,8 @@ function calculateLeftForTopBottom(
   }
 ): number {
   const { elementDimensions, popoverDimensions, popoverPadding, popoverArrowDimensions } = config;
+  const shouldStickToViewport = getConfig('popoverStickToViewport');
+  const safeZone = shouldStickToViewport ? popoverArrowDimensions.width : Number.MIN_SAFE_INTEGER 
 
   if (alignment === "start") {
     return Math.max(
@@ -320,7 +327,7 @@ function calculateLeftForTopBottom(
         elementDimensions.left - popoverPadding,
         window.innerWidth - popoverDimensions!.realWidth - popoverArrowDimensions.width
       ),
-      popoverArrowDimensions.width
+      safeZone
     );
   }
 
@@ -330,7 +337,7 @@ function calculateLeftForTopBottom(
         elementDimensions.left - popoverDimensions?.realWidth + elementDimensions.width + popoverPadding,
         window.innerWidth - popoverDimensions?.realWidth - popoverArrowDimensions.width
       ),
-      popoverArrowDimensions.width
+      safeZone
     );
   }
 
@@ -340,7 +347,7 @@ function calculateLeftForTopBottom(
         elementDimensions.left + elementDimensions.width / 2 - popoverDimensions?.realWidth / 2,
         window.innerWidth - popoverDimensions?.realWidth - popoverArrowDimensions.width
       ),
-      popoverArrowDimensions.width
+      safeZone
     );
   }
 
@@ -378,6 +385,8 @@ export function repositionPopover(element: Element, step: DriveStep) {
 
   const noneOptimal = !isTopOptimal && !isBottomOptimal && !isLeftOptimal && !isRightOptimal;
   let popoverRenderedSide: Side = requiredSide;
+
+  const shouldStickToViewport = getConfig('popoverStickToViewport');
 
   if (requiredSide === "top" && isTopOptimal) {
     isRightOptimal = isLeftOptimal = isBottomOptimal = false;
@@ -443,10 +452,11 @@ export function repositionPopover(element: Element, step: DriveStep) {
 
     popoverRenderedSide = "right";
   } else if (isTopOptimal) {
-    const topToSet = Math.min(
+    const topToSet = shouldStickToViewport ? Math.min(
       topValue,
       window.innerHeight - popoverDimensions!.realHeight - popoverArrowDimensions.width
-    );
+    ) : topValue;
+    
     let leftToSet = calculateLeftForTopBottom(requiredAlignment, {
       elementDimensions,
       popoverDimensions,
@@ -461,10 +471,10 @@ export function repositionPopover(element: Element, step: DriveStep) {
 
     popoverRenderedSide = "top";
   } else if (isBottomOptimal) {
-    const bottomToSet = Math.min(
+    const bottomToSet =  shouldStickToViewport ? Math.min(
       bottomValue,
       window.innerHeight - popoverDimensions?.realHeight - popoverArrowDimensions.width
-    );
+    ) : bottomValue;
 
     let leftToSet = calculateLeftForTopBottom(requiredAlignment, {
       elementDimensions,

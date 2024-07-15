@@ -2,14 +2,18 @@
   pointer-events: none;
 }
 
-.driver-active * {
+.driver-active.driver-no-scroll {
+  overflow: hidden;
+}
+
+.driver-active:not(.driver-no-overlay) * {
   pointer-events: none;
 }
 
 .driver-active .driver-active-element,
 .driver-active .driver-active-element *,
-.driver-popover,
-.driver-popover * {
+.driver-active .driver-popover,
+.driver-active .driver-popover * {
   pointer-events: auto;
 }
 
@@ -27,7 +31,7 @@
   animation: animate-fade-in 200ms ease-in-out;
 }
 
-.driver-fade .driver-popover {
+.driver-fade .driver-popover:not(.driver-no-animation) {
   animation: animate-fade-in 200ms;
 }
 

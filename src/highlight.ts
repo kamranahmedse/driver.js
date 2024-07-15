@@ -27,9 +27,30 @@ function mountDummyElement(): Element {
   return element;
 }
 
-export function highlight(step: DriveStep) {
+function getStepElement(step: DriveStep): Element | null {
   const { element } = step;
-  let elemObj = typeof element === "string" ? document.querySelector(element) : element;
+
+  if (typeof element === 'function') {
+    return element();
+  }
+  
+  if (typeof element === 'string') {
+    return document.querySelector(element);
+  }
+
+  return element ?? null;
+}
+
+export function highlight(step: DriveStep) {
+  let elemObj = getStepElement(step);
+
+  if (!getConfig("overlayEnable")) {
+    document.body.classList.add("driver-no-overlay");
+  }
+
+  if (!getConfig("allowScroll")) {
+    document.body.classList.add("driver-no-scroll");
+  }
 
   // If the element is not found, we mount a 1px div
   // at the center of the screen to highlight and show
@@ -62,11 +83,12 @@ function transferHighlight(toElement: Element, toStep: DriveStep) {
 
   const fromStep = getState("__activeStep");
   const fromElement = getState("__activeElement") || toElement;
+  const isSameElement = fromElement === toElement;
 
   // If it's the first time we're highlighting an element, we show
   // the popover immediately. Otherwise, we wait for the animation
   // to finish before showing the popover.
-  const isFirstHighlight = !fromElement || fromElement === toElement;
+  const isFirstHighlight = !fromElement || isSameElement;
   const isToDummyElement = toElement.id === "driver-dummy-element";
   const isFromDummyElement = fromElement.id === "driver-dummy-element";
 
@@ -102,6 +124,8 @@ function transferHighlight(toElement: Element, toStep: DriveStep) {
   setState("activeStep", toStep);
   setState("activeElement", toElement);
 
+  const isSameElementAnimationEnabled = !isSameElement || !!getConfig("animateBetweenSameElements");
+
   const animate = () => {
     const transitionCallback = getState("__transitionCallback");
 
@@ -112,12 +136,15 @@ function transferHighlight(toElement: Element, toStep: DriveStep) {
       return;
     }
 
+    setState("__activeElement", toElement);
+
     const elapsed = Date.now() - start;
     const timeRemaining = duration - elapsed;
     const isHalfwayThrough = timeRemaining <= duration / 2;
 
+
     if (toStep.popover && isHalfwayThrough && !isPopoverRendered && hasDelayedPopover) {
-      renderPopover(toElement, toStep);
+      renderPopover(toElement, toStep, isSameElementAnimationEnabled);
       isPopoverRendered = true;
     }
 
@@ -137,7 +164,6 @@ function transferHighlight(toElement: Element, toStep: DriveStep) {
       setState("__previousStep", fromStep);
       setState("__previousElement", fromElement);
       setState("__activeStep", toStep);
-      setState("__activeElement", toElement);
     }
 
     window.requestAnimationFrame(animate);
@@ -149,7 +175,7 @@ function transferHighlight(toElement: Element, toStep: DriveStep) {
 
   bringInView(toElement);
   if (!hasDelayedPopover && toStep.popover) {
-    renderPopover(toElement, toStep);
+    renderPopover(toElement, toStep, isSameElementAnimationEnabled);
   }
 
   fromElement.classList.remove("driver-active-element", "driver-no-interaction");

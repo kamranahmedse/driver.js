@@ -5,7 +5,8 @@ type allowedEvents =
   | "prevClick"
   | "closeClick"
   | "arrowRightPress"
-  | "arrowLeftPress";
+  | "arrowLeftPress"
+  | "windowClick";
 
 let registeredListeners: Partial<{ [key in allowedEvents]: () => void }> = {};
 
