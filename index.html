@@ -180,6 +180,7 @@
         <button id="backdrop-disabled-btn">Disabled backdrop</button>
         <button id="disabled-stick-to-viewport">Disabled stick to viewport</button>
         <button id="disabled-scroll">Disabled body scrolling</button>
+        <button id="disabled-same-element-animation">Disabled same element step animation</button>
         <button id="hooks">Hooks</button>
         <button id="destroy-btn" style="border-color: red; background: red; color: white">Destroy</button>
       </div>
@@ -367,6 +368,77 @@ npm install driver.js</pre
           element: ".page-header h1",
           popover: {
             title: "No Stacking Issues",
+            description:
+              "Unlike the older version, new version doesn't work with z-indexes so no more positional issues.",
+            side: "left",
+            align: "start",
+          },
+        },
+        {
+          element: ".page-header sup",
+          popover: {
+            title: "Improved Hooks",
+            description:
+              "Unlike the older version, new version doesn't work with z-indexes so no more positional issues.",
+            side: "bottom",
+            align: "start",
+          },
+        },
+        {
+          popover: {
+            title: "No Element",
+            description: "You can now have popovers without elements as well",
+          },
+        },
+        {
+          element: '.buttons',
+          popover: {
+            title: "Buttons",
+            description: "Here are some buttons",
+          },
+        },
+        {
+          element: "#scrollable-area",
+          popover: {
+            title: "Scrollable Areas",
+            description: "There are no issues with scrollable element tours as well.",
+          },
+        },
+        {
+          element: "#third-scroll-paragraph",
+          popover: {
+            title: "Nested Scrolls",
+            description: "Even the nested scrollable elements work now.",
+          },
+        },
+      ];
+
+
+      const sameElementSteps = [
+        {
+          element: ".page-header h1",
+          popover: {
+            title: "1 popup on the same element",
+            description:
+              "Unlike the older version, new version doesn't work with z-indexes so no more positional issues.",
+            side: "left",
+            align: "start",
+          },
+        },
+        {
+          element: ".page-header h1",
+          popover: {
+            title: "2 popup on the same element",
+            description:
+              "Unlike the older version, new version doesn't work with z-indexes so no more positional issues.",
+            side: "left",
+            align: "start",
+          },
+        },
+        {
+          element: ".page-header h1",
+          popover: {
+            title: "3 popup on the same element",
             description:
               "Unlike the older version, new version doesn't work with z-indexes so no more positional issues.",
             side: "left",
@@ -907,6 +979,16 @@ npm install driver.js</pre
         const driverObj = driver({
           allowScroll: false,
           steps: basicTourSteps,
+        });
+
+        driverObj.drive();
+      });
+
+      document.getElementById("disabled-same-element-animation").addEventListener("click", () => {
+        const driverObj = driver({
+          allowScroll: false,
+          animateBetweenSameElements: false,
+          steps: sameElementSteps,
         });
 
         driverObj.drive();

@@ -58,7 +58,7 @@ export function hidePopover() {
   popover.wrapper.style.display = "none";
 }
 
-export function renderPopover(element: Element, step: DriveStep) {
+export function renderPopover(element: Element, step: DriveStep, isAnimationEnabled: boolean = true) {
   let popover = getState("popover");
   if (popover) {
     document.body.removeChild(popover.wrapper);
@@ -150,6 +150,10 @@ export function renderPopover(element: Element, step: DriveStep) {
   // Reset any custom classes on the popover
   const customPopoverClass = step.popover?.popoverClass || getConfig("popoverClass") || "";
   popoverWrapper.className = `driver-popover ${customPopoverClass}`.trim();
+
+  if (!isAnimationEnabled) {
+    popoverWrapper.classList.add("driver-no-animation");
+  }
 
   // Handles the popover button clicks
   onDriverClick(

@@ -8,6 +8,7 @@ export type Config = {
   steps?: DriveStep[];
 
   animate?: boolean;
+  animateBetweenSameElements?: boolean
   overlayEnable?: boolean;
   overlayColor?: string;
   overlayOpacity?: number;
@@ -56,6 +57,7 @@ let currentConfig: Config = {};
 export function configure(config: Config = {}) {
   currentConfig = {
     animate: true,
+    animateBetweenSameElements: true,
     allowClose: true,
     allowScroll: true,
     overlayOpacity: 0.7,

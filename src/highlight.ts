@@ -75,11 +75,12 @@ function transferHighlight(toElement: Element, toStep: DriveStep) {
 
   const fromStep = getState("__activeStep");
   const fromElement = getState("__activeElement") || toElement;
+  const isSameElement = fromElement === toElement;
 
   // If it's the first time we're highlighting an element, we show
   // the popover immediately. Otherwise, we wait for the animation
   // to finish before showing the popover.
-  const isFirstHighlight = !fromElement || fromElement === toElement;
+  const isFirstHighlight = !fromElement || isSameElement;
   const isToDummyElement = toElement.id === "driver-dummy-element";
   const isFromDummyElement = fromElement.id === "driver-dummy-element";
 
@@ -115,6 +116,8 @@ function transferHighlight(toElement: Element, toStep: DriveStep) {
   setState("activeStep", toStep);
   setState("activeElement", toElement);
 
+  const isSameElementAnimationEnabled = !isSameElement || !!getConfig("animateBetweenSameElements");
+
   const animate = () => {
     const transitionCallback = getState("__transitionCallback");
 
@@ -129,8 +132,9 @@ function transferHighlight(toElement: Element, toStep: DriveStep) {
     const timeRemaining = duration - elapsed;
     const isHalfwayThrough = timeRemaining <= duration / 2;
 
+
     if (toStep.popover && isHalfwayThrough && !isPopoverRendered && hasDelayedPopover) {
-      renderPopover(toElement, toStep);
+      renderPopover(toElement, toStep, isSameElementAnimationEnabled);
       isPopoverRendered = true;
     }
 
@@ -162,7 +166,7 @@ function transferHighlight(toElement: Element, toStep: DriveStep) {
 
   bringInView(toElement);
   if (!hasDelayedPopover && toStep.popover) {
-    renderPopover(toElement, toStep);
+    renderPopover(toElement, toStep, isSameElementAnimationEnabled);
   }
 
   fromElement.classList.remove("driver-active-element", "driver-no-interaction");

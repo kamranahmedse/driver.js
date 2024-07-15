@@ -31,7 +31,7 @@
   animation: animate-fade-in 200ms ease-in-out;
 }
 
-.driver-fade .driver-popover {
+.driver-fade .driver-popover:not(.driver-no-animation) {
   animation: animate-fade-in 200ms;
 }
 
