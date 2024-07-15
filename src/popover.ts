@@ -1,4 +1,4 @@
-import { bringInView, getFocusableElements } from "./utils";
+import { getFocusableElements } from "./utils";
 import { Config, DriverHook, getConfig } from "./config";
 import { getState, setState, State } from "./state";
 import { DriveStep } from "./driver";
