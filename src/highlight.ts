@@ -128,6 +128,8 @@ function transferHighlight(toElement: Element, toStep: DriveStep) {
       return;
     }
 
+    setState("__activeElement", toElement);
+
     const elapsed = Date.now() - start;
     const timeRemaining = duration - elapsed;
     const isHalfwayThrough = timeRemaining <= duration / 2;
@@ -154,7 +156,6 @@ function transferHighlight(toElement: Element, toStep: DriveStep) {
       setState("__previousStep", fromStep);
       setState("__previousElement", fromElement);
       setState("__activeStep", toStep);
-      setState("__activeElement", toElement);
     }
 
     window.requestAnimationFrame(animate);
