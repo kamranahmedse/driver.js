@@ -8,8 +8,8 @@
 
 .driver-active .driver-active-element,
 .driver-active .driver-active-element *,
-.driver-popover,
-.driver-popover * {
+.driver-active .driver-popover,
+.driver-active .driver-popover * {
   pointer-events: auto;
 }
 

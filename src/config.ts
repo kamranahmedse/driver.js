@@ -23,6 +23,7 @@ export type Config = {
   // Popover specific configuration
   popoverClass?: string;
   popoverOffset?: number;
+  popoverStickToViewport?: boolean;
   showButtons?: AllowedButtons[];
   disableButtons?: AllowedButtons[];
   showProgress?: boolean;
@@ -63,6 +64,7 @@ export function configure(config: Config = {}) {
     stagePadding: 10,
     stageRadius: 5,
     popoverOffset: 10,
+    popoverStickToViewport: true,
     showButtons: ["next", "previous", "close"],
     disableButtons: [],
     overlayColor: "#000",

@@ -5,6 +5,9 @@ import { getConfig } from "./config";
 import { getFocusableElements } from "./utils";
 
 function onWindowClick(e: MouseEvent) {
+  const isOverlayEnabled = getConfig('overlayEnable')
+  if (isOverlayEnabled) return;
+
   const isPopoverContent = (e.target as HTMLElement)?.closest('#driver-popover-content')
   const isActive = getState('activeStep')
   const isTransitioning = getState("__transitionCallback")
