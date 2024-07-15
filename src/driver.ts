@@ -127,14 +127,6 @@ export function driver(options: Config = {}) {
     setState("isInitialized", true);
     document.body.classList.add("driver-active", getConfig("animate") ? "driver-fade" : "driver-simple");
 
-    if (!getConfig("overlayEnable")) {
-      document.body.classList.add("driver-no-overlay");
-    }
-
-    if (!getConfig("allowScroll")) {
-      document.body.classList.add("driver-no-scroll");
-    }
-
     initEvents();
 
     listen("overlayClick", handleClose);
@@ -243,7 +235,7 @@ export function driver(options: Config = {}) {
     const onDeselected = activeStep?.onDeselected || getConfig("onDeselected");
     const onDestroyed = getConfig("onDestroyed");
 
-    document.body.classList.remove("driver-active", "driver-fade", "driver-simple");
+    document.body.classList.remove("driver-active", "driver-fade", "driver-simple", "driver-no-overlay", "driver-no-scroll");
 
     destroyEvents();
     destroyPopover();

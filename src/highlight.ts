@@ -44,6 +44,14 @@ function getStepElement(step: DriveStep): Element | null {
 export function highlight(step: DriveStep) {
   let elemObj = getStepElement(step);
 
+  if (!getConfig("overlayEnable")) {
+    document.body.classList.add("driver-no-overlay");
+  }
+
+  if (!getConfig("allowScroll")) {
+    document.body.classList.add("driver-no-scroll");
+  }
+
   // If the element is not found, we mount a 1px div
   // at the center of the screen to highlight and show
   // the popover on top of that. This is to show a
