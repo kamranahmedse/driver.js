@@ -225,7 +225,6 @@ export function renderPopover(element: Element, step: DriveStep, isAnimationEnab
   }
 
   repositionPopover(element, step);
-  bringInView(popoverWrapper);
 
   // Focus on the first focusable element in active element or popover
   const isToDummyElement = element.classList.contains("driver-dummy-element");
