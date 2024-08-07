@@ -11,6 +11,9 @@ export type State = {
   previousElement?: Element;
   previousStep?: DriveStep;
 
+  isNextStepCalled?: boolean;
+  isPreviousStepCalled?: boolean;
+
   popover?: PopoverDOM;
 
   // actual values considering the animation
