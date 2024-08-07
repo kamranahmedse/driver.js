@@ -162,6 +162,9 @@ export function driver(options: Config = {}) {
       return;
     }
 
+    setState("isNextStepCalled", false);
+    setState("isPreviousStepCalled", false);
+
     setState("__activeOnDestroyed", document.activeElement as HTMLElement);
     setState("activeIndex", stepIndex);
 
@@ -207,12 +210,14 @@ export function driver(options: Config = {}) {
               if (!hasNextStep) {
                 destroy();
               } else {
+                setState("isNextStepCalled", true);
                 drive(stepIndex + 1);
               }
             },
         onPrevClick: onPrevClick
           ? onPrevClick
           : () => {
+              setState("isPreviousStepCalled", true);
               drive(stepIndex - 1);
             },
         onCloseClick: onCloseClick
