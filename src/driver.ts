@@ -40,6 +40,7 @@ export function driver(options: Config = {}) {
   }
 
   function moveNext() {
+    setState("isNextStepCalled", true);
     const activeIndex = getState("activeIndex");
     const steps = getConfig("steps") || [];
     if (typeof activeIndex === "undefined") {
@@ -55,6 +56,7 @@ export function driver(options: Config = {}) {
   }
 
   function movePrevious() {
+    setState("isPreviousStepCalled", true);
     const activeIndex = getState("activeIndex");
     const steps = getConfig("steps") || [];
     if (typeof activeIndex === "undefined") {
@@ -161,6 +163,9 @@ export function driver(options: Config = {}) {
 
       return;
     }
+
+    setState("isNextStepCalled", false);
+    setState("isPreviousStepCalled", false);
 
     setState("__activeOnDestroyed", document.activeElement as HTMLElement);
     setState("activeIndex", stepIndex);
