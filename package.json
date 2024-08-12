@@ -19,6 +19,7 @@
       "import": "./dist/driver.js.mjs"
     },
     "./dist/driver.css": {
+      "default": "./dist/driver.css",
       "import": "./dist/driver.css",
       "require": "./dist/driver.css"
     }
