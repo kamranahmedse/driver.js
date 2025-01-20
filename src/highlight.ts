@@ -157,7 +157,7 @@ function transferHighlight(toElement: Element, toStep: DriveStep) {
   fromElement.removeAttribute("aria-expanded");
   fromElement.removeAttribute("aria-controls");
 
-  const disableActiveInteraction = getConfig("disableActiveInteraction");
+  const disableActiveInteraction = toStep.disableActiveInteraction ?? getConfig("disableActiveInteraction");
   if (disableActiveInteraction) {
     toElement.classList.add("driver-no-interaction");
   }
