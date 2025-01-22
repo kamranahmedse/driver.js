@@ -64,6 +64,37 @@ function onKeyup(e: KeyboardEvent) {
   }
 }
 
+type EventCallback = (pointer: MouseEvent | PointerEvent) => void
+type EventHandlers = {
+  [key: string]: {
+    clickedListener?: EventCallback,
+    disabledlistener?: EventCallback
+  }
+}
+const driverEventHandlers: EventHandlers = {}
+
+const listenerWrapper = (
+  element?: Element,
+  listener?: EventCallback,
+  shouldPreventDefault?: (target: HTMLElement) => boolean
+) => {
+  return function (e: MouseEvent | PointerEvent) {
+    // event and extra_data will be available here
+    const target = e.target as HTMLElement;
+    if (!element?.contains(target)) {
+      return;
+    }
+
+    if (!shouldPreventDefault || shouldPreventDefault(target)) {
+      e.preventDefault();
+      e.stopPropagation();
+      e.stopImmediatePropagation();
+    }
+
+    listener?.(e);
+  };
+};
+
 /**
  * Attaches click handler to the elements created by driver.js. It makes
  * sure to give the listener the first chance to handle the event, and
@@ -76,41 +107,49 @@ function onKeyup(e: KeyboardEvent) {
  */
 export function onDriverClick(
   element: Element,
-  listener: (pointer: MouseEvent | PointerEvent) => void,
+  listener: EventCallback,
   shouldPreventDefault?: (target: HTMLElement) => boolean
 ) {
-  const listenerWrapper = (e: MouseEvent | PointerEvent, listener?: (pointer: MouseEvent | PointerEvent) => void) => {
-    const target = e.target as HTMLElement;
-    if (!element.contains(target)) {
-      return;
-    }
+  // event handlers
+  const clickedListener = listenerWrapper(element, listener, shouldPreventDefault);
+  const disabledlistener = listenerWrapper();
 
-    if (!shouldPreventDefault || shouldPreventDefault(target)) {
-      e.preventDefault();
-      e.stopPropagation();
-      e.stopImmediatePropagation();
-    }
+  // save event handlers so we can remove events later
+  // use the element ID as the object key
+  // save event handlers as values
+  driverEventHandlers[element.id] = { clickedListener }
 
-    listener?.(e);
-  };
+  if (element.classList.contains('driver-popover')) {
+    // save event handlers so we can remove events later
+    // use the element ID as the object key
+    // save event handlers as values
+    driverEventHandlers[element.id].disabledlistener = disabledlistener
 
-  // We want to be the absolute first one to hear about the event
-  const useCapture = true;
-
-  // Events to disable
-  document.addEventListener("pointerdown", listenerWrapper, useCapture);
-  document.addEventListener("mousedown", listenerWrapper, useCapture);
-  document.addEventListener("pointerup", listenerWrapper, useCapture);
-  document.addEventListener("mouseup", listenerWrapper, useCapture);
-
+    // Events to disable
+    document.addEventListener("pointerdown", disabledlistener, true);
+    document.addEventListener("mousedown", disabledlistener, true);
+    document.addEventListener("pointerup", disabledlistener, true);
+    document.addEventListener("mouseup", disabledlistener, true);
+  }
   // Actual click handler
-  document.addEventListener(
-    "click",
-    e => {
-      listenerWrapper(e, listener);
-    },
-    useCapture
-  );
+  document.addEventListener('click', clickedListener, true)
+}
+
+export function destroyDriverEvents (element: Element) {
+  // extract the saved event handlers to delete these events
+  const { clickedListener, disabledlistener } = driverEventHandlers[element.id];
+
+  clickedListener && document.removeEventListener('click', clickedListener, true);
+
+  if (disabledlistener) {
+    document.removeEventListener("pointerdown", disabledlistener, true);
+    document.removeEventListener("mousedown", disabledlistener, true);
+    document.removeEventListener("pointerup", disabledlistener, true);
+    document.removeEventListener("mouseup", disabledlistener, true);
+  }
+
+  // clear driverEventHandlers
+  delete driverEventHandlers[element.id]
 }
 
 export function initEvents() {
@@ -122,6 +161,7 @@ export function initEvents() {
 
 export function destroyEvents() {
   window.removeEventListener("keyup", onKeyup);
+  window.removeEventListener("keydown", trapFocus);
   window.removeEventListener("resize", requireRefresh);
   window.removeEventListener("scroll", requireRefresh);
 }
