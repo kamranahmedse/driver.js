@@ -14,6 +14,7 @@ export type DriveStep = {
   onDeselected?: DriverHook;
   popover?: Popover;
   disableActiveInteraction?: boolean;
+  data?: Record<string, any>;
 };
 
 export function driver(options: Config = {}) {
