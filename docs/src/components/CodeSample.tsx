@@ -53,7 +53,7 @@ export function CodeSample(props: CodeSampleProps) {
   const { heading, id, children, buttonText = "Show me an Example", className, config, highlight, tour } = props;
 
   if (id === "demo-hook-theme") {
-    config!.onPopoverRendered = attachFirstButton;
+    config!.onPopoverRender = attachFirstButton;
   }
 
   function onClick() {
