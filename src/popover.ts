@@ -1,7 +1,7 @@
 import { bringInView, getFocusableElements } from "./utils";
-import { Config, DriverHook, getConfig } from "./config";
+import { Config, DriverHook, getConfig, getCurrentDriver } from "./config";
 import { getState, setState, State } from "./state";
-import { DriveStep } from "./driver";
+import { Driver, DriveStep } from "./driver";
 import { onDriverClick } from "./events";
 import { emit } from "./emitter";
 
@@ -28,7 +28,7 @@ export type Popover = {
   prevBtnText?: string;
 
   // Called after the popover is rendered
-  onPopoverRender?: (popover: PopoverDOM, opts: { config: Config; state: State }) => void;
+  onPopoverRender?: (popover: PopoverDOM, opts: { config: Config; state: State; driver: Driver }) => void;
 
   // Button callbacks
   onNextClick?: DriverHook;
@@ -168,6 +168,7 @@ export function renderPopover(element: Element, step: DriveStep) {
           return onNextClick(element, step, {
             config: getConfig(),
             state: getState(),
+            driver: getCurrentDriver(),
           });
         } else {
           return emit("nextClick");
@@ -179,6 +180,7 @@ export function renderPopover(element: Element, step: DriveStep) {
           return onPrevClick(element, step, {
             config: getConfig(),
             state: getState(),
+            driver: getCurrentDriver(),
           });
         } else {
           return emit("prevClick");
@@ -190,6 +192,7 @@ export function renderPopover(element: Element, step: DriveStep) {
           return onCloseClick(element, step, {
             config: getConfig(),
             state: getState(),
+            driver: getCurrentDriver(),
           });
         } else {
           return emit("closeClick");
@@ -204,7 +207,7 @@ export function renderPopover(element: Element, step: DriveStep) {
       return (
         !popover?.description.contains(target) &&
         !popover?.title.contains(target) &&
-        typeof target.className === 'string' &&
+        typeof target.className === "string" &&
         target.className.includes("driver-popover")
       );
     }
@@ -217,6 +220,7 @@ export function renderPopover(element: Element, step: DriveStep) {
     onPopoverRender(popover, {
       config: getConfig(),
       state: getState(),
+      driver: getCurrentDriver(),
     });
   }
 

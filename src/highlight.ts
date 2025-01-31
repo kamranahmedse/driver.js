@@ -1,6 +1,6 @@
 import { DriveStep } from "./driver";
 import { refreshOverlay, trackActiveElement, transitionStage } from "./overlay";
-import { getConfig } from "./config";
+import { getConfig, getCurrentDriver } from "./config";
 import { hidePopover, renderPopover, repositionPopover } from "./popover";
 import { bringInView } from "./utils";
 import { getState, setState } from "./state";
@@ -56,7 +56,6 @@ export function refreshActiveHighlight() {
   repositionPopover(activeHighlight, activeStep);
 }
 
-
 function transferHighlight(toElement: Element, toStep: DriveStep) {
   const duration = 400;
   const start = Date.now();
@@ -83,6 +82,7 @@ function transferHighlight(toElement: Element, toStep: DriveStep) {
     deselectedHook(isFromDummyElement ? undefined : fromElement, fromStep!, {
       config,
       state,
+      driver: getCurrentDriver(),
     });
   }
 
@@ -90,6 +90,7 @@ function transferHighlight(toElement: Element, toStep: DriveStep) {
     highlightStartedHook(isToDummyElement ? undefined : toElement, toStep, {
       config,
       state,
+      driver: getCurrentDriver(),
     });
   }
 
@@ -131,6 +132,7 @@ function transferHighlight(toElement: Element, toStep: DriveStep) {
         highlightedHook(isToDummyElement ? undefined : toElement, toStep, {
           config: getConfig(),
           state: getState(),
+          driver: getCurrentDriver(),
         });
       }
 

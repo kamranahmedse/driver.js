@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -388,7 +388,7 @@ npm install driver.js</pre
           },
         },
         {
-          element: '.buttons',
+          element: ".buttons",
           popover: {
             title: "Buttons",
             description: "Here are some buttons",
@@ -468,13 +468,17 @@ npm install driver.js</pre
           disableActiveInteraction: true,
           showProgress: true,
           progressText: "{{current}} of {{total}} done",
-          onPopoverRender: (popover) => {
-            popover.title.innerHTML = `${driverObj.getActiveIndex()} ${driverObj.hasNextStep() ? 'Yes' : 'No'} ${driverObj.hasPreviousStep() ? 'Yes' : 'No'}`
-            popover.description.innerHTML = `${driverObj.isFirstStep() ? 'Yes' : 'No'} ${driverObj.isLastStep() ? 'Yes' : 'No'}`
+          onPopoverRender: popover => {
+            popover.title.innerHTML = `${driverObj.getActiveIndex()} ${driverObj.hasNextStep() ? "Yes" : "No"} ${
+              driverObj.hasPreviousStep() ? "Yes" : "No"
+            }`;
+            popover.description.innerHTML = `${driverObj.isFirstStep() ? "Yes" : "No"} ${
+              driverObj.isLastStep() ? "Yes" : "No"
+            }`;
 
             console.log(driverObj.getActiveIndex());
             console.log(driverObj.getActiveStep());
-          }
+          },
         });
 
         driverObj.drive(4);
@@ -491,16 +495,16 @@ npm install driver.js</pre
           {
             element: "h1",
             popover: {
-              description: "This is a new description"
-            }
+              description: "This is a new description",
+            },
           },
           {
             element: "p",
             popover: {
-              description: "This is another new description"
-            }
-          }
-        ])
+              description: "This is another new description",
+            },
+          },
+        ]);
 
         driverObj.drive();
       });
@@ -517,16 +521,16 @@ npm install driver.js</pre
           {
             element: "h1",
             popover: {
-              description: "This is a new description"
-            }
+              description: "This is a new description",
+            },
           },
           {
             element: "p",
             popover: {
-              description: "This is another new description"
-            }
-          }
-        ])
+              description: "This is another new description",
+            },
+          },
+        ]);
 
         driverObj.drive();
       });
@@ -624,7 +628,7 @@ npm install driver.js</pre
       document.getElementById("basic-tour").addEventListener("click", () => {
         const driverObj = driver({
           showProgress: true,
-          showButtons: ["next", 'previous', 'close'],
+          showButtons: ["next", "previous", "close"],
           steps: basicTourSteps,
         });
 
@@ -667,6 +671,10 @@ npm install driver.js</pre
             title: "Next and Close",
             showButtons: ["close", "next"],
             description: "This one only has next and close buttons, nothing else.",
+            onNextClick: (step, element, opts) => {
+              console.log("Next Clicked", step, element, opts);
+              opts.driver.destroy();
+            },
           },
         });
       });
@@ -835,10 +843,10 @@ npm install driver.js</pre
             driverObj.destroy();
           },
           steps: [
-            { popover: { title: "Some title", description: "Some description" }},
-            { popover: { title: "Another title", description: "Some description" }},
-            { popover: { title: "Yet another title", description: "Some description" }},
-          ]
+            { popover: { title: "Some title", description: "Some description" } },
+            { popover: { title: "Another title", description: "Some description" } },
+            { popover: { title: "Yet another title", description: "Some description" } },
+          ],
         });
 
         driverObj.drive();
@@ -856,10 +864,10 @@ npm install driver.js</pre
             });
           },
           steps: [
-            { popover: { title: "Some title", description: "Some description" }},
-            { popover: { title: "Another title", description: "Some description" }},
-            { popover: { title: "Yet another title", description: "Some description" }},
-          ]
+            { popover: { title: "Some title", description: "Some description" } },
+            { popover: { title: "Another title", description: "Some description" } },
+            { popover: { title: "Yet another title", description: "Some description" } },
+          ],
         });
 
         driverObj.drive();
@@ -1103,7 +1111,7 @@ npm install driver.js</pre
       document.getElementById("click-overlay-to-next").addEventListener("click", () => {
         const driverObj = driver({
           animate: true,
-          overlayClickBehavior: 'nextStep',
+          overlayClickBehavior: "nextStep",
           steps: basicTourSteps,
         });
 

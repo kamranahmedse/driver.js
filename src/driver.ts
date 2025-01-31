@@ -1,7 +1,7 @@
 import { AllowedButtons, destroyPopover, Popover } from "./popover";
 import { destroyOverlay } from "./overlay";
 import { destroyEvents, initEvents, requireRefresh } from "./events";
-import { Config, configure, DriverHook, getConfig } from "./config";
+import { Config, configure, DriverHook, getConfig, getCurrentDriver, setCurrentDriver } from "./config";
 import { destroyHighlight, highlight } from "./highlight";
 import { destroyEmitter, listen } from "./emitter";
 import { getState, resetState, setState } from "./state";
@@ -16,7 +16,31 @@ export type DriveStep = {
   disableActiveInteraction?: boolean;
 };
 
-export function driver(options: Config = {}) {
+export interface Driver {
+  isActive: () => boolean;
+  refresh: () => void;
+  drive: (stepIndex?: number) => void;
+  setConfig: (config: Config) => void;
+  setSteps: (steps: DriveStep[]) => void;
+  getConfig: () => Config;
+  getState: (key?: string) => any;
+  getActiveIndex: () => number | undefined;
+  isFirstStep: () => boolean;
+  isLastStep: () => boolean;
+  getActiveStep: () => DriveStep | undefined;
+  getActiveElement: () => Element | undefined;
+  getPreviousElement: () => Element | undefined;
+  getPreviousStep: () => DriveStep | undefined;
+  moveNext: () => void;
+  movePrevious: () => void;
+  moveTo: (index: number) => void;
+  hasNextStep: () => boolean;
+  hasPreviousStep: () => boolean;
+  highlight: (step: DriveStep) => void;
+  destroy: () => void;
+}
+
+export function driver(options: Config = {}): Driver {
   configure(options);
 
   function handleClose() {
@@ -103,6 +127,7 @@ export function driver(options: Config = {}) {
       return onPrevClick(activeElement, activeStep, {
         config: getConfig(),
         state: getState(),
+        driver: getCurrentDriver(),
       });
     }
 
@@ -127,6 +152,7 @@ export function driver(options: Config = {}) {
       return onNextClick(activeElement, activeStep, {
         config: getConfig(),
         state: getState(),
+        driver: getCurrentDriver(),
       });
     }
 
@@ -241,6 +267,7 @@ export function driver(options: Config = {}) {
       onDestroyStarted(isActiveDummyElement ? undefined : activeElement, activeStep!, {
         config: getConfig(),
         state: getState(),
+        driver: getCurrentDriver(),
       });
       return;
     }
@@ -264,6 +291,7 @@ export function driver(options: Config = {}) {
         onDeselected(isActiveDummyElement ? undefined : activeElement, activeStep, {
           config: getConfig(),
           state: getState(),
+          driver: getCurrentDriver(),
         });
       }
 
@@ -271,6 +299,7 @@ export function driver(options: Config = {}) {
         onDestroyed(isActiveDummyElement ? undefined : activeElement, activeStep, {
           config: getConfig(),
           state: getState(),
+          driver: getCurrentDriver(),
         });
       }
     }
@@ -280,7 +309,7 @@ export function driver(options: Config = {}) {
     }
   }
 
-  return {
+  const api: Driver = {
     isActive: () => getState("isInitialized") || false,
     refresh: requireRefresh,
     drive: (stepIndex: number = 0) => {
@@ -316,13 +345,13 @@ export function driver(options: Config = {}) {
       const steps = getConfig("steps") || [];
       const activeIndex = getState("activeIndex");
 
-      return activeIndex !== undefined && steps[activeIndex + 1];
+      return activeIndex !== undefined && !!steps[activeIndex + 1];
     },
     hasPreviousStep: () => {
       const steps = getConfig("steps") || [];
       const activeIndex = getState("activeIndex");
 
-      return activeIndex !== undefined && steps[activeIndex - 1];
+      return activeIndex !== undefined && !!steps[activeIndex - 1];
     },
     highlight: (step: DriveStep) => {
       init();
@@ -342,6 +371,8 @@ export function driver(options: Config = {}) {
       destroy(false);
     },
   };
-}
 
-export type Driver = ReturnType<typeof driver>;
+  setCurrentDriver(api);
+
+  return api;
+}

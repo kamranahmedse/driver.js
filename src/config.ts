@@ -1,8 +1,12 @@
-import { DriveStep } from "./driver";
+import { Driver, DriveStep } from "./driver";
 import { AllowedButtons, PopoverDOM } from "./popover";
 import { State } from "./state";
 
-export type DriverHook = (element: Element | undefined, step: DriveStep, opts: { config: Config; state: State }) => void;
+export type DriverHook = (
+  element: Element | undefined,
+  step: DriveStep,
+  opts: { config: Config; state: State; driver: Driver }
+) => void;
 
 export type Config = {
   steps?: DriveStep[];
@@ -12,7 +16,7 @@ export type Config = {
   overlayOpacity?: number;
   smoothScroll?: boolean;
   allowClose?: boolean;
-  overlayClickBehavior?: 'close' | 'nextStep';
+  overlayClickBehavior?: "close" | "nextStep";
   stagePadding?: number;
   stageRadius?: number;
 
@@ -50,12 +54,13 @@ export type Config = {
 };
 
 let currentConfig: Config = {};
+let currentDriver: Driver;
 
 export function configure(config: Config = {}) {
   currentConfig = {
     animate: true,
     allowClose: true,
-    overlayClickBehavior: 'close',
+    overlayClickBehavior: "close",
     overlayOpacity: 0.7,
     smoothScroll: false,
     disableActiveInteraction: false,
@@ -74,4 +79,12 @@ export function getConfig(): Config;
 export function getConfig<K extends keyof Config>(key: K): Config[K];
 export function getConfig<K extends keyof Config>(key?: K) {
   return key ? currentConfig[key] : currentConfig;
+}
+
+export function setCurrentDriver(driver: Driver) {
+  currentDriver = driver;
+}
+
+export function getCurrentDriver() {
+  return currentDriver;
 }
