@@ -8,7 +8,7 @@
     <img src="https://img.shields.io/npm/v/driver.js.svg" alt="version" />
   </a>
   <a href="https://npmjs.org/package/driver.js">
-    <img src="https://img.shields.io/npm/dt/driver.js.svg" alt="downloads" />
+    <img src="https://img.shields.io/npm/dm/driver.js" alt="downloads" />
   </a>
 </p>
 
