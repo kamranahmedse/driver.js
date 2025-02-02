@@ -1,9 +1,9 @@
-import { bringInView, getFocusableElements } from "./utils";
 import { Config, DriverHook, getConfig, getCurrentDriver } from "./config";
-import { getState, setState, State } from "./state";
 import { Driver, DriveStep } from "./driver";
-import { onDriverClick } from "./events";
 import { emit } from "./emitter";
+import { onDriverClick } from "./events";
+import { getState, setState, State } from "./state";
+import { bringInView, getFocusableElements } from "./utils";
 
 export type Side = "top" | "right" | "bottom" | "left" | "over";
 export type Alignment = "start" | "center" | "end";
@@ -585,7 +585,6 @@ function renderPopoverArrow(alignment: Alignment, side: Side, element: Element) 
       arrowSide = "right";
       arrowAlignment = "end";
     }
-  } else {
   }
 
   if (!arrowSide) {
@@ -593,6 +592,34 @@ function renderPopoverArrow(alignment: Alignment, side: Side, element: Element) 
   } else {
     popoverArrow.classList.add(`driver-popover-arrow-side-${arrowSide}`);
     popoverArrow.classList.add(`driver-popover-arrow-align-${arrowAlignment}`);
+
+    const elementRect = element.getBoundingClientRect();
+    const arrowRect = popoverArrow.getBoundingClientRect();
+    const stagePadding = getConfig("stagePadding") || 0;
+
+    const isElementPartiallyInViewPort =
+      elementRect.left - stagePadding < window.innerWidth &&
+      elementRect.right + stagePadding > 0 &&
+      elementRect.top - stagePadding < window.innerHeight &&
+      elementRect.bottom + stagePadding > 0;
+
+    if (side === "bottom" && isElementPartiallyInViewPort) {
+      const isArrowWithinElementBounds =
+        arrowRect.x > elementRect.x && arrowRect.x + arrowRect.width < elementRect.x + elementRect.width;
+
+      if (!isArrowWithinElementBounds) {
+        popoverArrow.classList.remove(`driver-popover-arrow-align-${arrowAlignment}`);
+        popoverArrow.classList.add(`driver-popover-arrow-none`);
+        // reduce the top position by the padding
+        popover.wrapper.style.transform = `translateY(-${stagePadding / 2}px)`;
+      } else {
+        popover.wrapper.style.transform = `translateY(0)`;
+      }
+
+      // TODO: implement this using either of the following:
+      // 1 - move the arrow to the center of the element and point it towards the popover. This way, scrolling or resizing the window will move the arrow to the correct position.
+      // 2 - calculate the center position of the element and point the arrow towards the popover. However, we will have to re-calculate the position of the arrow when the window is resized or scrolled.
+    }
   }
 }
 

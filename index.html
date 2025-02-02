@@ -166,6 +166,7 @@
       <p>given below are the examples of simple `highlight`</p>
       <div class="buttons">
         <button id="highlight-btn">Animated Highlight</button>
+        <button id="buggy-highlight-btn">Buggy Highlight</button>
         <button id="simple-highlight-btn">Simple Highlight</button>
         <button id="transition-highlight-btn">Transition Highlight</button>
         <button id="disallow-close">Disallow Close</button>
@@ -908,6 +909,18 @@ npm install driver.js</pre
             alert(`Status: ${driverObj.isActive()}`);
           }, 0);
         }, 2000);
+      });
+
+      document.getElementById("buggy-highlight-btn").addEventListener("click", () => {
+        driver().highlight({
+          element: ".page-header h1 sup",
+          popover: {
+            title: "Buggy Highlight",
+            description: "Unlike the older version, new version doesn't work with z-indexes so no more positional issues.",
+            side: "bottom",
+            align: "start",
+          },
+        });
       });
 
       document.getElementById("highlight-btn").addEventListener("click", () => {
