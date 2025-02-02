@@ -30,12 +30,14 @@ export function bringInView(element: Element) {
 
   const shouldSmoothScroll = getConfig("smoothScroll");
 
+  const isTallerThanViewport = (element as HTMLElement).offsetHeight > window.innerHeight;
+
   element.scrollIntoView({
     // Removing the smooth scrolling for elements which exist inside the scrollable parent
     // This was causing the highlight to not properly render
     behavior: !shouldSmoothScroll || hasScrollableParent(element) ? "auto" : "smooth",
     inline: "center",
-    block: "center",
+    block: isTallerThanViewport ? "start" : "center",
   });
 }
 
