@@ -1,112 +1,115 @@
 ---
 import Analytics from "../components/Analytics/Analytics.astro";
 export interface Props {
-	title: string;
+  permalink?: string;
+  title?: string;
+  description?: string;
 }
 
-export interface BaseLayoutProps extends Props {
-	permalink?: string;
-	title?: string;
-	description?: string;
-}
-
-const { permalink = '', title = "Driver.js", description = "A light-weight, no-dependency, vanilla JavaScript library to drive user's focus across the page." } = Astro.props;
-
+const {
+  permalink = "",
+  title = "driver.js",
+  description = "A light-weight, no-dependency, vanilla JavaScript library to drive user's focus across the page.",
+} = Astro.props;
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
+  <head>
+    <meta charset="UTF-8" />
 
-		<title>{ title }</title>
-		<meta name="robots" content="index,follow"/>
-		<meta name="description" itemprop="description" content={description}/>
+    <title>{title}</title>
+    <meta name="robots" content="index,follow" />
+    <meta name="description" itemprop="description" content={description} />
 
-		<link href={`https://driverjs.com${permalink}`} rel="canonical">
+    <link href={`https://driverjs.com${permalink}`} rel="canonical" />
 
-		<meta content="Kamran Ahmed" name=author>
-		<meta content="summary_large_image" name="twitter:card">
-		<meta content="@kamrify" name="twitter:creator">
-		<meta content="1200" property="og:image:width">
-		<meta content="630" property="og:image:height">
-		<meta content="https://driverjs.com/og-img.png" property="og:image">
-		<meta content="driverjs.com" property="og:image:alt">
-		<meta content="driverjs.com" property="og:site_name">
-		<meta content="Driver.js" property="og:title">
-		<meta content="A light-weight, no-dependency, vanilla JavaScript library to drive user's focus across the page." property=og:description>
-		<meta content="website" property="og:type">
-		<meta content="https://driverjs.com/" property="og:url">
+    <meta content="Kamran Ahmed" name="author" />
+    <meta content="summary_large_image" name="twitter:card" />
+    <meta content="@kamrify" name="twitter:creator" />
+    <meta content="1200" property="og:image:width" />
+    <meta content="630" property="og:image:height" />
+    <meta content="https://driverjs.com/og-img.png" property="og:image" />
+    <meta content="driverjs.com" property="og:image:alt" />
+    <meta content="driverjs.com" property="og:site_name" />
+    <meta content="Driver.js" property="og:title" />
+    <meta
+      content="A light-weight, no-dependency, vanilla JavaScript library to drive user's focus across the page."
+      property="og:description"
+    />
+    <meta content="website" property="og:type" />
+    <meta content="https://driverjs.com/" property="og:url" />
 
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
-		<style is:global>
-			.driver-popover.driverjs-theme {
-				background-color: #fde047;
-				color: #000;
-			}
+    <style is:global>
+      .driver-popover.driverjs-theme {
+        background-color: #fde047;
+        color: #000;
+      }
 
-			.driver-popover.driverjs-theme .driver-popover-title {
-				font-size: 20px;
-			}
+      .driver-popover.driverjs-theme .driver-popover-title {
+        font-size: 20px;
+      }
 
-			.driver-popover.driverjs-theme .driver-popover-title,
-			.driver-popover.driverjs-theme .driver-popover-description,
-			.driver-popover.driverjs-theme .driver-popover-progress-text {
-				color: #000;
-			}
+      .driver-popover.driverjs-theme .driver-popover-title,
+      .driver-popover.driverjs-theme .driver-popover-description,
+      .driver-popover.driverjs-theme .driver-popover-progress-text {
+        color: #000;
+      }
 
-			.driver-popover.driverjs-theme button {
-				flex: 1;
-				text-align: center;
-				background-color: #000;
-				color: #ffffff;
-				border: 1px solid #000;
-				text-shadow: none;
-				font-size: 14px;
-				padding: 5px 8px;
-				border-radius: 6px;
-			}
+      .driver-popover.driverjs-theme button {
+        flex: 1;
+        text-align: center;
+        background-color: #000;
+        color: #ffffff;
+        border: 1px solid #000;
+        text-shadow: none;
+        font-size: 14px;
+        padding: 5px 8px;
+        border-radius: 6px;
+      }
 
-			.driver-popover.driverjs-theme button:focus, .driver-popover.driverjs-theme button:hover {
-				background-color: #000;
-				opacity: 0.8;
-				color: #ffffff;
-			}
+      .driver-popover.driverjs-theme button:focus,
+      .driver-popover.driverjs-theme button:hover {
+        background-color: #000;
+        opacity: 0.8;
+        color: #ffffff;
+      }
 
-			.driver-popover.driverjs-theme .driver-popover-navigation-btns {
-				justify-content: space-between;
-				gap: 3px;
-			}
+      .driver-popover.driverjs-theme .driver-popover-navigation-btns {
+        justify-content: space-between;
+        gap: 3px;
+      }
 
-			.driver-popover.driverjs-theme .driver-popover-close-btn {
-				color: #9b9b9b;
-			}
+      .driver-popover.driverjs-theme .driver-popover-close-btn {
+        color: #9b9b9b;
+      }
 
-			.driver-popover.driverjs-theme .driver-popover-close-btn:hover {
-				color: #000;
-			}
+      .driver-popover.driverjs-theme .driver-popover-close-btn:hover {
+        color: #000;
+      }
 
-			.driver-popover.driverjs-theme .driver-popover-arrow-side-left.driver-popover-arrow {
-				border-left-color: #fde047;
-			}
+      .driver-popover.driverjs-theme .driver-popover-arrow-side-left.driver-popover-arrow {
+        border-left-color: #fde047;
+      }
 
-			.driver-popover.driverjs-theme .driver-popover-arrow-side-right.driver-popover-arrow {
-				border-right-color: #fde047;
-			}
+      .driver-popover.driverjs-theme .driver-popover-arrow-side-right.driver-popover-arrow {
+        border-right-color: #fde047;
+      }
 
-			.driver-popover.driverjs-theme .driver-popover-arrow-side-top.driver-popover-arrow {
-				border-top-color: #fde047;
-			}
+      .driver-popover.driverjs-theme .driver-popover-arrow-side-top.driver-popover-arrow {
+        border-top-color: #fde047;
+      }
 
-			.driver-popover.driverjs-theme .driver-popover-arrow-side-bottom.driver-popover-arrow {
-				border-bottom-color: #fde047;
-			}
-		</style>
-	</head>
-	<body>
-		<slot />
-        <Analytics />
-	</body>
+      .driver-popover.driverjs-theme .driver-popover-arrow-side-bottom.driver-popover-arrow {
+        border-bottom-color: #fde047;
+      }
+    </style>
+  </head>
+  <body>
+    <slot />
+    <Analytics />
+  </body>
 </html>
