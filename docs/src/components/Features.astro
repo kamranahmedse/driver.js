@@ -1,0 +1,84 @@
+---
+import { Earth, Smartphone, Settings, Feather, Code2, Layers, Keyboard } from "lucide-react";
+import Container from "./Container.astro";
+---
+
+<div class="py-0 mb-16 bg-white">
+  <Container>
+    <div class="max-w-screen-lg">
+      <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-4 md:mb-6">Nothing else like it</h2>
+      <p class="text-base md:text-xl lg:text-2xl text-black mb-10 md:mb-14 lg:mb-16">
+        Lightweight with no external dependencies, supports all major browsers and is highly customizable.
+      </p>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10 lg:gap-4">
+      <div class="group bg-yellow-50 p-6 rounded-xl transition-colors">
+        <div class="flex justify-center items-center mb-4 w-12 h-12 rounded-xl bg-yellow-300 lg:h-14 lg:w-14">
+          <Earth className="w-6 h-6 text-black lg:w-7 lg:h-7" />
+        </div>
+        <h3 class="mb-3 text-xl md:text-2xl font-bold text-black">Browser Support</h3>
+        <p class="text-gray-600 md:text-lg">
+          Works in all modern browsers including Chrome, IE9+, Safari, Firefox and Opera
+        </p>
+      </div>
+      <div class="group bg-yellow-50 p-6 rounded-xl transition-colors">
+        <div class="flex justify-center items-center mb-4 w-12 h-12 rounded-xl bg-yellow-300 lg:h-14 lg:w-14">
+          <Smartphone className="w-6 h-6 text-black lg:w-7 lg:h-7" />
+        </div>
+        <h3 class="mb-3 text-xl md:text-2xl font-bold text-black">Mobile Ready</h3>
+        <p class="text-gray-600 md:text-lg">Works on desktop, tablets and mobile devices</p>
+      </div>
+      <div class="group bg-yellow-50 p-6 rounded-xl transition-colors">
+        <div class="flex justify-center items-center mb-4 w-12 h-12 rounded-xl bg-yellow-300 lg:h-14 lg:w-14">
+          <Settings className="w-6 h-6 text-black lg:w-7 lg:h-7" />
+        </div>
+        <h3 class="mb-3 text-xl md:text-2xl font-bold text-black">Highly Customizable</h3>
+        <p class="text-gray-600 md:text-lg">Powerful API that allows you to customize it to your needs</p>
+      </div>
+      <div class="group bg-yellow-50 p-6 rounded-xl transition-colors">
+        <div class="flex justify-center items-center mb-4 w-12 h-12 rounded-xl bg-yellow-300 lg:h-14 lg:w-14">
+          <Feather className="w-6 h-6 text-black lg:w-7 lg:h-7" />
+        </div>
+        <h3 class="mb-3 text-xl md:text-2xl font-bold text-black">Lightweight</h3>
+        <p class="text-gray-600 md:text-lg">
+          Only 5KB minified, compared to other libraries which are typically >12KB minified
+        </p>
+      </div>
+      <div class="group bg-yellow-50 p-6 rounded-xl transition-colors">
+        <div class="flex justify-center items-center mb-4 w-12 h-12 rounded-xl bg-yellow-300 lg:h-14 lg:w-14">
+          <Code2 className="w-6 h-6 text-black lg:w-7 lg:h-7" />
+        </div>
+        <h3 class="mb-3 text-xl md:text-2xl font-bold text-black">No Dependencies</h3>
+        <p class="text-gray-600 md:text-lg">Simple to use with absolutely no external dependencies</p>
+      </div>
+      <div class="group bg-yellow-50 p-6 rounded-xl transition-colors">
+        <div class="flex justify-center items-center mb-4 w-12 h-12 rounded-xl bg-yellow-300 lg:h-14 lg:w-14">
+          <Layers className="w-6 h-6 text-black lg:w-7 lg:h-7" />
+        </div>
+        <h3 class="mb-3 text-xl md:text-2xl font-bold text-black">Feature Rich</h3>
+        <p class="text-gray-600 md:text-lg">Create powerful feature introductions for your web applications</p>
+      </div>
+      <div class="group bg-yellow-50 p-6 rounded-xl transition-colors">
+        <div class="flex justify-center items-center mb-4 w-12 h-12 rounded-xl bg-yellow-300 lg:h-14 lg:w-14">
+          <span class="w-6 h-6 text-black lg:w-7 lg:h-7 font-black">MIT</span>
+        </div>
+        <h3 class="mb-3 text-xl md:text-2xl font-bold text-black">MIT License</h3>
+        <p class="text-gray-600 md:text-lg">Free for both personal and commercial use</p>
+      </div>
+      <div class="group bg-yellow-50 p-6 rounded-xl transition-colors">
+        <div class="flex justify-center items-center mb-4 w-12 h-12 rounded-xl bg-yellow-300 lg:h-14 lg:w-14">
+          <Keyboard className="w-6 h-6 text-black lg:w-7 lg:h-7" />
+        </div>
+        <h3 class="mb-3 text-xl md:text-2xl font-bold text-black">Keyboard Control</h3>
+        <p class="text-gray-600 md:text-lg">All actions can be controlled via keyboard</p>
+      </div>
+      <div class="group bg-yellow-50 p-6 rounded-xl transition-colors">
+        <div class="flex justify-center items-center mb-4 w-12 h-12 rounded-xl bg-yellow-300 lg:h-14 lg:w-14">
+          <span class="w-6 h-6 text-black lg:w-7 lg:h-7 font-black">ALL</span>
+        </div>
+        <h3 class="mb-3 text-xl md:text-2xl font-bold text-black">Highlight Anything</h3>
+        <p class="text-gray-600 md:text-lg">Highlight any element on the page</p>
+      </div>
+    </div>
+  </Container>
+</div>
