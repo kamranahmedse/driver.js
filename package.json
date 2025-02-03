@@ -2,7 +2,7 @@
   "name": "driver.js",
   "license": "MIT",
   "private": false,
-  "version": "1.3.4",
+  "version": "1.3.5",
   "main": "./dist/driver.js.cjs",
   "module": "./dist/driver.js.mjs",
   "types": "./dist/driver.js.d.ts",
