@@ -1,25 +1,51 @@
 ---
 import Container from "./Container.astro";
 ---
-<div class="bg-yellow-300">
+
+<div class="bg-white border-b border-gray-100 select-none">
+  <Container>
+    <div class="flex items-center justify-between h-16">
+      <a href="/" class="flex items-center justify-end text-xl font-bold text-gray-900 font-semibold gap-2.5">
+        <img src="/favicon.svg" alt="driver.js logo" class="h-10" />
+        driver.js
+      </a>
+      <span class="flex items-center gap-7">
+        <a href="/docs/installation" class="hover:underline underline-offset-4 text-lg font-medium text-gray-900">
+          <span class="hidden sm:inline">Documentation</span>
+          <span class="inline sm:hidden">Docs</span>
+        </a>
+        <a href="https://github.com/kamranahmedse/driver.js" target="_blank" class="hover:underline underline-offset-4 text-lg font-medium text-gray-900">GitHub</a>
+      </span>
+    </div>
+  </Container>
+</div>
+<div class="bg-yellow-300/80 overflow-hidden via-transparent">
   <Container>
     <div class="py-10 md:py-14 lg:py-20 flex justify-start items-center gap-4">
       <div class="flex-grow" data-hero-text>
         <h1 data-driver-name class="text-7xl md:text-8xl lg:text-9xl mb-2 md:mb-3 lg:mb-4 font-bold">driver.js</h1>
-        <p data-driver-tagline class="text-md md:text-2xl lg:text-3xl">Product tours, highlights, contextual help and more.</p>
+        <p data-driver-tagline class="text-base md:text-2xl lg:text-3xl !leading-normal">
+          Lightweight JavaScript library for product tours, highlights, and contextual help to guide users through your
+          product.
+        </p>
         <div class="mt-4 md:mt-8 lg:mt-10 flex flex-col sm:flex-row gap-2 items-stretch">
-          <button data-demo-tour class="bg-black rounded-xl py-2 md:py-3 px-6 font-medium text-white text-lg md:text-xl focus:outline-0 hover:bg-gray-800 focus:bg-gray-800">
-            Show Demo Tour
+          <button
+            data-demo-tour
+            class="bg-black rounded-xl py-2 md:py-3 px-6 font-medium text-white text-lg md:text-xl focus:outline-0 hover:bg-gray-800 focus:bg-gray-800"
+          >
+            Show Demo
           </button>
-          <a href="/docs/installation"
-             data-docs-link
-             class="bg-white rounded-xl py-2 md:py-3 px-6 font-medium text-black text-lg md:text-xl focus:outline-0 border-4 border-black text-center hover:bg-gray-200 focus:bg-gray-200">
+          <a
+            href="/docs/installation"
+            data-docs-link
+            class="bg-white rounded-xl py-2 md:py-3 px-6 font-medium text-black text-lg md:text-xl focus:outline-0 border-2 border-black text-center hover:bg-gray-200 focus:bg-gray-200"
+          >
             Get Started
           </a>
         </div>
       </div>
       <div class="flex-shrink-0 hidden sm:flex">
-        <img src="/driver.svg" alt="Hero Image" class="sm:h-48 md:h-60 lg:h-72" />
+        <img src="/driver.svg" alt="driver.js image" class="sm:h-48 md:h-60 lg:h-72" />
       </div>
     </div>
   </Container>
