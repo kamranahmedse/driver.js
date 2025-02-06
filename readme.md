@@ -4,8 +4,8 @@
   <a href="https://github.com/kamranahmedse/driver.js/blob/master/license">
     <img src="https://img.shields.io/badge/License-MIT-yellow.svg" />
   </a>
-  <a href="https://npmjs.org/package/driver.js">
-    <img src="https://img.shields.io/npm/v/driver.js.svg" alt="version" />
+  <a href="https://www.jsdelivr.com/package/npm/driver.js">
+    <img src="https://data.jsdelivr.com/v1/package/npm/driver.js/badge?style=rounded" alt="jsdelivr hits" />
   </a>
   <a href="https://npmjs.org/package/driver.js">
     <img src="https://img.shields.io/npm/dm/driver.js" alt="downloads" />
