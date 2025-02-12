@@ -1,7 +1,7 @@
 import { easeInOutQuad } from "./utils";
 import { onDriverClick } from "./events";
 import { emit } from "./emitter";
-import { getConfig } from "./config";
+import { getAttachElement, getConfig } from "./config";
 import { getState, setState } from "./state";
 
 export type StageDefinition = {
@@ -75,7 +75,7 @@ export function refreshOverlay() {
 
 function mountOverlay(stagePosition: StageDefinition) {
   const overlaySvg = createOverlaySvg(stagePosition);
-  document.body.appendChild(overlaySvg);
+  getAttachElement().appendChild(overlaySvg);
 
   onDriverClick(overlaySvg, e => {
     const target = e.target as SVGElement;
