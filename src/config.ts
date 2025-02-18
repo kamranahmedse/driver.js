@@ -12,6 +12,7 @@ export type Config = {
   steps?: DriveStep[];
 
   animate?: boolean;
+  duration?: number;
   overlayColor?: string;
   overlayOpacity?: number;
   smoothScroll?: boolean;
