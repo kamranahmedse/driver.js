@@ -113,7 +113,7 @@
   zoom: 1;
 }
 
-.driver-popover-footer button {
+.driver-popover-footer-btn {
   all: unset;
   display: inline-block;
   box-sizing: border-box;
