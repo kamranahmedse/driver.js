@@ -12,6 +12,8 @@ export type Config = {
   steps?: DriveStep[];
 
   animate?: boolean;
+  highlightColor?: string;
+  highlightOpacity?: number;
   overlayColor?: string;
   overlayOpacity?: number;
   smoothScroll?: boolean;
@@ -71,6 +73,7 @@ export function configure(config: Config = {}) {
     showButtons: ["next", "previous", "close"],
     disableButtons: [],
     overlayColor: "#000",
+    highlightOpacity: 0.3,
     ...config,
   };
 }
