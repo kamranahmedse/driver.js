@@ -207,8 +207,11 @@ export function renderPopover(element: Element, step: DriveStep) {
       return (
         !popover?.description.contains(target) &&
         !popover?.title.contains(target) &&
-        typeof target.className === "string" &&
-        target.className.includes("driver-popover")
+        typeof target.className === "string" && (
+          target.classList.contains("driver-popover-prev-btn") ||
+          target.classList.contains("driver-popover-next-btn") ||
+          target.classList.contains("driver-popover-close-btn")
+        )
       );
     }
   );
@@ -660,12 +663,12 @@ function createPopover(): PopoverDOM {
 
   const previousButton = document.createElement("button");
   previousButton.type = "button";
-  previousButton.classList.add("driver-popover-prev-btn");
+  previousButton.classList.add("driver-popover-prev-btn", "driver-popover-footer-btn");
   previousButton.innerHTML = "&larr; Previous";
 
   const nextButton = document.createElement("button");
   nextButton.type = "button";
-  nextButton.classList.add("driver-popover-next-btn");
+  nextButton.classList.add("driver-popover-next-btn", "driver-popover-footer-btn");
   nextButton.innerHTML = "Next &rarr;";
 
   footerButtons.appendChild(previousButton);

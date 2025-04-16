@@ -289,6 +289,8 @@ You can add custom buttons using `onPopoverRender` callback. This callback is ca
     onPopoverRender: (popover, { config, state }) => {
       const firstButton = document.createElement("button");
       firstButton.innerText = "Go to First";
+      // This class adds the default button styling. It can be left out if you want your own styles to apply
+      firstButton.classList.add("driver-popover-footer-btn");
       popover.footerButtons.appendChild(firstButton);
 
       firstButton.addEventListener("click", () => {
