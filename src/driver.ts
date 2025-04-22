@@ -173,6 +173,8 @@ export function driver(options: Config = {}): Driver {
     listen("escapePress", handleClose);
     listen("arrowLeftPress", handleArrowLeft);
     listen("arrowRightPress", handleArrowRight);
+
+    (document.querySelector("#driver-popover-content") as HTMLDivElement)?.focus();
   }
 
   function drive(stepIndex: number = 0) {

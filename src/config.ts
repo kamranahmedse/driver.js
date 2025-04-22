@@ -19,6 +19,7 @@ export type Config = {
   overlayClickBehavior?: "close" | "nextStep";
   stagePadding?: number;
   stageRadius?: number;
+  autoFocusNextButton?: boolean;
 
   disableActiveInteraction?: boolean;
 
@@ -38,7 +39,7 @@ export type Config = {
   doneBtnText?: string;
 
   // Called after the popover is rendered
-  onPopoverRender?: (popover: PopoverDOM, opts: { config: Config; state: State, driver: Driver }) => void;
+  onPopoverRender?: (popover: PopoverDOM, opts: { config: Config; state: State; driver: Driver }) => void;
 
   // State based callbacks, called upon state changes
   onHighlightStarted?: DriverHook;
