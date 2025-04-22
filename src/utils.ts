@@ -8,8 +8,9 @@ export function easeInOutQuad(elapsed: number, initialValue: number, amountOfCha
 }
 
 export function getFocusableElements(parentEls: Element[] | HTMLElement[]) {
-  const focusableQuery =
-    'a[href]:not([disabled]), button:not([disabled]), textarea:not([disabled]), input[type="text"]:not([disabled]), input[type="radio"]:not([disabled]), input[type="checkbox"]:not([disabled]), select:not([disabled])';
+  const focusableQuery = getConfig("autoFocusNextButton")
+    ? "button.driver-popover-next-btn:not([disabled])"
+    : 'a[href]:not([disabled]), button:not([disabled]), textarea:not([disabled]), input[type="text"]:not([disabled]), input[type="radio"]:not([disabled]), input[type="checkbox"]:not([disabled]), select:not([disabled])';
 
   return parentEls
     .flatMap(parentEl => {
