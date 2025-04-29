@@ -161,7 +161,7 @@ export function renderPopover(element: Element, step: DriveStep) {
       const onPrevClick = step.popover?.onPrevClick || getConfig("onPrevClick");
       const onCloseClick = step.popover?.onCloseClick || getConfig("onCloseClick");
 
-      if (target.classList.contains("driver-popover-next-btn")) {
+      if (!!target.closest(".driver-popover-next-btn")) {
         // If the user has provided a custom callback, call it
         // otherwise, emit the event.
         if (onNextClick) {
@@ -175,7 +175,7 @@ export function renderPopover(element: Element, step: DriveStep) {
         }
       }
 
-      if (target.classList.contains("driver-popover-prev-btn")) {
+      if (!!target.closest(".driver-popover-prev-btn")) {
         if (onPrevClick) {
           return onPrevClick(element, step, {
             config: getConfig(),
@@ -187,7 +187,7 @@ export function renderPopover(element: Element, step: DriveStep) {
         }
       }
 
-      if (target.classList.contains("driver-popover-close-btn")) {
+      if (!!target.closest(".driver-popover-close-btn")) {
         if (onCloseClick) {
           return onCloseClick(element, step, {
             config: getConfig(),
