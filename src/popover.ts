@@ -1,4 +1,4 @@
-import { Config, DriverHook, getConfig, getCurrentDriver } from "./config";
+import { Config, DriverHook, getAttachElement, getConfig, getCurrentDriver } from "./config";
 import { Driver, DriveStep } from "./driver";
 import { emit } from "./emitter";
 import { onDriverClick } from "./events";
@@ -61,11 +61,11 @@ export function hidePopover() {
 export function renderPopover(element: Element, step: DriveStep) {
   let popover = getState("popover");
   if (popover) {
-    document.body.removeChild(popover.wrapper);
+    getAttachElement().removeChild(popover.wrapper);
   }
 
   popover = createPopover();
-  document.body.appendChild(popover.wrapper);
+  getAttachElement().appendChild(popover.wrapper);
 
   const {
     title,
