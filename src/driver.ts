@@ -81,6 +81,7 @@ export function driver(options: Config = {}): Driver {
 
   function movePrevious() {
     const activeIndex = getState("activeIndex");
+    if (activeIndex === 0) return;
     const steps = getConfig("steps") || [];
     if (typeof activeIndex === "undefined") {
       return;
@@ -182,10 +183,9 @@ export function driver(options: Config = {}): Driver {
       destroy();
       return;
     }
-
+    if (stepIndex < 0) return;
     if (!steps[stepIndex]) {
       destroy();
-
       return;
     }
 
