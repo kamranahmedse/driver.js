@@ -1,4 +1,5 @@
 import { getConfig } from "./config";
+import { Driver } from "./driver";
 
 export function easeInOutQuad(elapsed: number, initialValue: number, amountOfChange: number, duration: number): number {
   if ((elapsed /= duration / 2) < 1) {
@@ -64,4 +65,10 @@ function isElementInView(element: Element) {
 
 export function isElementVisible(el: HTMLElement) {
   return !!(el.offsetWidth || el.offsetHeight || el.getClientRects().length);
+}
+
+export const DRIVER_MARKER = Symbol("Driver");
+
+export function isDriver(obj: any): obj is Driver {
+  return obj && obj[DRIVER_MARKER] === true;
 }
