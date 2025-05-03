@@ -80,6 +80,11 @@
   transition-duration: 200ms;
 }
 
+html[dir="rtl"] .driver-popover-close-btn {
+  right: auto;
+  left: 0;
+}
+
 .driver-popover-close-btn:hover,
 .driver-popover-close-btn:focus {
   color: #2d2d2d;
@@ -158,6 +163,11 @@
 
 .driver-popover-navigation-btns button + button {
   margin-left: 4px;
+}
+
+html[dir="rtl"] .driver-popover-navigation-btns button + button {
+  margin-left: unset;
+  margin-right: 4px;
 }
 
 .driver-popover-arrow {
