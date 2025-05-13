@@ -6,6 +6,8 @@ import { destroyHighlight, highlight } from "./highlight";
 import { destroyEmitter, listen } from "./emitter";
 import { getState, resetState, setState } from "./state";
 import "./driver.css";
+import { InvalidDriverActionError } from "./errors";
+import { DRIVER_MARKER, isDriver } from "./utils";
 
 export type DriveStep = {
   element?: string | Element | (() => Element);
@@ -38,6 +40,7 @@ export interface Driver {
   hasPreviousStep: () => boolean;
   highlight: (step: DriveStep) => void;
   destroy: () => void;
+  [DRIVER_MARKER]: true;
 }
 
 export function driver(options: Config = {}): Driver {
@@ -72,6 +75,10 @@ export function driver(options: Config = {}): Driver {
     }
 
     const nextStepIndex = activeIndex + 1;
+    // @ts-ignore
+    if (isDriver(this) && nextStepIndex >= steps.length) {
+        throw new InvalidDriverActionError("Cannot move to next step. Already at the last step.");
+    }
     if (steps[nextStepIndex]) {
       drive(nextStepIndex);
     } else {
@@ -87,6 +94,9 @@ export function driver(options: Config = {}): Driver {
     }
 
     const previousStepIndex = activeIndex - 1;
+    if (previousStepIndex < 0) {
+      throw new InvalidDriverActionError("Cannot move to previous step. Already at the first step.");
+    }
     if (steps[previousStepIndex]) {
       drive(previousStepIndex);
     } else {
@@ -96,6 +106,10 @@ export function driver(options: Config = {}): Driver {
 
   function moveTo(index: number) {
     const steps = getConfig("steps") || [];
+
+    if (index < 0 || index >= steps.length) {
+      throw new RangeError();
+    }
 
     if (steps[index]) {
       drive(index);
@@ -182,10 +196,11 @@ export function driver(options: Config = {}): Driver {
       destroy();
       return;
     }
-
+    if (stepIndex < 0 || stepIndex >= steps.length) {
+      throw new RangeError();
+    }
     if (!steps[stepIndex]) {
       destroy();
-
       return;
     }
 
@@ -370,6 +385,7 @@ export function driver(options: Config = {}): Driver {
     destroy: () => {
       destroy(false);
     },
+    [DRIVER_MARKER]: true,
   };
 
   setCurrentDriver(api);
