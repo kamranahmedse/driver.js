@@ -1,6 +1,6 @@
 import { DriveStep } from "./driver";
 import { refreshOverlay, trackActiveElement, transitionStage } from "./overlay";
-import { getConfig, getCurrentDriver } from "./config";
+import { getAttachElement, getConfig, getCurrentDriver } from "./config";
 import { hidePopover, renderPopover, repositionPopover } from "./popover";
 import { bringInView } from "./utils";
 import { getState, setState } from "./state";
@@ -22,7 +22,7 @@ function mountDummyElement(): Element {
   element.style.top = "50%";
   element.style.left = "50%";
 
-  document.body.appendChild(element);
+  getAttachElement().appendChild(element);
 
   return element;
 }

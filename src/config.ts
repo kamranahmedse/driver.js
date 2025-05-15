@@ -37,6 +37,10 @@ export type Config = {
   prevBtnText?: string;
   doneBtnText?: string;
 
+  // Attach the popover and overlay to a specific element, defaults to document.body
+  // but the position is still calculated based on window
+  attach?: string;
+
   // Called after the popover is rendered
   onPopoverRender?: (popover: PopoverDOM, opts: { config: Config; state: State, driver: Driver }) => void;
 
@@ -87,4 +91,8 @@ export function setCurrentDriver(driver: Driver) {
 
 export function getCurrentDriver() {
   return currentDriver;
+}
+
+export function getAttachElement() {
+  return currentConfig.attach && document.querySelector(currentConfig.attach) || document.body;
 }
