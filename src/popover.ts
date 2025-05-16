@@ -74,13 +74,23 @@ export function renderPopover(element: Element, step: DriveStep) {
     disableButtons,
     showProgress,
 
-    nextBtnText = getConfig("nextBtnText") || "Next &rarr;",
-    prevBtnText = getConfig("prevBtnText") || "&larr; Previous",
+    nextBtnText = getConfig("nextBtnText") || "Next",
+    prevBtnText = getConfig("prevBtnText") || "Previous",
     progressText = getConfig("progressText") || "{current} of {total}",
   } = step.popover || {};
 
+  const rightArrow = document.createElement("span");
+  rightArrow.ariaHidden = "true"
+  rightArrow.textContent = " →";
+
+  const leftArrow = document.createElement("span");
+  leftArrow.ariaHidden = "true"
+  leftArrow.textContent = "← ";
+
   popover.nextButton.innerHTML = nextBtnText;
+  popover.nextButton.appendChild(rightArrow);
   popover.previousButton.innerHTML = prevBtnText;
+  popover.previousButton.insertBefore(leftArrow, popover.previousButton.firstChild);
   popover.progress.innerHTML = progressText;
 
   if (title) {
