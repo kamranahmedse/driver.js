@@ -4,6 +4,9 @@ import { emit } from "./emitter";
 import { getConfig } from "./config";
 import { getState, setState } from "./state";
 
+const overlayDarkPathClass = 'driver-overlay-dark-path';
+const overlayHighlightPathClass = 'driver-overlay-highlight-path';
+
 export type StageDefinition = {
   x: number;
   y: number;
@@ -71,6 +74,8 @@ export function refreshOverlay() {
   const windowY = window.innerHeight;
 
   overlaySvg.setAttribute("viewBox", `0 0 ${windowX} ${windowY}`);
+  
+  updateHighlightElement(activeStagePosition);
 }
 
 function mountOverlay(stagePosition: StageDefinition) {
@@ -99,12 +104,49 @@ function renderOverlay(stagePosition: StageDefinition) {
     return;
   }
 
-  const pathElement = overlaySvg.firstElementChild as SVGPathElement | null;
-  if (pathElement?.tagName !== "path") {
+  const pathElement = overlaySvg.querySelector(`path.${overlayDarkPathClass}`) as SVGPathElement | null;
+  if (!pathElement) {
     throw new Error("no path element found in stage svg");
   }
 
   pathElement.setAttribute("d", generateStageSvgPathString(stagePosition));
+  
+  // Update or create highlight element
+  updateHighlightElement(stagePosition);
+}
+
+function updateHighlightElement(stagePosition: StageDefinition) {
+  const highlightColor = getConfig("highlightColor");
+  
+  // Only proceed if highlighting is enabled
+  if (!highlightColor) {
+    return;
+  }
+  
+  const overlaySvg = getState("__overlaySvg");
+  if (!overlaySvg) {
+    return;
+  }
+  
+  // Find existing highlight element
+  let highlightElement = overlaySvg.querySelector(`path.${overlayHighlightPathClass}`) as SVGPathElement | null;
+  
+  // If no existing highlight element then create one
+  if (!highlightElement) {
+    highlightElement = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    highlightElement.classList.add(overlayHighlightPathClass);
+    highlightElement.style.pointerEvents = "none"; // Don't interfere with clicks
+    overlaySvg.appendChild(highlightElement);
+  }
+  
+  // Generate path for the highlighted area (inner cutout)
+  const highlightPath = generateHighlightSvgPathString(stagePosition);
+  highlightElement.setAttribute("d", highlightPath);
+  
+  // Match any animation timing with the overlay
+  if (overlaySvg.classList.contains('driver-overlay-animated')) {
+    highlightElement.setAttribute("d", highlightPath);
+  }
 }
 
 function createOverlaySvg(stage: StageDefinition): SVGSVGElement {
@@ -132,6 +174,7 @@ function createOverlaySvg(stage: StageDefinition): SVGSVGElement {
   svg.style.height = "100%";
 
   const stagePath = document.createElementNS("http://www.w3.org/2000/svg", "path");
+  stagePath.classList.add(overlayDarkPathClass);
 
   stagePath.setAttribute("d", generateStageSvgPathString(stage));
 
@@ -141,6 +184,21 @@ function createOverlaySvg(stage: StageDefinition): SVGSVGElement {
   stagePath.style.cursor = "auto";
 
   svg.appendChild(stagePath);
+  
+  // If highlight color is configured, add the highlight element
+  const highlightColor = getConfig("highlightColor");
+  if (highlightColor) {
+    const highlightPath = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    highlightPath.classList.add(overlayHighlightPathClass);
+    
+    highlightPath.setAttribute("d", generateHighlightSvgPathString(stage));
+    
+    highlightPath.style.fill = highlightColor;
+    highlightPath.style.opacity = `${getConfig("highlightOpacity")}`;
+    highlightPath.style.pointerEvents = "none";  // Prevent interfering with clicks
+    
+    svg.appendChild(highlightPath);
+  }
 
   return svg;
 }
@@ -168,6 +226,28 @@ function generateStageSvgPathString(stage: StageDefinition) {
 
   return `M${windowX},0L0,0L0,${windowY}L${windowX},${windowY}L${windowX},0Z
     M${highlightBoxX},${highlightBoxY} h${highlightBoxWidth} a${normalizedRadius},${normalizedRadius} 0 0 1 ${normalizedRadius},${normalizedRadius} v${highlightBoxHeight} a${normalizedRadius},${normalizedRadius} 0 0 1 -${normalizedRadius},${normalizedRadius} h-${highlightBoxWidth} a${normalizedRadius},${normalizedRadius} 0 0 1 -${normalizedRadius},-${normalizedRadius} v-${highlightBoxHeight} a${normalizedRadius},${normalizedRadius} 0 0 1 ${normalizedRadius},-${normalizedRadius} z`;
+}
+
+// Generate path for just the highlight area (inner cutout)
+function generateHighlightSvgPathString(stage: StageDefinition) {
+  const stagePadding = getConfig("stagePadding") || 0;
+  const stageRadius = getConfig("stageRadius") || 0;
+
+  const stageWidth = stage.width + stagePadding * 2;
+  const stageHeight = stage.height + stagePadding * 2;
+
+  // Prevent glitches when stage is too small for radius
+  const limitedRadius = Math.min(stageRadius, stageWidth / 2, stageHeight / 2);
+
+  // No value below 0 allowed + round down
+  const normalizedRadius = Math.floor(Math.max(limitedRadius, 0));
+
+  const highlightBoxX = stage.x - stagePadding + normalizedRadius;
+  const highlightBoxY = stage.y - stagePadding;
+  const highlightBoxWidth = stageWidth - normalizedRadius * 2;
+  const highlightBoxHeight = stageHeight - normalizedRadius * 2;
+
+  return `M${highlightBoxX},${highlightBoxY} h${highlightBoxWidth} a${normalizedRadius},${normalizedRadius} 0 0 1 ${normalizedRadius},${normalizedRadius} v${highlightBoxHeight} a${normalizedRadius},${normalizedRadius} 0 0 1 -${normalizedRadius},${normalizedRadius} h-${highlightBoxWidth} a${normalizedRadius},${normalizedRadius} 0 0 1 -${normalizedRadius},-${normalizedRadius} v-${highlightBoxHeight} a${normalizedRadius},${normalizedRadius} 0 0 1 ${normalizedRadius},-${normalizedRadius} z`;
 }
 
 export function destroyOverlay() {
