@@ -223,6 +223,7 @@ export function driver(options: Config = {}): Driver {
     highlight({
       ...currentStep,
       popover: {
+        ...(currentStep?.popover || {}),
         showButtons: calculatedButtons,
         nextBtnText: !hasNextStep ? doneBtnText : undefined,
         disableButtons: [...(!hasPreviousStep ? ["previous" as AllowedButtons] : [])],
@@ -247,7 +248,6 @@ export function driver(options: Config = {}): Driver {
           : () => {
               destroy();
             },
-        ...(currentStep?.popover || {}),
       },
     });
   }
