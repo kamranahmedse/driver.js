@@ -199,7 +199,7 @@ type DriveStep = {
   // This can be a DOM element, or a CSS selector.
   // If this is a selector, the first matching
   // element will be highlighted.
-  element: Element | string;
+  element: Element | string | (() => Element);
 
   // The popover configuration for this step.
   // Look at the Popover Configuration section
