@@ -196,10 +196,11 @@ Drive step is the configuration object passed to the `highlight` method or the `
 ```typescript
 type DriveStep = {
   // The target element to highlight.
-  // This can be a DOM element, or a CSS selector.
+  // This can be a DOM element,
+  // a function that returns a DOM Element, or a CSS selector.
   // If this is a selector, the first matching
   // element will be highlighted.
-  element: Element | string;
+  element: Element | string | (() => Element);
 
   // The popover configuration for this step.
   // Look at the Popover Configuration section
