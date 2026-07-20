@@ -35,6 +35,38 @@ import { ExampleButton } from "./ExampleButton";
     btn.classList.remove("bg-transparent");
   }
 
+  let activeDriverObj = null;
+  let activeDriverBtn = null;
+
+  function runDriver(driverObj, btn, startDriver) {
+    if (activeDriverObj?.isActive()) {
+      if (activeDriverBtn === btn) {
+        return;
+      }
+
+      activeDriverObj.destroy();
+
+      if (activeDriverObj?.isActive()) {
+        return;
+      }
+    }
+
+    activeDriverObj = driverObj;
+    activeDriverBtn = btn;
+    startDriver();
+  }
+
+  function handleDriverDestroyed(driverObj, btn) {
+    if (activeDriverObj === driverObj) {
+      activeDriverObj = null;
+      activeDriverBtn = null;
+    }
+
+    if (btn) {
+      markDone(btn);
+    }
+  }
+
   const demoTourButton = document.querySelector("[data-demo-tour]");
   demoTourButton.addEventListener("click", () => {
     const driverObj = driver({
@@ -114,10 +146,15 @@ import { ExampleButton } from "./ExampleButton";
             popoverClass: "default-theme"
           }
         }
-      ]
+      ],
+      onDestroyed: () => {
+        handleDriverDestroyed(driverObj);
+      }
     });
 
-    driverObj.drive();
+    runDriver(driverObj, demoTourButton, () => {
+      driverObj.drive();
+    });
   });
 
   const animatedTourBtn = document.getElementById('animated-tour');
@@ -155,11 +192,13 @@ import { ExampleButton } from "./ExampleButton";
         },
       ],
       onDestroyed: () => {
-        markDone(animatedTourBtn);
+        handleDriverDestroyed(driverObj, animatedTourBtn);
       }
     });
 
-    driverObj.drive();
+    runDriver(driverObj, animatedTourBtn, () => {
+      driverObj.drive();
+    });
   });
 
   const staticTourBtn = document.getElementById('static-tour');
@@ -198,11 +237,13 @@ import { ExampleButton } from "./ExampleButton";
         },
       ],
       onDestroyed: () => {
-        markDone(staticTourBtn);
+        handleDriverDestroyed(driverObj, staticTourBtn);
       }
     });
 
-    driverObj.drive();
+    runDriver(driverObj, staticTourBtn, () => {
+      driverObj.drive();
+    });
   });
 
   const asyncTourBtn = document.getElementById('async-tour');
@@ -255,11 +296,13 @@ import { ExampleButton } from "./ExampleButton";
         },
       ],
       onDestroyed: () => {
-        markDone(asyncTourBtn);
+        handleDriverDestroyed(driverObj, asyncTourBtn);
       }
     });
 
-    driverObj.drive();
+    runDriver(driverObj, asyncTourBtn, () => {
+      driverObj.drive();
+    });
   });
 
   const exitConfirm = document.getElementById('confirm-on-exit');
@@ -303,11 +346,13 @@ import { ExampleButton } from "./ExampleButton";
         }
       },
       onDestroyed: () => {
-        markDone(exitConfirm);
+        handleDriverDestroyed(driverObj, exitConfirm);
       }
     });
 
-    driverObj.drive();
+    runDriver(driverObj, exitConfirm, () => {
+      driverObj.drive();
+    });
   });
 
   const showProgressBtn = document.getElementById('show-progress');
@@ -346,11 +391,13 @@ import { ExampleButton } from "./ExampleButton";
         },
       ],
       onDestroyed: () => {
-        markDone(showProgressBtn);
+        handleDriverDestroyed(driverObj, showProgressBtn);
       }
     });
 
-    driverObj.drive();
+    runDriver(driverObj, showProgressBtn, () => {
+      driverObj.drive();
+    });
   });
 
   const simpleHighlightBtn = document.getElementById('simple-element-highlight');
@@ -358,31 +405,34 @@ import { ExampleButton } from "./ExampleButton";
     const driverObj = driver({
       popoverClass: 'driverjs-theme',
       onDestroyed: () => {
-        markDone(simpleHighlightBtn);
+        handleDriverDestroyed(driverObj, simpleHighlightBtn);
       }
     });
 
-    driverObj.highlight({
-      element: '[data-example-btns]'
-    })
+    runDriver(driverObj, simpleHighlightBtn, () => {
+      driverObj.highlight({
+        element: '[data-example-btns]'
+      });
+    });
   });
 
   const simpleHighlightPopoverBtn = document.getElementById('simple-element-highlight-popover');
+  const simpleHighlightDriverObj = driver({
+    popoverClass: 'driverjs-theme',
+    onDestroyed: () => {
+      handleDriverDestroyed(simpleHighlightDriverObj, simpleHighlightPopoverBtn);
+    }
+  });
   simpleHighlightPopoverBtn.addEventListener('click', () => {
-    const driverObj = driver({
-      popoverClass: 'driverjs-theme',
-      onDestroyed: () => {
-        markDone(simpleHighlightPopoverBtn);
-      }
-    });
-
-    driverObj.highlight({
-      element: '[data-example-btns]',
-      popover: {
-        title: "Popover Highlight",
-        description: "You can also highlight an element with a popover.",
-        side: 'top'
-      }
+    runDriver(simpleHighlightDriverObj, simpleHighlightPopoverBtn, () => {
+      simpleHighlightDriverObj.highlight({
+        element: '[data-example-btns]',
+        popover: {
+          title: "Popover Highlight",
+          description: "You can also highlight an element with a popover.",
+          side: 'top'
+        }
+      });
     });
   });
 
@@ -391,15 +441,17 @@ import { ExampleButton } from "./ExampleButton";
     const driverObj = driver({
       popoverClass: 'driverjs-theme',
       onDestroyed: () => {
-        markDone(noElementbtn);
+        handleDriverDestroyed(driverObj, noElementbtn);
       }
     });
 
-    driverObj.highlight({
-      popover: {
-        title: "Without Element",
-        description: "You can also show a popover without highlighting an element. For example, this popover is shown without highlighting anything.",
-      }
+    runDriver(driverObj, noElementbtn, () => {
+      driverObj.highlight({
+        popover: {
+          title: "Without Element",
+          description: "You can also show a popover without highlighting an element. For example, this popover is shown without highlighting anything.",
+        }
+      });
     });
   });
 
@@ -440,89 +492,96 @@ import { ExampleButton } from "./ExampleButton";
         },
       ],
       onDestroyed: () => {
-        markDone(preventCloseBtn);
+        handleDriverDestroyed(driverObj, preventCloseBtn);
       }
     });
 
-    driverObj.drive();
+    runDriver(driverObj, preventCloseBtn, () => {
+      driverObj.drive();
+    });
   });
 
   const overlayColorBtn = document.getElementById('overlay-color');
+  const overlayDriverObj = driver({
+    overlayColor: 'red',
+    overlayOpacity: 0.5,
+    onDestroyed: () => {
+      handleDriverDestroyed(overlayDriverObj, overlayColorBtn);
+    }
+  });
   overlayColorBtn.addEventListener('click', () => {
-    const driverObj = driver({
-      overlayColor: 'red',
-      overlayOpacity: 0.5,
-      onDestroyed: () => {
-        markDone(overlayColorBtn);
-      }
-    });
-
-    driverObj.highlight({
-      element: '[data-example-btns]',
-      popover: {
-        title: "Popover Highlight",
-        description: "You can also highlight an element with a popover.",
-        side: 'top'
-      }
+    runDriver(overlayDriverObj, overlayColorBtn, () => {
+      overlayDriverObj.highlight({
+        element: '[data-example-btns]',
+        popover: {
+          title: "Popover Highlight",
+          description: "You can also highlight an element with a popover.",
+          side: 'top'
+        }
+      });
     });
   });
 
   const popoverPositionBtn = document.getElementById('popover-position');
+  const popoverDriverObj = driver({
+    onDestroyed: () => {
+      handleDriverDestroyed(popoverDriverObj, popoverPositionBtn);
+    }
+  });
   popoverPositionBtn.addEventListener('click', () => {
-    const driverObj = driver({
-      onDestroyed: () => {
-        markDone(popoverPositionBtn);
-      }
-    });
-
-    driverObj.highlight({
-      element: '#popover-position',
-      popover: {
-        title: "Popover Position",
-        description: "You can also change the position of the popover using `side` and `align` options.<br /> Allowed sides are `top`, `bottom`, `left` and `right`. Allowed aligns are `start`, `center` and `end`.",
-        side: 'top',
-        align: 'start'
-      }
+    runDriver(popoverDriverObj, popoverPositionBtn, () => {
+      popoverDriverObj.highlight({
+        element: '#popover-position',
+        popover: {
+          title: "Popover Position",
+          description: "You can also change the position of the popover using `side` and `align` options.<br /> Allowed sides are `top`, `bottom`, `left` and `right`. Allowed aligns are `start`, `center` and `end`.",
+          side: 'top',
+          align: 'start'
+        }
+      });
     });
   });
 
   const customizingBtn = document.getElementById('customizing-popover');
+  const customizingDriverObj = driver({
+    popoverClass: 'driverjs-theme',
+    onDestroyed: () => {
+      handleDriverDestroyed(customizingDriverObj, customizingBtn);
+    }
+  });
   customizingBtn.addEventListener('click', () => {
-    const driverObj = driver({
-      popoverClass: 'driverjs-theme',
-      onDestroyed: () => {
-        markDone(customizingBtn);
-      }
-    });
-
-    driverObj.highlight({
-      element: '#customizing-popover',
-      popover: {
-        title: "Customizing Popover",
-        description: "Add your own class using `popoverClass` or use `onPopoverRender` to get full control over the popover. <br /><br /> Visit these pages which cover <a class='font-medium underline' href='/docs/styling-popover'>styling</a> and <a class='font-medium underline' href='/docs/buttons'>customizing popovers</a> in detail.",
-        side: 'top',
-        align: 'start'
-      }
+    runDriver(customizingDriverObj, customizingBtn, () => {
+      customizingDriverObj.highlight({
+        element: '#customizing-popover',
+        popover: {
+          title: "Customizing Popover",
+          description: "Add your own class using `popoverClass` or use `onPopoverRender` to get full control over the popover. <br /><br /> Visit these pages which cover <a class='font-medium underline' href='/docs/styling-popover'>styling</a> and <a class='font-medium underline' href='/docs/buttons'>customizing popovers</a> in detail.",
+          side: 'top',
+          align: 'start'
+        }
+      });
     });
   });
 
   const hooksEverythingBtn = document.getElementById('hooks-everything');
+  const hooksDriverObj = driver({
+    popoverClass: 'driverjs-theme',
+    onDestroyed: () => {
+      handleDriverDestroyed(hooksDriverObj, hooksEverythingBtn);
+    }
+  });
   hooksEverythingBtn.addEventListener('click', () => {
-    const driverObj = driver({
-      popoverClass: 'driverjs-theme',
-      onDestroyed: () => {
-        markDone(hooksEverythingBtn);
-      }
-    });
 
-    driverObj.highlight({
-      element: '#hooks-everything',
-      popover: {
-        title: "Hooks for Everything",
-        description: "Have a look at the <a class='font-medium underline' href='/docs/configuration'>configuration</a> page to see how you can use hooks to control the driver.",
-        side: 'top',
-        align: 'start'
-      }
+    runDriver(hooksDriverObj, hooksEverythingBtn, () => {
+      hooksDriverObj.highlight({
+        element: '#hooks-everything',
+        popover: {
+          title: "Hooks for Everything",
+          description: "Have a look at the <a class='font-medium underline' href='/docs/configuration'>configuration</a> page to see how you can use hooks to control the driver.",
+          side: 'top',
+          align: 'start'
+        }
+      });
     });
   });
 </script>
