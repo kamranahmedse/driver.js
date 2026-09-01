@@ -3,28 +3,37 @@ import { destroyDriverClick, onDriverClick } from "./click";
 import { Context } from "./context";
 import { generateStageSvgPathString, StageDefinition } from "./stage";
 
+const centerOf = (rect: StageDefinition): StageDefinition => ({
+  x: rect.x + rect.width / 2,
+  y: rect.y + rect.height / 2,
+  width: 0,
+  height: 0,
+});
+
+const ZERO_RECT: StageDefinition = { x: 0, y: 0, width: 0, height: 0 };
+
 // This method calculates the animated new position of the
 // stage (called for each frame by requestAnimationFrame)
 export function transitionStage(ctx: Context, elapsed: number, duration: number, from: Element, to: Element) {
-  let activeStagePosition = ctx.getState("__activeStagePosition");
+  const activeStagePosition = ctx.getState("__activeStagePosition");
+  const isFromDummy = from?.id === "driver-dummy-element";
+  const isToDummy = to?.id === "driver-dummy-element";
 
-  const fromDefinition = activeStagePosition ? activeStagePosition : from.getBoundingClientRect();
-  const toDefinition = to.getBoundingClientRect();
+  const realFrom = activeStagePosition || (!isFromDummy ? from.getBoundingClientRect() : null);
+  const realTo = !isToDummy ? to.getBoundingClientRect() : null;
+
+  const fromDefinition = isFromDummy ? (realTo ? centerOf(realTo) : ZERO_RECT) : (realFrom || ZERO_RECT);
+  const toDefinition = isToDummy ? (realFrom ? centerOf(realFrom) : ZERO_RECT) : (realTo || ZERO_RECT);
 
   const x = easeInOutQuad(elapsed, fromDefinition.x, toDefinition.x - fromDefinition.x, duration);
   const y = easeInOutQuad(elapsed, fromDefinition.y, toDefinition.y - fromDefinition.y, duration);
   const width = easeInOutQuad(elapsed, fromDefinition.width, toDefinition.width - fromDefinition.width, duration);
   const height = easeInOutQuad(elapsed, fromDefinition.height, toDefinition.height - fromDefinition.height, duration);
 
-  activeStagePosition = {
-    x,
-    y,
-    width,
-    height,
-  };
+  const nextStagePosition = { x, y, width, height };
 
-  renderOverlay(ctx, activeStagePosition);
-  ctx.setState("__activeStagePosition", activeStagePosition);
+  renderOverlay(ctx, nextStagePosition);
+  ctx.setState("__activeStagePosition", nextStagePosition);
 }
 
 export function trackActiveElement(ctx: Context, element: Element) {
@@ -32,7 +41,8 @@ export function trackActiveElement(ctx: Context, element: Element) {
     return;
   }
 
-  const definition = element.getBoundingClientRect();
+  const isDummy = element?.id === "driver-dummy-element";
+  const definition = isDummy ? { x: 0, y: 0, width: 0, height: 0 } : element.getBoundingClientRect();
 
   const activeStagePosition: StageDefinition = {
     x: definition.x,
@@ -100,9 +110,14 @@ function renderOverlay(ctx: Context, stagePosition: StageDefinition) {
 }
 
 function stageOptions(ctx: Context) {
+  const activeStep = ctx.getState("activeStep") || ctx.getState("__activeStep");
+  const activeElement = ctx.getState("activeElement") || ctx.getState("__activeElement");
+  const isDummy = !activeStep?.element || activeElement?.id === "driver-dummy-element";
+
   return {
-    padding: ctx.getConfig("stagePadding") || 0,
-    radius: ctx.getConfig("stageRadius") || 0,
+    padding: isDummy ? 0 : ctx.getConfig("stagePadding") || 0,
+    radius: isDummy ? 0 : ctx.getConfig("stageRadius") || 0,
+    isDummy,
   };
 }
 

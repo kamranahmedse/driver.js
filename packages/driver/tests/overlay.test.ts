@@ -80,3 +80,4 @@ describe("overlay configuration", () => {
     expect(d.isActive()).toBe(true);
   });
 });
+

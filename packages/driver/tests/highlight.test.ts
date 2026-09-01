@@ -192,3 +192,18 @@ describe("step data", () => {
     expect(step.data).toEqual({ id: 7 });
   });
 });
+
+describe("anchorless steps", () => {
+  it("mounts driver-dummy-element with display: none so it remains hidden", () => {
+    const d = createDriver({
+      animate: false,
+      steps: [{ popover: { title: "Anchorless Step" } }],
+    });
+    d.drive();
+
+    const dummy = document.getElementById("driver-dummy-element");
+    expect(dummy).not.toBeNull();
+    expect(dummy?.style.display).toBe("none");
+  });
+});
+

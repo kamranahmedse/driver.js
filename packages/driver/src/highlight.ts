@@ -12,15 +12,12 @@ function mountDummyElement(): Element {
   }
 
   let element = document.createElement("div");
-
   element.id = "driver-dummy-element";
   element.style.width = "0";
   element.style.height = "0";
   element.style.pointerEvents = "none";
   element.style.opacity = "0";
-  element.style.position = "fixed";
-  element.style.top = "50%";
-  element.style.left = "50%";
+  element.style.display = "none";
 
   document.body.appendChild(element);
 
@@ -64,9 +61,9 @@ function transferHighlight(ctx: Context, toElement: Element, toStep: DriveStep) 
   // If it's the first time we're highlighting an element, we show
   // the popover immediately. Otherwise, we wait for the animation
   // to finish before showing the popover.
-  const isFirstHighlight = !fromElement || fromElement === toElement;
   const isToDummyElement = toElement.id === "driver-dummy-element";
   const isFromDummyElement = fromElement.id === "driver-dummy-element";
+  const isFirstHighlight = !fromStep || !fromElement || (fromElement === toElement && !isToDummyElement);
 
   const isAnimatedTour = ctx.getConfig("animate");
   const highlightStartedHook = toStep.onHighlightStarted || ctx.getConfig("onHighlightStarted");
@@ -149,7 +146,12 @@ function transferHighlight(ctx: Context, toElement: Element, toStep: DriveStep) 
   fromElement.removeAttribute("aria-expanded");
   fromElement.removeAttribute("aria-controls");
 
-  const disableActiveInteraction = toStep.disableActiveInteraction ?? ctx.getConfig("disableActiveInteraction");
+  if (!isToDummyElement) {
+    document.getElementById("driver-dummy-element")?.remove();
+  }
+
+  const disableActiveInteraction =
+    isToDummyElement || (toStep.disableActiveInteraction ?? ctx.getConfig("disableActiveInteraction"));
   if (disableActiveInteraction) {
     toElement.classList.add("driver-no-interaction");
   }

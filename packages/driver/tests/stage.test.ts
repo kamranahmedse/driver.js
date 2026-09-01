@@ -27,4 +27,12 @@ describe("generateStageSvgPathString", () => {
 
     expect(path).toContain("a0,0");
   });
+
+  it("returns full viewport rectangle with no cutout subpaths when stage size is zero", () => {
+    const zeroStage = { x: 50, y: 50, width: 0, height: 0 };
+    const path = generateStageSvgPathString(zeroStage, { padding: 0, radius: 0, isDummy: true });
+    const { innerWidth: w, innerHeight: h } = window;
+
+    expect(path).toBe(`M${w},0L0,0L0,${h}L${w},${h}L${w},0Z`);
+  });
 });

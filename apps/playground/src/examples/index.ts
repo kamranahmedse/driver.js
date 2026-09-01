@@ -10,6 +10,7 @@ import { instancesGroup } from "./instances";
 import { skipMissingGroup } from "./skip-missing";
 import { advanceWaitGroup } from "./advance-wait";
 import { hintsGroup } from "./hints";
+import { anchorlessGroup } from "./anchorless";
 
 export const exampleGroups: ExampleGroup[] = [
   highlightGroup,
@@ -23,6 +24,7 @@ export const exampleGroups: ExampleGroup[] = [
   durationGroup,
   scrollGroup,
   apiGroup,
+  anchorlessGroup,
 ];
 
 export const examples: Example[] = exampleGroups.flatMap(group => group.examples);
