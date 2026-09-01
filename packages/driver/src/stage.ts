@@ -12,12 +12,17 @@ export type StageDefinition = {
 export type StageOptions = {
   padding: number;
   radius: number;
+  isDummy?: boolean;
 };
 
 // The full-screen dim with a rounded cutout, as a single evenodd path.
 export function generateStageSvgPathString(stage: StageDefinition, options: StageOptions) {
   const windowX = window.innerWidth;
   const windowY = window.innerHeight;
+
+  if (options.isDummy) {
+    return `M${windowX},0L0,0L0,${windowY}L${windowX},${windowY}L${windowX},0Z`;
+  }
 
   const stagePadding = options.padding;
   const stageRadius = options.radius;

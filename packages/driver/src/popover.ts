@@ -150,8 +150,9 @@ export function renderPopover(anchor: Element, options: PopoverRenderOptions): P
     popover.closeButton.classList.add("driver-popover-btn-disabled");
   }
 
-  // Reset the popover position
+  // Reset the popover position while keeping it hidden until positioned
   const popoverWrapper = popover.wrapper;
+  popoverWrapper.style.visibility = "hidden";
   popoverWrapper.style.display = "block";
   popoverWrapper.style.left = "";
   popoverWrapper.style.top = "";
@@ -205,6 +206,7 @@ export function renderPopover(anchor: Element, options: PopoverRenderOptions): P
   options.onRender?.(popover);
 
   repositionPopover(popover, anchor, options.position);
+  popoverWrapper.style.visibility = "";
   repositionOnImagesLoad(popover, anchor, options.position);
   bringInView(popoverWrapper, options.smoothScroll);
 
