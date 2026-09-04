@@ -1,12 +1,21 @@
 import { describe, expect, it, vi } from "vitest";
-import { createDriver, nextFrame, popoverTitle, SAMPLE_STEPS, useDriverHarness } from "./utils";
+import {
+  createDriver,
+  nextFrame,
+  popoverTitle,
+  SAMPLE_STEPS,
+  useDriverHarness,
+} from "./utils";
 
 useDriverHarness();
 
 // Advances the rAF loop until the predicate holds or the frame budget runs out.
 // The animated stage transition settles over several frames, so polling beats a
 // fixed wait.
-async function flushFrames(predicate: () => boolean, maxFrames = 120): Promise<void> {
+async function flushFrames(
+  predicate: () => boolean,
+  maxFrames = 120,
+): Promise<void> {
   for (let i = 0; i < maxFrames; i++) {
     if (predicate()) {
       return;
@@ -18,7 +27,8 @@ async function flushFrames(predicate: () => boolean, maxFrames = 120): Promise<v
 
 // The library drives the CSS fade via a custom property on <body> so a single
 // `duration` config controls both the JS stage slide and the CSS fade-in.
-const cssDuration = () => document.body.style.getPropertyValue("--driver-animation-duration");
+const cssDuration = () =>
+  document.body.style.getPropertyValue("--driver-animation-duration");
 
 describe("animation duration", () => {
   it("defaults to 400ms", () => {
@@ -59,7 +69,13 @@ describe("animation duration", () => {
 describe("animated stage transition", () => {
   it("runs the rAF stage transition and settles on the next step", async () => {
     const onHighlighted = vi.fn();
-    const d = createDriver({ animate: true, duration: 30, steps: SAMPLE_STEPS, onHighlighted });
+    const d = createDriver({
+      animate: true,
+      duration: 30,
+      steps: SAMPLE_STEPS,
+      onHighlighted,
+    });
+
     d.drive();
 
     await flushFrames(() => onHighlighted.mock.calls.length >= 1);
@@ -73,5 +89,30 @@ describe("animated stage transition", () => {
     expect(d.getActiveIndex()).toBe(1);
     expect(popoverTitle()).toBe("Step 2");
     expect(d.getState("__activeStep")?.popover?.title).toBe("Step 2");
+  });
+
+  it("does not animate the stage between consecutive element-less steps", async () => {
+    const d = createDriver({
+      animate: true,
+      duration: 30,
+      steps: [
+        { popover: { title: "Centered 1" } },
+        { popover: { title: "Centered 2" } },
+      ],
+    });
+
+    d.drive();
+
+    await flushFrames(() => popoverTitle() === "Centered 1");
+
+    expect(d.getActiveIndex()).toBe(0);
+    expect(popoverTitle()).toBe("Centered 1");
+
+    d.moveNext();
+
+    await flushFrames(() => popoverTitle() === "Centered 2");
+
+    expect(d.getActiveIndex()).toBe(1);
+    expect(popoverTitle()).toBe("Centered 2");
   });
 });

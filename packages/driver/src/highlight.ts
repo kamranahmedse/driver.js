@@ -112,7 +112,7 @@ function transferHighlight(ctx: Context, toElement: Element, toStep: DriveStep) 
       isPopoverRendered = true;
     }
 
-    if (ctx.getConfig("animate") && elapsed < duration) {
+    if (ctx.getConfig("animate") && elapsed < duration && !(isFromDummyElement && isToDummyElement)) {
       transitionStage(ctx, elapsed, duration, fromElement, toElement);
     } else {
       trackActiveElement(ctx, toElement);
